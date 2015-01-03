@@ -1,38 +1,90 @@
 package org.usfirst.frc.team766.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team766.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
+	public Joystick
+    jLeft = new Joystick(1),
+    jRight = new Joystick(2),
+    jBox = new Joystick(3);
     
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
+    public Button      
+    buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
+    buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
+    buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
+    buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
+    buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot);
+  
     
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
+    //Auton Stuff
+    public int AutonMode = 0;
+    public boolean TankDrive = false;
+    public boolean UseGamepad = false;
     
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
+	public OI(){
     
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+        //buttonDriverPickup.whileHeld(new Command);
+	}
+	
+	//interface for gamepad support
+	//we can map commands to multiple buttons, but not for drive inputs
+	public boolean getShifter(){
+		return buttonShifter.get();
+	}
+	public boolean getQuickTurn(){
+		return buttonQuickTurn.get();
+	}
+	public boolean getReverse(){
+		return buttonReverse.get();
+	}
+	
+	public double getThrottle(){
+		return jLeft.getY();
+	}
+	public double getSteer(){
+		return jRight.getX();
+	}
+	//tank drive here
+	public double getLeft(){
+		return jLeft.getRawAxis(2);
+	}
+	public double getRight(){
+		return jRight.getRawAxis(2);
+	}
+	/**
+	 * Originally the gripper switch would be in the off
+	 * position by default. Then, we removed manual control
+	 * of the grippers. Now the grippers switch will by default be in the
+	 * 'on' positition on the OI, but in code, 'on' will be
+	 * its off position. This makes it easier to deal with commands, as
+	 * we only want it to be running its command when it is not in its
+	 * relaxed state.
+	 * 
+	 * <p>Previously the button would be 'on'
+	 * if it was less than 0. Now, it'll be 
+	 * true when greater than 0.
+	 */
+	public void setTankDrive(boolean in){
+		TankDrive = in;
+	}
+	public boolean getTankDrive(){
+		return TankDrive;
+	}
+	public void setUseGamepad(boolean in){
+		UseGamepad = in;
+	}
+	public boolean getUseGamepad(){
+		return UseGamepad;
+	}
+	/**
+	 * Adds or subtracts the current auton mode.
+	 * @param direction: negative if decrementing and positive if incrementing.
+	 */
 }
 
