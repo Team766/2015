@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.commands.TankDrive;
+import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 
 /*
  * 2015 Java Code

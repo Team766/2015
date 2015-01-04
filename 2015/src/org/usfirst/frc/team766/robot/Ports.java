@@ -9,6 +9,7 @@ public class Ports {
 	//Drive
 	public static final int PWM_Left_Drive = 0;
 	public static final int PWM_Right_Drive = 1;
+	public static final int PWM_Elevators = 2;
 	
 	//Solenoids
 	public static final int Sol_Shifter = 1;
