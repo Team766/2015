@@ -3,9 +3,11 @@ package org.usfirst.frc.team766.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
+import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 
 /*
  * 2015 Java Code
@@ -19,6 +21,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	CommandBase.init();
+    	SmartDashboard.putBoolean("Tank Drive", false);
     }
 	
 	public void disabledPeriodic() {
@@ -34,12 +37,16 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-        new TankDrive();
+    	CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
+    	
+    	if(!CommandBase.OI.getTankDrive()){
+            new CheesyDriveCommand().start();			
+        }else{
+            new TankDrive().start();
+        }
     }
 
-    public void disabledInit(){
-
-    }
+    public void disabledInit(){}
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
