@@ -10,30 +10,41 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class UltrasonicDrive extends CommandBase {
 
 	private double distanceFromBox;
+	private boolean beSafe;
+	private double currentDistance;
 	
-    public UltrasonicDrive(double distance) {
+	public UltrasonicDrive()
+	{
+		this.beSafe = true;
+		distanceFromBox = 0;
+	}
+	
+    public UltrasonicDrive(double distance, boolean beSafe) {
     	distanceFromBox = distance;
+    	this.beSafe = beSafe;
     }
 
     protected void initialize() {
     	Drive.resetEncoders();
+    	currentDistance = 0;
     }
 
     protected void execute() {
     	//Drive forward using the PID here for the Ultrasonic sensor
-    	
-    	if(Drive.getUltrasonicDistance() <= 0)end();
-    	if(Drive.getAverageEncoderDistance() >= RobotValues.safteyDriveDistance)end();
+    	currentDistance = Drive.getUltrasonicDistance();
     }
 
     protected boolean isFinished() {
-        return false;
+        return (currentDistance <= distanceFromBox) || 
+        		(beSafe && (Drive.getAverageEncoderDistance() >= RobotValues.safteyDriveDistance));
     }
 
     protected void end() {
+    	Drive.setPower(0.0d);
     }
     
     protected void interrupted() {
+    	System.out.println("0 Nose!!!  Someone interrupted the UltrasonicDrive Command...");
     	end();
     }
 }

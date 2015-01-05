@@ -13,7 +13,7 @@ public class TestDriveAuto extends CommandGroup {
     
     public  TestDriveAuto() {
     	//Drive forward using Ultrasonic Drive Command
-    	addSequential(new UltrasonicDrive(RobotValues.distanceFromBox));
+    	addSequential(new UltrasonicDrive(RobotValues.distanceFromBox, false));
     	
     }
 }
