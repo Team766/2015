@@ -1,8 +1,12 @@
 package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,6 +21,11 @@ public class Drive extends Subsystem{
 	
 	private Talon leftDrive = new Talon(Ports.PWM_Left_Drive);
 	private Talon rightDrive = new Talon(Ports.PWM_Right_Drive);
+	
+	private Encoder rightEncoder = new Encoder(Ports.DIO_RDriveEncA, Ports.DIO_RDriveEncB);
+	private Encoder leftEncoder = new Encoder(Ports.DIO_LDriveEncA, Ports.DIO_LDriveEncB);
+	
+	private Ultrasonic rangeFinder = new Ultrasonic(Ports.ULTRASONIC_PING,Ports.ULTRASONIC_ECHO,Unit.kInches);
     
     private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
     
@@ -40,4 +49,30 @@ public class Drive extends Subsystem{
 	public void setShifter(boolean highGear){
 		Shifter.set(!highGear);
 	}
+	
+	public double getUltrasonicDistance()
+	{
+		return 0;
+	}
+	
+	public double getLeftEncoderDistance() {
+		return translateDrive(leftEncoder.getRaw());
+	}
+	public double getRightEncoderDistance() {
+		return translateDrive(rightEncoder.getRaw());
+	}
+	public double getAverageEncoderDistance(){
+		return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0d;
+	}
+	public void resetEncoders(){
+		rightEncoder.reset();
+		leftEncoder.reset();
+	}
+	
+	public float translateDrive(float trans){
+		double wheel_d = 0.0899;
+		double counts = 256 * 4.0;
+		return (float) ((trans / counts) * (Math.PI) * wheel_d);
+	}
+
 }
