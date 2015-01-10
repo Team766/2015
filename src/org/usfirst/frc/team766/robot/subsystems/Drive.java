@@ -28,6 +28,7 @@ public class Drive extends Subsystem{
 	private Ultrasonic rangeFinder = new Ultrasonic(Ports.ULTRASONIC_PING,Ports.ULTRASONIC_ECHO,Unit.kInches);
     
     private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
+    private Solenoid Light = new Solenoid(Ports.Sol_Light);
     
 	protected void initDefaultCommand() {
 	}
@@ -73,6 +74,9 @@ public class Drive extends Subsystem{
 		double wheel_d = 0.0899;
 		double counts = 256 * 4.0;
 		return (float) ((trans / counts) * (Math.PI) * wheel_d);
+	}
+	public void setLight(boolean b) {
+		Light.set(b);
 	}
 
 }

@@ -25,14 +25,18 @@ public class TankDrive extends CommandBase {
 			double RightSave = rightC;
 			rightC = leftC;
 			leftC = RightSave;
-		}
+			Drive.setLight(true);
+		}else Drive.setLight(false);
 		
+		/*
+		 * 	Need an actuall sensor for this to "work"
 		//Auto slow
 		if((!CommandBase.OI.getOverride() && (CommandBase.OI.getLeft() >= 0) || (CommandBase.OI.getRight() >= 0)) && (CommandBase.Drive.getUltrasonicDistance() <= RobotValues.distanceFromBox))
 		{
 			leftC = (leftC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
 			rightC = (rightC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
 		}
+		*/
 		
 		Drive.setLeftPower(leftC);
 		Drive.setRightPower(rightC);
