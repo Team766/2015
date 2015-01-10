@@ -6,4 +6,5 @@ public class RobotValues {
     public static final double sensitivityLow = .75d;
 	public static final double distanceFromBox = 5d;
 	public static final double safteyDriveDistance = 10;
+	public static final double driveDividor = 10;
 }

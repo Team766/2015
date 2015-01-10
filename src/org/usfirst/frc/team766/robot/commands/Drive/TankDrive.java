@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team766.robot.commands.Drive;
 
+import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 
@@ -25,6 +26,14 @@ public class TankDrive extends CommandBase {
 			rightC = leftC;
 			leftC = RightSave;
 		}
+		
+		//Auto slow
+		if((!CommandBase.OI.getOverride()) && (CommandBase.Drive.getUltrasonicDistance() <= RobotValues.distanceFromBox))
+		{
+			leftC = (leftC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
+			rightC = (rightC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
+		}
+		
 		Drive.setLeftPower(leftC);
 		Drive.setRightPower(rightC);
 		Drive.setShifter(OI.getShifter());

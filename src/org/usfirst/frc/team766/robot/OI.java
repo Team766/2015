@@ -19,7 +19,8 @@ public class OI {
     buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
     buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
     buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
-    buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot);
+    buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
+    buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride);
   
     
     //Auton Stuff
@@ -82,9 +83,9 @@ public class OI {
 	public boolean getUseGamepad(){
 		return UseGamepad;
 	}
-	/**
-	 * Adds or subtracts the current auton mode.
-	 * @param direction: negative if decrementing and positive if incrementing.
-	 */
+
+	public boolean getOverride() {
+		return buttonDriverOverride.get();
+	}
 }
 

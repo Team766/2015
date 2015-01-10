@@ -52,7 +52,7 @@ public class Drive extends Subsystem{
 	
 	public double getUltrasonicDistance()
 	{
-		return 0;
+		return rangeFinder.getRangeInches();
 	}
 	
 	public double getLeftEncoderDistance() {
