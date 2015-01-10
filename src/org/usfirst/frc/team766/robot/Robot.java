@@ -13,6 +13,14 @@ import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 /*
  * 2015 Java Code
  * author: Brett Levenson
+ * author: Patrick Kao
+ * 
+ */
+
+/**
+ * 
+ * @author Patrick Kao
+ * @author Brett Levenson
  */
 public class Robot extends IterativeRobot {
 
