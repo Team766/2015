@@ -28,7 +28,7 @@ public class TankDrive extends CommandBase {
 		}
 		
 		//Auto slow
-		if((!CommandBase.OI.getOverride()) && (CommandBase.Drive.getUltrasonicDistance() <= RobotValues.distanceFromBox))
+		if((!CommandBase.OI.getOverride() && (CommandBase.OI.getLeft() >= 0) || (CommandBase.OI.getRight() >= 0)) && (CommandBase.Drive.getUltrasonicDistance() <= RobotValues.distanceFromBox))
 		{
 			leftC = (leftC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
 			rightC = (rightC * CommandBase.Drive.getUltrasonicDistance()) / RobotValues.driveDividor;
