@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
@@ -19,9 +20,12 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+	private NetworkTable table;
+	
     public void robotInit() {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
+    	table = NetworkTable.getTable("dataTable");
     }
 	
 	public void disabledPeriodic() {
@@ -50,6 +54,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        table.putBoolean("itWorked", true);
     }
     
     public void testPeriodic() {

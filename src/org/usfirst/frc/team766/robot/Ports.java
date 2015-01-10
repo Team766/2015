@@ -15,7 +15,7 @@ public class Ports {
 	public static final int PWM_Elevators = 2;
 	
 	//Solenoids
-	public static final int Sol_Shifter = 1;
+	public static final int Sol_Shifter = 0;
 	
 	//Encoders
     public static final int DIO_LDriveEncA = 1;
@@ -24,6 +24,6 @@ public class Ports {
     public static final int DIO_RDriveEncB = 13;
     
     //Ultrasonnic Range Finder
-	public static final int ULTRASONIC_PING = 1;
-	public static final int ULTRASONIC_ECHO = 2;
+	public static final int ULTRASONIC_PING = 3;
+	public static final int ULTRASONIC_ECHO = 4;
 }

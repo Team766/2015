@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick
-    jLeft = new Joystick(1),
-    jRight = new Joystick(2),
-    jBox = new Joystick(3);
+    jLeft = new Joystick(0),
+    jRight = new Joystick(1),
+    jBox = new Joystick(2);
     
     public Button      
     buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
