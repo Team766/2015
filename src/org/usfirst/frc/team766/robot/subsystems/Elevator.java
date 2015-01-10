@@ -8,23 +8,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Subsystem for the elevator
  * 
- * TODO:
- * 	-Add presets to arm.
- *	@author Blevenson
+ * TODO: -Add presets to arm.
+ *
+ * @author Blevenson
  */
 public class Elevator extends Subsystem {
-    
-	private Talon Elevator = new Talon(Ports.PWM_Elevators);
-	
-    public void initDefaultCommand() {}
-    
-    public void setElevatorSpeed(double speed)
-    {
-    	Elevator.set(speed);
-    }
-    public void setElevatorHeight(int height)
-    {
-    	//takes elevator height and sets the motors to get to that height.
-    }
-}
 
+	private Talon Elevator = new Talon(Ports.PWM_Elevators);
+
+	public void initDefaultCommand() {
+	}
+
+	public void setElevatorSpeed(double speed) {
+		Elevator.set(speed);
+	}
+
+	public void setElevatorHeightWaypoint(int height) {
+		// takes elevator height and sets the motors to get to that height.
+	}
+
+	public void setElevatorHeightFeet(double height){
+		//takes elevator height in feet and sets the location of the elevator to that height.
+	}
+}
