@@ -1,5 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorBottom;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,7 +22,8 @@ public class OI {
     buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
     buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
     buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
-    buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride);
+    buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
+    buttonCancelElevator = new JoystickButton(jRight, Buttons.CancelElevator);
   
     
     //Auton Stuff
@@ -29,8 +32,9 @@ public class OI {
     public boolean UseGamepad = false;
     
 	public OI(){
-    
         //buttonDriverPickup.whileHeld(new Command);
+		buttonCancelElevator.cancelWhenPressed(new MoveElevatorBottom());
+		//Repeat for MoveElevatorTop(), etc...
 	}
 	
 	//interface for gamepad support
