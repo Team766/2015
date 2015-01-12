@@ -1,5 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.RobotValues;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,7 +22,10 @@ public class OI {
     buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
     buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
     buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
-    buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride);
+    buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
+    
+    buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
+    buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);    
   
     
     //Auton Stuff
@@ -33,8 +38,6 @@ public class OI {
         //buttonDriverPickup.whileHeld(new Command);
 	}
 	
-	//interface for gamepad support
-	//we can map commands to multiple buttons, but not for drive inputs
 	public boolean getShifter(){
 		return buttonShifter.get();
 	}
@@ -51,12 +54,12 @@ public class OI {
 	public double getSteer(){
 		return jRight.getX();
 	}
-	//tank drive here
+	//tank drive
 	public double getLeft(){
-		return jLeft.getRawAxis(2);
+		return jLeft.getY();
 	}
 	public double getRight(){
-		return jRight.getRawAxis(2);
+		return jRight.getY();
 	}
 	/**
 	 * Originally the gripper switch would be in the off
@@ -86,6 +89,26 @@ public class OI {
 
 	public boolean getOverride() {
 		return buttonDriverOverride.get();
+	}
+	
+	/**
+	 * Adds or subtracts the current auton mode.
+	 * @param direction: negative if decrementing and positive if incrementing.
+	 */
+	public void incrementAutonMode(int direction){
+		//increment
+		if(direction > 0)AutonMode++;
+		//decrement
+		else if(direction < 0)AutonMode--;
+		else System.out.println("incrementAutonMode can't take parm 0!");
+        
+		//Reset the auton cycle
+        if (AutonMode > RobotValues.Auton_Max){
+            AutonMode = RobotValues.Auton_Min;
+        }
+        else if (AutonMode < RobotValues.Auton_Min){
+            AutonMode = RobotValues.Auton_Max;
+        }
 	}
 }
 

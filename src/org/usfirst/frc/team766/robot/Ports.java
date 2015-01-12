@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
@@ -24,7 +25,13 @@ public class Ports {
     public static final int DIO_RDriveEncA = 14;
     public static final int DIO_RDriveEncB = 13;
     
+    //Limit Switchs
+    public static final int DIO_LimitSwitch = 5;
+    
     //Ultrasonnic Range Finder
 	public static final int ULTRASONIC_PING = 3;
 	public static final int ULTRASONIC_ECHO = 4;
+	
+	//Testing
+	public static final int POTENTIOMETER = 6;
 }

@@ -8,6 +8,17 @@ public class RobotValues {
 	public static final double safteyDriveDistance = 10;
 	public static final double driveDividor = 10;
 	
+	//Autonomous
+		//Modes
+		public static final int Auton_VisionDrive = 0;
+		public static final int Auton_Move = 1;
+		
+		public static final int Auton_Max = 1;
+		public static final int Auton_Min = 0;
+		
+		//Values
+		public static final double DriveForwardDistance = 10;
+	
 	public enum ElevatorState{
 		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
 	}
