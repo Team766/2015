@@ -1,6 +1,10 @@
 package org.usfirst.frc.team766.robot;
 
+<<<<<<< HEAD
 import org.usfirst.frc.team766.robot.RobotValues;
+=======
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorBottom;
+>>>>>>> FETCH_HEAD
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -23,9 +27,13 @@ public class OI {
     buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
     buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
     buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
+<<<<<<< HEAD
     
     buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
     buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);    
+=======
+    buttonCancelElevator = new JoystickButton(jRight, Buttons.CancelElevator);
+>>>>>>> FETCH_HEAD
   
     
     //Auton Stuff
@@ -34,8 +42,9 @@ public class OI {
     public boolean UseGamepad = false;
     
 	public OI(){
-    
         //buttonDriverPickup.whileHeld(new Command);
+		buttonCancelElevator.cancelWhenPressed(new MoveElevatorBottom());
+		//Repeat for MoveElevatorTop(), etc...
 	}
 	
 	public boolean getShifter(){
