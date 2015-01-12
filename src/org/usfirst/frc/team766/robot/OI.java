@@ -26,9 +26,7 @@ public class OI {
     buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
     
     buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
-    buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement),    
-    
-    buttonCancelElevator = new JoystickButton(jRight, Buttons.CancelElevator);
+    buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);
   
     
     //Auton Stuff
@@ -38,8 +36,6 @@ public class OI {
     
 	public OI(){
         //buttonDriverPickup.whileHeld(new Command);
-		buttonCancelElevator.cancelWhenPressed(new MoveElevatorBottom());
-		//Repeat for MoveElevatorTop(), etc...
 	}
 	
 	public boolean getShifter(){
