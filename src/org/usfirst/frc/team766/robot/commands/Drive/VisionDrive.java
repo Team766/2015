@@ -20,10 +20,13 @@ public class VisionDrive extends CommandBase {
     protected void execute() {
     	Drive.setLeftPower(Robot.table.getNumber("leftMotor"));
     	Drive.setRightPower(Robot.table.getNumber("rightMotor"));
+    	System.out.println("Left: " + Robot.table.getNumber("leftMotor") + " Right: " +
+    						Robot.table.getNumber("rightMotor"));
     }
 
     protected boolean isFinished() {
-        return Robot.table.getBoolean("done");
+        //return Robot.table.getBoolean("done");
+    	return false;
     }
 
     protected void end() {

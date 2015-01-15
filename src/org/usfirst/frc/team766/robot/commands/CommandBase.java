@@ -20,12 +20,13 @@ public abstract class CommandBase extends Command{
 	public static Drive Drive;
 	public static OI OI;
 	public static Elevator Elevator;
-	//public static logData myLog = new logData(); 
+	//public static logData myLog;
 	
 	public static void init(){
 		Drive = new Drive();
 		OI = new OI();
 		Elevator = new Elevator();
+		//myLog = new logData();
 	}
 
 }

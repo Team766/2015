@@ -63,7 +63,12 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	//cancel auton
-    	auton.cancel();
+    	try{
+    		auton.cancel();
+    	}catch(NullPointerException e)
+    	{
+    		System.out.println("Can't cancel auton command");
+    	}
     	
     	CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
     	
@@ -79,7 +84,8 @@ public class Robot extends IterativeRobot {
     	table.putNumber("rightMotor", 0d);
     }
 
-    public void disabledInit(){}
+    public void disabledInit(){
+    }
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();

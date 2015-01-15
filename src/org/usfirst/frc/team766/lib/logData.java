@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import edu.wpi.first.wpilibj.Timer;
 
@@ -17,21 +18,27 @@ import edu.wpi.first.wpilibj.Timer;
  
 public class logData {
 	
-	private BufferedWriter bw;
+	//private BufferedWriter bw;
+	private PrintWriter pw;
 	private Timer timer;
 			
 	public logData(){
 		try{
 			timer = new Timer();
+//			File file = new File("file:///log.txt");
+// 
+//			// if file doesnt exists, then create it
+//			if (!file.exists()) {
+//				file.createNewFile();
+//			}
+// 
+//			FileWriter fw = new FileWriter(file.getAbsolutePath());
+//			bw = new BufferedWriter(fw);
+			
 			File file = new File("file:///log.txt");
- 
-			// if file doesnt exists, then create it
-			if (!file.exists()) {
-				file.createNewFile();
-			}
- 
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			bw = new BufferedWriter(fw);
+		    file.createNewFile();
+
+		    pw = new PrintWriter(file);
 			
  
 			timer.start();
@@ -44,34 +51,24 @@ public class logData {
 	
 	public void print(String message)
 	{
-		try {
-			bw.write(getTime() + "\t" + message + "\n");
-			System.out.println("I be writing");
-		} catch (IOException e) {
-			System.out.println("I 2 stupid 2 no how 2 wite: #1");
-			e.printStackTrace();
-		}
+		//			bw.write(getTime() + "\t" + message);
+		//			bw.newLine();
+					pw.println(getTime() + "\t" + message);
+					System.out.println("I be writing");
 	}
 	
 	public void print(String message, int value)
 	{
-		try {
-			bw.write(getTime() + "\t" + message + value + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("I 2 stupid 2 no how 2 wite");
-		}
+		//			bw.write(getTime() + "\t" + message + value);
+//			bw.newLine();
+		pw.println(getTime() + "\t" + message + value);
 	}
 	
 	public void closeFile()
 	{
-		try {
-			timer.stop();
-			bw.close();
-		} catch (IOException e) {
-			System.out.println("Failed to close log file");
-			e.printStackTrace();
-		}
+		timer.stop();
+		pw.close();
+		//bw.close();
 	}
 	
 	private String getTime()
