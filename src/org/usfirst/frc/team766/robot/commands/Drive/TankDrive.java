@@ -9,7 +9,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  * @author blevenson
  */
 public class TankDrive extends CommandBase {
-
+	
 	public TankDrive() {
 	}
 
@@ -33,7 +33,7 @@ public class TankDrive extends CommandBase {
 			Drive.setLight(false);
 
 		/*
-		 * Need an actuall sensor for this to "work" //Auto slow
+		 * Need an actual sensor for this to "work" //Auto slow
 		 * if((!CommandBase.OI.getOverride() && (CommandBase.OI.getLeft() >= 0)
 		 * || (CommandBase.OI.getRight() >= 0)) &&
 		 * (CommandBase.Drive.getUltrasonicDistance() <=
@@ -43,17 +43,10 @@ public class TankDrive extends CommandBase {
 		 * CommandBase.Drive.getUltrasonicDistance()) /
 		 * RobotValues.driveDividor; }
 		 */
-
-		// Auto slow with Potentiometer
-		if ((!CommandBase.OI.getOverride() && (CommandBase.OI.getLeft() >= 0) || 
-			(CommandBase.OI.getRight() >= 0)) && 
-			(CommandBase.Drive.getPot() <= RobotValues.distanceFromBox)) {
-			leftC = (leftC * CommandBase.Drive.getPot())
-					/ RobotValues.driveDividor;
-			rightC = (rightC * CommandBase.Drive.getPot())
-					/ RobotValues.driveDividor;
-		}
-
+		
+		
+		
+		
 		Drive.setLeftPower(leftC);
 		Drive.setRightPower(rightC);
 		Drive.setShifter(OI.getShifter());

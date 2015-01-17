@@ -2,7 +2,6 @@ package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -30,7 +29,6 @@ public class Drive extends Subsystem{
 	private DigitalInput limitSwitch = new DigitalInput(Ports.DIO_LimitSwitch);
 	
 	private Ultrasonic rangeFinder = new Ultrasonic(Ports.ULTRASONIC_PING,Ports.ULTRASONIC_ECHO,Unit.kInches);
-	private AnalogPotentiometer pot = new AnalogPotentiometer(Ports.POTENTIOMETER);
     
     private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
     private Solenoid Light = new Solenoid(Ports.Sol_Light);
@@ -86,10 +84,6 @@ public class Drive extends Subsystem{
 	public boolean getSwitch()
 	{
 		return limitSwitch.get();
-	}
-	public double getPot()
-	{
-		return pot.get();
 	}
 
 }

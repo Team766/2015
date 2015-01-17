@@ -31,7 +31,4 @@ public class Ports {
     //Ultrasonnic Range Finder
 	public static final int ULTRASONIC_PING = 3;
 	public static final int ULTRASONIC_ECHO = 4;
-	
-	//Testing
-	public static final int POTENTIOMETER = 6;
 }
