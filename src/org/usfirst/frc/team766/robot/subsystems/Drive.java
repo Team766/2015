@@ -47,7 +47,7 @@ public class Drive extends Subsystem{
 		setRightPower(speed);
 	}
 	public void setLeftPower(double power){
-		leftDrive.set(-power);
+		leftDrive.set(power);
 	}
 	public void setRightPower(double power){
 		rightDrive.set(power);
