@@ -52,8 +52,7 @@ public class Robot extends IterativeRobot {
     	 * smartdashboard to allow autons
     	 * to be selected...Add here
     	 */
-    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-    	auton.start();
+    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode).start();
     }
 
     
@@ -63,12 +62,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	//cancel auton
-    	try{
-    		auton.cancel();
-    	}catch(NullPointerException e)
-    	{
-    		System.out.println("Can't cancel auton command");
-    	}
+	if (auton != null) auton.cancel();
     	
     	CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
     	
