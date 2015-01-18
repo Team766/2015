@@ -52,7 +52,8 @@ public class Robot extends IterativeRobot {
     	 * smartdashboard to allow autons
     	 * to be selected...Add here
     	 */
-    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode).start();
+    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+    	auton.start();
     }
 
     
