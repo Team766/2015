@@ -17,6 +17,12 @@ public class CheesyDriveCommand extends CommandBase {
   private double quickStopAccumulator;
   private double throttleDeadband = 0.02;
   private double wheelDeadband = 0.02;
+  
+  //Bearly Driving
+  private double lastRightOut;
+  private double lastLeftOut;
+  private double outputLeft;
+  private double outputRight;
 
   public CheesyDriveCommand() {
 	  requires(Drive);
@@ -24,6 +30,10 @@ public class CheesyDriveCommand extends CommandBase {
 
   protected void initialize() {
     //drive.disableControllers() ;
+	  lastRightOut = 0;
+	  lastLeftOut = 0;
+	  outputLeft = 0;
+	  outputRight = 0;
   }
 
   protected void execute() {
@@ -145,8 +155,8 @@ public class CheesyDriveCommand extends CommandBase {
     }
 
     //drive.setLeftRightPower(leftPwm, rightPwm);
-    Drive.setLeftPower(leftPwm);
-    Drive.setRightPower(rightPwm);
+    Drive.setLeftPower(bearafyLeftPower(leftPwm));
+    Drive.setRightPower(bearafyRightPower(rightPwm));
     Drive.setShifter(isHighGear);
   }
 
@@ -167,5 +177,17 @@ public class CheesyDriveCommand extends CommandBase {
   }
   public static double limit(double v, double limit) {
 	return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
+  }
+  public double bearafyLeftPower(double in)
+  {
+	  outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
+	  lastLeftOut = outputLeft;
+	  return outputLeft;
+  }
+  public double bearafyRightPower(double in)
+  {
+	  outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
+	  lastRightOut = outputRight;
+	  return outputRight;
   }
 }

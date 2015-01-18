@@ -19,6 +19,10 @@ public class RobotValues {
 		//Values
 		public static final double DriveForwardDistance = 10;
 	
+	//Bearly Drive
+	//Decrease for faster reaction times
+	public static final double alpha = 0.9;
+	
 	public enum ElevatorState{
 		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
 	}

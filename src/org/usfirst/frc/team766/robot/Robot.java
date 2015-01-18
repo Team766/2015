@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
+import org.usfirst.frc.team766.robot.commands.Drive.BearlyDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
+    	SmartDashboard.putNumber("Alpha", 0.5);
     	table = NetworkTable.getTable("dataTable");
     }
 	
