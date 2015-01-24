@@ -11,6 +11,7 @@ import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.BearlyDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
+import org.usfirst.frc.team766.robot.commands.Elevator.CameraMount;
 
 /**
  * 2015 Java Code main class
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
     	 */
     	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
     	auton.start();
+    	
     }
 
     
@@ -69,11 +71,13 @@ public class Robot extends IterativeRobot {
     	
     	CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
     	
-    	if(!CommandBase.OI.getTankDrive()){
-            new CheesyDriveCommand().start();			
-        }else{
-            new TankDrive().start();
-        }
+//    	if(!CommandBase.OI.getTankDrive()){
+//            new CheesyDriveCommand().start();			
+//        }else{
+//            new TankDrive().start();
+//        }
+    	
+    	new CameraMount().start();
     	
     	//Vision variables
     	table.putBoolean("done", true);

@@ -110,5 +110,9 @@ public class OI {
             AutonMode = RobotValues.Auton_Max;
         }
 	}
+
+	public double getTwist() {
+		return jLeft.getTwist();
+	}
 }
 
