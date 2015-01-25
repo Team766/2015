@@ -32,19 +32,20 @@ public class CameraMount extends CommandBase{
 			twist = OI.getTwist();
 			pull = OI.getLeft();
 			
-//			outR = (twist / 2) + 0.5;
-//			outP = (pull / 2) + 0.5;
+			outR = (twist / 2) + 0.5;
+			outP = (pull / 2) + 0.5;
 			
 			
-			if(looper > loopSpeed)
-			{
-				update();
-				looper = 0;
-			}
+//			if(looper > loopSpeed)
+//			{
+//				update();
+//				looper = 0;
+//			}
+			
 			Elevator.rotateCamera(outR);
 			Elevator.rollCamera(outP);
 			
-			looper += 0.5;
+//			looper += 0.5;
 		}
 		
 		public void update()

@@ -31,4 +31,7 @@ public class Ports {
     //Ultrasonnic Range Finder
 	public static final int ULTRASONIC_PING = 3;
 	public static final int ULTRASONIC_ECHO = 4;
+	
+	
+	public static final int GYRO = 1;
 }

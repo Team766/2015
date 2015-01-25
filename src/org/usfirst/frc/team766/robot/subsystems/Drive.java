@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
  * Drive subsystem.
@@ -32,6 +34,10 @@ public class Drive extends Subsystem{
     
     private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
     private Solenoid Light = new Solenoid(Ports.Sol_Light);
+    
+    private Gyro gyro = new Gyro(Ports.GYRO);
+    
+    private PowerDistributionPanel PDP = new PowerDistributionPanel();
     
 	protected void initDefaultCommand() {
 	}
@@ -84,6 +90,24 @@ public class Drive extends Subsystem{
 	public boolean getSwitch()
 	{
 		return limitSwitch.get();
+	}
+	public double getVoltage()
+	{
+		return PDP.getVoltage();
+	}
+	public double getTemp()
+	{
+		return PDP.getTemperature();
+	}
+	
+	//Gyro
+	public void resetGyro()
+	{
+		gyro.reset();
+	}
+	public double getAngle()
+	{
+		return gyro.getAngle();
 	}
 
 }
