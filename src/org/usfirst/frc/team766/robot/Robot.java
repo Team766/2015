@@ -11,6 +11,7 @@ import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.BearlyDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
+import org.usfirst.frc.team766.robot.commands.Drive.VisionDrive;
 import org.usfirst.frc.team766.robot.commands.Elevator.CameraMount;
 
 /**
@@ -55,8 +56,11 @@ public class Robot extends IterativeRobot {
     	 * smartdashboard to allow autons
     	 * to be selected...Add here
     	 */
-    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-    	auton.start();
+    	
+    	SmartDashboard.putData(new VisionDrive());
+    	
+//    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+//    	auton.start();
     	
     }
 
