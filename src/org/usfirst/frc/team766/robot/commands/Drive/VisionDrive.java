@@ -9,8 +9,9 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *
  */
 public class VisionDrive extends CommandBase {
-
+    private int count;
     public VisionDrive() {
+        count = 0;
     }
 
     protected void initialize() {
@@ -22,11 +23,18 @@ public class VisionDrive extends CommandBase {
     	Drive.setRightPower(Robot.table.getNumber("rightMotor"));
     	System.out.println("Left: " + Robot.table.getNumber("leftMotor") + " Right: " +
     						Robot.table.getNumber("rightMotor"));
+    	
+    	//Count is used as a buffer to wait for the vision to connect with the robot, if it doesn't
+    	//connect, then it cancels this auton
+        if(Robot.table.getBoolean("done"))
+            count++;
+        else
+            count = 101;  //Needs to be greater so than it can be ready to end  
     }
 
     protected boolean isFinished() {
-        //return Robot.table.getBoolean("done");
-    	return false;
+        return (Robot.table.getBoolean("done") && count > 100);
+    	//return false;
     }
 
     protected void end() {
