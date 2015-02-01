@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 /**
  * Drive subsystem.
@@ -36,6 +37,7 @@ public class Drive extends Subsystem{
     private Solenoid Light = new Solenoid(Ports.Sol_Light);
     
     private Gyro gyro = new Gyro(Ports.GYRO);
+    private AnalogPotentiometer pot = new AnalogPotentiometer(0);
     
     private PowerDistributionPanel PDP = new PowerDistributionPanel();
     
@@ -108,6 +110,10 @@ public class Drive extends Subsystem{
 	public double getAngle()
 	{
 		return gyro.getAngle();
+	}
+	//Testing distances
+	public double getPot() {
+		return pot.get();
 	}
 
 }

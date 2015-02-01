@@ -27,7 +27,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
 	
-	public static NetworkTable table;
 	private AutonSelectorCommand auton;
 	private boolean AutonCyclePrev;
 	
@@ -35,12 +34,11 @@ public class Robot extends IterativeRobot {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
     	SmartDashboard.putNumber("Alpha", 0.5);
-    	table = NetworkTable.getTable("dataTable");
     	
     	//Vision variables
-    	table.putBoolean("done", true);
-    	table.putNumber("leftMotor", 0d);
-    	table.putNumber("rightMotor", 0d);
+    	CommandBase.table.putBoolean("done", true);
+    	CommandBase.table.putNumber("leftMotor", 0d);
+    	CommandBase.table.putNumber("rightMotor", 0d);
     }
 	
 	public void disabledPeriodic() {

@@ -2,6 +2,7 @@ package org.usfirst.frc.team766.robot.commands.Drive;
 
 import org.usfirst.frc.team766.robot.Robot;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.UltrasonicSensor;
 
 /**
  * Autonmous command that uses the offboard/onboard processor to
@@ -17,29 +18,34 @@ public class VisionDrive extends CommandBase {
 
     protected void initialize() {
     	Drive.setLeftPower(0);
+    	table.putBoolean("done", true);
     }
 
     protected void execute() {
-    	Drive.setLeftPower(Robot.table.getNumber("leftMotor"));
-    	Drive.setRightPower(Robot.table.getNumber("rightMotor"));
+    	//CommandBase.table.putNumber("distance", UltrasonicSensor.getInstance().getDistanceDouble());
+    	CommandBase.table.putNumber("distance", (Drive.getPot() * 1000));
+    	
+    	Drive.setLeftPower(CommandBase.table.getNumber("leftMotor"));
+    	Drive.setRightPower(CommandBase.table.getNumber("rightMotor"));
     	
     	//System.out.println("Left: " + Robot.table.getNumber("leftMotor") + " Right: " +
     	//					Robot.table.getNumber("rightMotor"));
     	
     	//Count is used as a buffer to wait for the vision to connect with the robot, if it doesn't
     	//connect, then it cancels this auton
-        if(Robot.table.getBoolean("done"))
+        if(CommandBase.table.getBoolean("done"))
             count++;
         else
             count = 101;  //Needs to be greater so than it can be ready to end  
     }
 
     protected boolean isFinished() {
-        return (Robot.table.getBoolean("done") && count > 1000000);
+        return (CommandBase.table.getBoolean("done") && count > 100);
     	//return false;
     }
 
     protected void end() {
+    	System.out.println("Ending vision drive");
     	Drive.setPower(0);
     }
 
