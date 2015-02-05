@@ -24,6 +24,8 @@ public class Ports {
     public static final int DIO_LDriveEncB = 2;
     public static final int DIO_RDriveEncA = 14;
     public static final int DIO_RDriveEncB = 13;
+    public static final int DIO_ELEVATOR_ENCA = 11;
+    public static final int DIO_ELEVATOR_ENCB = 12;
     
     //Limit Switchs
     public static final int DIO_LimitSwitch = 5;
