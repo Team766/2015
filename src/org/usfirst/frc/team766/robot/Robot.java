@@ -58,15 +58,14 @@ public class Robot extends IterativeRobot {
     	 */
 
     	
-//    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-//    	auton.start();
+    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+    	auton.start();
     	
     }
 
     
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-    	System.out.println(CommandBase.Drive.getAngle());
     }
 
     public void teleopInit() {
