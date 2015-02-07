@@ -8,9 +8,13 @@ package org.usfirst.frc.team766.robot;
  */
 public class Ports {
 	//Drive
-	public static final int PWM_Left_Drive = 0;
-	public static final int PWM_Right_Drive = 1;
+	public static final int PWM_Left_Drive = 1;
+	public static final int PWM_Right_Drive = 0;
 	public static final int PWM_Elevators = 2;
+	public static final int PWM_IntakeR = 3;
+	public static final int PWM_IntakeL = 4;
+	public static final int PWM_IntakeWheelR = 5;
+	public static final int PWM_IntakWheelL = 6;
 	
 	//Solenoids
 	public static final int Sol_Shifter = 0;
@@ -18,8 +22,8 @@ public class Ports {
 	//Encoders
     public static final int DIO_LDriveEncA = 1;
     public static final int DIO_LDriveEncB = 2;
-    public static final int DIO_RDriveEncA = 7;
-    public static final int DIO_RDriveEncB = 8;
+    public static final int DIO_RDriveEncA = 9;
+    public static final int DIO_RDriveEncB = 10;
     public static final int DIO_ELEVATOR_ENCA = 3;
     public static final int DIO_ELEVATOR_ENCB = 4;
 	
