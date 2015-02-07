@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	//SmartDashboard.putData("Test Hall Effect Sensor", new TestHallEffectSensor()); //Not necessary. Uncomment if you want to test.
     	SmartDashboard.putData(new OpenCvTest());
+    	SmartDashboard.putData(new DriveTurn(90));
     }
 	
 	public void disabledPeriodic() {
@@ -56,15 +58,15 @@ public class Robot extends IterativeRobot {
     	 */
 
     	
-    	
-    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-    	auton.start();
+//    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+//    	auton.start();
     	
     }
 
     
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+    	System.out.println(CommandBase.Drive.getAngle());
     }
 
     public void teleopInit() {

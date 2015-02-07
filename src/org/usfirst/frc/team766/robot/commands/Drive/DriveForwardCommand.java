@@ -24,7 +24,7 @@ public class DriveForwardCommand extends CommandBase {
 	private PIDController AnglePID = new PIDController(RobotValues.AngleKp,
 			RobotValues.AngleKi, RobotValues.AngleKd,
 			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
-			RobotValues.AngleThreshold);;
+			RobotValues.AngleThreshold);
 
 	public DriveForwardCommand() {
 		this(0);
@@ -44,8 +44,7 @@ public class DriveForwardCommand extends CommandBase {
 	}
 
 	protected void execute() {
-		DistancePID.calculate((Drive.getLeftEncoderDistance() + Drive
-				.getRightEncoderDistance()) / 2.0);
+		DistancePID.calculate(Drive.getAverageEncoderDistance());
 		AnglePID.calculate(Drive.getAngle());
 		Drive.setLeftPower(DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 		Drive.setRightPower(DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);

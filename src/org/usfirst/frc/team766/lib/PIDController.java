@@ -97,8 +97,6 @@ public class PIDController {
 	 */
 	public void calculate(double cur_input) {
 		cur_error = (setpoint - cur_input);
-		System.out.println("curerror:" + cur_error);
-		System.out.println("input: " + cur_input);
 		if (isDone()) {
 			output_value = 0;
 			System.out.println("pid done");
@@ -109,7 +107,6 @@ public class PIDController {
 		prev_error = cur_error;
 		total_error += cur_error;
 		output_value = clip(out);
-		System.out.println("out: " + out);
 	}
 
 	public double getOutput() {
@@ -117,8 +114,6 @@ public class PIDController {
 	}
 
 	public boolean isDone() {
-		System.out.println("endthresh" + endthreshold);
-		System.out.println("calc: " + (endthreshold - cur_error));
 		if (Math.abs(cur_error) < endthreshold)
 			return true;
 		return false;
