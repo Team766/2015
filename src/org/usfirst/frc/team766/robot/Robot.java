@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
     	SmartDashboard.putNumber("Alpha", 0.5);
-    	SmartDashboard.putData("Test Hall Effect Sensor", new TestHallEffectSensor());
+    	//SmartDashboard.putData("Test Hall Effect Sensor", new TestHallEffectSensor()); //Not necessary. Uncomment if you want to test.
     	SmartDashboard.putData(new OpenCvTest());
     }
 	

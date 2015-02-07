@@ -8,7 +8,8 @@ import org.usfirst.frc.team766.robot.UltrasonicSensor.UltrasonicValue;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * @author PKao
+ * @author EBlack
  */
 
 //Use this class if you want an accurate ultrasonic

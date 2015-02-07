@@ -63,6 +63,15 @@ public class RobotValues {
 	public static final double Straightoutputmax_low = -0.1;
 	public static final double Straightoutputmax_high = 0.1;
 	public static final double StraightThreshold = Double.MIN_NORMAL; // so it never stops
-															// trying // rekt(Ethan wuz here)
-
+															// trying
+	
+	//drive smoothly
+	public static final double SmootherLeftKp = .1;
+	public static final double SmootherRightKp = .1;
+	public static final double SmootherLeftKi = .2;
+	public static final double SmootherRightKi = .2;
+	
+	//elvate smoothly
+	public static final double ElevatorKp = .1;
+	public static final double ElevatorKi = .1;
 }
