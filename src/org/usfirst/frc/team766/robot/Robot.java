@@ -4,15 +4,13 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
-import org.usfirst.frc.team766.robot.commands.Drive.BearlyDrive;
+import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
-import org.usfirst.frc.team766.robot.commands.Drive.VisionDrive;
-import org.usfirst.frc.team766.robot.commands.Elevator.CameraMount;
+import org.usfirst.frc.team766.robot.commands.TestHallEffectSensor;
 
 /**
  * 2015 Java Code main class
@@ -34,11 +32,8 @@ public class Robot extends IterativeRobot {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
     	SmartDashboard.putNumber("Alpha", 0.5);
-    	
-    	//Vision variables
-    	CommandBase.table.putBoolean("done", true);
-    	CommandBase.table.putNumber("leftMotor", 0d);
-    	CommandBase.table.putNumber("rightMotor", 0d);
+    	SmartDashboard.putData("Test Hall Effect Sensor", new TestHallEffectSensor());
+    	SmartDashboard.putData(new OpenCvTest());
     }
 	
 	public void disabledPeriodic() {
@@ -60,6 +55,8 @@ public class Robot extends IterativeRobot {
     	 * smartdashboard to allow autons
     	 * to be selected...Add here
     	 */
+
+    	
     	
     	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
     	auton.start();
@@ -83,7 +80,6 @@ public class Robot extends IterativeRobot {
             new TankDrive().start();
         }
     	
-    	//new CameraMount().start();
     }
 
     public void disabledInit(){

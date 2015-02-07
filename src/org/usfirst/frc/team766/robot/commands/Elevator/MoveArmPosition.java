@@ -1,40 +1,68 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team766.robot.subsystems.Elevator;
+import org.usfirst.frc.team766.lib.PIDController;
+import org.usfirst.frc.team766.robot.RobotValues;
+import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
- *	Command that moves the elevator to the bottom preset
- *	@author Blevenson
+ * Command that moves the elevator to the bottom preset
+ *
+ * @author Blevenson
+ * @author PKao
  */
-public class MoveArmPosition extends Command {
-	private boolean done;
-	private int goal;
-    public MoveArmPosition() {
-        done = false;
-        goal = 0;
-    }
-    
-    public MoveArmPosition(int goal) {
-        done = false;
-        this.goal = goal;
-    }
 
-    protected void initialize() {
-    }
+// Note: PID Constants need to be tuned
+public class MoveArmPosition extends CommandBase {
+	private PIDController positionPID; // Need to initialize PID Controller with
+										// right constants.
 
-    protected void execute() {
-    	//PID to move the elevator to position
-    }
+	public MoveArmPosition() {
+		requires(Elevator);
+		Elevator.setGoal(0);
+		positionPID.setSetpoint(0);
+	}
 
-    protected boolean isFinished() {
-        return done;
-    }
+	public MoveArmPosition(double goal) {
+		positionPID.setSetpoint(goal);
+	}
 
-    protected void end() {
-    }
+	public MoveArmPosition(RobotValues.ElevatorState waypoint) {
+		switch (waypoint) {
+			case BOTTOM:
+				positionPID.setSetpoint(RobotValues.bottomPreset);
+				break;
+	
+			case MIDDLE:
+				positionPID.setSetpoint(RobotValues.middlePreset);
+				break;
+	
+			case TOP:
+				positionPID.setSetpoint(RobotValues.topPreset);
+				break;
+			default:
+				break;
+		}
+	}
 
-    protected void interrupted() {
-    	end();
-    }
+	protected void initialize() {
+		Elevator.resetEnc();
+		positionPID.reset();
+	}
+
+	protected void execute() {
+		positionPID.calculate(Elevator.getEnc());
+		Elevator.setElevatorSpeed(positionPID.getOutput());
+	}
+
+	protected boolean isFinished() {
+		return positionPID.isDone();
+	}
+
+	protected void end() {
+		Elevator.setElevatorSpeed(0);
+	}
+
+	protected void interrupted() {
+		end();
+	}
 }

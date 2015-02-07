@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot.commands;
 
-import org.usfirst.frc.team766.lib.logData;
 import org.usfirst.frc.team766.robot.subsystems.Drive;
 import org.usfirst.frc.team766.robot.OI;
 

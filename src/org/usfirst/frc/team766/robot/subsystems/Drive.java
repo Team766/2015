@@ -2,16 +2,12 @@ package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 /**
  * Drive subsystem.
@@ -28,16 +24,10 @@ public class Drive extends Subsystem{
 	
 	private Encoder rightEncoder = new Encoder(Ports.DIO_RDriveEncA, Ports.DIO_RDriveEncB);
 	private Encoder leftEncoder = new Encoder(Ports.DIO_LDriveEncA, Ports.DIO_LDriveEncB);
-	
-	private DigitalInput limitSwitch = new DigitalInput(Ports.DIO_LimitSwitch);
-	
-	private Ultrasonic rangeFinder = new Ultrasonic(Ports.ULTRASONIC_PING,Ports.ULTRASONIC_ECHO,Unit.kInches);
-    
+	    
     private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
-    private Solenoid Light = new Solenoid(Ports.Sol_Light);
     
     private Gyro gyro = new Gyro(Ports.GYRO);
-    private AnalogPotentiometer pot = new AnalogPotentiometer(0);
     
     private PowerDistributionPanel PDP = new PowerDistributionPanel();
     
@@ -62,11 +52,6 @@ public class Drive extends Subsystem{
 		Shifter.set(!highGear);
 	}
 	
-	public double getUltrasonicDistance()
-	{
-		return rangeFinder.getRangeInches();
-	}
-	
 	public double getLeftEncoderDistance() {
 		return translateDrive(leftEncoder.getRaw());
 	}
@@ -86,13 +71,7 @@ public class Drive extends Subsystem{
 		double counts = 256 * 4.0;
 		return (float) ((trans / counts) * (Math.PI) * wheel_d);
 	}
-	public void setLight(boolean b) {
-		Light.set(b);
-	}
-	public boolean getSwitch()
-	{
-		return limitSwitch.get();
-	}
+
 	public double getVoltage()
 	{
 		return PDP.getVoltage();
@@ -110,10 +89,6 @@ public class Drive extends Subsystem{
 	public double getAngle()
 	{
 		return gyro.getAngle();
-	}
-	//Testing distances
-	public double getPot() {
-		return pot.get();
 	}
 
 }

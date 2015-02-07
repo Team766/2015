@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
-import org.usfirst.frc.team766.robot.Robot;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.UltrasonicSensor;
 
@@ -22,8 +21,7 @@ public class VisionDrive extends CommandBase {
     }
 
     protected void execute() {
-    	//CommandBase.table.putNumber("distance", UltrasonicSensor.getInstance().getDistanceDouble());
-    	CommandBase.table.putNumber("distance", (Drive.getPot() * 1000));
+    	CommandBase.table.putNumber("distance", UltrasonicSensor.getInstance().getDistanceDouble());
     	
     	Drive.setLeftPower(CommandBase.table.getNumber("leftMotor"));
     	Drive.setRightPower(CommandBase.table.getNumber("rightMotor"));

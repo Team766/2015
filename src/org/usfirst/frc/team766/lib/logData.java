@@ -1,8 +1,7 @@
 package org.usfirst.frc.team766.lib;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -11,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 /*
 * Creates a log for storing values on the roboRio that can then be accesed using ftp
 * username: admin
-* password: ••••••••
+* password: 
 * 
 * Created by Brett Levenson
 */
@@ -23,29 +22,12 @@ public class logData {
 	private Timer timer;
 			
 	public logData(){
-		try{
-			timer = new Timer();
-//			File file = new File("file:///log.txt");
-// 
-//			// if file doesnt exists, then create it
-//			if (!file.exists()) {
-//				file.createNewFile();
-//			}
-// 
-//			FileWriter fw = new FileWriter(file.getAbsolutePath());
-//			bw = new BufferedWriter(fw);
-			
-			File file = new File("file:///log.txt");
-		    file.createNewFile();
-
-		    pw = new PrintWriter(file);
-			
- 
-			timer.start();
+		try {
+			FileOutputStream fOut = new FileOutputStream(new File("/tmp/log.txt"));
+			fOut.close();
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the log's constructor");
 			e.printStackTrace();
-			timer.stop();
 		}
 	}
 	

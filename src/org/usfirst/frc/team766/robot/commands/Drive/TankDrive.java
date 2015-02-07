@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
-import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
@@ -24,27 +23,7 @@ public class TankDrive extends CommandBase {
 			double RightSave = rightC;
 			rightC = leftC;
 			leftC = RightSave;
-		} else
-			Drive.setLight(false);
-
-		if (Drive.getSwitch())
-			Drive.setLight(true);
-		else
-			Drive.setLight(false);
-
-		/*
-		 * Need an actual sensor for this to "work" //Auto slow
-		 * if((!CommandBase.OI.getOverride() && (CommandBase.OI.getLeft() >= 0)
-		 * || (CommandBase.OI.getRight() >= 0)) &&
-		 * (CommandBase.Drive.getUltrasonicDistance() <=
-		 * RobotValues.distanceFromBox)) { leftC = (leftC *
-		 * CommandBase.Drive.getUltrasonicDistance()) /
-		 * RobotValues.driveDividor; rightC = (rightC *
-		 * CommandBase.Drive.getUltrasonicDistance()) /
-		 * RobotValues.driveDividor; }
-		 */
-		
-		
+		}
 		
 		
 		Drive.setLeftPower(leftC);

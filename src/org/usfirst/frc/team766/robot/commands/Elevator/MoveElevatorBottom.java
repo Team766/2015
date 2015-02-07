@@ -1,33 +1,15 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team766.robot.subsystems.Elevator;
+import org.usfirst.frc.team766.robot.RobotValues;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *	Command that moves the elevator to the bottom preset
- *	@author Blevenson
+ *
  */
-public class MoveElevatorBottom extends Command {
-	private boolean done;
-    public MoveElevatorBottom() {
-        done = false;
+public class MoveElevatorBottom extends CommandGroup {
+    
+    public  MoveElevatorBottom() {
+    	addSequential(new MoveArmPosition(RobotValues.ElevatorState.BOTTOM));
     }
-
-    protected void initialize() {
-    }
-
-    protected void execute() {
-    	//PID to move the elevator to position
-    }
-
-    protected boolean isFinished() {
-        return done;
-    }
-
-    protected void end() {
-    }
-
-    protected void interrupted() {
-    	end();
-    }
-}
+}          

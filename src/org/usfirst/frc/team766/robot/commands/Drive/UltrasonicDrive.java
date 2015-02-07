@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
 import org.usfirst.frc.team766.robot.RobotValues;
+import org.usfirst.frc.team766.robot.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
@@ -31,7 +32,7 @@ public class UltrasonicDrive extends CommandBase {
 
     protected void execute() {
     	//Drive forward using the PID here for the Ultrasonic sensor
-    	currentDistance = Drive.getUltrasonicDistance();
+    	currentDistance = UltrasonicSensor.getInstance().getDistanceDouble();
     }
 
     protected boolean isFinished() {

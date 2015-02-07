@@ -1,7 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorBottom;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
