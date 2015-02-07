@@ -31,13 +31,7 @@ public class RobotValues {
 	public static final int bottomPreset = 1;//Open to change. Prototype value
 	public static final int middlePreset = 3;//Open to change. Prototype value
 	public static final int topPreset = 5;//Open to change. Prototype value
-	
-	// Values from here down are last year's values
 
-	// drive
-	public static final double Kp = 0.4;
-	public static final double Kd = 0.2;
-	public static final double driveTolerance = .01;
 
 	// gyro turning
 
@@ -50,15 +44,15 @@ public class RobotValues {
 
 	// drive straight
 
-	public static final double DriveKp = 0.0;
-	public static final double DriveKi = 0.0;
+	public static final double DriveKp = 0.4;
+	public static final double DriveKi = 0.2;
 	public static final double DriveKd = 0.0;
 	public static final double Driveoutputmax_low = -0.5;
 	public static final double Driveoutputmax_high = 0.5;
 	public static final double DriveThreshold = .01;
 
-	public static final double StraightKp = 0.0;
-	public static final double StraightKi = 0.0;
+	public static final double StraightKp = 0.3;
+	public static final double StraightKi = 0.2;
 	public static final double StraightKd = 0.0;
 	public static final double Straightoutputmax_low = -0.1;
 	public static final double Straightoutputmax_high = 0.1;
@@ -71,7 +65,8 @@ public class RobotValues {
 	public static final double SmootherLeftKi = .2;
 	public static final double SmootherRightKi = .2;
 	
-	//elvate smoothly
+	//elevate smoothly
 	public static final double ElevatorKp = .1;
 	public static final double ElevatorKi = .1;
+	
 }

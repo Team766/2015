@@ -5,47 +5,63 @@ import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
- * 	Command that uses the encoders to move the robot
- *	@author Blevenson
- *	@author PKao
+ * Command that uses the encoders to move the robot
+ *
+ * @author Blevenson
+ * @author PKao
  */
-//Note: PID code experimental
+// Note: PID code experimental
 public class DriveForwardCommand extends CommandBase {
-	private PIDController DistancePID = new PIDController(RobotValues.AngleKp, RobotValues.AngleKi,
-			RobotValues.AngleKd, RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high, 
-			RobotValues.AngleThreshold); //see PID class or hover for definition of all
+	private static final double ANGLE_TO_POWER_RATIO = .005;
 	
-    public DriveForwardCommand() {
-    	DistancePID.setSetpoint(0);
-    }
-    
-    public DriveForwardCommand(double distance){
-    	DistancePID.setSetpoint(distance);
-    }
+	
+	private PIDController DistancePID = new PIDController(RobotValues.DriveKp,
+			RobotValues.DriveKi, RobotValues.DriveKd,
+			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
+			RobotValues.AngleThreshold); // see PID class or hover for
+											// definition of all
+	
+	private PIDController AnglePID = new PIDController(RobotValues.AngleKp,
+			RobotValues.AngleKi, RobotValues.AngleKd,
+			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
+			RobotValues.AngleThreshold);;
 
-    protected void initialize() {
-    	Drive.resetEncoders();
-    	DistancePID.reset();
-    	Drive.setShifter(false);
-    }
+	public DriveForwardCommand() {
+		this(0);
+	}
 
-    protected void execute() {
-    	DistancePID.calculate((Drive.getLeftEncoderDistance() + Drive.getRightEncoderDistance()) / 2.0);
-    	Drive.setLeftPower(DistancePID.getOutput());
-    	Drive.setRightPower(DistancePID.getOutput());
-    }
+	public DriveForwardCommand(double distance) {
+		DistancePID.setSetpoint(distance);
+		AnglePID.setSetpoint(distance);
+	}
 
-    protected boolean isFinished() {
-    	//added to remove error, needs to be changed
-        return DistancePID.isDone();
-    }
+	protected void initialize() {
+		Drive.resetGyro();
+		Drive.resetEncoders();
+		DistancePID.reset();
+		AnglePID.reset();
+		Drive.setShifter(false);
+	}
 
-    protected void end() {
-    	Drive.setPower(0d);
-    }
+	protected void execute() {
+		DistancePID.calculate((Drive.getLeftEncoderDistance() + Drive
+				.getRightEncoderDistance()) / 2.0);
+		AnglePID.calculate(Drive.getAngle());
+		Drive.setLeftPower(DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
+		Drive.setRightPower(DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
+	}
 
-    protected void interrupted() {
-    	end();
-    }
-    
+	protected boolean isFinished() {
+		// added to remove error, needs to be changed
+		return DistancePID.isDone();
+	}
+
+	protected void end() {
+		Drive.setPower(0d);
+	}
+
+	protected void interrupted() {
+		end();
+	}
+
 }

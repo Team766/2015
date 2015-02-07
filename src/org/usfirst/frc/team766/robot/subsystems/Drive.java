@@ -34,13 +34,18 @@ public class Drive extends Subsystem implements Runnable {
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
-	//Should I use arrays?
+	// Should I use arrays?
 	private Thread changeLimiter = new Thread(this);
 	private double leftTargetSpeed = 0;
 	private double rightTargetSpeed = 0;
-	private PIDController leftSmoother = new PIDController(RobotValues.SmootherLeftKp, RobotValues.SmootherLeftKi, 0, leftTargetSpeed); //Add Better PID Constants P
-	private PIDController rightSmoother = new PIDController(RobotValues.SmootherRightKp, RobotValues.SmootherRightKi, 0, rightTargetSpeed); //Add Better PID Constants
-	
+	private PIDController leftSmoother = new PIDController(
+			RobotValues.SmootherLeftKp, RobotValues.SmootherLeftKi, 0,
+			leftTargetSpeed); // Add Better PID Constants P
+	private PIDController rightSmoother = new PIDController(
+			RobotValues.SmootherRightKp, RobotValues.SmootherRightKi, 0,
+			rightTargetSpeed); // Add Better PID Constants
+	private boolean smoothing = true;
+
 	protected void initDefaultCommand() {
 		changeLimiter.start();
 	}
@@ -48,20 +53,31 @@ public class Drive extends Subsystem implements Runnable {
 	/**
 	 * Set power to both motors, useful for shutting them off
 	 * 
-	 * @param speed
+	 * @param power
 	 *            power value
 	 */
-	public void setPower(double speed) {
-		leftSmoother.setSetpoint(speed);
-		rightSmoother.setSetpoint(speed);
+	public void setPower(double power) {
+		if (smoothing) {
+			leftSmoother.setSetpoint(power);
+			rightSmoother.setSetpoint(power);
+		} else {
+			leftDrive.set(power);
+			rightDrive.set(power);
+		}
 	}
 
 	public void setLeftPower(double power) {
-		leftSmoother.setSetpoint(power);
+		if (smoothing) {
+			leftSmoother.setSetpoint(power);
+		} else
+			leftDrive.set(power);
 	}
 
 	public void setRightPower(double power) {
-		rightSmoother.setSetpoint(power);
+		if (smoothing) {
+			rightSmoother.setSetpoint(power);
+		} else
+			rightDrive.set(power);
 	}
 
 	public void setShifter(boolean highGear) {
@@ -108,14 +124,24 @@ public class Drive extends Subsystem implements Runnable {
 		return gyro.getAngle();
 	}
 
+	public boolean getSmoothing() {
+		return smoothing;
+	}
+
+	public void setSmoothing(boolean setSmooth) {
+		smoothing = setSmooth;
+	}
+
 	public void run() {
-		while(true){
-			leftSmoother.calculate(leftDrive.get());
-			rightSmoother.calculate(rightDrive.get());
-			leftDrive.set(leftSmoother.getOutput());
-			rightDrive.set(rightSmoother.getOutput());
+		while (true) {
+			if (smoothing) {
+				leftSmoother.calculate(leftDrive.get());
+				rightSmoother.calculate(rightDrive.get());
+				leftDrive.set(leftSmoother.getOutput());
+				rightDrive.set(rightSmoother.getOutput());
+			}
 			try {
-				Thread.sleep(10);//Sleep time should be tuned
+				Thread.sleep(10);// Sleep time should be tuned
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

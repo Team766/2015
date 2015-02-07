@@ -23,6 +23,7 @@ public class OI {
     buttonDriverPickup = new JoystickButton(jRight, Buttons.DriverPickup),
     buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
     buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
+    buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
     
     buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
     buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);
@@ -46,6 +47,10 @@ public class OI {
 	public boolean getReverse(){
 		return buttonReverse.get();
 	}
+
+	public boolean getDriveSmoother(){
+		return buttonDriverDriveSmoothing.get();
+	}
 	
 	public double getThrottle(){
 		return jLeft.getY();
@@ -53,6 +58,7 @@ public class OI {
 	public double getSteer(){
 		return jRight.getX();
 	}
+	
 	//tank drive
 	public double getLeft(){
 		return jLeft.getY();
