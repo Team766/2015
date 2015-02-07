@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * 
  * @author Brett Levenson
  * @author PKao
- * @author AWire
  */
 
 public class Drive extends Subsystem implements Runnable {
@@ -41,7 +40,7 @@ public class Drive extends Subsystem implements Runnable {
 	private double rightTargetSpeed = 0;
 	private PIDController leftSmoother = new PIDController(RobotValues.SmootherLeftKp, RobotValues.SmootherLeftKi, 0, leftTargetSpeed); //Add Better PID Constants P
 	private PIDController rightSmoother = new PIDController(RobotValues.SmootherRightKp, RobotValues.SmootherRightKi, 0, rightTargetSpeed); //Add Better PID Constants
-
+	
 	protected void initDefaultCommand() {
 		changeLimiter.start();
 	}
@@ -110,14 +109,16 @@ public class Drive extends Subsystem implements Runnable {
 	}
 
 	public void run() {
-		leftSmoother.calculate(leftDrive.get());
-		rightSmoother.calculate(rightDrive.get());
-		leftDrive.set(leftSmoother.getOutput());
-		rightDrive.set(rightSmoother.getOutput());
-		try {
-			Thread.sleep(10);//Sleep time should be tuned
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		while(true){
+			leftSmoother.calculate(leftDrive.get());
+			rightSmoother.calculate(rightDrive.get());
+			leftDrive.set(leftSmoother.getOutput());
+			rightDrive.set(rightSmoother.getOutput());
+			try {
+				Thread.sleep(10);//Sleep time should be tuned
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

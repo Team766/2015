@@ -10,7 +10,6 @@ import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
-import org.usfirst.frc.team766.robot.commands.TestHallEffectSensor;
 
 /**
  * 2015 Java Code main class
@@ -80,6 +79,8 @@ public class Robot extends IterativeRobot {
             new TankDrive().start();
         }
     	
+    	//new UpdateElevatorInput();
+    	
     }
 
     public void disabledInit(){
@@ -87,7 +88,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //table.putBoolean("itWorked", true);
     }
     
     public void testPeriodic() {

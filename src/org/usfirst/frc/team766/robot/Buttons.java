@@ -8,6 +8,8 @@ public class Buttons {
     public static final int DriverShoot = 1;
     public static final int DriverOverride = 3;
     
+    //BoxOp
+    
     /*
      * Auton:
      * AutonIncrement and AutonDecrement will be removed and other
