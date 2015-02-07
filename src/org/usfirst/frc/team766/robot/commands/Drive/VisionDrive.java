@@ -28,8 +28,8 @@ public class VisionDrive extends CommandBase {
     	
     	//System.out.println("Left: " + Robot.table.getNumber("leftMotor") + " Right: " +
     	//					Robot.table.getNumber("rightMotor"));
-    	
     	//Count is used as a buffer to wait for the vision to connect with the robot, if it doesn't
+    	
     	//connect, then it cancels this auton
         if(CommandBase.table.getBoolean("done"))
             count++;

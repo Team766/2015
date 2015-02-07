@@ -21,11 +21,11 @@ public class AutonSelectorCommand extends CommandGroup{
 
         switch(mode){
         	//runs the VisionDriveCommand
-            case RobotValues.Auton_VisionDrive:
-                System.out.println("Vision Drive");
-                addSequential(new VisionDrive());
-                break;
-           
+//            case RobotValues.Auton_VisionDrive:
+//                System.out.println("Vision Drive");
+//                addSequential(new VisionDrive());
+//                break;
+//           
             //runs the Move Command
             case RobotValues.Auton_Move:
                 System.out.println("Drive Forward Auton");
