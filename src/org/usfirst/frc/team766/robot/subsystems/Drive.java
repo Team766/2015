@@ -68,9 +68,9 @@ public class Drive extends Subsystem implements Runnable {
 
 	public void setLeftPower(double power) {
 		if (smoothing) {
-			leftSmoother.setSetpoint(power);
+			leftSmoother.setSetpoint(-power);
 		} else
-			leftDrive.set(power);
+			leftDrive.set(-power);
 	}
 
 	public void setRightPower(double power) {

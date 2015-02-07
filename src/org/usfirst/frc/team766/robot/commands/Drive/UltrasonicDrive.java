@@ -49,8 +49,7 @@ public class UltrasonicDrive extends CommandBase {
 	}
 
 	protected void interrupted() {
-		System.out
-				.println("0 Nose!!!  Someone interrupted the UltrasonicDrive Command...");
+		System.out.println("0 Nose!!!  Someone interrupted the UltrasonicDrive Command...");
 		end();
 	}
 }

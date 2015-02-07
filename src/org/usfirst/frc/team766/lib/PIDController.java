@@ -143,5 +143,9 @@ public class PIDController {
 			out = maxoutput_low;
 		return out;
 	}
+	public double getError()
+	{
+		return total_error;
+	}
 
 }
