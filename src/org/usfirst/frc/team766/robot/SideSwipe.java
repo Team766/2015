@@ -18,12 +18,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
  * @author Brett Levenson
  */
 
-public class Robot extends IterativeRobot {
-
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
+public class SideSwipe extends IterativeRobot {
 	
 	private AutonSelectorCommand auton;
 	private boolean AutonCyclePrev;
@@ -32,9 +27,9 @@ public class Robot extends IterativeRobot {
     	CommandBase.init();
     	SmartDashboard.putBoolean("Tank Drive", false);
     	SmartDashboard.putNumber("Alpha", 0.5);
-    	//SmartDashboard.putData("Test Hall Effect Sensor", new TestHallEffectSensor()); //Not necessary. Uncomment if you want to test.
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
+    	CommandBase.myLog.print("SideSwipe 2015 Code");
     }
 	
 	public void disabledPeriodic() {
@@ -79,8 +74,6 @@ public class Robot extends IterativeRobot {
         }else{
             new TankDrive().start();
         }
-    	
-    	//new UpdateElevatorInput();
     	
     }
 

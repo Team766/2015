@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot.commands;
 
+import org.usfirst.frc.team766.lib.logData;
 import org.usfirst.frc.team766.robot.subsystems.Drive;
 import org.usfirst.frc.team766.robot.OI;
 
@@ -21,14 +22,14 @@ public abstract class CommandBase extends Command{
 	public static OI OI;
 	public static Elevator Elevator;
 	public static NetworkTable table;
-	//public static logData myLog;
+	public static logData myLog;
 	
 	public static void init(){
 		Drive = new Drive();
 		OI = new OI();
 		Elevator = new Elevator();
 		table = NetworkTable.getTable("dataTable");
-		//myLog = new logData();
+		myLog = new logData();
 	}
 
 }

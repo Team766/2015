@@ -1,7 +1,6 @@
 package org.usfirst.frc.team766.lib;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,26 +22,22 @@ public class logData {
 			
 	public logData(){
 		try {
-			FileOutputStream fOut = new FileOutputStream(new File("/tmp/log.txt"));
-			fOut.close();
+			pw = new PrintWriter(new FileWriter("/tmp/log.txt"));
+			timer.start();
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the log's constructor");
+			timer.stop();
 			e.printStackTrace();
 		}
 	}
 	
 	public void print(String message)
 	{
-		//			bw.write(getTime() + "\t" + message);
-		//			bw.newLine();
-					pw.println(getTime() + "\t" + message);
-					System.out.println("I be writing");
+		pw.println(getTime() + "\t" + message);
 	}
 	
 	public void print(String message, int value)
 	{
-		//			bw.write(getTime() + "\t" + message + value);
-//			bw.newLine();
 		pw.println(getTime() + "\t" + message + value);
 	}
 	
@@ -50,7 +45,6 @@ public class logData {
 	{
 		timer.stop();
 		pw.close();
-		//bw.close();
 	}
 	
 	private String getTime()

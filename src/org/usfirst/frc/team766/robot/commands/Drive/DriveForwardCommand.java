@@ -32,7 +32,7 @@ public class DriveForwardCommand extends CommandBase {
 
 	public DriveForwardCommand(double distance) {
 		DistancePID.setSetpoint(distance);
-		AnglePID.setSetpoint(distance);
+		AnglePID.setSetpoint(0);
 	}
 
 	protected void initialize() {
@@ -51,7 +51,6 @@ public class DriveForwardCommand extends CommandBase {
 	}
 
 	protected boolean isFinished() {
-		// added to remove error, needs to be changed
 		return DistancePID.isDone();
 	}
 
