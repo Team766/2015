@@ -35,12 +35,14 @@ public class RobotValues {
 
 	// gyro turning
 
-	public static final double AngleKp = 0.3;
-	public static final double AngleKi = 0.0;
-	public static final double AngleKd = 0.0;
-	public static final double Angleoutputmax_low = -0.3;
-	public static final double Angleoutputmax_high = 0.3;
-	public static final double AngleThreshold = 1;
+	public static final double AngleKp = 0.8;
+	public static final double AngleKi = 0.2;
+	public static final double AngleKd = 0.2;
+//	public static final double Angleoutputmax_low = -0.3;
+//	public static final double Angleoutputmax_high = 0.3;
+	public static final double Angleoutputmax_low = 1;
+	public static final double Angleoutputmax_high = 1;
+	public static final double AngleThreshold = .01;
 
 	// drive straight
 

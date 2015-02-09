@@ -57,7 +57,6 @@ public class Robot extends IterativeRobot {
     	 * to be selected...Add here
     	 */
 
-    	
 //    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
 //    	auton.start();
     	
@@ -66,7 +65,7 @@ public class Robot extends IterativeRobot {
     
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(CommandBase.Drive.getAngle());
+    	SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
     }
 
     public void teleopInit() {

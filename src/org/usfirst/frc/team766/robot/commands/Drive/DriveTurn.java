@@ -12,12 +12,14 @@ public class DriveTurn extends CommandBase {
 			RobotValues.AngleKi, RobotValues.AngleKd,
 			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
 			RobotValues.AngleThreshold);
+	private double setPoint;
 
 	public DriveTurn() {
         this(0d);
     }
     public DriveTurn(double a) {
         pid.setSetpoint(a);
+        setPoint = a;
     }
 
     protected void initialize() {
@@ -29,9 +31,18 @@ public class DriveTurn extends CommandBase {
 
     protected void execute() {
     	pid.calculate(Drive.getAngle());
+    	//pid.calculate(((1d / 360d) * (Drive.getAngle() + 360d)) - 1d);
     	
-    	Drive.setLeftPower(pid.getOutput());
-    	Drive.setRightPower(1 - pid.getOutput());
+    	if(setPoint > 0)
+    	{
+    		Drive.setRawLeft(pid.getOutput());
+    		Drive.setRawRight(-pid.getOutput());
+    	}else
+    	{
+    		Drive.setRawLeft(-pid.getOutput());
+    		Drive.setRawRight(pid.getOutput());
+    	}
+    	System.out.println("left: " + pid.getOutput() + "right: " + (-pid.getOutput()));
     }
 
     protected boolean isFinished() {

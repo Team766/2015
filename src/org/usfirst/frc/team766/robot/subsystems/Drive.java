@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem implements Runnable {
 
-	private Talon leftDrive = new Talon(Ports.PWM_Left_Drive);
-	private Talon rightDrive = new Talon(Ports.PWM_Right_Drive);
+	private Victor leftDrive = new Victor(Ports.PWM_Left_Drive);
+	private Victor rightDrive = new Victor(Ports.PWM_Right_Drive);
 
 	private Encoder rightEncoder = new Encoder(Ports.DIO_RDriveEncA,
 			Ports.DIO_RDriveEncB);
@@ -65,19 +65,33 @@ public class Drive extends Subsystem implements Runnable {
 			rightDrive.set(power);
 		}
 	}
+	
+	public void setRawPower(double power)
+	{
+		setRawLeft(power);
+		setRawRight(power);
+	}
+	public void setRawLeft(double power)
+	{
+		leftDrive.set(-power);
+	}
+	public void setRawRight(double power)
+	{
+		rightDrive.set(power);
+	}
 
 	public void setLeftPower(double power) {
 		if (smoothing) {
 			leftSmoother.setSetpoint(-power);
 		} else
-			leftDrive.set(-power);
+			setRawLeft(power);
 	}
 
 	public void setRightPower(double power) {
 		if (smoothing) {
 			rightSmoother.setSetpoint(power);
 		} else
-			rightDrive.set(power);
+			setRawRight(power);
 	}
 
 	public void setShifter(boolean highGear) {

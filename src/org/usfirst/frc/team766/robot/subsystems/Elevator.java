@@ -5,7 +5,7 @@ import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,7 +21,7 @@ public class Elevator extends Subsystem implements Runnable {
 	private RobotValues.ElevatorState currentState;
 	private int goal = 0;
 
-	private Talon Elevator = new Talon(Ports.PWM_Elevators);
+	private Victor Elevator = new Victor(Ports.PWM_Elevators);
 	private Encoder liftPos = new Encoder(Ports.DIO_ELEVATOR_ENCA,
 			Ports.DIO_ELEVATOR_ENCB);
 
