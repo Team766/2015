@@ -10,7 +10,9 @@ public class Buttons {
     public static final int DriverSmoothing = 4; //Feel free to change if not practical or wan to use button 4 for something else
     
     //BoxOp
-    
+	public static final int BoxStop = 1;
+	
+	
     /*
      * Auton:
      * AutonIncrement and AutonDecrement will be removed and other
@@ -20,4 +22,6 @@ public class Buttons {
      */
 	public static final int AutonIncrement = 1;
 	public static final int AutonDecrement = 2;
+	
+
 }

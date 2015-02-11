@@ -25,6 +25,8 @@ public class OI {
     buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
     buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
     
+    buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
+    
     buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
     buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);
   
@@ -118,6 +120,10 @@ public class OI {
 
 	public double getTwist() {
 		return jLeft.getTwist();
+	}
+	public boolean getStop()
+	{
+		return buttonStopElevator.get();
 	}
 }
 

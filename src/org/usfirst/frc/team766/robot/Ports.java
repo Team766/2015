@@ -18,6 +18,7 @@ public class Ports {
 	
 	//Solenoids
 	public static final int Sol_Shifter = 0;
+	public static final int Sol_ElevBrake = 1;
 	
 	//Encoders
     public static final int DIO_LDriveEncA = 1;
