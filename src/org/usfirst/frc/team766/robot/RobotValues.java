@@ -41,6 +41,10 @@ public class RobotValues {
 	public static final double Angleoutputmax_low = -.05;
 	public static final double Angleoutputmax_high = .05;
 	public static final double AngleThreshold = .01;
+	
+	public static double TurnAngleKp = 0.35;
+	public static double TurnAngleKi = 0.2;
+	public static double TurnAngleKd = 0.1;
 
 	// drive straight
 

@@ -107,7 +107,11 @@ public class PIDController {
 		
 		prev_error = cur_error;
 		total_error += cur_error;
-		output_value = clip(out);
+		output_value = smartClamp(out);
+	}
+
+	private double smartClamp(double out) {
+		return (((2d/-180000d)*(out))-1);
 	}
 
 	public double getOutput() {

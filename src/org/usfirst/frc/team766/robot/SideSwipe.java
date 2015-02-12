@@ -22,6 +22,7 @@ public class SideSwipe extends IterativeRobot {
 	
 	private AutonSelectorCommand auton;
 	private boolean AutonCyclePrev;
+	private boolean done;
 	
     public void robotInit() {
     	CommandBase.init();
@@ -29,7 +30,11 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
+    	done = false;
     	CommandBase.myLog.print("SideSwipe 2015 Code");
+    	SmartDashboard.putNumber("P", RobotValues.TurnAngleKp);
+    	SmartDashboard.putNumber("I", RobotValues.TurnAngleKi);
+    	SmartDashboard.putNumber("D", RobotValues.TurnAngleKd);
     }
 	
 	public void disabledPeriodic() {
@@ -44,6 +49,12 @@ public class SideSwipe extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
+    	RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
+    	RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
+    	
+    	
+    	
     	/*
     	 * Run auton command
     	 * Need to create an auton
@@ -51,7 +62,8 @@ public class SideSwipe extends IterativeRobot {
     	 * smartdashboard to allow autons
     	 * to be selected...Add here
     	 */
-
+    	done = true;
+    	
 //    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
 //    	auton.start();
     	
@@ -61,11 +73,12 @@ public class SideSwipe extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     	SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
+    	CommandBase.myLog.print("Test Value", 10);
     }
 
     public void teleopInit() {
     	//cancel auton
-	if (auton != null) auton.cancel();
+    	if (auton != null) auton.cancel();
     	
     	CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
     	
@@ -74,10 +87,11 @@ public class SideSwipe extends IterativeRobot {
         }else{
             new TankDrive().start();
         }
-    	
+    	done = true;
     }
 
     public void disabledInit(){
+    	if(done)CommandBase.myLog.closeFile();
     }
 
     public void teleopPeriodic() {

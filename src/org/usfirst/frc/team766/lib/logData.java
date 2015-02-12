@@ -16,9 +16,8 @@ import edu.wpi.first.wpilibj.Timer;
  
 public class logData {
 	
-	//private BufferedWriter bw;
 	private PrintWriter pw;
-	private Timer timer;
+	private Timer timer = new Timer();
 			
 	public logData(){
 		try {
@@ -33,18 +32,34 @@ public class logData {
 	
 	public void print(String message)
 	{
-		pw.println(getTime() + "\t" + message);
+		try{
+			pw.println(getTime() + "\t" + message);
+		}catch(NullPointerException e)
+		{
+			System.out.println("Null Pointer alert!");
+		}
 	}
 	
 	public void print(String message, int value)
 	{
-		pw.println(getTime() + "\t" + message + value);
+		try{
+			pw.println(getTime() + "\t" + message + value);
+		}catch(NullPointerException e)
+		{
+			System.out.println("Can't save log!");
+		}
 	}
 	
 	public void closeFile()
 	{
 		timer.stop();
-		pw.close();
+		
+		try{
+			pw.close();
+		}catch(NullPointerException e)
+		{
+			System.out.println("Can't save log!");
+		}
 	}
 	
 	private String getTime()

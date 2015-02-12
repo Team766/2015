@@ -8,10 +8,9 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *	Turns the robot x degrees
  */
 public class DriveTurn extends CommandBase {
-	private static final double ANGLE_TO_POWER_RATIO = 0.005;
-	private PIDController pid = new PIDController(RobotValues.AngleKp,
-			RobotValues.AngleKi, RobotValues.AngleKd,
-			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
+	private PIDController pid = new PIDController(RobotValues.TurnAngleKp,
+			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd,
+			-1, 1,
 			RobotValues.AngleThreshold);
 
 	public DriveTurn() {
@@ -32,10 +31,10 @@ public class DriveTurn extends CommandBase {
     	pid.calculate(Drive.getAngle());
     	//pid.calculate(((1d / 360d) * (Drive.getAngle() + 360d)) - 1d);
     	
-    	Drive.setLeftPower(pid.getOutput() * ANGLE_TO_POWER_RATIO);
-		Drive.setRightPower(-pid.getOutput() * ANGLE_TO_POWER_RATIO);
-
-    
+    	Drive.setLeftPower(pid.getOutput());
+		Drive.setRightPower(-pid.getOutput());
+		
+		System.out.println(pid.getError());
     	System.out.println("left: " + pid.getOutput() + "right: " + (-pid.getOutput()));
     }
 
