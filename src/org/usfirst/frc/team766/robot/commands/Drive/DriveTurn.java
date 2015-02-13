@@ -28,11 +28,10 @@ public class DriveTurn extends CommandBase {
 
     protected void execute() {
     	pid.calculate(Drive.getAngle(), true);
-    	//pid.calculate(((1d / 360d) * (Drive.getAngle() + 360d)) - 1d);
     	
     	Drive.setLeftPower(pid.getOutput());
 		Drive.setRightPower(-pid.getOutput());
-		
+    	
 		System.out.println(pid.getError());
     	System.out.println("left: " + pid.getOutput() + "right: " + (-pid.getOutput()));
     }

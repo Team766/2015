@@ -106,18 +106,26 @@ public class PIDController {
 				* (cur_error - prev_error);
 		
 		prev_error = cur_error;
+		total_error += cur_error;
+		
 		if((total_error * Ki) > 1)
 			total_error = 1;
 		else if((total_error * Ki) < -1)
 			total_error = -1;
 		
-		total_error += cur_error;
 		//double out = Kp * cur_error;
 		
 		if(!smart)
 			output_value = clip(out);
 		else
 			output_value = out;
+	}
+	public void basicCalculate(double cur_input)
+	{
+		cur_error = setpoint - cur_input;
+        output_value = Kp * cur_error + Kd * (cur_error - prev_error) * 100.0;
+        
+        prev_error = cur_error;
 	}
 
 	private double smartClamp(double out) {
