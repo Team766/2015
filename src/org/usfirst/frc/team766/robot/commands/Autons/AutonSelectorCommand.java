@@ -32,6 +32,10 @@ public class AutonSelectorCommand extends CommandGroup{
                 addSequential(new DriveForwardCommand(RobotValues.DriveForwardDistance));
                 break;
             
+            case RobotValues.Auton_PickOneBox:
+            	System.out.println("Pick One Box Auton");
+            	addSequential(new Auton_PickOneBox());
+            	break;
             default:{
                 System.out.println("Auton selection failed");
                 break;

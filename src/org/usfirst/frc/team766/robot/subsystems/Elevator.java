@@ -8,6 +8,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,9 +20,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author PKao
  */
 
-public class Elevator extends Subsystem implements Runnable {
+public class Elevator extends Subsystem {
 	private double stopTolerance = 0.5;
-	
+
 	private RobotValues.ElevatorState currentState;
 	private int goal = 0;
 
@@ -30,17 +31,23 @@ public class Elevator extends Subsystem implements Runnable {
 			Ports.DIO_ELEVATOR_ENCB);
 	private Solenoid brake = new Solenoid(Ports.Sol_ElevBrake);
 
-	private Thread changeLimiter = new Thread(this);
 	private double targetSpeed = 0;
 	private PIDController smoother = new PIDController(RobotValues.ElevatorKp,
 			RobotValues.ElevatorKi, 0, targetSpeed);
+	private ChangeLimiter changeLimiter;
+	private Solenoid gripper;
+	
+	public Elevator() {
+		changeLimiter = new ChangeLimiter();
+		changeLimiter.start();
+		gripper = new Solenoid(Ports.Sol_Gripper);
+	}
 
 	public void initDefaultCommand() {
-		changeLimiter.start();
 	}
 
 	public void setElevatorSpeed(double speed) {
-		if(Math.abs(speed) <= stopTolerance)
+		if (Math.abs(speed) <= stopTolerance)
 			setBrake(true);
 		else
 			setBrake(false);
@@ -70,26 +77,53 @@ public class Elevator extends Subsystem implements Runnable {
 	public void setState(RobotValues.ElevatorState currentState) {
 		this.currentState = currentState;
 	}
-	
-	public void setBrake(boolean stop)
-	{
+
+	public void setBrake(boolean stop) {
 		brake.set(!stop);
 	}
+	
+	public boolean getElevator(){
+		return gripper.get();
+	}
+	
+	public void setElevator(boolean toGripOrNotToGrip){//To do: figure out if setting to true closes or opens arm. For now, true = open. I'm sorry, try not to change the name unless necessary
+		gripper.set(toGripOrNotToGrip);
+	}
+	
+	private class ChangeLimiter extends Command {
 
-	public void run() {
-		while (true) {
+		@Override
+		protected void initialize() {
+
+		}
+
+		@Override
+		protected void execute() {
 			smoother.calculate(Elevator.get(), false);
 			Elevator.set(smoother.getOutput());
-			
-			//update Brake
+
+			// update Brake
 			setBrake(CommandBase.OI.getStop());
-			
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 		}
+
+		@Override
+		protected boolean isFinished() {
+
+			return false;
+		}
+
+		@Override
+		protected void end() {
+
+		}
+
+		@Override
+		protected void interrupted() {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 }
