@@ -73,4 +73,11 @@ public class RobotValues {
 	public static final double ElevatorKp = .1;
 	public static final double ElevatorKi = .1;
 	
+	//Intake PID
+	public static final double 
+		IntakeKP = 0.01,
+		IntakeKI = 0.0,
+		IntakeKD = 0.0,
+		IntakeThreshold = .01;
+	
 }

@@ -31,6 +31,7 @@ public class UltrasonicSensor implements Runnable {
 
 	private synchronized void setValue(double d) {
 		distance = d;
+		isNewValue = true;
 	}
 
 	private void pr(String printData) {
@@ -74,7 +75,6 @@ public class UltrasonicSensor implements Runnable {
 			pr("Line Read");
 			if (isValid(s)) {
 				setValue(Double.parseDouble(s.substring(s.indexOf('R') + 1)));
-				isNewValue = true;
 			}
 		}
 	}

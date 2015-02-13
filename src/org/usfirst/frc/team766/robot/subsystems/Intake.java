@@ -1,6 +1,8 @@
 package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,6 +20,9 @@ public class Intake extends Subsystem{
 	
 	private Victor rightWheel = new Victor(Ports.PWM_IntakeWheelR);
 	private Victor leftWheel = new Victor(Ports.PWM_IntakeWheelL);
+	
+	private Encoder leftEnc = new Encoder(Ports.DIO_LIntakeEncA, Ports.DIO_LIntakeEncB);
+	private Encoder rightEnc = new Encoder(Ports.DIO_RIntakeEncA, Ports.DIO_RIntakeEncB);
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
@@ -57,5 +62,20 @@ public class Intake extends Subsystem{
 	{
 		return PDP.getCurrent(15);
 	}
+	
+	public double getEncLeft()
+	{
+		return leftEnc.getDistance();
+	}
+	public double getEncRight()
+	{
+		return rightEnc.getDistance();
+	}
+	public void resetEnc()
+	{
+		rightEnc.reset();
+		leftEnc.reset();
+	}
+	
 }
 	

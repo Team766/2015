@@ -74,6 +74,7 @@ public class PIDController {
 	 */
 	public void setSetpoint(double set) {
 		setpoint = set;
+		total_error = 0;
 	}
 
 	/**

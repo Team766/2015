@@ -1,5 +1,7 @@
 package org.usfirst.frc.team766.robot.commands.Intake;
 
+import org.usfirst.frc.team766.lib.PIDController;
+import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,14 +14,33 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class PullToteIn extends Command {
 
-    private double stopCurrent;
-    private double leftPower;
-    private double rightPower;
-    private double lastLeftCurr;
-    private double lastRightCurr;
-	private double curr_currentLeft;
-	private double curr_currentRight;
-	private double tollerance = 10;
+    private double 
+	    stopCurrent,
+	    leftPower,
+	    rightPower,
+	    lastLeftCurr,
+	    lastRightCurr,
+		curr_currentLeft,
+		curr_currentRight,
+		curr_Lrate,
+		pastRateL,
+		curr_Rrate,
+		pastRateR,
+		tollerance = 10;
+	
+	private PIDController pidL = new PIDController(RobotValues.IntakeKP, 
+			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
+	private PIDController pidR = new PIDController(RobotValues.IntakeKP, 
+			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
+	
+	private State _state;
+
+	private double stopEncDistance;
+	
+	private enum State{
+		GRASP_TOTE, RESETING, INTAKING, STOP, HOLD
+	} 
+	
 	
 	public PullToteIn() {
     	stopCurrent = 0;
@@ -30,24 +51,41 @@ public class PullToteIn extends Command {
     }
 
     protected void initialize() {
-    	curr_currentLeft = 0;
-    	curr_currentRight = 0;
-    	lastLeftCurr = 0;
-    	lastRightCurr = 0;
-    	leftPower = 0;
-    	rightPower = 0;
+    	curr_currentLeft = curr_currentRight = lastLeftCurr = 
+    	lastRightCurr = leftPower = rightPower = curr_Lrate = 
+    	pastRateL = curr_Rrate = pastRateR = 0;
     	
+    	_state = State.HOLD;
+    	
+    	pidL.setSetpoint(0.6);
+    	pidR.setSetpoint(0.6);
+    	
+    	CommandBase.Intake.resetEnc();
     	CommandBase.Intake.setWheels(1);
     }
 
     protected void execute() {
+    	
+    	pidL.basicCalculate(CommandBase.Intake.getEncLeft());
+    	pidR.basicCalculate(CommandBase.Intake.getEncRight());
+    	leftPower = pidL.getOutput();
+    	rightPower = pidR.getOutput();
+    	
+    	curr_Rrate = CommandBase.Intake.getEncRight();
+    	curr_Lrate = CommandBase.Intake.getEncLeft();
+    	
     	curr_currentLeft = CommandBase.Intake.getIntakeCurrentLeft();
     	curr_currentRight = CommandBase.Intake.getIntakeCurrentRight();
     	
+    	if(!(Math.abs(curr_Rrate - pastRateR) <= stopEncDistance))
+    		rightPower = pidR.getOutput();
+    	if(!(Math.abs(curr_Lrate - pastRateL) <= stopEncDistance))
+    		leftPower = pidL.getOutput();
+    	
     	if(curr_currentLeft > lastLeftCurr)
-    		leftPower = 0.5;
+    		leftPower = pidL.getOutput();
     	if(curr_currentRight > lastRightCurr)
-    		rightPower = 0.5;
+    		rightPower = pidR.getOutput();
     	
     	//If we are tyring to pull the tote in and the encoders are
     	//not moving, we have hit the tote.
@@ -57,11 +95,14 @@ public class PullToteIn extends Command {
     	
     	lastLeftCurr = curr_currentLeft + tollerance;
     	lastRightCurr = curr_currentRight + tollerance;
+    	pastRateL = curr_Rrate;
+    	pastRateR = curr_Lrate;
     }
 
     protected boolean isFinished() {
-		return (curr_currentLeft > stopCurrent) && 
-				(curr_currentRight > stopCurrent) ;
+		return ((curr_currentLeft > stopCurrent) && 
+				(curr_currentRight > stopCurrent)) &&
+				(Math.abs(curr_Rrate - pastRateR) <= stopEncDistance);
     }
 
     protected void end() {

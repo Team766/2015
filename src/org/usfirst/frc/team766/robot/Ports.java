@@ -21,12 +21,17 @@ public class Ports {
 	public static final int Sol_ElevBrake = 1;
 	
 	//Encoders
-    public static final int DIO_LDriveEncA = 1;
-    public static final int DIO_LDriveEncB = 2;
-    public static final int DIO_RDriveEncA = 9;
-    public static final int DIO_RDriveEncB = 10;
-    public static final int DIO_ELEVATOR_ENCA = 3;
-    public static final int DIO_ELEVATOR_ENCB = 4;
+    public static final int 
+		DIO_LDriveEncA = 1,
+		DIO_LDriveEncB = 2,
+		DIO_RDriveEncA = 9,
+		DIO_RDriveEncB = 10,
+		DIO_ELEVATOR_ENCA = 3,
+		DIO_ELEVATOR_ENCB = 4,
+		DIO_LIntakeEncA = 5,
+		DIO_LIntakeEncB = 6,
+		DIO_RIntakeEncA = 7,
+		DIO_RIntakeEncB = 8;
 	
 	public static final int GYRO = 1;
 	
