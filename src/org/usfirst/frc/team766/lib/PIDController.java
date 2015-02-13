@@ -95,7 +95,7 @@ public class PIDController {
 	 * @param cur_input
 	 *            Input from sensor
 	 */
-	public void calculate(double cur_input) {
+	public void calculate(double cur_input, boolean smart) {
 		cur_error = (setpoint - cur_input);
 		if (isDone()) {
 			output_value = 0;
@@ -106,12 +106,22 @@ public class PIDController {
 				* (cur_error - prev_error);
 		
 		prev_error = cur_error;
+		if((total_error * Ki) > 1)
+			total_error = 1;
+		else if((total_error * Ki) < -1)
+			total_error = -1;
+		
 		total_error += cur_error;
-		output_value = clip(out);
+		//double out = Kp * cur_error;
+		
+		if(!smart)
+			output_value = clip(out);
+		else
+			output_value = out;
 	}
 
 	private double smartClamp(double out) {
-		return (((2d/-180000d)*(out))-1);
+		return (((2d/-1860d)*(out))-1);
 	}
 
 	public double getOutput() {

@@ -73,7 +73,6 @@ public class SideSwipe extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     	SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
-    	CommandBase.myLog.print("Test Value", 10);
     }
 
     public void teleopInit() {

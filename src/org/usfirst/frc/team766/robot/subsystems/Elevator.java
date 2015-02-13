@@ -78,7 +78,7 @@ public class Elevator extends Subsystem implements Runnable {
 
 	public void run() {
 		while (true) {
-			smoother.calculate(Elevator.get());
+			smoother.calculate(Elevator.get(), false);
 			Elevator.set(smoother.getOutput());
 			
 			//update Brake

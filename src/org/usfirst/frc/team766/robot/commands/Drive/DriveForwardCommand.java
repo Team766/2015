@@ -44,8 +44,8 @@ public class DriveForwardCommand extends CommandBase {
 	}
 
 	protected void execute() {
-		DistancePID.calculate(Drive.getAverageEncoderDistance());
-		AnglePID.calculate(Drive.getAngle());
+		DistancePID.calculate(Drive.getAverageEncoderDistance(), false);
+		AnglePID.calculate(Drive.getAngle(), false);
 		Drive.setLeftPower(DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 		Drive.setRightPower(DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 	}

@@ -50,7 +50,7 @@ public class MoveArmPosition extends CommandBase {
 	}
 
 	protected void execute() {
-		positionPID.calculate(Elevator.getEnc());
+		positionPID.calculate(Elevator.getEnc(), false);
 		Elevator.setElevatorSpeed(positionPID.getOutput());
 	}
 

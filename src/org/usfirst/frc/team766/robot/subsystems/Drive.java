@@ -61,7 +61,7 @@ public class Drive extends Subsystem implements Runnable {
 			leftSmoother.setSetpoint(power);
 			rightSmoother.setSetpoint(power);
 		} else {
-			leftDrive.set(power);
+			leftDrive.set(-power);
 			rightDrive.set(power);
 		}
 	}
@@ -148,9 +148,9 @@ public class Drive extends Subsystem implements Runnable {
 
 	public void run() {
 		while (true) {
-			if (smoothing) {
-				leftSmoother.calculate(leftDrive.get());
-				rightSmoother.calculate(rightDrive.get());
+			if (smoothing){
+				leftSmoother.calculate(leftDrive.get(), false);
+				rightSmoother.calculate(rightDrive.get(), false);
 				leftDrive.set(leftSmoother.getOutput());
 				rightDrive.set(rightSmoother.getOutput());
 			}

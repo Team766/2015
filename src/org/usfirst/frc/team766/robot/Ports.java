@@ -14,7 +14,7 @@ public class Ports {
 	public static final int PWM_IntakeR = 3;
 	public static final int PWM_IntakeL = 4;
 	public static final int PWM_IntakeWheelR = 5;
-	public static final int PWM_IntakWheelL = 6;
+	public static final int PWM_IntakeWheelL = 6;
 	
 	//Solenoids
 	public static final int Sol_Shifter = 0;

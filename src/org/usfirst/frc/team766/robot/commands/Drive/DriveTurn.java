@@ -10,8 +10,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class DriveTurn extends CommandBase {
 	private PIDController pid = new PIDController(RobotValues.TurnAngleKp,
 			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd,
-			-1, 1,
-			RobotValues.AngleThreshold);
+			-1, 1, .5);
 
 	public DriveTurn() {
         this(0d);
@@ -28,7 +27,7 @@ public class DriveTurn extends CommandBase {
     }
 
     protected void execute() {
-    	pid.calculate(Drive.getAngle());
+    	pid.calculate(Drive.getAngle(), true);
     	//pid.calculate(((1d / 360d) * (Drive.getAngle() + 360d)) - 1d);
     	
     	Drive.setLeftPower(pid.getOutput());
