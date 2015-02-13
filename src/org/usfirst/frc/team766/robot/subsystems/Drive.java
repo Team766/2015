@@ -36,16 +36,12 @@ public class Drive extends Subsystem implements Runnable {
 
 	// Should I use arrays?
 	private Thread changeLimiter = new Thread(this);
-	private double leftTargetSpeed = 0;
-	private double rightTargetSpeed = 0;
-	private PIDController leftSmoother = new PIDController(
-			RobotValues.SmootherLeftKp, RobotValues.SmootherLeftKi, 0,
-			leftTargetSpeed); // Add Better PID Constants P
-	private PIDController rightSmoother = new PIDController(
-			RobotValues.SmootherRightKp, RobotValues.SmootherRightKi, 0,
-			rightTargetSpeed); // Add Better PID Constants
+	private double leftTarget = 0;
+	private double rightTarget = 0;
+	private double rateOfChange = .05;//might need 2 variables
 	private boolean smoothing = true;
-
+	private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
+	
 	protected void initDefaultCommand() {
 		changeLimiter.start();
 	}
@@ -56,42 +52,38 @@ public class Drive extends Subsystem implements Runnable {
 	 * @param power
 	 *            power value
 	 */
-	public void setPower(double power) {
+	
+	//For set methods, to set raw you need to not be in smoothing mode
+	public synchronized void setPower(double power) {
 		if (smoothing) {
-			leftSmoother.setSetpoint(power);
-			rightSmoother.setSetpoint(power);
+			leftTarget = power;
+			rightTarget = power;
 		} else {
-			leftDrive.set(-power);
+			leftDrive.set(power);
 			rightDrive.set(power);
 		}
 	}
 	
-	public void setRawPower(double power)
-	{
-		setRawLeft(power);
-		setRawRight(power);
-	}
-	public void setRawLeft(double power)
-	{
-		leftDrive.set(-power);
-	}
-	public void setRawRight(double power)
-	{
-		rightDrive.set(power);
+	public synchronized void setLeftPower(double power) {
+		if (smoothing) {
+			leftTarget = power;
+		} else
+			leftDrive.set(power);
 	}
 
-	public void setLeftPower(double power) {
+	public synchronized void setRightPower(double power) {
 		if (smoothing) {
-			leftSmoother.setSetpoint(-power);
+			rightTarget = power;
 		} else
-			setRawLeft(power);
+			rightDrive.set(power);
 	}
-
-	public void setRightPower(double power) {
-		if (smoothing) {
-			rightSmoother.setSetpoint(power);
-		} else
-			setRawRight(power);
+	
+	private synchronized double getRightTarget(){ //Should I have these return Double.NaN if you aren't in smoothing mode? 
+		return rightTarget;
+	}
+	
+	private synchronized double getLeftTarget(){ //Should I have these return Double.NaN if you aren't in smoothing mode? 
+		return leftTarget;
 	}
 
 	public void setShifter(boolean highGear) {
@@ -148,11 +140,15 @@ public class Drive extends Subsystem implements Runnable {
 
 	public void run() {
 		while (true) {
-			if (smoothing){
-				leftSmoother.calculate(leftDrive.get(), false);
-				rightSmoother.calculate(rightDrive.get(), false);
-				leftDrive.set(leftSmoother.getOutput());
-				rightDrive.set(rightSmoother.getOutput());
+			if (smoothing){				
+				double outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
+				double outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
+				
+				rightDrive.set(outputRight);
+				leftDrive.set(outputLeft);
+				
+				lastRightOut = outputRight;
+				lastLeftOut = outputLeft;
 			}
 			try {
 				Thread.sleep(10);// Sleep time should be tuned
