@@ -1,14 +1,13 @@
 package org.usfirst.frc.team766.robot.subsystems;
 
-import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.Ports;
-import org.usfirst.frc.team766.robot.RobotValues;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author PKao
  */
 
-public class Drive extends Subsystem implements Runnable {
+public class Drive extends Subsystem{
 
 	private Victor leftDrive = new Victor(Ports.PWM_Left_Drive);
 	private Victor rightDrive = new Victor(Ports.PWM_Right_Drive);
@@ -34,16 +33,19 @@ public class Drive extends Subsystem implements Runnable {
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
-	// Should I use arrays?
-	private Thread changeLimiter = new Thread(this);
 	private double leftTarget = 0;
 	private double rightTarget = 0;
 	private double rateOfChange = .05;//might need 2 variables
 	private boolean smoothing = true;
-	private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
+	private DriveSmoother smoother;
+	
+	
+	public Drive(){
+		smoother = new DriveSmoother();
+		smoother.start();
+	}
 	
 	protected void initDefaultCommand() {
-		changeLimiter.start();
 	}
 
 	/**
@@ -138,24 +140,45 @@ public class Drive extends Subsystem implements Runnable {
 		smoothing = setSmooth;
 	}
 
-	public void run() {
-		while (true) {
-			if (smoothing){				
-				double outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
-				double outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
-				
-				rightDrive.set(outputRight);
-				leftDrive.set(outputLeft);
-				
-				lastRightOut = outputRight;
-				lastLeftOut = outputLeft;
-			}
-			try {
-				Thread.sleep(10);// Sleep time should be tuned
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	private class DriveSmoother extends Command{
+		private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
+		
+		@Override
+		protected void initialize() {
+			// TODO Auto-generated method stub			
 		}
-	}
 
+		@Override
+		protected void execute() {
+			// TODO Auto-generated method stub
+			double outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
+			double outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
+			
+			rightDrive.set(outputRight);
+			leftDrive.set(outputLeft);
+			
+			lastRightOut = outputRight;
+			lastLeftOut = outputLeft;
+		}
+
+		@Override
+		protected boolean isFinished() {
+		
+			return false;
+		}
+
+		@Override
+		protected void end() {
+		
+			
+		}
+
+		@Override
+		protected void interrupted() {
+		
+			
+		}
+		
+	}
+	
 }
