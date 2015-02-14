@@ -32,13 +32,13 @@ public class DriveTurn extends CommandBase {
 
 	protected void execute() {
 		pid.calculate(Drive.getAngle(), false);
-
+		
 		double leftPower = pid.getOutput() * ANGLES_TO_DEGREES;
 		double rightPower = -pid.getOutput() * ANGLES_TO_DEGREES;
-
+		
 		Drive.setLeftPower(leftPower);
 		Drive.setRightPower(rightPower);
-
+		
 		if (++counter >= 20) {
 			counter = 0;
 			pr(pid.getError());

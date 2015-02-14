@@ -68,16 +68,16 @@ public class Drive extends Subsystem{
 	
 	public synchronized void setLeftPower(double power) {
 		if (smoothing) {
-			leftTarget = power;
+			leftTarget = -power;
 		} else
-			leftDrive.set(power);
+			leftDrive.set(-power);
 	}
 
 	public synchronized void setRightPower(double power) {
 		if (smoothing) {
-			rightTarget = -power;
+			rightTarget = power;
 		} else
-			rightDrive.set(-power);
+			rightDrive.set(power);
 	}
 	
 	private synchronized double getRightTarget(){ //Should I have these return Double.NaN if you aren't in smoothing mode? 

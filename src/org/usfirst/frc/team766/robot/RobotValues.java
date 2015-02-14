@@ -52,7 +52,7 @@ public class RobotValues {
 	public static final double DriveKp = 0.2;
 	public static final double DriveKi = 0.02;
 	public static final double DriveKd = 0.01;
-	public static final double Driveoutputmax_low = -1;
+	public static final double Driveoutputmax_low = -1.0;
 	public static final double Driveoutputmax_high = 1;
 	public static final double DriveThreshold = .01;
 
