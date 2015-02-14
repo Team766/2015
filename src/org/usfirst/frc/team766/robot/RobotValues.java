@@ -49,9 +49,9 @@ public class RobotValues {
 	public static final double DriveThreshold = .1;
 	
 	// gyro turning in drive forward
-	public static final double AngleKp = 0.1;
-	public static final double AngleKi = 0.03;
-	public static final double AngleKd = 0.1;
+	public static final double AngleKp = 0.05;
+	public static final double AngleKi = 0.00;
+	public static final double AngleKd = 0.03;
 	public static final double Angleoutputmax_low = -10;
 	public static final double Angleoutputmax_high = 10;
 	public static final double AngleThreshold = Double.MIN_VALUE;
