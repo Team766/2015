@@ -17,6 +17,7 @@ public class RobotValues {
 	public static final int Auton_VisionDrive = 0;
 	public static final int Auton_Move = 1;
 	public static final int Auton_PickOneBox = 2;
+	public static final int Auton_Rotate = 3;
 	
 	public static final int Auton_Max = 2;
 	public static final int Auton_Min = 0;
