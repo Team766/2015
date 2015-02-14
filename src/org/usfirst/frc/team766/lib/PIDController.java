@@ -104,23 +104,21 @@ public class PIDController {
 			return;
 		}
 
-		prev_error = cur_error;
 		total_error += cur_error;
 		
-		total_error *= Ki;
-		
-		if ((total_error) > 1) {
-			total_error = 1;
+		if ((total_error * Ki) > 1) {
+			total_error = 1/Ki;
 		} else {
-			if ((total_error) < -1)
-				total_error = -1;
+			if ((total_error  * Ki) < -1)
+				total_error = -1/Ki;
 		}
 
 		// double out = Kp * cur_error;
 
 		double out = Kp * cur_error + Ki * total_error + Kd
 				* (cur_error - prev_error);
-
+		prev_error = cur_error;
+		
 		if (!smart) {
 			output_value = clip(out);
 		} else{

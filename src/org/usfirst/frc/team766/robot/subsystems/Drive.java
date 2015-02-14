@@ -75,9 +75,9 @@ public class Drive extends Subsystem{
 
 	public synchronized void setRightPower(double power) {
 		if (smoothing) {
-			rightTarget = power;
+			rightTarget = -power;
 		} else
-			rightDrive.set(power);
+			rightDrive.set(-power);
 	}
 	
 	private synchronized double getRightTarget(){ //Should I have these return Double.NaN if you aren't in smoothing mode? 
@@ -111,7 +111,7 @@ public class Drive extends Subsystem{
 
 	public float translateDrive(float trans) {
 		double wheel_d = 0.0899;
-		double counts = 256 * 4.0;
+		double counts = 256d * 4.0;
 		return (float) ((trans / counts) * (Math.PI) * wheel_d);
 	}
 
@@ -150,7 +150,6 @@ public class Drive extends Subsystem{
 
 		@Override
 		protected void execute() {
-			// TODO Auto-generated method stub
 			double outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
 			double outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
 			

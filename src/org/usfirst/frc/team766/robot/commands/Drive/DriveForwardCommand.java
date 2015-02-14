@@ -12,14 +12,13 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  */
 // Note: PID code experimental
 public class DriveForwardCommand extends CommandBase {
-	private static final double ANGLE_TO_POWER_RATIO = .005;
+	private static final double ANGLE_TO_POWER_RATIO = .05;
 	
 	
 	private PIDController DistancePID = new PIDController(RobotValues.DriveKp,
 			RobotValues.DriveKi, RobotValues.DriveKd,
-			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
-			RobotValues.AngleThreshold); // see PID class or hover for
-											// definition of all
+			RobotValues.Driveoutputmax_low, RobotValues.Driveoutputmax_high,
+			RobotValues.DriveThreshold);
 	
 	private PIDController AnglePID = new PIDController(RobotValues.AngleKp,
 			RobotValues.AngleKi, RobotValues.AngleKd,
@@ -40,12 +39,14 @@ public class DriveForwardCommand extends CommandBase {
 		Drive.resetEncoders();
 		DistancePID.reset();
 		AnglePID.reset();
+		Drive.setSmoothing(false);
 		Drive.setShifter(false);
 	}
 
 	protected void execute() {
 		DistancePID.calculate(Drive.getAverageEncoderDistance(), false);
 		AnglePID.calculate(Drive.getAngle(), false);
+		System.out.println(DistancePID.getOutput());
 		Drive.setLeftPower(DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 		Drive.setRightPower(DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 	}
@@ -56,6 +57,7 @@ public class DriveForwardCommand extends CommandBase {
 
 	protected void end() {
 		Drive.setPower(0d);
+		Drive.setSmoothing(true);
 	}
 
 	protected void interrupted() {

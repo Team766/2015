@@ -22,8 +22,7 @@ public class RobotValues {
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
-	public static final double DriveForwardDistance = 10;
-
+	public static final double DriveForwardDistance = 2;
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.9;
@@ -35,9 +34,9 @@ public class RobotValues {
 
 
 	// gyro turning
-	public static final double AngleKp = 0.35;
-	public static final double AngleKi = 0.2;
-	public static final double AngleKd = 0.1;
+	public static final double AngleKp = 0.5;
+	public static final double AngleKi = 0;
+	public static final double AngleKd = 0;
 	public static final double Angleoutputmax_low = -.05;
 	public static final double Angleoutputmax_high = .05;
 	public static final double AngleThreshold = .01;
@@ -49,11 +48,11 @@ public class RobotValues {
 
 	// drive straight
 
-	public static final double DriveKp = 0.4;
-	public static final double DriveKi = 0.2;
-	public static final double DriveKd = 0.0;
-	public static final double Driveoutputmax_low = -0.5;
-	public static final double Driveoutputmax_high = 0.5;
+	public static final double DriveKp = 0.2;
+	public static final double DriveKi = 0.02;
+	public static final double DriveKd = 0.01;
+	public static final double Driveoutputmax_low = -1;
+	public static final double Driveoutputmax_high = 1;
 	public static final double DriveThreshold = .01;
 
 	public static final double StraightKp = 0.3;

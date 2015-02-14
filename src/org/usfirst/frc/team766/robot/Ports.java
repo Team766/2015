@@ -23,16 +23,16 @@ public class Ports {
 	
 	//Encoders
     public static final int 
-		DIO_LDriveEncA = 1,
-		DIO_LDriveEncB = 2,
-		DIO_RDriveEncA = 9,
-		DIO_RDriveEncB = 10,
-		DIO_ELEVATOR_ENCA = 3,
-		DIO_ELEVATOR_ENCB = 4,
-		DIO_LIntakeEncA = 5,
-		DIO_LIntakeEncB = 6,
-		DIO_RIntakeEncA = 7,
-		DIO_RIntakeEncB = 8;
+		DIO_LDriveEncA = 0,
+		DIO_LDriveEncB = 1,
+		DIO_RDriveEncA = 8,
+		DIO_RDriveEncB = 9,
+		DIO_ELEVATOR_ENCA = 2,
+		DIO_ELEVATOR_ENCB = 3,
+		DIO_LIntakeEncA = 4,
+		DIO_LIntakeEncB = 5,
+		DIO_RIntakeEncA = 6,
+		DIO_RIntakeEncB = 7;
 	
 	public static final int GYRO = 1;
 	
