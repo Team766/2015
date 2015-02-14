@@ -3,7 +3,7 @@ package org.usfirst.frc.team766.robot;
 import edu.wpi.first.wpilibj.SerialPort;
 
 public class UltrasonicSensor implements Runnable {
-	
+
 	private static final boolean PRINT_DATA = false;
 	private static final double TIMEOUT = 10;
 	private static UltrasonicSensor us;
@@ -22,9 +22,9 @@ public class UltrasonicSensor implements Runnable {
 	public synchronized UltrasonicValue getDistance() {
 		boolean isCurrentNew = isNewValue;
 		isNewValue = false;
-		return new UltrasonicValue(distance,isCurrentNew);
+		return new UltrasonicValue(distance, isCurrentNew);
 	}
-	
+
 	public double getDistanceDouble() {
 		return getDistance().distance;
 	}
@@ -74,22 +74,22 @@ public class UltrasonicSensor implements Runnable {
 			String s = readLine();
 			pr("Line Read");
 			if (isValid(s)) {
-				setValue(Double.parseDouble(s.substring(s.indexOf('R') + 1)));
+				setValue(Double.parseDouble(s.substring(s.indexOf('R') + 1)) / 1000);
 			}
 		}
 	}
-	
-	public class UltrasonicValue{
-		
-		public UltrasonicValue(double d, boolean n){
+
+	public class UltrasonicValue {
+
+		public UltrasonicValue(double d, boolean n) {
 			distance = d;
 			isNew = n;
 		}
-		
+
 		public double distance;
 		public boolean isNew;
 	}
-	
+
 	private boolean isNewValue = false;
 	private SerialPort port;
 	private Thread serverThread = new Thread(this);

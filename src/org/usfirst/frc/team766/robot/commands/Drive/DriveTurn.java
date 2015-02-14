@@ -5,46 +5,62 @@ import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
- *	Turns the robot x degrees
+ * Turns the robot x degrees
  */
 public class DriveTurn extends CommandBase {
+	private static final double ANGLES_TO_DEGREES = .0618;
+	private static final boolean PRINT = false;
+	
 	private PIDController pid = new PIDController(RobotValues.TurnAngleKp,
-			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd,
-			-1, 1, .5);
+			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd, -1, 1, .5);
 
 	public DriveTurn() {
-        this(0d);
-    }
-    public DriveTurn(double a) {
-        pid.setSetpoint(a);
-    }
+		this(0d);
+	}
 
-    protected void initialize() {
-    	Drive.resetGyro();
+	public DriveTurn(double a) {
+		pid.setSetpoint(a);
+	}
+
+	protected void initialize() {
+		Drive.resetGyro();
 		Drive.resetEncoders();
 		pid.reset();
 		Drive.setShifter(false);
-    }
+	}
 
-    protected void execute() {
-    	pid.calculate(Drive.getAngle(), true);
-    	
-    	Drive.setLeftPower(pid.getOutput());
-		Drive.setRightPower(-pid.getOutput());
-    	
-		System.out.println(pid.getError());
-    	System.out.println("left: " + pid.getOutput() + "right: " + (-pid.getOutput()));
-    }
+	protected void execute() {
+		pid.calculate(Drive.getAngle(), true);
 
-    protected boolean isFinished() {
-        return pid.isDone();
-    }
+		double leftPower = pid.getOutput() * ANGLES_TO_DEGREES;
+		double rightPower = -pid.getOutput() * ANGLES_TO_DEGREES;
 
-    protected void end() {
-    	Drive.setPower(0d);
-    }
+		Drive.setLeftPower(leftPower);
+		Drive.setRightPower(rightPower);
 
-    protected void interrupted() {
-    	end();
-    }
+		if (++counter >= 20) {
+			counter = 0;
+			pr(pid.getError());
+			pr("left: " + leftPower + "right: " + rightPower);
+			pr("Gyro Angle: " + Drive.getAngle());
+		}
+	}
+
+	protected boolean isFinished() {
+		return pid.isDone();
+	}
+
+	protected void end() {
+		Drive.setPower(0d);
+	}
+
+	protected void interrupted() {
+		end();
+	}
+
+	private void pr(Object text) {
+		if(PRINT) System.out.println("Drive Turn: " + text);
+	}
+
+	double counter = 0;
 }

@@ -35,7 +35,6 @@ public class RobotValues {
 
 
 	// gyro turning
-
 	public static final double AngleKp = 0.35;
 	public static final double AngleKi = 0.2;
 	public static final double AngleKd = 0.1;
@@ -43,8 +42,9 @@ public class RobotValues {
 	public static final double Angleoutputmax_high = .05;
 	public static final double AngleThreshold = .01;
 	
+	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
-	public static double TurnAngleKi = 0.2;
+	public static double TurnAngleKi = 0.01;
 	public static double TurnAngleKd = 0.1;
 
 	// drive straight

@@ -103,34 +103,40 @@ public class PIDController {
 			System.out.println("pid done");
 			return;
 		}
-		double out = Kp * cur_error + Ki * total_error + Kd
-				* (cur_error - prev_error);
-		
+
 		prev_error = cur_error;
 		total_error += cur_error;
 		
-		if((total_error * Ki) > 1)
+		total_error *= Ki;
+		
+		if ((total_error) > 1) {
 			total_error = 1;
-		else if((total_error * Ki) < -1)
-			total_error = -1;
-		
-		//double out = Kp * cur_error;
-		
-		if(!smart)
+		} else {
+			if ((total_error) < -1)
+				total_error = -1;
+		}
+
+		// double out = Kp * cur_error;
+
+		double out = Kp * cur_error + Ki * total_error + Kd
+				* (cur_error - prev_error);
+
+		if (!smart) {
 			output_value = clip(out);
-		else
+		} else{
 			output_value = out;
+		}
 	}
-	public void basicCalculate(double cur_input)
-	{
+
+	public void basicCalculate(double cur_input) {
 		cur_error = setpoint - cur_input;
-        output_value = Kp * cur_error + Kd * (cur_error - prev_error) * 100.0;
-        
-        prev_error = cur_error;
+		output_value = Kp * cur_error + Kd * (cur_error - prev_error) * 100.0;
+
+		prev_error = cur_error;
 	}
 
 	private double smartClamp(double out) {
-		return (((2d/-1860d)*(out))-1);
+		return (((2d / -1860d) * (out)) - 1);
 	}
 
 	public double getOutput() {
@@ -167,8 +173,8 @@ public class PIDController {
 			out = maxoutput_low;
 		return out;
 	}
-	public double getError()
-	{
+
+	public double getError() {
 		return total_error;
 	}
 
