@@ -36,7 +36,7 @@ public class UltrasonicDrive extends CommandBase {
 	protected void execute() {
 		// Drive forward using the PID here for the Ultrasonic sensor
 		currentDistance = UltrasonicSensor.getInstance().getDistanceDouble();
-		Drive.setPower(Math.min((currentDistance/1000)+ SLOWING_OFFSET,1));
+		Drive.setPower(Math.min((currentDistance)+ SLOWING_OFFSET,1));
 	}
 
 	protected boolean isFinished() {
