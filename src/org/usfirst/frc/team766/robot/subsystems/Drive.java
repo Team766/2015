@@ -88,8 +88,8 @@ public class Drive extends Subsystem{
 		return leftTarget;
 	}
 
-	public void setShifter(boolean highGear) {
-		Shifter.set(!highGear);
+	public void setHighGear(boolean isHighGear) {
+		Shifter.set(isHighGear);
 	}
 
 	public double getLeftEncoderDistance() {
@@ -110,7 +110,7 @@ public class Drive extends Subsystem{
 	}
 
 	public float translateDrive(float trans) {
-		double wheel_d = 0.0899;
+		double wheel_d = .09958;
 		double counts = 256d * 4.0;
 		return (float) ((trans / counts) * (Math.PI) * wheel_d);
 	}

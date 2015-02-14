@@ -29,7 +29,7 @@ public class TankDrive extends CommandBase {
 		
 		Drive.setLeftPower(leftC);
 		Drive.setRightPower(rightC);
-		Drive.setShifter(OI.getShifter());
+		Drive.setHighGear(OI.getShifter());
 	}
 
 	protected boolean isFinished() {
@@ -38,7 +38,7 @@ public class TankDrive extends CommandBase {
 
 	protected void end() {
 		Drive.setPower(0.0);
-		Drive.setShifter(false);
+		Drive.setHighGear(false);
 		Drive.setSmoothing(true);
 	}
 

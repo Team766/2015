@@ -1,7 +1,7 @@
 package org.usfirst.frc.team766.robot.commands.Autons;
 
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.commands.Drive.DriveForwardCommand;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.VisionDrive;
 
@@ -30,7 +30,7 @@ public class AutonSelectorCommand extends CommandGroup{
             //runs the Move Command
             case RobotValues.Auton_Move:
                 System.out.println("Drive Forward Auton");
-                addSequential(new DriveForwardCommand(RobotValues.DriveForwardDistance));
+                addSequential(new DriveForward(RobotValues.DriveForwardDistance));
                 break;
             
             case RobotValues.Auton_PickOneBox:

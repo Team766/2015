@@ -19,50 +19,43 @@ public class RobotValues {
 	public static final int Auton_PickOneBox = 2;
 	public static final int Auton_Rotate = 3;
 	
-	public static final int Auton_Max = 2;
+	public static final int Auton_Max = 3;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
 	public static final double DriveForwardDistance = 2;
+	
 	// Bearly Drive
 	// Decrease for faster reaction times
-	public static final double alpha = 0.9;
+	public static final double alpha = 0.5;
 	
 	//Elevator presets
 	public static final int bottomPreset = 1;//Open to change. Prototype value
 	public static final int middlePreset = 3;//Open to change. Prototype value
 	public static final int topPreset = 5;//Open to change. Prototype value
-
-
-	// gyro turning
-	public static final double AngleKp = 0.5;
-	public static final double AngleKi = 0;
-	public static final double AngleKd = 0;
-	public static final double Angleoutputmax_low = -.05;
-	public static final double Angleoutputmax_high = .05;
-	public static final double AngleThreshold = .01;
 	
 	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
 	public static double TurnAngleKi = 0.01;
-	public static double TurnAngleKd = 0.1;
+	public static double TurnAngleKd = 0.15;
 
 	// drive straight
 
-	public static final double DriveKp = 0.2;
+	public static final double DriveKp = 0.05;//Decrease to decrease robot speed
 	public static final double DriveKi = 0.02;
 	public static final double DriveKd = 0.01;
-	public static final double Driveoutputmax_low = -1.0;
-	public static final double Driveoutputmax_high = 1;
-	public static final double DriveThreshold = .01;
-
-	public static final double StraightKp = 0.3;
-	public static final double StraightKi = 0.2;
-	public static final double StraightKd = 0.0;
-	public static final double Straightoutputmax_low = -0.1;
-	public static final double Straightoutputmax_high = 0.1;
-	public static final double StraightThreshold = Double.MIN_NORMAL; // so it never stops
-															// trying
+	public static final double Driveoutputmax_low = -10;
+	public static final double Driveoutputmax_high = 10;
+	public static final double DriveThreshold = .1;
+	
+	// gyro turning in drive forward
+	public static final double AngleKp = 0.1;
+	public static final double AngleKi = 0.03;
+	public static final double AngleKd = 0.1;
+	public static final double Angleoutputmax_low = -10;
+	public static final double Angleoutputmax_high = 10;
+	public static final double AngleThreshold = Double.MIN_VALUE;
+	
 	
 	//drive smoothly
 	public static final double SmootherLeftKp = .1;

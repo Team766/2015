@@ -6,14 +6,15 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
  * Command that uses the encoders to move the robot
- *
- * @author Blevenson
+ * 
  * @author PKao
+ * @author EBlack
+ * @author Blevenson
  */
-// Note: PID code experimental
-public class DriveForwardCommand extends CommandBase {
-	private static final double ANGLE_TO_POWER_RATIO = .05;
-	
+
+public class DriveForward extends CommandBase {
+	private static final double ANGLE_TO_POWER_RATIO = 1;
+	private static final boolean PRINT = true;
 	
 	private PIDController DistancePID = new PIDController(RobotValues.DriveKp,
 			RobotValues.DriveKi, RobotValues.DriveKd,
@@ -25,11 +26,11 @@ public class DriveForwardCommand extends CommandBase {
 			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
 			RobotValues.AngleThreshold);
 
-	public DriveForwardCommand() {
+	public DriveForward() {
 		this(0);
 	}
 
-	public DriveForwardCommand(double distance) {
+	public DriveForward(double distance) {
 		DistancePID.setSetpoint(distance);
 		AnglePID.setSetpoint(0);
 	}
@@ -40,14 +41,16 @@ public class DriveForwardCommand extends CommandBase {
 		DistancePID.reset();
 		AnglePID.reset();
 		Drive.setSmoothing(false);
-		Drive.setShifter(false);
+		Drive.setHighGear(false);
 	}
 
 	protected void execute() {
 		DistancePID.calculate(Drive.getAverageEncoderDistance(), false);
-		AnglePID.calculate(Drive.getAngle(), false);
-		System.out.println(DistancePID.getOutput());
-		System.out.println("D: " + DistancePID.getOutput() + "A: " + AnglePID.getOutput());
+		double gyroAngle = Drive.getAngle();
+		AnglePID.calculate(gyroAngle , false);
+		
+		pr("Gyro Angle: " + gyroAngle);
+		pr("D: " + DistancePID.getOutput() + "A: " + AnglePID.getOutput());
 		Drive.setLeftPower(-DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 		Drive.setRightPower(-DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 	}
@@ -63,6 +66,10 @@ public class DriveForwardCommand extends CommandBase {
 
 	protected void interrupted() {
 		end();
+	}
+	
+	private void pr(Object text){
+		if(PRINT) System.out.println("Drive Forward: " +text);
 	}
 
 }

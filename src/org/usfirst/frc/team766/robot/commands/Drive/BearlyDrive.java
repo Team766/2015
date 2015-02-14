@@ -35,7 +35,7 @@ public class BearlyDrive extends CommandBase {
 		
 		Drive.setLeftPower(outputLeft);
 		Drive.setRightPower(outputRight);
-		Drive.setShifter(OI.getShifter());
+		Drive.setHighGear(OI.getShifter());
 		
 		lastRightOut = outputRight;
 		lastLeftOut = outputLeft;
@@ -47,7 +47,7 @@ public class BearlyDrive extends CommandBase {
 
 	protected void end() {
 		Drive.setPower(0.0);
-		Drive.setShifter(false);
+		Drive.setHighGear(false);
 		Drive.setSmoothing(true);
 	}
 
