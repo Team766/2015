@@ -42,7 +42,7 @@ public class CheesyDriveCommand extends CommandBase {
       return;
     }
     boolean isQuickTurn = OI.getQuickTurn();
-    boolean isHighGear = !OI.getShifter();
+    boolean isHighGear = OI.getShifter();
 
     double wheelNonLinearity;
 
@@ -158,7 +158,7 @@ public class CheesyDriveCommand extends CommandBase {
     //drive.setLeftRightPower(leftPwm, rightPwm);
     Drive.setLeftPower(bearafyLeftPower(leftPwm));
     Drive.setRightPower(bearafyRightPower(rightPwm));
-    Drive.setShifter(isHighGear);
+    Drive.setHighGear(isHighGear);
   }
 
   protected boolean isFinished() {
