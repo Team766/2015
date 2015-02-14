@@ -13,6 +13,7 @@ public class TankDrive extends CommandBase {
 	}
 
 	protected void initialize() {
+		CommandBase.Drive.setSmoothing(false);
 	}
 
 	protected void execute() {
@@ -38,6 +39,7 @@ public class TankDrive extends CommandBase {
 	protected void end() {
 		Drive.setPower(0.0);
 		Drive.setShifter(false);
+		Drive.setSmoothing(true);
 	}
 
 	protected void interrupted() {

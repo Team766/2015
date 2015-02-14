@@ -30,6 +30,7 @@ public class CheesyDriveCommand extends CommandBase {
 
   protected void initialize() {
     //drive.disableControllers() ;
+	  Drive.setSmoothing(false);
 	  lastRightOut = 0;
 	  lastLeftOut = 0;
 	  outputLeft = 0;
@@ -166,6 +167,7 @@ public class CheesyDriveCommand extends CommandBase {
 
   protected void end() {
 	  Drive.setPower(0);
+	  Drive.setSmoothing(true);
   }
 
   protected void interrupted() {

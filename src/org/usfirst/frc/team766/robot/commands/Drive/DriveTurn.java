@@ -9,10 +9,10 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  */
 public class DriveTurn extends CommandBase {
 	private static final double ANGLES_TO_DEGREES = .0618;
-	private static final boolean PRINT = false;
+	private static final boolean PRINT = true;
 	
 	private PIDController pid = new PIDController(RobotValues.TurnAngleKp,
-			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd, -1, 1, .5);
+			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd, -0.5, 0.5, .5);
 
 	public DriveTurn() {
 		this(0d);
@@ -23,6 +23,7 @@ public class DriveTurn extends CommandBase {
 	}
 
 	protected void initialize() {
+		Drive.setSmoothing(false);
 		Drive.resetGyro();
 		Drive.resetEncoders();
 		pid.reset();
@@ -30,7 +31,7 @@ public class DriveTurn extends CommandBase {
 	}
 
 	protected void execute() {
-		pid.calculate(Drive.getAngle(), true);
+		pid.calculate(Drive.getAngle(), false);
 
 		double leftPower = pid.getOutput() * ANGLES_TO_DEGREES;
 		double rightPower = -pid.getOutput() * ANGLES_TO_DEGREES;
@@ -52,6 +53,7 @@ public class DriveTurn extends CommandBase {
 
 	protected void end() {
 		Drive.setPower(0d);
+		Drive.setSmoothing(true);
 	}
 
 	protected void interrupted() {

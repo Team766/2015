@@ -23,6 +23,7 @@ public class BearlyDrive extends CommandBase {
 		lastLeftOut = 0;
 		outputLeft = 0;
 		outputRight = 0;
+		CommandBase.Drive.setSmoothing(false);
 	}
 
 	protected void execute() {
@@ -47,6 +48,7 @@ public class BearlyDrive extends CommandBase {
 	protected void end() {
 		Drive.setPower(0.0);
 		Drive.setShifter(false);
+		Drive.setSmoothing(true);
 	}
 
 	protected void interrupted() {
