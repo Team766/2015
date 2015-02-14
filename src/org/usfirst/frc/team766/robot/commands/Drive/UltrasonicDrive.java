@@ -14,17 +14,16 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class UltrasonicDrive extends CommandBase {
 	private static final double SLOWING_OFFSET = .2;
 	
-	private double distanceFromBox;
+	private double targetDistance;
 	private boolean beSafe;
 	private double currentDistance;
 
 	public UltrasonicDrive() {
-		this.beSafe = true;
-		distanceFromBox = 0;
+		this(0,false);
 	}
 
 	public UltrasonicDrive(double distance, boolean beSafe) {
-		distanceFromBox = distance;
+		targetDistance = distance;
 		this.beSafe = beSafe;
 	}
 
@@ -36,11 +35,11 @@ public class UltrasonicDrive extends CommandBase {
 	protected void execute() {
 		// Drive forward using the PID here for the Ultrasonic sensor
 		currentDistance = UltrasonicSensor.getInstance().getDistanceDouble();
-		Drive.setPower(Math.min((currentDistance)+ SLOWING_OFFSET,1));
+		Drive.setPower(Math.min(targetDistance-currentDistance,1));
 	}
 
 	protected boolean isFinished() {
-		return (currentDistance <= distanceFromBox)
+		return (currentDistance <= targetDistance)
 				|| (beSafe && (Drive.getAverageEncoderDistance() >= RobotValues.safteyDriveDistance));
 	}
 
