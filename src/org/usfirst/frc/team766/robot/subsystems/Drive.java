@@ -139,7 +139,7 @@ public class Drive extends Subsystem{
 	public void setSmoothing(boolean setSmooth) {
 		smoothing = setSmooth;
 	}
-
+	
 	private class DriveSmoother extends Command{
 		private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
 		
