@@ -51,8 +51,8 @@ public class DriveForward extends CommandBase {
 		
 		pr("Gyro Angle: " + gyroAngle);
 		pr("D: " + DistancePID.getOutput() + "A: " + AnglePID.getOutput());
-		Drive.setLeftPower(-DistancePID.getOutput() + AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
-		Drive.setRightPower(-DistancePID.getOutput()- AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
+		Drive.setLeftPower(-DistancePID.getOutput() - AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
+		Drive.setRightPower(-DistancePID.getOutput()+ AnglePID.getOutput() * ANGLE_TO_POWER_RATIO);
 	}
 
 	protected boolean isFinished() {
