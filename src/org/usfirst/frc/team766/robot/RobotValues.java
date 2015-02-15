@@ -44,9 +44,9 @@ public class RobotValues {
 
 	// drive straight
 
-	public static final double DriveKp = 0.05;//Decrease to decrease robot speed
-	public static final double DriveKi = 0.02;
-	public static final double DriveKd = 0.01;
+	public static final double DriveKp = 0.2;//Decrease to decrease robot speed
+	public static final double DriveKi = 0.01;
+	public static final double DriveKd = 0.1;
 	public static final double Driveoutputmax_low = -10;
 	public static final double Driveoutputmax_high = 10;
 	public static final double DriveThreshold = .05;

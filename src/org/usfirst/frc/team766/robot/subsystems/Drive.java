@@ -32,7 +32,7 @@ public class Drive extends Subsystem{
 	private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
 
 	private Gyro gyro = new Gyro(Ports.GYRO);
-	private Gyro cheesyGyro = new Gyro(Ports.GYRO);
+	private Gyro cheesyGyro;
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
@@ -44,6 +44,7 @@ public class Drive extends Subsystem{
 	
 	
 	public Drive(){
+		cheesyGyro = gyro;
 		smoother = new DriveSmoother();
 		smoother.start();
 		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
