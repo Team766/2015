@@ -37,5 +37,6 @@ public class Ports {
 	public static final int GYRO = 1;
 	
 	//Hall Effect Sensor
-	public static final int DIO_HallEffectSensor = 5;
+	public static final int DIO_HallEffectSensorBottom = 10;
+	public static final int DIO_HallEffectSensorTop = 11;
 }

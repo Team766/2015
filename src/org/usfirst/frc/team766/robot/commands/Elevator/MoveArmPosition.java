@@ -51,14 +51,14 @@ public class MoveArmPosition extends CommandBase {
 
 	protected void execute() {
 		positionPID.calculate(Elevator.getEnc(), false);
-		//Don't want to go too high or low
+		//Don't want to go too high or too low
 		if((Elevator.getEnc() <= RobotValues.ElevatorTopHeight) &&
 				(Elevator.getEnc() >= 0))
 			Elevator.setElevatorSpeed(positionPID.getOutput());
 	}
 
 	protected boolean isFinished() {
-		return positionPID.isDone();
+		return positionPID.isDone() || Elevator.getBottomStop() || Elevator.getTopStop();
 	}
 
 	protected void end() {

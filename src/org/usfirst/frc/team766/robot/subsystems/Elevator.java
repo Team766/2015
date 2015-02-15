@@ -8,6 +8,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
-	private double stopTolerance = 0.5;
+	private double stopTolerance = 0.001;
 
 	private RobotValues.ElevatorState currentState;
 	//Goal: wanted position, between 0 and Elevator Encoder Height  
@@ -36,7 +37,9 @@ public class Elevator extends Subsystem {
 	private PIDController smoother = new PIDController(RobotValues.ElevatorKp,
 			RobotValues.ElevatorKi, 0, targetSpeed);
 	private ChangeLimiter changeLimiter;
-	private Solenoid gripper;
+	private Solenoid gripper = new Solenoid(Ports.Sol_Gripper);
+	private DigitalInput topStop = new DigitalInput(Ports.DIO_HallEffectSensorTop);
+	private DigitalInput bottomStop = new DigitalInput(Ports.DIO_HallEffectSensorBottom);
 	
 	public Elevator() {
 		changeLimiter = new ChangeLimiter();
@@ -48,10 +51,15 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setElevatorSpeed(double speed) {
+		if(((speed > stopTolerance) && (getTopStop())) ||
+				((speed < stopTolerance) && getBottomStop()))
+			Elevator.set(0);
+		
 		if (Math.abs(speed) <= stopTolerance)
 			setBrake(true);
 		else
 			setBrake(false);
+
 		smoother.setSetpoint(speed);
 	}
 
@@ -90,6 +98,14 @@ public class Elevator extends Subsystem {
 	public void setElevator(boolean toGripOrNotToGrip){//To do: figure out if setting to true closes or opens arm. For now, true = open. I'm sorry, try not to change the name unless necessary
 		gripper.set(toGripOrNotToGrip);
 	}
+	public boolean getTopStop()
+	{
+		return topStop.get();
+	}
+	public boolean getBottomStop()
+	{
+		return bottomStop.get();
+	}
 	
 	private class ChangeLimiter extends Command {
 		@Override
@@ -104,6 +120,9 @@ public class Elevator extends Subsystem {
 			
 			//Move Elevator to slider
 			goal = CommandBase.OI.getSlider();
+			
+			if(getBottomStop())
+				resetEnc();
 			
 			// update Brake
 			setBrake(CommandBase.OI.getStop());
