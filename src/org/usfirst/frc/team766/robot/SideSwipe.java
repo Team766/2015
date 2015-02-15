@@ -4,6 +4,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
@@ -32,6 +33,8 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
     	SmartDashboard.putData( new TestEncoders());
+    	SmartDashboard.putData("Drive For"
+    			+ "ward 2 Meters: " ,new DriveForward(2));
     	done = false;
     	CommandBase.myLog.print("SideSwipe 2015 Code");
     	SmartDashboard.putNumber("P", RobotValues.DriveKp);
