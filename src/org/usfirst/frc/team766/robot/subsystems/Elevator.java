@@ -24,7 +24,8 @@ public class Elevator extends Subsystem {
 	private double stopTolerance = 0.5;
 
 	private RobotValues.ElevatorState currentState;
-	private int goal = 0;
+	//Goal: wanted position, between 0 and Elevator Encoder Height  
+	private double goal = 0;
 
 	private Victor Elevator = new Victor(Ports.PWM_Elevators);
 	private Encoder liftPos = new Encoder(Ports.DIO_ELEVATOR_ENCA,
@@ -62,11 +63,11 @@ public class Elevator extends Subsystem {
 		return liftPos.getDistance();
 	}
 
-	public int getGoal() {
+	public double getGoal() {
 		return goal;
 	}
 
-	public void setGoal(int goal) {
+	public void setGoal(double goal) {
 		this.goal = goal;
 	}
 
@@ -91,7 +92,6 @@ public class Elevator extends Subsystem {
 	}
 	
 	private class ChangeLimiter extends Command {
-
 		@Override
 		protected void initialize() {
 
@@ -101,7 +101,10 @@ public class Elevator extends Subsystem {
 		protected void execute() {
 			smoother.calculate(Elevator.get(), false);
 			Elevator.set(smoother.getOutput());
-
+			
+			//Move Elevator to slider
+			goal = CommandBase.OI.getSlider();
+			
 			// update Brake
 			setBrake(CommandBase.OI.getStop());
 

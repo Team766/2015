@@ -8,10 +8,13 @@ public class RobotValues {
 	public static final double safteyDriveDistance = 10;
 	public static final double driveDividor = 10;
 
+	//Elevator
 	public enum ElevatorState {
 		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
 	}
-
+	//Encoder Height of elevator, needs to be changed
+	public static final double ElevatorTopHeight = 100;
+	
 	// Autonomous
 	// Modes
 	public static final int Auton_VisionDrive = 0;

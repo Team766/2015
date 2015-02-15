@@ -125,5 +125,9 @@ public class OI {
 	{
 		return buttonStopElevator.get();
 	}
+
+	public double getSlider() {
+		return jBox.getRawAxis(1);
+	}
 }
 
