@@ -14,7 +14,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 public class DriveForward extends CommandBase {
 	private static final double ANGLE_TO_POWER_RATIO = 1;
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 	
 	private PIDController DistancePID = new PIDController(RobotValues.DriveKp,
 			RobotValues.DriveKi, RobotValues.DriveKd,

@@ -9,7 +9,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  */
 public class DriveTurn extends CommandBase {
 	private static final double ANGLES_TO_DEGREES = 1;
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 	
 	private PIDController pid = new PIDController(RobotValues.TurnAngleKp,
 			RobotValues.TurnAngleKi, RobotValues.TurnAngleKd, -0.5, 0.5, .5);

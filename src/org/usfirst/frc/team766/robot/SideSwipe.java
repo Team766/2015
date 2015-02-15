@@ -1,16 +1,17 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
+import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
+import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
+import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
+import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
-import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
-import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
-import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
-import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 
 /**
  * 2015 Java Code main class
@@ -30,6 +31,7 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
+    	SmartDashboard.putData( new TestEncoders());
     	done = false;
     	CommandBase.myLog.print("SideSwipe 2015 Code");
     	SmartDashboard.putNumber("P", RobotValues.DriveKp);

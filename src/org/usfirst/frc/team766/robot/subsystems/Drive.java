@@ -2,6 +2,7 @@ package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
 
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -17,15 +18,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author PKao
  */
 
-public class Drive extends Subsystem{
-
+public class Drive extends Subsystem{	
+	private static final double DISTANCE_PER_PULSE = (Math.PI * .09958)/256; //PI * Wheel Diameter / 256 * Encoder type
+	
 	private Victor leftDrive = new Victor(Ports.PWM_Left_Drive);
 	private Victor rightDrive = new Victor(Ports.PWM_Right_Drive);
 
 	private Encoder rightEncoder = new Encoder(Ports.DIO_RDriveEncA,
-			Ports.DIO_RDriveEncB);
+			Ports.DIO_RDriveEncB,false,CounterBase.EncodingType.k4X);
 	private Encoder leftEncoder = new Encoder(Ports.DIO_LDriveEncA,
-			Ports.DIO_LDriveEncB);
+			Ports.DIO_LDriveEncB,false,CounterBase.EncodingType.k4X);
 
 	private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
 
@@ -36,13 +38,15 @@ public class Drive extends Subsystem{
 	private double leftTarget = 0;
 	private double rightTarget = 0;
 	private double rateOfChange = .05;//might need 2 variables
-	private boolean smoothing = true;
+	private boolean smoothing = false;
 	private DriveSmoother smoother;
 	
 	
 	public Drive(){
 		smoother = new DriveSmoother();
 		smoother.start();
+		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 	}
 	
 	protected void initDefaultCommand() {
@@ -93,11 +97,19 @@ public class Drive extends Subsystem{
 	}
 
 	public double getLeftEncoderDistance() {
-		return translateDrive(leftEncoder.getRaw());
+		return leftEncoder.getDistance();
 	}
 
 	public double getRightEncoderDistance() {
-		return translateDrive(rightEncoder.getRaw());
+		return rightEncoder.getDistance();
+	}
+	
+	public int getRawLeftEncoder(){
+		return leftEncoder.getRaw();
+	}
+	
+	public int getRawRightEncoder(){
+		return rightEncoder.getRaw();
 	}
 
 	public double getAverageEncoderDistance() {
@@ -107,12 +119,6 @@ public class Drive extends Subsystem{
 	public void resetEncoders() {
 		rightEncoder.reset();
 		leftEncoder.reset();
-	}
-
-	public float translateDrive(float trans) {
-		double wheel_d = .09958;
-		double counts = 256d * 4.0;
-		return (float) ((trans / counts) * (Math.PI) * wheel_d);
 	}
 
 	public double getVoltage() {
