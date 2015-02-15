@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
+import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
@@ -13,7 +14,8 @@ import edu.wpi.first.wpilibj.DriverStation;
  * 
  */
 public class CheesyDriveCommand extends CommandBase {
-  private double oldWheel = 0.0;
+  private static final double ANGLE_TO_POWER_RATIO = 1;
+private double oldWheel = 0.0;
   private double quickStopAccumulator;
   private double throttleDeadband = 0.02;
   private double wheelDeadband = 0.02;
@@ -23,14 +25,21 @@ public class CheesyDriveCommand extends CommandBase {
   private double lastLeftOut;
   private double outputLeft;
   private double outputRight;
+  private PIDController gyroPID = new PIDController(RobotValues.AngleKp,
+			RobotValues.AngleKi, RobotValues.AngleKd,
+			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
+			RobotValues.AngleThreshold);
 
   public CheesyDriveCommand() {
 	  requires(Drive);
+	  gyroPID.setSetpoint(0);
   }
 
   protected void initialize() {
     //drive.disableControllers() ;
+	  Drive.resetCheesyGyro();
 	  Drive.setSmoothing(false);
+	  gyroPID.reset();
 	  lastRightOut = 0;
 	  lastLeftOut = 0;
 	  outputLeft = 0;
@@ -38,6 +47,9 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
+	  gyroPID.calculate(Drive.getCheesyAngle(), false); 
+	  
+	  
     if (DriverStation.getInstance().isAutonomous()) {
       return;
     }
@@ -184,12 +196,21 @@ public class CheesyDriveCommand extends CommandBase {
   {
 	  outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
 	  lastLeftOut = outputLeft;
+	  
+	  if(Math.abs(OI.getSteer()) < 0.05)
+		  outputLeft = (outputLeft - gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+	  
 	  return outputLeft;
   }
   public double bearafyRightPower(double in)
   {
 	  outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
 	  lastRightOut = outputRight;
+	  
+	  if(Math.abs(OI.getSteer()) < 0.05)
+		  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+	  else
+		  Drive.resetCheesyGyro();
 	  return outputRight;
   }
 }

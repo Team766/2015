@@ -23,6 +23,7 @@ public class MoveArmPosition extends CommandBase {
 	}
 
 	public MoveArmPosition(double goal) {
+		Elevator.setGoal(goal);
 		positionPID.setSetpoint(goal);
 	}
 
