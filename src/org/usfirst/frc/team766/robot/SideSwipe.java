@@ -32,9 +32,9 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putData(new DriveTurn(90));
     	done = false;
     	CommandBase.myLog.print("SideSwipe 2015 Code");
-    	SmartDashboard.putNumber("P", RobotValues.TurnAngleKp);
-    	SmartDashboard.putNumber("I", RobotValues.TurnAngleKi);
-    	SmartDashboard.putNumber("D", RobotValues.TurnAngleKd);
+    	SmartDashboard.putNumber("P", RobotValues.DriveKp);
+    	SmartDashboard.putNumber("I", RobotValues.DriveKi);
+    	SmartDashboard.putNumber("D", RobotValues.DriveKd);
     }
 	
 	public void disabledPeriodic() {

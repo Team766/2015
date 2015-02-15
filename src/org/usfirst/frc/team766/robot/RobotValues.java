@@ -46,7 +46,7 @@ public class RobotValues {
 	public static final double DriveKd = 0.01;
 	public static final double Driveoutputmax_low = -10;
 	public static final double Driveoutputmax_high = 10;
-	public static final double DriveThreshold = .1;
+	public static final double DriveThreshold = .05;
 	
 	// gyro turning in drive forward
 	public static final double AngleKp = 0.05;
