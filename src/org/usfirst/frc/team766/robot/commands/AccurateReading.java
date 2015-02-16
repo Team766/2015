@@ -2,8 +2,8 @@ package org.usfirst.frc.team766.robot.commands;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team766.robot.UltrasonicSensor;
-import org.usfirst.frc.team766.robot.UltrasonicSensor.UltrasonicValue;
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicInfo;
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,10 +30,10 @@ public class AccurateReading extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	UltrasonicValue currentValue = UltrasonicSensor.getInstance().getDistance();
-    	if(currentValue.isNew){
-    		pr("Distance to target: " + new String(new Double(currentValue.distance).toString()));
-    		distances.add(currentValue.distance);
+    	UltrasonicInfo currentValue = UltrasonicSensor.getInstance().getDistance();
+    	if(currentValue.isNew()){
+    		pr("Distance to target: " + new String(new Double(currentValue.getDistance1()).toString()));
+    		distances.add(currentValue.getDistance1());
     		pr("Array Size: "+distances.size());
     		
     		if(distances.size()>=100){

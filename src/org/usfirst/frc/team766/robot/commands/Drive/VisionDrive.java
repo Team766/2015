@@ -1,7 +1,7 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.UltrasonicSensor;
 
 /**
  * Autonmous command that uses the offboard/onboard processor to

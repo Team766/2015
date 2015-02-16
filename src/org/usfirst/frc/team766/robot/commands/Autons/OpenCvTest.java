@@ -13,7 +13,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team766.robot.UltrasonicSensor;
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**

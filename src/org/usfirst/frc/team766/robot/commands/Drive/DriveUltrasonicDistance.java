@@ -2,7 +2,7 @@ package org.usfirst.frc.team766.robot.commands.Drive;
 
 import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.UltrasonicSensor;
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
