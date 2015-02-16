@@ -4,6 +4,7 @@ import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -88,6 +89,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setBrake(boolean stop) {
+		Elevator.set(0);
 		brake.set(!stop);
 	}
 	
@@ -108,42 +110,57 @@ public class Elevator extends Subsystem {
 	}
 	
 	private class ChangeLimiter extends Command {
+		private double lastSlider;
+		private double slider;
 		@Override
 		protected void initialize() {
-
+			lastSlider = slider = 0;
 		}
 
 		@Override
 		protected void execute() {
+			System.out.println("Elevator Current: " + CommandBase.Drive.getElevatorCurrent());
+			//If elevator current is big, drop the smoother's max and enlarge min output
+			//Try and make them be scaled, i,e. the higher the current, thee smaller the value
+			//else, set both to 1 and -1 respectively
+			
 			smoother.calculate(Elevator.get(), false);
 			Elevator.set(smoother.getOutput());
 			
 			//Move Elevator to slider
-			goal = CommandBase.OI.getSlider();
+			slider = CommandBase.OI.getSlider();
 			
+			if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTollerance)
+			{
+				//Convert the slider from -1 - 1 to 0 - TopHeight
+				goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
+				new MoveArmPosition(goal);
+			}
+			
+			//Reset the elevator
+			if(getTopStop())
+				RobotValues.ElevatorTopHeight = getEnc();
 			if(getBottomStop())
 				resetEnc();
 			
 			// update Brake
 			setBrake(CommandBase.OI.getStop());
-
+			
+			lastSlider = slider;
 		}
 
 		@Override
 		protected boolean isFinished() {
-
 			return false;
 		}
 
 		@Override
 		protected void end() {
-
 		}
 
 		@Override
 		protected void interrupted() {
-			// TODO Auto-generated method stub
-
+			end();
 		}
 
 	}

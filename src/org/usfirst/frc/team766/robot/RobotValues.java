@@ -13,7 +13,7 @@ public class RobotValues {
 		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
 	}
 	//Encoder Height of elevator, needs to be changed
-	public static final double ElevatorTopHeight = 100;
+	public static double ElevatorTopHeight = 100;
 	
 	// Autonomous
 	// Modes
@@ -36,6 +36,10 @@ public class RobotValues {
 	public static final int bottomPreset = 1;//Open to change. Prototype value
 	public static final int middlePreset = 3;//Open to change. Prototype value
 	public static final int topPreset = 5;//Open to change. Prototype value
+	public static final int ElevatorPreset2 = 2;
+	public static final int ElevatorPreset3 = 2;
+	public static final int ElevatorPreset5 = 2;
+	public static final int ElevatorPreset6 = 2;
 	
 	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
@@ -81,5 +85,8 @@ public class RobotValues {
 		IntakeKI = 0.0,
 		IntakeKD = 0.0,
 		IntakeThreshold = .01;
+	
+	//Elevator
+	public static final double SliderChangeTollerance = 0.1;
 	
 }
