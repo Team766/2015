@@ -51,6 +51,11 @@ public class RobotValues {
 	public static final double Driveoutputmax_high = 10;
 	public static final double DriveThreshold = .05;
 	
+	//Ultrasonic
+	public static final double UltrasonicDriveKp = 6.4;
+	public static final double UltrasonicDriveKi = 0.0;//0.01
+	public static final double UltrasonicDriveKd = 0.0;
+	
 	// gyro turning in drive forward
 	public static final double AngleKp = 0.05;
 	public static final double AngleKi = 0.00;

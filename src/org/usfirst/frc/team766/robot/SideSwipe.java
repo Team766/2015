@@ -6,6 +6,7 @@ import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonicDistance;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
 
@@ -23,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SideSwipe extends IterativeRobot {
 	
 	private AutonSelectorCommand auton;
+	private DriveUltrasonicDistance dist;
 	private boolean AutonCyclePrev;
 	private boolean done;
 	
@@ -32,14 +34,17 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
+    	dist = new DriveUltrasonicDistance(1);
+    	SmartDashboard.putData(dist);
     	SmartDashboard.putData( new TestEncoders());
     	SmartDashboard.putData("Drive For"
-    			+ "ward 2 Meters: " ,new DriveForward(2));
+    			+ "ward 2 Meters: " ,new DriveForward(-1.5));
     	done = false;
+   
     	CommandBase.myLog.print("SideSwipe 2015 Code");
-    	SmartDashboard.putNumber("P", RobotValues.DriveKp);
-    	SmartDashboard.putNumber("I", RobotValues.DriveKi);
-    	SmartDashboard.putNumber("D", RobotValues.DriveKd);
+    	SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
+    	SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
+    	SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
     }
 	
 	public void disabledPeriodic() {
@@ -59,7 +64,6 @@ public class SideSwipe extends IterativeRobot {
     	RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
     	
     	
-    	
     	/*
     	 * Run auton command
     	 * Need to create an auton
@@ -69,15 +73,16 @@ public class SideSwipe extends IterativeRobot {
     	 */
     	done = true;
     	
-    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-    	auton.start();
+//    	auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+//    	auton.start();
     	
     }
 
     
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+        Scheduler.getInstance().run();        
     	SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
+    	SmartDashboard.putNumber("Graph", dist.graphError);
     }
 
     public void teleopInit() {

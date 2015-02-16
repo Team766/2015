@@ -76,6 +76,8 @@ public class UltrasonicSensor implements Runnable {
 			if (isValid(s)) {
 				setValue(Double.parseDouble(s.substring(s.indexOf('R') + 1)) / 1000);
 			}
+			
+			System.out.println("Distance " + UltrasonicSensor.getInstance().getDistanceDouble());
 		}
 	}
 

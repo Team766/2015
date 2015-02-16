@@ -27,5 +27,5 @@
   
   <import file="${wpilib.ant.dir}/build.xml"/>
 	
-	<var name="classpath" value="${classpath}:${user.home}/Desktop/opencv/build/java/opencv-2410.jar" />
+	<var name="classpath" value="${classpath}:${user.home}/git/2015/opencv-2410.jar" />
 </project> 

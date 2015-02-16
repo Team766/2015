@@ -73,6 +73,12 @@ public class Drive extends Subsystem{
 	}
 	
 	public synchronized void setLeftPower(double power) {
+		//Compensating for deadband
+		if(power < 0)
+			power -= .08;
+		else if(power > 0)
+			power += .08;
+		
 		if (smoothing) {
 			leftTarget = -power;
 		} else
@@ -80,6 +86,12 @@ public class Drive extends Subsystem{
 	}
 
 	public synchronized void setRightPower(double power) {
+		//Compensating for deadband
+		if(power < 0)
+			power -= .08;
+		else if(power > 0)
+			power += .08;
+		
 		if (smoothing) {
 			rightTarget = power;
 		} else

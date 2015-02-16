@@ -175,5 +175,9 @@ public class PIDController {
 	public double getError() {
 		return total_error;
 	}
+	public double getCurrentError()
+	{
+		return cur_error;
+	}
 
 }
