@@ -168,6 +168,10 @@ public class Drive extends Subsystem{
 	public void setSmoothing(boolean setSmooth) {
 		smoothing = setSmooth;
 	}
+
+	public double getElevatorCurrent() {
+		return (PDP.getCurrent(0) + PDP.getCurrent(1)) / 2d;
+	}
 	
 	private class DriveSmoother extends Command{
 		private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
@@ -208,5 +212,6 @@ public class Drive extends Subsystem{
 		}
 		
 	}
+
 	
 }

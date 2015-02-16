@@ -13,7 +13,7 @@ public class RobotValues {
 		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
 	}
 	//Encoder Height of elevator, needs to be changed
-	public static final double ElevatorTopHeight = 100;
+	public static double ElevatorTopHeight = 100;
 	
 	// Autonomous
 	// Modes

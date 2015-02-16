@@ -88,6 +88,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setBrake(boolean stop) {
+		Elevator.set(0);
 		brake.set(!stop);
 	}
 	
@@ -109,18 +110,24 @@ public class Elevator extends Subsystem {
 	
 	private class ChangeLimiter extends Command {
 		@Override
-		protected void initialize() {
-
-		}
+		protected void initialize() {}
 
 		@Override
 		protected void execute() {
+			System.out.println("Elevator Current: " + CommandBase.Drive.getElevatorCurrent());
+			//If elevator current is big, drop the smoother's max and enlarge min output
+			//Try and make them be scaled, i,e. the higher the current, thee smaller the value
+			//else, set both to 1 and -1 respectively
+			
 			smoother.calculate(Elevator.get(), false);
 			Elevator.set(smoother.getOutput());
 			
 			//Move Elevator to slider
 			goal = CommandBase.OI.getSlider();
 			
+			//Reset the elevator
+			if(getTopStop())
+				RobotValues.ElevatorTopHeight = getEnc();
 			if(getBottomStop())
 				resetEnc();
 			
@@ -131,19 +138,16 @@ public class Elevator extends Subsystem {
 
 		@Override
 		protected boolean isFinished() {
-
 			return false;
 		}
 
 		@Override
 		protected void end() {
-
 		}
 
 		@Override
 		protected void interrupted() {
-			// TODO Auto-generated method stub
-
+			end();
 		}
 
 	}

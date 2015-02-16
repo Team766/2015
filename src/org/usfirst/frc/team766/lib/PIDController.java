@@ -179,5 +179,13 @@ public class PIDController {
 	{
 		return cur_error;
 	}
+	public void setMaxoutputHigh(double in)
+	{
+		maxoutput_high = in;
+	}
+	public void setMaxoutputLow(double in)
+	{
+		maxoutput_low = in;
+	}
 
 }
