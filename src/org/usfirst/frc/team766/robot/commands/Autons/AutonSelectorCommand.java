@@ -35,7 +35,13 @@ public class AutonSelectorCommand extends CommandGroup{
             case RobotValues.Auton_Rotate:
                 System.out.println("Rotate Auton");
                 addSequential(new DriveTurn(90));
-                break;	
+                break;
+                
+            case RobotValues.Auton_DoNothing:
+            	System.out.println ("This Auton Does Nothing");
+            	addSequential (new Auton_DoNothing());
+            	break;
+            	
             default:{
                 System.out.println("Auton selection failed");
                 break;
