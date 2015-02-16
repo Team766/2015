@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 2015 Java Code main class
  * 
  * @author Brett Levenson
+ * @author Patrick Kao
  */
 
 public class SideSwipe extends IterativeRobot {
@@ -37,10 +38,10 @@ public class SideSwipe extends IterativeRobot {
     	dist = new DriveUltrasonicDistance(1);
     	SmartDashboard.putData(dist);
     	SmartDashboard.putData( new TestEncoders());
-    	SmartDashboard.putData("Drive For"
-    			+ "ward 2 Meters: " ,new DriveForward(-1.5));
+    	SmartDashboard.putData("Drive Back"
+    			+ "ward 1.5 Meters: " ,new DriveForward(-1.5));
     	done = false;
-   
+    	
     	CommandBase.myLog.print("SideSwipe 2015 Code");
     	SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
     	SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);

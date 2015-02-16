@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * Choose which auton command to run
  * This runs after the AutonSelector is updated.
  * Runs the appropriate auton mode
- * 
+ * @author Patrick Kao
  * @author Brett Levenson blevenson68@gmail.com
  */
 
@@ -21,12 +21,6 @@ public class AutonSelectorCommand extends CommandGroup{
     	//pass in the auton mode
 
         switch(mode){
-        	//runs the VisionDriveCommand
-//            case RobotValues.Auton_VisionDrive:
-//                System.out.println("Vision Drive");
-//                addSequential(new VisionDrive());
-//                break;
-//           
             //runs the Move Command
             case RobotValues.Auton_Move:
                 System.out.println("Drive Forward Auton");
