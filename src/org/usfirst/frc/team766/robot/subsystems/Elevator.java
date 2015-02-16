@@ -4,6 +4,7 @@ import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -109,8 +110,12 @@ public class Elevator extends Subsystem {
 	}
 	
 	private class ChangeLimiter extends Command {
+		private double lastSlider;
+		private double slider;
 		@Override
-		protected void initialize() {}
+		protected void initialize() {
+			lastSlider = slider = 0;
+		}
 
 		@Override
 		protected void execute() {
@@ -123,7 +128,14 @@ public class Elevator extends Subsystem {
 			Elevator.set(smoother.getOutput());
 			
 			//Move Elevator to slider
-			goal = CommandBase.OI.getSlider();
+			slider = CommandBase.OI.getSlider();
+			
+			if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTollerance)
+			{
+				//Convert the slider from -1 - 1 to 0 - TopHeight
+				goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
+				new MoveArmPosition(goal);
+			}
 			
 			//Reset the elevator
 			if(getTopStop())
@@ -133,7 +145,8 @@ public class Elevator extends Subsystem {
 			
 			// update Brake
 			setBrake(CommandBase.OI.getStop());
-
+			
+			lastSlider = slider;
 		}
 
 		@Override

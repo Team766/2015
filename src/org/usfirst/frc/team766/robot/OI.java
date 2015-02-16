@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
-import org.usfirst.frc.team766.robot.RobotValues;
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -26,6 +27,14 @@ public class OI {
     buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
     
     buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
+    buttonElevatorClamp = new JoystickButton(jBox, Buttons.ElevatorClamp),
+    buttonElevatorPreset1 = new JoystickButton(jBox, Buttons.preset1),
+	buttonElevatorPreset2 = new JoystickButton(jBox, Buttons.preset2),
+	buttonElevatorPreset3 = new JoystickButton(jBox, Buttons.preset3),
+	buttonElevatorPreset4 = new JoystickButton(jBox, Buttons.preset4),
+	buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
+	buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
+	buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
     
     buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
     buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement);
@@ -37,7 +46,14 @@ public class OI {
     public boolean UseGamepad = false;
     
 	public OI(){
-        //buttonDriverPickup.whileHeld(new Command);
+        buttonElevatorClamp.whenPressed(new AdjustGripper(true));
+        buttonElevatorPreset1.whenPressed(new MoveArmPosition(RobotValues.ElevatorState.BOTTOM));
+        buttonElevatorPreset2.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset2));
+        buttonElevatorPreset3.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset3));
+        buttonElevatorPreset4.whenPressed(new MoveArmPosition(RobotValues.ElevatorState.MIDDLE));
+        buttonElevatorPreset5.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset5));
+        buttonElevatorPreset6.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset6));
+        buttonElevatorPreset7.whenPressed(new MoveArmPosition(RobotValues.ElevatorState.TOP));
 	}
 	
 	public boolean getShifter(){
@@ -68,19 +84,7 @@ public class OI {
 	public double getRight(){
 		return jRight.getY();
 	}
-	/**
-	 * Originally the gripper switch would be in the off
-	 * position by default. Then, we removed manual control
-	 * of the grippers. Now the grippers switch will by default be in the
-	 * 'on' positition on the OI, but in code, 'on' will be
-	 * its off position. This makes it easier to deal with commands, as
-	 * we only want it to be running its command when it is not in its
-	 * relaxed state.
-	 * 
-	 * <p>Previously the button would be 'on'
-	 * if it was less than 0. Now, it'll be 
-	 * true when greater than 0.
-	 */
+
 	public void setTankDrive(boolean in){
 		TankDrive = in;
 	}
