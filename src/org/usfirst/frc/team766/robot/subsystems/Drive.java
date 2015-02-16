@@ -62,17 +62,17 @@ public class Drive extends Subsystem{
 	 */
 	
 	//For set methods, to set raw you need to not be in smoothing mode
-	public synchronized void setPower(double power) {
+	public void setPower(double power) {
 		if (smoothing) {
-			leftTarget = power;
+			leftTarget = -power;
 			rightTarget = power;
 		} else {
-			leftDrive.set(power);
+			leftDrive.set(-power);
 			rightDrive.set(power);
 		}
 	}
 	
-	public synchronized void setLeftPower(double power) {
+	public void setLeftPower(double power) {
 		//Compensating for deadband
 		if(power < 0)
 			power -= .08;
