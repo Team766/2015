@@ -13,8 +13,9 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 // Note: PID Constants need to be tuned
 public class MoveArmPosition extends CommandBase {
-	private PIDController positionPID; // Need to initialize PID Controller with
-										// right constants.
+	private PIDController positionPID = new PIDController(RobotValues.ElevatorKp, RobotValues.ElevatorKp,
+			RobotValues.ElevatorKd, RobotValues.ElevatorThreshold, RobotValues.ElevatorMaxSpeed,
+			RobotValues.ElevatorMinSpeed);
 
 	public MoveArmPosition() {
 		requires(Elevator);

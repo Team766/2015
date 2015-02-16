@@ -20,17 +20,17 @@ import org.usfirst.frc.team766.robot.subsystems.Elevator;
 public abstract class CommandBase extends Command{
 	
 	public static Drive Drive;
-	public static OI OI;
 	public static Elevator Elevator;
 	public static Intake Intake;
+	public static OI OI;
 	public static NetworkTable table;
 	public static logData myLog;
 	
 	public static void init(){
 		Drive = new Drive();
-		OI = new OI();
 		Elevator = new Elevator();
 		Intake = new Intake();
+		OI = new OI();
 		table = NetworkTable.getTable("dataTable");
 		myLog = new logData();
 	}

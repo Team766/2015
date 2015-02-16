@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem{	
 	private static final double DISTANCE_PER_PULSE = (Math.PI * .09958)/256; //PI * Wheel Diameter / 256 * Encoder type
+	private double outputRight;
+	private double outputLeft;
+	
 	
 	private Victor leftDrive = new Victor(Ports.PWM_Left_Drive);
 	private Victor rightDrive = new Victor(Ports.PWM_Right_Drive);
@@ -178,14 +181,14 @@ public class Drive extends Subsystem{
 		
 		@Override
 		protected void initialize() {
-			// TODO Auto-generated method stub			
 		}
 
 		@Override
 		protected void execute() {
-			double outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
-			double outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
-			
+			outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
+			outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
+		
+		
 			rightDrive.set(outputRight);
 			leftDrive.set(outputLeft);
 			

@@ -19,9 +19,8 @@ public class RobotValues {
 	// Modes
 	public static final int Auton_VisionDrive = 0;
 	public static final int Auton_Move = 1;
-	public static final int Auton_PickOneBox = 2;
 	public static final int Auton_Rotate = 3;
-	public static final int Auton_DoNothing = 4;
+	public static final int Auton_PickOneBox = 2;
 	public static final int Auton_Max = 3;
 	public static final int Auton_Min = 0;
 
@@ -77,7 +76,11 @@ public class RobotValues {
 	
 	//elevate smoothly
 	public static final double ElevatorKp = .1;
-	public static final double ElevatorKi = .1;
+	public static final double ElevatorKi = .01;
+	public static final double ElevatorKd = 0;
+	public static final double ElevatorThreshold = .01;
+	public static final double ElevatorMaxSpeed = 1;
+	public static final double ElevatorMinSpeed = 1;
 	
 	//Intake PID
 	public static final double 

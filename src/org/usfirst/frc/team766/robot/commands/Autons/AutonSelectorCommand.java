@@ -3,7 +3,6 @@ package org.usfirst.frc.team766.robot.commands.Autons;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
-import org.usfirst.frc.team766.robot.commands.Drive.VisionDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -36,11 +35,6 @@ public class AutonSelectorCommand extends CommandGroup{
                 System.out.println("Rotate Auton");
                 addSequential(new DriveTurn(90));
                 break;
-                
-            case RobotValues.Auton_DoNothing:
-            	System.out.println ("This Auton Does Nothing");
-            	addSequential (new Auton_DoNothing());
-            	break;
             	
             default:{
                 System.out.println("Auton selection failed");
