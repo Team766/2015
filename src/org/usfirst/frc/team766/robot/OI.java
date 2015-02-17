@@ -27,7 +27,8 @@ public class OI {
     buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
     
     buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
-    buttonElevatorClamp = new JoystickButton(jBox, Buttons.ElevatorClamp),
+//    buttonElevatorClamp = new JoystickButton(jBox, Buttons.ElevatorClamp),
+	buttonElevatorClamp = new JoystickButton(jRight, 1),
     buttonElevatorPreset1 = new JoystickButton(jBox, Buttons.preset1),
 	buttonElevatorPreset2 = new JoystickButton(jBox, Buttons.preset2),
 	buttonElevatorPreset3 = new JoystickButton(jBox, Buttons.preset3),
@@ -46,7 +47,7 @@ public class OI {
     public boolean UseGamepad = false;
     
 	public OI(){
-        buttonElevatorClamp.whenPressed(new AdjustGripper(true));
+        buttonElevatorClamp.whileHeld(new AdjustGripper(true));
         buttonElevatorPreset1.whenPressed(new MoveArmPosition(RobotValues.ElevatorState.BOTTOM));
         buttonElevatorPreset2.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset2));
         buttonElevatorPreset3.whenPressed(new MoveArmPosition(RobotValues.ElevatorPreset3));

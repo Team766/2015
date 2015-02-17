@@ -198,7 +198,7 @@ private double oldWheel = 0.0;
 	  lastLeftOut = outputLeft;
 	  
 	  if(Math.abs(OI.getSteer()) < 0.05)
-		  outputLeft = (outputLeft - gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+		  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  
 	  return outputLeft;
   }

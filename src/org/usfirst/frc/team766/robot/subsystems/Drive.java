@@ -76,11 +76,11 @@ public class Drive extends Subsystem{
 	}
 	
 	public void setLeftPower(double power) {
-		//Compensating for deadband
-		if(power < 0)
-			power -= .08;
-		else if(power > 0)
-			power += .08;
+//		//Compensating for deadband
+//		if(power < 0)
+//			power -= .08;
+//		else if(power > 0)
+//			power += .08;
 		
 		if (smoothing) {
 			leftTarget = -power;
@@ -90,10 +90,10 @@ public class Drive extends Subsystem{
 
 	public synchronized void setRightPower(double power) {
 		//Compensating for deadband
-		if(power < 0)
-			power -= .08;
-		else if(power > 0)
-			power += .08;
+//		if(power < 0)
+//			power -= .08;
+//		else if(power > 0)
+//			power += .08;
 		
 		if (smoothing) {
 			rightTarget = power;
@@ -187,7 +187,6 @@ public class Drive extends Subsystem{
 		protected void execute() {
 			outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
 			outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
-		
 		
 			rightDrive.set(outputRight);
 			leftDrive.set(outputLeft);
