@@ -41,6 +41,9 @@ public class AutonSelectorCommand extends CommandGroup{
             	addSequential(new DriveForward(RobotValues.DistanceToLandfill));
             	break;
             
+            case RobotValues.Auton_None:
+            	System.out.println("No auton selected");
+            	break;
             default:{
                 System.out.println("Auton selection failed");
                 break;

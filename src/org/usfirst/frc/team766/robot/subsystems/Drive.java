@@ -183,12 +183,5 @@ public class Drive extends Subsystem{
 	public void setSmoothing(boolean setSmooth) {
 		smoothing = setSmooth;
 	}
-
-	public double getElevatorCurrent() {
-		return (PDP.getCurrent(0) + PDP.getCurrent(1)) / 2d;
-	}
-	
-
-
 	
 }

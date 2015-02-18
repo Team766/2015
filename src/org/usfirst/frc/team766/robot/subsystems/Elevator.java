@@ -8,6 +8,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -39,6 +40,7 @@ public class Elevator extends Subsystem {
 	private Solenoid gripper = new Solenoid(Ports.Sol_Gripper);
 	private DigitalInput topStop = new DigitalInput(Ports.DIO_HallEffectSensorTop);
 	private DigitalInput bottomStop = new DigitalInput(Ports.DIO_HallEffectSensorBottom);
+	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 	
 	public Elevator() {
 		ChangeLimiter changeLimiter = new ChangeLimiter(){
@@ -51,7 +53,7 @@ public class Elevator extends Subsystem {
 			}
 
 			protected void execute() {
-				System.out.println("Elevator Current: " + CommandBase.Drive.getElevatorCurrent());
+				System.out.println("Elevator Current: " + getElevatorCurrent());
 				//If elevator current is big, drop the smoother's max and enlarge min output
 				//Try and make them be scaled, i,e. the higher the current, thee smaller the value
 				//else, set both to 1 and -1 respectively
@@ -147,6 +149,9 @@ public class Elevator extends Subsystem {
 	{
 		return bottomStop.get();
 	}
-	
+
+	public double getElevatorCurrent() {
+		return (PDP.getCurrent(0) + PDP.getCurrent(1)) / 2d;
+	}
 
 }
