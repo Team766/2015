@@ -4,16 +4,13 @@ import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
-
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *  Command that reads the current sent to the motors and sets the intake motors.
  *  Used to pull a tote in.  Closes the arms around the tote and then sucks it into the
  *  robot.  When run it reads the current and uses that to determine if the motors are
  *  in contact with the tote.
  */
-public class PullToteIn extends Command {
+public class PullToteIn extends CommandBase {
 
     private double 
 	    stopCurrent,
@@ -34,7 +31,7 @@ public class PullToteIn extends Command {
 	private PIDController pidR = new PIDController(RobotValues.IntakeKP, 
 			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
 	
-	private State _state;
+	private State state_;
 
 	private double stopEncDistance;
 
@@ -58,29 +55,29 @@ public class PullToteIn extends Command {
     	lastRightCurr = leftPower = rightPower = curr_Lrate = 
     	pastRateL = curr_Rrate = pastRateR = 0;
     	done = false;
-    	_state = State.GRASP_TOTE;
+    	state_ = State.GRASP_TOTE;
     	
     	pidL.setSetpoint(0.6);
     	pidR.setSetpoint(0.6);
     	
-    	CommandBase.Intake.resetEnc();
-    	CommandBase.Intake.setWheels(1);
+    	Intake.resetEnc();
+    	Intake.setWheels(1);
     }
 
     protected void execute() {
-    	switch(_state)
+    	curr_Rrate = Intake.getEncRight();
+    	curr_Lrate = Intake.getEncLeft();
+    	
+    	curr_currentLeft = Intake.getIntakeCurrentLeft();
+    	curr_currentRight = Intake.getIntakeCurrentRight();
+    	
+    	switch(state_)
     	{
     		case GRASP_TOTE:
-		    	pidL.basicCalculate(CommandBase.Intake.getEncLeft());
-		    	pidR.basicCalculate(CommandBase.Intake.getEncRight());
+		    	pidL.calculate(Intake.getEncLeft(), false);
+		    	pidR.calculate(Intake.getEncRight(), false);
 		    	leftPower = pidL.getOutput();
 		    	rightPower = pidR.getOutput();
-		    	
-		    	curr_Rrate = CommandBase.Intake.getEncRight();
-		    	curr_Lrate = CommandBase.Intake.getEncLeft();
-		    	
-		    	curr_currentLeft = CommandBase.Intake.getIntakeCurrentLeft();
-		    	curr_currentRight = CommandBase.Intake.getIntakeCurrentRight();
 		    	
 		    	if(!(Math.abs(curr_Rrate - pastRateR) <= stopEncDistance))
 		    		rightPower = pidR.getOutput();
@@ -92,8 +89,8 @@ public class PullToteIn extends Command {
 		    	if(curr_currentRight > lastRightCurr)
 		    		rightPower = pidR.getOutput();
 		    	
-		    	CommandBase.Intake.setLeftIntake(leftPower);
-		    	CommandBase.Intake.setRightIntake(rightPower);
+		    	Intake.setLeftIntake(leftPower);
+		    	Intake.setRightIntake(rightPower);
 		    	
 		    	lastLeftCurr = curr_currentLeft + tollerance;
 		    	lastRightCurr = curr_currentRight + tollerance;
@@ -103,30 +100,28 @@ public class PullToteIn extends Command {
 		    	if(((curr_currentLeft > stopCurrent) && 
 		    	   (curr_currentRight > stopCurrent)) &&
 		    	   (Math.abs(curr_Rrate - pastRateR) <= stopEncDistance))
-		    			_state = State.INTAKING;
+		    			state_ = State.INTAKING;
 		    	break;
-    		case INTAKING:
-    			CommandBase.Intake.setLeftWheel(1);
-    			CommandBase.Intake.setRightWheel(1);
-    			CommandBase.Intake.setLeftIntake(0.4);
-    			CommandBase.Intake.setRightIntake(0.4);
+    		case INTAKING:    			
+    			Intake.setLeftWheel(1);
+    			Intake.setRightWheel(1);
+    			Intake.setLeftIntake(0.4);
+    			Intake.setRightIntake(0.4);
     			if((UltrasonicSensor.getInstance().getDistanceDouble() * 1000) < 10)
-    				_state = State.RESETING;
+    				state_ = State.RESETING;
     			break;
     		case RESETING:
-    			pidL.reset();
-    			pidR.reset();
-    			pidL.setSetpoint(-2);
-    			pidR.setSetpoint(2);
+    			pidL.setSetpoint(0);
+    			pidR.setSetpoint(0);
     			
     			while(!done)
     			{
-    				pidL.calculate(CommandBase.Intake.getEncLeft(), true);
-    				pidR.calculate(CommandBase.Intake.getEncLeft(), true);
-    				CommandBase.Intake.setLeftIntake(pidL.getOutput());
-    				CommandBase.Intake.setRightIntake(pidR.getOutput());
+    				pidL.calculate(Intake.getEncLeft(), true);
+    				pidR.calculate(Intake.getEncLeft(), true);
+    				Intake.setLeftIntake(pidL.getOutput());
+    				Intake.setRightIntake(pidR.getOutput());
     			}
-    			_state = State.STOP;
+    			state_ = State.STOP;
     			break;
     		case STOP:
     			done = true;
@@ -142,12 +137,16 @@ public class PullToteIn extends Command {
     }
 
     protected void end() {
-    	CommandBase.Intake.setWheels(0);
-    	CommandBase.Intake.setLeftIntake(0);
-    	CommandBase.Intake.setRightIntake(0);
+    	Intake.setWheels(0);
+    	Intake.setLeftIntake(0);
+    	Intake.setRightIntake(0);
     }
 
     protected void interrupted() {
+    	state_ = State.RESETING;
+    	System.out.println("Reseting intake");
+    	execute();
+    	System.out.println("Done reseting");
     	end();
     }
 }
