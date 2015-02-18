@@ -134,13 +134,14 @@ public class Elevator extends Subsystem {
 		brake.set(!stop);
 	}
 	
-	public boolean getElevator(){
+	public boolean getGripper(){
 		return gripper.get();
 	}
 	
-	public void setElevator(boolean toGripOrNotToGrip){//To do: figure out if setting to true closes or opens arm. For now, true = open. I'm sorry, try not to change the name unless necessary
-		gripper.set(toGripOrNotToGrip);
+	public void setGripper(boolean toGripOrNotToGrip){//To do: figure out if setting to true closes or opens arm. For now, true = closed. I'm sorry, try not to change the name unless necessary
+		gripper.set(!toGripOrNotToGrip);
 	}
+	
 	public boolean getTopStop()
 	{
 		return topStop.get();

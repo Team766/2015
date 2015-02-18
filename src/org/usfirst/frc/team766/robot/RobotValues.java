@@ -31,8 +31,9 @@ public class RobotValues {
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
-	public static final double DriveForwardDistance = 2;
-	public static final double DistanceToLandfill = (646.88/2 - 39/2) * INCHES_TO_METERS;
+	public static final double DriveForwardDistance = 107 * INCHES_TO_METERS;//Distance to landmark
+	public static final double DistanceToLandfill = (646.88/2 - 39 - 51 -20) * INCHES_TO_METERS;//20 just to give more room to ultrasonic drive
+	public static final double OptimalGripperDistance = 0.45;
 	
 	// Bearly Drive
 	// Decrease for faster reaction times

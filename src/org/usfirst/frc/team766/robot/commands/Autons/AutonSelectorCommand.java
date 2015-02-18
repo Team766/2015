@@ -22,7 +22,7 @@ public class AutonSelectorCommand extends CommandGroup{
         switch(mode){
             //runs the Move Command
             case RobotValues.Auton_Move:
-                System.out.println("Drive Forward Auton");
+                System.out.println("Drive Forward to Landmark Auton");
                 addSequential(new DriveForward(RobotValues.DriveForwardDistance));
                 break;
             
@@ -36,9 +36,9 @@ public class AutonSelectorCommand extends CommandGroup{
                 addSequential(new DriveTurn(90));
                 break;
             
-            case RobotValues.Auton_MoveToLandfill:
+            case RobotValues.Auton_MoveToLandfill://Align robot with box
             	System.out.println("Move to Landfill Auton");
-            	addSequential(new DriveForward(RobotValues.DistanceToLandfill));
+            	addSequential(new Auton_MoveToLandfill());
             	break;
             
             case RobotValues.Auton_None:
