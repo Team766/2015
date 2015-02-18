@@ -62,7 +62,7 @@ public class Elevator extends Subsystem {
 				
 				smoother.calculate(Elevator.get(), false);
 				double currentPID = smoother.getOutput();
-				Elevator.set(currentPID<0?currentPID +GRAVITY_OFFSET: currentPID );
+				Elevator.set(currentPID<0?currentPID + GRAVITY_OFFSET: currentPID );
 				
 				//Move Elevator to slider
 				slider = CommandBase.OI.getSlider();
@@ -106,6 +106,11 @@ public class Elevator extends Subsystem {
 			setBrake(false);
 
 		smoother.setSetpoint(speed);
+	}
+	
+	public void setElevatorSpeedRaw(double in)
+	{
+		Elevator.set(in);
 	}
 
 	public void resetEnc() {
