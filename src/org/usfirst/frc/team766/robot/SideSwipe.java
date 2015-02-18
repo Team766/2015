@@ -6,7 +6,7 @@ import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
-import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonicDistance;
+import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
 import org.usfirst.frc.team766.robot.subsystems.Drive;
@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SideSwipe extends IterativeRobot {
 	
 	private AutonSelectorCommand auton;
-	private DriveUltrasonicDistance dist;
+	private DriveUltrasonic dist;
 	private boolean AutonCyclePrev;
 	private boolean done;
 	
@@ -36,7 +36,7 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
-    	dist = new DriveUltrasonicDistance(1);
+    	dist = new DriveUltrasonic(1);
     	SmartDashboard.putData(dist);
     	SmartDashboard.putData( new TestEncoders());
     	SmartDashboard.putData("Drive Back"

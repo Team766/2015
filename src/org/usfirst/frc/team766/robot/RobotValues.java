@@ -2,7 +2,7 @@ package org.usfirst.frc.team766.robot;
 
 public class RobotValues {
 	//Conversion constants
-	private static final double INCHES_TO_METERS = 0.0254;
+	public static final double INCHES_TO_METERS = 0.0254;
 	
 	// Cheesy drive values
 	public static final double sensitivityHigh = .85d;
@@ -26,8 +26,9 @@ public class RobotValues {
 	public static final int Auton_None = 5;
 	public static final int Auton_PickOneBox = 2;
 	public static final int Auton_MoveToLandfill = 4;
+	public static final int Auton_Move3Boxes = 6;
 	
-	public static final int Auton_Max = 5;
+	public static final int Auton_Max = 6;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
