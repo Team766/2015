@@ -124,6 +124,10 @@ public class Drive extends Subsystem{
 	public void setHighGear(boolean isHighGear) {
 		Shifter.set(isHighGear);
 	}
+	
+	public boolean isHighGear(){
+		return Shifter.get();
+	}
 
 	public double getLeftEncoderDistance() {
 		return leftEncoder.getDistance();

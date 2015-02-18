@@ -4,7 +4,7 @@ import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
+	private static final double GRAVITY_OFFSET = .05;
+	
 	private double stopTolerance = 0.001;
 
 	private RobotValues.ElevatorState currentState;
@@ -59,16 +61,17 @@ public class Elevator extends Subsystem {
 				//else, set both to 1 and -1 respectively
 				
 				smoother.calculate(Elevator.get(), false);
-				Elevator.set(smoother.getOutput());
+				double currentPID = smoother.getOutput();
+				Elevator.set(currentPID<0?currentPID +GRAVITY_OFFSET: currentPID );
 				
 				//Move Elevator to slider
 				slider = CommandBase.OI.getSlider();
 				
-				if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTollerance)
+				if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance)
 				{
 					//Convert the slider from -1 - 1 to 0 - TopHeight
 					goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
-					new MoveArmPosition(goal).start();
+					new MoveElevatorHeight(goal).start();
 				}
 				
 				//Reset the elevator

@@ -40,13 +40,8 @@ public class RobotValues {
 	public static final double alpha = 0.5;
 	
 	//Elevator presets
-	public static final int bottomPreset = 1;//Open to change. Prototype value
-	public static final int middlePreset = 3;//Open to change. Prototype value
-	public static final int topPreset = 5;//Open to change. Prototype value
-	public static final int ElevatorPreset2 = 2;
-	public static final int ElevatorPreset3 = 2;
-	public static final int ElevatorPreset5 = 2;
-	public static final int ElevatorPreset6 = 2;
+	private static final int ElevatorPresetBase = 1;//All values based on this one
+	public static final int[] ElevatorPresets = {0,ElevatorPresetBase,ElevatorPresetBase*2,ElevatorPresetBase*3,ElevatorPresetBase*4,ElevatorPresetBase*5,ElevatorPresetBase*6};
 	
 	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
@@ -98,6 +93,6 @@ public class RobotValues {
 		IntakeThreshold = .01;
 	
 	//Elevator
-	public static final double SliderChangeTollerance = 0.1;
+	public static final double SliderChangeTolerance = 0.1;
 	
 }
