@@ -1,6 +1,9 @@
 package org.usfirst.frc.team766.robot;
 
 public class RobotValues {
+	//Conversion constants
+	private static final double INCHES_TO_METERS = 0.0254;
+	
 	// Cheesy drive values
 	public static final double sensitivityHigh = .85d;
 	public static final double sensitivityLow = .75d;
@@ -20,26 +23,25 @@ public class RobotValues {
 	public static final int Auton_VisionDrive = 0;
 	public static final int Auton_Move = 1;
 	public static final int Auton_Rotate = 3;
-	public static final int Auton_None = 4;
+	public static final int Auton_None = 5;
 	public static final int Auton_PickOneBox = 2;
-	public static final int Auton_Max = 3;
+	public static final int Auton_MoveToLandfill = 4;
+	
+	public static final int Auton_Max = 5;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
-	public static final double DriveForwardDistance = 2;
+	public static final double DriveForwardDistance = 107 * INCHES_TO_METERS;//Distance to landmark
+	public static final double DistanceToLandfill = (646.88/2 - 39 - 51 -20) * INCHES_TO_METERS;//20 just to give more room to ultrasonic drive
+	public static final double OptimalGripperDistance = 0.45;
 	
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.5;
 	
 	//Elevator presets
-	public static final int bottomPreset = 1;//Open to change. Prototype value
-	public static final int middlePreset = 3;//Open to change. Prototype value
-	public static final int topPreset = 5;//Open to change. Prototype value
-	public static final int ElevatorPreset2 = 2;
-	public static final int ElevatorPreset3 = 2;
-	public static final int ElevatorPreset5 = 2;
-	public static final int ElevatorPreset6 = 2;
+	private static final int ElevatorPresetBase = 1;//All values based on this one
+	public static final int[] ElevatorPresets = {0,ElevatorPresetBase,ElevatorPresetBase*2,ElevatorPresetBase*3,ElevatorPresetBase*4,ElevatorPresetBase*5,ElevatorPresetBase*6};
 	
 	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
@@ -91,6 +93,6 @@ public class RobotValues {
 		IntakeThreshold = .01;
 	
 	//Elevator
-	public static final double SliderChangeTollerance = 0.1;
+	public static final double SliderChangeTolerance = 0.1;
 	
 }
