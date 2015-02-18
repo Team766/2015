@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -43,12 +42,25 @@ public class Drive extends Subsystem{
 	private double rightTarget = 0;
 	private double rateOfChange = .05;//might need 2 variables
 	private boolean smoothing = false;
-	private DriveSmoother smoother;
 	
 	
 	public Drive(){
 		cheesyGyro = gyro;
-		smoother = new DriveSmoother();
+		ChangeLimiter smoother = new ChangeLimiter(){
+			private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
+			
+			protected void execute() {
+				outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
+				outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
+			
+				rightDrive.set(outputRight);
+				leftDrive.set(outputLeft);
+				
+				lastRightOut = outputRight;
+				lastLeftOut = outputLeft;
+			}
+			
+		};
 		smoother.start();
 		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
@@ -176,44 +188,7 @@ public class Drive extends Subsystem{
 		return (PDP.getCurrent(0) + PDP.getCurrent(1)) / 2d;
 	}
 	
-	private class DriveSmoother extends Command{
-		private double lastRightOut,lastLeftOut; //Do not use variable directly. Use getters and setters to avoid conflict.
-		
-		@Override
-		protected void initialize() {
-		}
 
-		@Override
-		protected void execute() {
-			outputLeft = rateOfChange  * lastLeftOut + (1 - rateOfChange ) * getLeftTarget();
-			outputRight = rateOfChange  * lastRightOut + (1 - rateOfChange ) * getRightTarget();
-		
-			rightDrive.set(outputRight);
-			leftDrive.set(outputLeft);
-			
-			lastRightOut = outputRight;
-			lastLeftOut = outputLeft;
-		}
-
-		@Override
-		protected boolean isFinished() {
-		
-			return false;
-		}
-
-		@Override
-		protected void end() {
-		
-			
-		}
-
-		@Override
-		protected void interrupted() {
-		
-			
-		}
-		
-	}
 
 	
 }

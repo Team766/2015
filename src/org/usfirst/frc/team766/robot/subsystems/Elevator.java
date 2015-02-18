@@ -6,11 +6,10 @@ import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveArmPosition;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -37,13 +36,53 @@ public class Elevator extends Subsystem {
 	private double targetSpeed = 0;
 	private PIDController smoother = new PIDController(RobotValues.ElevatorKp,
 			RobotValues.ElevatorKi, 0, targetSpeed);
-	private ChangeLimiter changeLimiter;
 	private Solenoid gripper = new Solenoid(Ports.Sol_Gripper);
 	private DigitalInput topStop = new DigitalInput(Ports.DIO_HallEffectSensorTop);
 	private DigitalInput bottomStop = new DigitalInput(Ports.DIO_HallEffectSensorBottom);
 	
 	public Elevator() {
-		changeLimiter = new ChangeLimiter();
+		ChangeLimiter changeLimiter = new ChangeLimiter(){
+			private double lastSlider;
+			private double slider;
+			
+			@Override
+			protected void initialize() {
+				lastSlider = slider = 0;
+			}
+
+			protected void execute() {
+				System.out.println("Elevator Current: " + CommandBase.Drive.getElevatorCurrent());
+				//If elevator current is big, drop the smoother's max and enlarge min output
+				//Try and make them be scaled, i,e. the higher the current, thee smaller the value
+				//else, set both to 1 and -1 respectively
+				
+				smoother.calculate(Elevator.get(), false);
+				Elevator.set(smoother.getOutput());
+				
+				//Move Elevator to slider
+				slider = CommandBase.OI.getSlider();
+				
+				if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTollerance)
+				{
+					//Convert the slider from -1 - 1 to 0 - TopHeight
+					goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
+					new MoveArmPosition(goal).start();
+				}
+				
+				//Reset the elevator
+				if(getTopStop())
+					RobotValues.ElevatorTopHeight = getEnc();
+				if(getBottomStop())
+					resetEnc();
+				
+				// update Brake
+				setBrake(CommandBase.OI.getStop());
+				
+				lastSlider = slider;
+			}
+
+
+		};
 		changeLimiter.start();
 		gripper = new Solenoid(Ports.Sol_Gripper);
 	}
@@ -109,60 +148,5 @@ public class Elevator extends Subsystem {
 		return bottomStop.get();
 	}
 	
-	private class ChangeLimiter extends Command {
-		private double lastSlider;
-		private double slider;
-		@Override
-		protected void initialize() {
-			lastSlider = slider = 0;
-		}
-
-		@Override
-		protected void execute() {
-			System.out.println("Elevator Current: " + CommandBase.Drive.getElevatorCurrent());
-			//If elevator current is big, drop the smoother's max and enlarge min output
-			//Try and make them be scaled, i,e. the higher the current, thee smaller the value
-			//else, set both to 1 and -1 respectively
-			
-			smoother.calculate(Elevator.get(), false);
-			Elevator.set(smoother.getOutput());
-			
-			//Move Elevator to slider
-			slider = CommandBase.OI.getSlider();
-			
-			if(Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTollerance)
-			{
-				//Convert the slider from -1 - 1 to 0 - TopHeight
-				goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
-				new MoveArmPosition(goal);
-			}
-			
-			//Reset the elevator
-			if(getTopStop())
-				RobotValues.ElevatorTopHeight = getEnc();
-			if(getBottomStop())
-				resetEnc();
-			
-			// update Brake
-			setBrake(CommandBase.OI.getStop());
-			
-			lastSlider = slider;
-		}
-
-		@Override
-		protected boolean isFinished() {
-			return false;
-		}
-
-		@Override
-		protected void end() {
-		}
-
-		@Override
-		protected void interrupted() {
-			end();
-		}
-
-	}
 
 }
