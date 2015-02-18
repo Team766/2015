@@ -35,7 +35,12 @@ public class AutonSelectorCommand extends CommandGroup{
                 System.out.println("Rotate Auton");
                 addSequential(new DriveTurn(90));
                 break;
-            	
+            
+            case RobotValues.Auton_MoveToLandfill:
+            	System.out.println("Move to Landfill Auton");
+            	addSequential(new DriveForward(RobotValues.DistanceToLandfill));
+            	break;
+            
             default:{
                 System.out.println("Auton selection failed");
                 break;
