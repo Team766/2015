@@ -27,7 +27,6 @@ public class Elevator extends Subsystem {
 	
 	private double stopTolerance = 0.001;
 
-	private RobotValues.ElevatorState currentState;
 	//Goal: wanted position, between 0 and Elevator Encoder Height  
 	private double goal = 0;
 
@@ -127,14 +126,6 @@ public class Elevator extends Subsystem {
 
 	public void setGoal(double goal) {
 		this.goal = goal;
-	}
-
-	public RobotValues.ElevatorState getState() {
-		return currentState;
-	}
-
-	public void setState(RobotValues.ElevatorState currentState) {
-		this.currentState = currentState;
 	}
 
 	public void setBrake(boolean stop) {

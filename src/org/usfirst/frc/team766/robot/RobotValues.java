@@ -11,10 +11,6 @@ public class RobotValues {
 	public static final double safteyDriveDistance = 10;
 	public static final double driveDividor = 10;
 
-	//Elevator
-	public enum ElevatorState {
-		BOTTOM, MIDDLE, TOP, MANUAL_CONTROL
-	}
 	//Encoder Height of elevator, needs to be changed
 	public static double ElevatorTopHeight = 100;
 	
@@ -26,7 +22,7 @@ public class RobotValues {
 	public static final int Auton_None = 5;
 	public static final int Auton_PickOneBox = 2;
 	public static final int Auton_MoveToLandfill = 4;
-	public static final int Auton_Move3Boxes = 6;
+	public static final int Auton_Push3Boxes = 6;
 	
 	public static final int Auton_Max = 6;
 	public static final int Auton_Min = 0;
@@ -35,6 +31,8 @@ public class RobotValues {
 	public static final double DriveForwardDistance = 107 * INCHES_TO_METERS;//Distance to landmark
 	public static final double DistanceToLandfill = (646.88/2 - 39 - 51 -20) * INCHES_TO_METERS;//20 just to give more room to ultrasonic drive
 	public static final double OptimalGripperDistance = 0.45;
+	public static final double DistanceBetweenBoxes = 33; //Distance from box edge to box edge
+	public static final double Box_Width = 48 * INCHES_TO_METERS;
 	
 	// Bearly Drive
 	// Decrease for faster reaction times

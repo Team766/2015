@@ -41,9 +41,9 @@ public class AutonSelectorCommand extends CommandGroup{
             	addSequential(new Auton_MoveToLandfill());
             	break;
             
-            case RobotValues.Auton_Move3Boxes:
-            	System.out.println("Move 3 Boxes Auto");
-            	addSequential(new Auton_Move3Boxes());
+            case RobotValues.Auton_Push3Boxes:
+            	System.out.println("Push 3 Boxes Auto");
+            	addSequential(new Auton_Push3Boxes());
             	break;
         
             case RobotValues.Auton_None:
