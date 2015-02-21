@@ -74,7 +74,12 @@ public class Drive extends Subsystem {
 
 				lastRightOut = outputRight;
 				lastLeftOut = outputLeft;
-
+				
+				//avoids offset from no movement
+				if(Math.abs(cheesyGyro.getAngle()) <= 0.01)
+					cheesyGyro.reset();
+				System.out.println("Cheesy Gyro: " + cheesyGyro.getAngle());
+				
 				if (accel.getX() < ACCELEROMETER_STOP_THRESHOLD
 						&& accel.getY() < ACCELEROMETER_STOP_THRESHOLD
 						&& accel.getZ() < ACCELEROMETER_STOP_THRESHOLD
