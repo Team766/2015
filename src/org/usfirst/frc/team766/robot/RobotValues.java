@@ -1,6 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
-public class RobotValues {
+public class RobotValues { //Note: All distances in units of meters
 	//Conversion constants
 	public static final double INCHES_TO_METERS = 0.0254;
 	
@@ -33,14 +33,15 @@ public class RobotValues {
 	public static final double OptimalGripperDistance = 0.45;
 	public static final double DistanceBetweenBoxes = 33; //Distance from box edge to box edge
 	public static final double Box_Width = 48 * INCHES_TO_METERS;
+	public static final double Box_Height = .32;
 	
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.5;
 	
 	//Elevator presets
-	private static final int ElevatorPresetBase = 1;//All values based on this one
-	public static final int[] ElevatorPresets = {0,ElevatorPresetBase,ElevatorPresetBase*2,ElevatorPresetBase*3,ElevatorPresetBase*4,ElevatorPresetBase*5,ElevatorPresetBase*6};
+	private static final double ElevatorPresetBase = Box_Height;//All elevator presets based on this variable
+	public static final double[] ElevatorPresets = {0,ElevatorPresetBase,ElevatorPresetBase*2,ElevatorPresetBase*3,ElevatorPresetBase*4,ElevatorPresetBase*5,ElevatorPresetBase*6};
 	
 	//Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
