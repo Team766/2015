@@ -33,6 +33,11 @@ public class DriveForward extends CommandBase {
 		DistancePID.setSetpoint(distance);
 		AnglePID.setSetpoint(0);
 	}
+	
+	public DriveForward(double distance, double angle) {
+		DistancePID.setSetpoint(distance);
+		AnglePID.setSetpoint(angle);
+	}
 
 	protected void initialize() {
 		Drive.resetGyro();
