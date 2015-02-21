@@ -93,5 +93,7 @@ public class RobotValues {
 	
 	//Elevator
 	public static final double SliderChangeTolerance = 0.1;
+
+	public static final double k_moveToNextTote = 33 * INCHES_TO_METERS;
 	
 }
