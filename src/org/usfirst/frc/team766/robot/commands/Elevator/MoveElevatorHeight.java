@@ -48,6 +48,13 @@ public class MoveElevatorHeight extends CommandBase {
 	protected void end() {
 		Elevator.setElevatorSpeed(0);
 	}
+	
+	public void changeGoal(double goal)
+	{
+		Elevator.setGoal(goal);
+		positionPID.setSetpoint(goal);
+		initialize();
+	}
 
 	protected void interrupted() {
 		end();

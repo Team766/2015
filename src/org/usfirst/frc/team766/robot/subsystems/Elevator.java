@@ -52,6 +52,8 @@ public class Elevator extends Subsystem {
 		Periodic p = new Periodic() {
 			private double lastSlider;
 			private double slider;
+			
+			MoveElevatorHeight mover = new MoveElevatorHeight();
 
 			@Override
 			protected void initialize() {
@@ -72,7 +74,8 @@ public class Elevator extends Subsystem {
 				if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
 					// Convert the slider from -1 - 1 to 0 - TopHeight
 					goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
-					new MoveElevatorHeight(goal).start();
+					mover.changeGoal(goal);
+					mover.start();
 				}
 
 				// Reset the elevator
@@ -89,7 +92,6 @@ public class Elevator extends Subsystem {
 
 		};
 		p.start();
-		gripper = new Solenoid(Ports.Sol_Gripper);
 	}
 
 	public void initDefaultCommand() {

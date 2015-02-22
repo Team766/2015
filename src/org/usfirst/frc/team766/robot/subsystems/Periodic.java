@@ -1,11 +1,11 @@
 package org.usfirst.frc.team766.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
  * Extend this class in inner classes in subsystems.
  */
-public abstract class Periodic extends Command {
+public abstract class Periodic extends CommandBase {
 
     public Periodic() {
     }
