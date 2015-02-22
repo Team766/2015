@@ -16,13 +16,14 @@ public class RobotValues { //Note: All distances in units of meters
 	
 	// Autonomous
 	// Modes
-	public static final int Auton_VisionDrive = 0;
-	public static final int Auton_Move = 1;
-	public static final int Auton_Rotate = 3;
-	public static final int Auton_None = 5;
-	public static final int Auton_PickOneBox = 2;
-	public static final int Auton_MoveToLandfill = 4;
-	public static final int Auton_Push3Boxes = 6;
+	public static final int 
+		Auton_VisionDrive = 0,
+		Auton_Move = 1,
+		Auton_Rotate = 3,
+		Auton_None = 5,
+		Auton_PickOneBox = 2,
+		Auton_MoveToLandfill = 4,
+		Auton_Push3Boxes = 6;
 	
 	public static final int Auton_Max = 6;
 	public static final int Auton_Min = 0;
@@ -94,6 +95,7 @@ public class RobotValues { //Note: All distances in units of meters
 	
 	//Elevator
 	public static final double SliderChangeTolerance = 0.1;
+	public static int numTotes = 0;
 
 	public static final double k_moveToNextTote = 33 * INCHES_TO_METERS;
 	

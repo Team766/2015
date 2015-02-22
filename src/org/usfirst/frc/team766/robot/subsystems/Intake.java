@@ -71,6 +71,11 @@ public class Intake extends Subsystem{
 	{
 		return rightEnc.getDistance();
 	}
+	public void setIntake(double in)
+	{
+		setLeftIntake(in);
+		setRightIntake(in);
+	}
 	public void resetEnc()
 	{
 		rightEnc.reset();

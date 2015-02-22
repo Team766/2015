@@ -33,7 +33,7 @@ public class PullToteIn extends CommandBase {
 	
 	private State state_;
 
-	private double stopEncDistance;
+	private double stopEncDistance = 0.01;
 
 	private boolean done;
 	
@@ -120,6 +120,7 @@ public class PullToteIn extends CommandBase {
     				pidR.calculate(Intake.getEncLeft(), true);
     				Intake.setLeftIntake(pidL.getOutput());
     				Intake.setRightIntake(pidR.getOutput());
+    				done = pidL.isDone() && pidR.isDone();
     			}
     			state_ = State.STOP;
     			break;

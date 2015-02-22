@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
+import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -16,5 +17,6 @@ public class DropStack extends CommandGroup {
         CommandBase.Intake.setWheels(-1);
         addParallel(new WaitCommand(10));
         CommandBase.Intake.setWheels(0);
+        RobotValues.numTotes = 0;
     }
 }
