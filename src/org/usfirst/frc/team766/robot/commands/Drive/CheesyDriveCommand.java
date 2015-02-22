@@ -199,7 +199,9 @@ private double oldWheel = 0.0;
 	  
 	  if(Math.abs(OI.getSteer()) < 0.05)
 		  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
-	  
+	  //Accounts for drift in the gyro
+	  if(Math.abs(OI.getThrottle()) <= 0.001)
+		  outputLeft = 0;
 	  return outputLeft;
   }
   public double bearafyRightPower(double in)
@@ -211,6 +213,11 @@ private double oldWheel = 0.0;
 		  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  else
 		  Drive.resetCheesyGyro();
+	  if(Math.abs(OI.getThrottle()) <= 0.001)
+	  {
+		  outputRight = 0;
+		  Drive.resetCheesyGyro();
+	  }
 	  return outputRight;
   }
 }

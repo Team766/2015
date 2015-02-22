@@ -44,7 +44,7 @@ public class Drive extends Subsystem {
 	private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
 
 	private Gyro gyro = new Gyro(Ports.GYRO);
-	private Gyro cheesyGyro;
+	private Gyro cheesyGyro = new Gyro(0);
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
@@ -56,7 +56,7 @@ public class Drive extends Subsystem {
 
 	public Drive() {
 
-		cheesyGyro = gyro;
+		//cheesyGyro = gyro;
 		ChangeLimiter smoother = new ChangeLimiter() {
 			private double lastRightOut, lastLeftOut; // Do not use variable
 														// directly. Use getters
@@ -74,11 +74,6 @@ public class Drive extends Subsystem {
 
 				lastRightOut = outputRight;
 				lastLeftOut = outputLeft;
-				
-				//avoids offset from no movement
-				if(Math.abs(cheesyGyro.getAngle()) <= 0.01)
-					cheesyGyro.reset();
-				System.out.println("Cheesy Gyro: " + cheesyGyro.getAngle());
 				
 				if (accel.getX() < ACCELEROMETER_STOP_THRESHOLD
 						&& accel.getY() < ACCELEROMETER_STOP_THRESHOLD
