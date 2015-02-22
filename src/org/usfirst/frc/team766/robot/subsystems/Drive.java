@@ -44,7 +44,7 @@ public class Drive extends Subsystem {
 	private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
 
 	private Gyro gyro = new Gyro(Ports.GYRO);
-	private Gyro cheesyGyro = new Gyro(0);
+	private Gyro cheesyGyro;
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
@@ -56,7 +56,7 @@ public class Drive extends Subsystem {
 
 	public Drive() {
 
-		//cheesyGyro = gyro;
+		cheesyGyro = gyro;
 		ChangeLimiter smoother = new ChangeLimiter() {
 			private double lastRightOut, lastLeftOut; // Do not use variable
 														// directly. Use getters
