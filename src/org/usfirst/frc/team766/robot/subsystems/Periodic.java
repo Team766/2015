@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Extend this class in inner classes in subsystems.
  */
-public abstract class ChangeLimiter extends Command {
+public abstract class Periodic extends Command {
 
-    public ChangeLimiter() {
+    public Periodic() {
     }
 
     protected void initialize() {

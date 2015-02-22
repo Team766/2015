@@ -13,7 +13,7 @@ public class AdjustGripper extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator.setGripper(true);
+    	Elevator.setGripper(true,false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +27,7 @@ public class AdjustGripper extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Elevator.setGripper(false);
+    	Elevator.setGripper(false,false);
     }
 
     // Called when another command which requires one or more of the same
