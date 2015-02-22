@@ -107,7 +107,7 @@ public class SideSwipe extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(CommandBase.Drive.getCheesyAngle());
+		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle());
     }
     
     public void testPeriodic() {
