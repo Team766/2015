@@ -83,7 +83,7 @@ public class RobotValues { //Note: All distances in units of meters
 	public static final double ElevatorKd = 0;
 	public static final double ElevatorThreshold = .01;
 	public static final double ElevatorMaxSpeed = 1;
-	public static final double ElevatorMinSpeed = 1;
+	public static final double ElevatorMinSpeed = -1;
 	
 	//Intake PID
 	public static final double 

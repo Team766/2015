@@ -57,7 +57,7 @@ public class Drive extends Subsystem {
 	public Drive() {
 
 		cheesyGyro = gyro;
-		ChangeLimiter smoother = new ChangeLimiter() {
+		Periodic smoother = new Periodic() {
 			private double lastRightOut, lastLeftOut; // Do not use variable
 														// directly. Use getters
 														// and setters to avoid
