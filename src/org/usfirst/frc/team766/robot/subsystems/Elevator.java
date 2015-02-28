@@ -25,10 +25,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
 	private static final int NUM_TEETH_SPROCKET = 24;
-	private static final double CHAIN_PITCH = (3 / 8)
+	private static final double CHAIN_PITCH = 3.0 / 8.0
 			* RobotValues.INCHES_TO_METERS;
 	private static final double DISTANCE_PER_SPROCKET_ROTATION = CHAIN_PITCH
-			/ NUM_TEETH_SPROCKET;
+			* NUM_TEETH_SPROCKET;
 	private static final int PULSES_PER_ROTATION = 256;
 	private static final double DISTANCE_PER_PULSE = DISTANCE_PER_SPROCKET_ROTATION
 			/ PULSES_PER_ROTATION;
