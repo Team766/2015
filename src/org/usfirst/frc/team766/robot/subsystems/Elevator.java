@@ -24,13 +24,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
-	private static final double GRAVITY_OFFSET = .1; // Needs to be calculated.
-														// Offset of just
-														// mechanism. PID should
-														// compensate for rest
-														// -Patrick
+	private static final boolean DYNAMIC_CALIBRATION = true;
+	private static final double GRAVITY_COUNTERBALANCE = .1; // Needs to be
+																// calculated.
+	// Offset of just
+	// mechanism. PID should
+	// compensate for rest
+	// -Patrick
 
-	private double gravityOffset = GRAVITY_OFFSET;
+	private double gravityOffset = GRAVITY_COUNTERBALANCE;
 	private double stopTolerance = 0.001;
 
 	// Goal: wanted position, between 0 and Elevator Encoder Height
@@ -48,52 +50,6 @@ public class Elevator extends Subsystem {
 			Ports.DIO_HallEffectSensorBottom);
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
-	public Elevator() {
-		Periodic p = new Periodic() {
-			private double lastSlider;
-			private double slider;
-			
-			MoveElevatorHeight mover = new MoveElevatorHeight();
-
-			@Override
-			protected void initialize() {
-				lastSlider = slider = 0;
-			}
-
-			protected void execute() {
-				System.out.println("Elevator Current: " + getElevatorCurrent());
-				// If elevator current is big, drop the smoother's max and
-				// enlarge min output
-				// Try and make them be scaled, i,e. the higher the current,
-				// thee smaller the value
-				// else, set both to 1 and -1 respectively
-
-				// Move Elevator to slider
-				slider = CommandBase.OI.getSlider();
-
-				if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
-					// Convert the slider from -1 - 1 to 0 - TopHeight
-					goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
-					mover.changeGoal(goal);
-					mover.start();
-				}
-
-				// Reset the elevator
-				if (getTopStop())
-					RobotValues.ElevatorTopHeight = getEnc();
-				if (getBottomStop())
-					resetEnc();
-
-				// update Brake
-				setBrake(CommandBase.OI.getStop());
-
-				lastSlider = slider;
-			}
-
-		};
-		p.start();
-	}
-
 	public void initDefaultCommand() {
 	}
 
@@ -107,11 +63,13 @@ public class Elevator extends Subsystem {
 		else
 			setBrake(false);
 
-		Elevator.set(speed + GRAVITY_OFFSET);
+		Elevator.set(speed
+				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
 	}
 
 	public void setElevatorSpeedRaw(double in) {
-		Elevator.set(in + GRAVITY_OFFSET);
+		Elevator.set(in
+				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
 	}
 
 	public void resetEnc() {
@@ -139,11 +97,11 @@ public class Elevator extends Subsystem {
 		return gripper.get();
 	}
 
-	public void setGripper(boolean grip, boolean calibrateGravityOffset) { // true
-																			// =
-																			// closed
+	public void setGripper(boolean grip) { // true
+											// =
+											// closed
 		gripper.set(!grip);
-		if (calibrateGravityOffset && grip) {
+		if (DYNAMIC_CALIBRATION && grip) {
 			Timer.delay(.2);
 			Encoder calibrator = liftPos;
 			calibrator.reset();
@@ -157,7 +115,7 @@ public class Elevator extends Subsystem {
 					decreases++;
 				lastValue = velocity;
 			}
-			double currentPower = .2; // Need to tune so neutral
+			double currentPower = GRAVITY_COUNTERBALANCE;
 			calibrator.reset();
 			while (calibrator.getDistance() < .03) {
 				currentPower += .2;// Increase for less accuracy but faster
@@ -165,6 +123,7 @@ public class Elevator extends Subsystem {
 				Elevator.set(currentPower);
 				Timer.delay(.05);// Give time to react to change.
 			}
+			gravityOffset = currentPower;
 		}
 	}
 

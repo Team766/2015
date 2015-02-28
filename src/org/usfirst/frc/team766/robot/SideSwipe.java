@@ -9,7 +9,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
-import org.usfirst.frc.team766.robot.subsystems.Drive;
+import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -98,6 +98,8 @@ public class SideSwipe extends IterativeRobot {
         }else{
             new TankDrive().start();
         }
+    	
+    	new Slider().start();
     	done = true;
     }
 

@@ -29,7 +29,6 @@ public class MoveElevatorHeight extends CommandBase {
 	}
 
 	protected void initialize() {
-		Elevator.resetEnc();
 		positionPID.reset();
 	}
 
