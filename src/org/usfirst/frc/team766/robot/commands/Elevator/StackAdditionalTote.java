@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StackAdditionalTote extends CommandGroup {
     
     public  StackAdditionalTote() {
-    	double curHeight = CommandBase.Elevator.getGoal();
+    	double curHeight = CommandBase.Elevator.getEnc();
     	addSequential(new MoveElevatorWaypoint(1));
     	addSequential(new IntakeTote());
     	addSequential(new AdjustGripper(false));

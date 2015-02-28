@@ -24,19 +24,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
+	private static final int NUM_TEETH_SPROCKET = 24;
+	private static final double CHAIN_PITCH = (3 / 8)
+			* RobotValues.INCHES_TO_METERS;
+	private static final double DISTANCE_PER_SPROCKET_ROTATION = CHAIN_PITCH
+			/ NUM_TEETH_SPROCKET;
+	private static final int PULSES_PER_ROTATION = 256;
+	private static final double DISTANCE_PER_PULSE = DISTANCE_PER_SPROCKET_ROTATION
+			/ PULSES_PER_ROTATION;
 	private static final boolean DYNAMIC_CALIBRATION = true;
-	private static final double GRAVITY_COUNTERBALANCE = .1; // Needs to be
-																// calculated.
+	private static final double GRAVITY_COUNTERBALANCE = .1;
+
+	// Needs to be
+	// calculated.
 	// Offset of just
-	// mechanism. PID should
+	// weight of mechanism. PID should
 	// compensate for rest
 	// -Patrick
 
 	private double gravityOffset = GRAVITY_COUNTERBALANCE;
 	private double stopTolerance = 0.001;
-
-	// Goal: wanted position, between 0 and Elevator Encoder Height
-	private double goal = 0;
 
 	private Victor Elevator = new Victor(Ports.PWM_Elevators);
 	private Encoder liftPos = new Encoder(Ports.DIO_ELEVATOR_ENCA,
@@ -49,6 +56,10 @@ public class Elevator extends Subsystem {
 	private DigitalInput bottomStop = new DigitalInput(
 			Ports.DIO_HallEffectSensorBottom);
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
+
+	public Elevator(){
+		liftPos.setDistancePerPulse(DISTANCE_PER_PULSE);
+	}
 
 	public void initDefaultCommand() {
 	}
@@ -80,12 +91,9 @@ public class Elevator extends Subsystem {
 		return liftPos.getDistance();
 	}
 
-	public double getGoal() {
-		return goal;
-	}
-
-	public void setGoal(double goal) {
-		this.goal = goal;
+	// Note: Encoders not properly set up for velocity yet. Brett fix!
+	public double getVelocity() {// meters per second
+		return liftPos.getRate();
 	}
 
 	public void setBrake(boolean stop) {

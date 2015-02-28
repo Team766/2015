@@ -13,18 +13,17 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 // Note: PID Constants need to be tuned
 public class MoveElevatorHeight extends CommandBase {
-	private PIDController positionPID = new PIDController(RobotValues.ElevatorKp, RobotValues.ElevatorKp,
-			RobotValues.ElevatorKd, RobotValues.ElevatorThreshold, RobotValues.ElevatorMaxSpeed,
-			RobotValues.ElevatorMinSpeed);
+	private PIDController positionPID = new PIDController(
+			RobotValues.ElevatorKp, RobotValues.ElevatorKp,
+			RobotValues.ElevatorKd, RobotValues.ElevatorThreshold,
+			RobotValues.ElevatorMaxSpeed, RobotValues.ElevatorMinSpeed);
 
 	public MoveElevatorHeight() {
 		requires(Elevator);
-		Elevator.setGoal(0);
 		positionPID.setSetpoint(0);
 	}
 
 	public MoveElevatorHeight(double goal) {
-		Elevator.setGoal(goal);
 		positionPID.setSetpoint(goal);
 	}
 
@@ -34,23 +33,22 @@ public class MoveElevatorHeight extends CommandBase {
 
 	protected void execute() {
 		positionPID.calculate(Elevator.getEnc(), false);
-		//Don't want to go too high or too low
-		if((Elevator.getEnc() <= RobotValues.ElevatorTopHeight) &&
-				(Elevator.getEnc() >= 0))
+		// Don't want to go too high or too low
+		if ((Elevator.getEnc() <= RobotValues.ElevatorTopHeight)
+				&& (Elevator.getEnc() >= 0))
 			Elevator.setElevatorSpeed(positionPID.getOutput());
 	}
 
 	protected boolean isFinished() {
-		return positionPID.isDone() || Elevator.getBottomStop() || Elevator.getTopStop();
+		return positionPID.isDone() || Elevator.getBottomStop()
+				|| Elevator.getTopStop();
 	}
 
 	protected void end() {
 		Elevator.setElevatorSpeed(0);
 	}
-	
-	public void changeGoal(double goal)
-	{
-		Elevator.setGoal(goal);
+
+	public void changeGoal(double goal) {
 		positionPID.setSetpoint(goal);
 		initialize();
 	}
