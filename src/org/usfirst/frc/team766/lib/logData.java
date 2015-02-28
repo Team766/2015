@@ -18,6 +18,7 @@ public class logData {
 	
 	private PrintWriter pw;
 	private Timer timer = new Timer();
+	private boolean INDENT = false;
 			
 	public logData(){
 		try {
@@ -33,7 +34,10 @@ public class logData {
 	public void print(String message)
 	{
 		try{
-			pw.println(getTime() + "\t" + message);
+			if(INDENT)
+				pw.println(getTime() + "\t\t" + message);
+			else
+				pw.println(getTime() + "\t" + message);
 		}catch(NullPointerException e)
 		{
 			System.out.println("Null Pointer alert!");
@@ -43,7 +47,11 @@ public class logData {
 	public void print(String message, int value)
 	{
 		try{
-			pw.println(getTime() + "\t" + message + value);
+			if(INDENT)
+				pw.println(getTime() + "\t\t" + message + value);
+			
+			else
+				pw.println(getTime() + "\t" + message + value);
 		}catch(NullPointerException e)
 		{
 			System.out.println("Can't save log!");
@@ -70,6 +78,14 @@ public class logData {
         int hours = totalSeconds / 3600; 
         return hours + ":" + minutes + ":" + seconds;
     }
+
+	public boolean isIndent() {
+		return INDENT;
+	}
+
+	public void setIndent(boolean iNDENT) {
+		INDENT = iNDENT;
+	}
 }
 
 
