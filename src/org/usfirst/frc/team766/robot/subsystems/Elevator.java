@@ -25,8 +25,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
 	private static final int NUM_TEETH_SPROCKET = 24;
-	private static final double CHAIN_PITCH = 3.0 / 8.0
-			* RobotValues.INCHES_TO_METERS;
+	private static final double CHAIN_PITCH = 3.0 / 8.0 * RobotValues.INCHES_TO_METERS;
 	private static final double DISTANCE_PER_SPROCKET_ROTATION = CHAIN_PITCH
 			* NUM_TEETH_SPROCKET;
 	private static final int PULSES_PER_ROTATION = 256;
@@ -34,13 +33,11 @@ public class Elevator extends Subsystem {
 			/ PULSES_PER_ROTATION;
 	private static final boolean DYNAMIC_CALIBRATION = true;
 	private static final double GRAVITY_COUNTERBALANCE = .1;
-
 	// Needs to be
 	// calculated.
 	// Offset of just
 	// weight of mechanism. PID should
 	// compensate for rest
-	// -Patrick
 
 	private double gravityOffset = GRAVITY_COUNTERBALANCE;
 	private double stopTolerance = 0.001;
@@ -57,7 +54,7 @@ public class Elevator extends Subsystem {
 			Ports.DIO_HallEffectSensorBottom);
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
-	public Elevator(){
+	public Elevator() {
 		liftPos.setDistancePerPulse(DISTANCE_PER_PULSE);
 	}
 
@@ -87,7 +84,7 @@ public class Elevator extends Subsystem {
 		liftPos.reset();
 	}
 
-	public double getEnc() {
+	public double getEncoders() {
 		return liftPos.getDistance();
 	}
 

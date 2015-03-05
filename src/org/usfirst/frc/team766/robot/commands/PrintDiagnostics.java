@@ -23,7 +23,7 @@ public class PrintDiagnostics extends CommandBase {
     	pr("Drive Smoothing: " +Drive.getSmoothing());
     	pr("Is High Gear: " + Drive.isHighGear());
     	pr("Elevator Statistics:");
-    	pr("Elevator Encoder Distance: "+Elevator.getEnc());
+    	pr("Elevator Encoder Distance: "+Elevator.getEncoders());
     	pr("Elevator Gripper: "+Elevator.getGripper());
     	pr("Elevator Current: " +Elevator.getElevatorCurrent());
     }

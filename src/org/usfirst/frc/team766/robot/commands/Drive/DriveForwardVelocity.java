@@ -1,4 +1,4 @@
-package org.usfirst.frc.team766.robot.commands.Elevator;
+package org.usfirst.frc.team766.robot.commands.Drive;
 
 import org.usfirst.frc.team766.lib.PIDController;
 import org.usfirst.frc.team766.robot.RobotValues;
@@ -7,10 +7,11 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Drives the robot forward using a velocity-based PID loop
+ * 
+ * @author Patrick Kao
  */
-public class MoveElevatorHeightVelocity extends CommandBase implements
-		MoveElevatorHeightBase {
+public class DriveForwardVelocity extends CommandBase {
 
 	// Constants need to be tuned. Units: meters per second
 	private static final double AMAX = .05;
@@ -21,29 +22,33 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 		RAMP_UP, MAX_VEL, RAMP_DOWN
 	}
 
-	public MoveElevatorHeightVelocity() {
+	public DriveForwardVelocity() {
 		this(0);
 	}
 
-	public MoveElevatorHeightVelocity(double goal) {
+	public DriveForwardVelocity(double goal) {
 		changeGoal(goal);
 	}
 
 	protected void initialize() {
 		velocityPID.reset();
+		AnglePID.reset();
+		Drive.resetEncoders();
+		Drive.resetGyro();
+		Drive.setSmoothing(false);
+		Drive.setHighGear(false);
 		lastTime = Timer.getFPGATimestamp();
 	}
 
 	protected void execute() {
-		double curSpeed = Elevator.getVelocity();
-		double curPosition = Elevator.getEncoders();
+		double curSpeed = Drive.getAverageVelocity();
+		double curPosition = Drive.getAverageEncoderDistance();
 		double timeElapsed = Timer.getFPGATimestamp() - lastTime;
 
 		if (Math.abs(targetPosition - curPosition) <= distanceInRamp(curSpeed)) {
 			phase = phaseType.RAMP_DOWN;
 		}
 
-		// should be a switch, but it's not!
 		if (phase == phaseType.RAMP_UP) {
 			if (Math.abs(curSpeed) < VMAX) {
 				velocityTarget += AMAX * timeElapsed * direction;
@@ -60,26 +65,28 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 
 		velocityPID.setSetpoint(velocityTarget);
 		velocityPID.calculate(curSpeed, false);
-		Elevator.setElevatorSpeedRaw(velocityPID.getOutput());
+
+		double gyroAngle = Drive.getAngle();
+		AnglePID.calculate(gyroAngle, false);
+
+		Drive.setLeftPower(-velocityPID.getOutput() - AnglePID.getOutput());
+		Drive.setRightPower(-velocityPID.getOutput() + AnglePID.getOutput());
 
 		lastTime = Timer.getFPGATimestamp();
 	}
 
 	protected boolean isFinished() {
-		return Elevator.getVelocity() <= STOP_THRESHOLD
-				&& phase == phaseType.RAMP_DOWN || Elevator.getBottomStop()
-				|| Elevator.getTopStop();
+		return Drive.getAverageVelocity() <= STOP_THRESHOLD;
 	}
 
 	protected void end() {
-		Elevator.setElevatorSpeedRaw(0);
+		Drive.setPower(0);
 	}
 
 	protected void interrupted() {
 		end();
 	}
 
-	@Override
 	public void changeGoal(double goal) {
 		targetPosition = goal;
 		direction = goal / Math.abs(goal);
@@ -90,10 +97,15 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 		return Math.pow(AMAX, 2) / (2 * Math.abs(velocity));
 	}
 
-	private PIDController velocityPID = new PIDController(
-			RobotValues.ElevatorKp, RobotValues.ElevatorKp,
-			RobotValues.ElevatorKd, RobotValues.ElevatorThreshold,
-			RobotValues.ElevatorMaxSpeed, RobotValues.ElevatorMinSpeed);
+	private PIDController velocityPID = new PIDController(RobotValues.DriveKp,
+			RobotValues.DriveKi, RobotValues.DriveKd,
+			RobotValues.Driveoutputmax_low, RobotValues.Driveoutputmax_high,
+			RobotValues.DriveThreshold);
+
+	private PIDController AnglePID = new PIDController(RobotValues.AngleKp,
+			RobotValues.AngleKi, RobotValues.AngleKd,
+			RobotValues.Angleoutputmax_low, RobotValues.Angleoutputmax_high,
+			RobotValues.AngleThreshold);
 
 	private phaseType phase;
 	private double targetPosition, direction;

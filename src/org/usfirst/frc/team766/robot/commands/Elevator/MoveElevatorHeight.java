@@ -32,10 +32,10 @@ public class MoveElevatorHeight extends CommandBase {
 	}
 
 	protected void execute() {
-		positionPID.calculate(Elevator.getEnc(), false);
+		positionPID.calculate(Elevator.getEncoders(), false);
 		// Don't want to go too high or too low
-		if ((Elevator.getEnc() <= RobotValues.ElevatorTopHeight)
-				&& (Elevator.getEnc() >= 0))
+		if ((Elevator.getEncoders() <= RobotValues.ElevatorTopHeight)
+				&& (Elevator.getEncoders() >= 0))
 			Elevator.setElevatorSpeed(positionPID.getOutput());
 	}
 

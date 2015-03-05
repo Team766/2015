@@ -37,7 +37,7 @@ public class Slider extends CommandBase {
 
 		// Reset the elevator
 		if (Elevator.getTopStop())
-			RobotValues.ElevatorTopHeight = Elevator.getEnc();
+			RobotValues.ElevatorTopHeight = Elevator.getEncoders();
 		if (Elevator.getBottomStop())
 			Elevator.resetEnc();
 

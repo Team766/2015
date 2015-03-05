@@ -74,7 +74,7 @@ public class Drive extends Subsystem {
 
 				lastRightOut = outputRight;
 				lastLeftOut = outputLeft;
-				
+
 				if (accel.getX() < ACCELEROMETER_STOP_THRESHOLD
 						&& accel.getY() < ACCELEROMETER_STOP_THRESHOLD
 						&& accel.getZ() < ACCELEROMETER_STOP_THRESHOLD
@@ -175,6 +175,18 @@ public class Drive extends Subsystem {
 
 	public double getAverageEncoderDistance() {
 		return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0d;
+	}
+
+	public double getLeftVelocity() {
+		return leftEncoder.getRate();
+	}
+
+	public double getRightVelocity() {
+		return rightEncoder.getRate();
+	}
+
+	public double getAverageVelocity() {
+		return (getLeftVelocity() + getRightVelocity()) / 2;
 	}
 
 	public void resetEncoders() {
