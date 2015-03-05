@@ -51,9 +51,15 @@ public class AutonSelectorCommand extends CommandGroup{
             	addSequential(new OpenCvTest());
             	break;
         
+            case RobotValues.Auton_Coopertition:
+            	System.out.println("Coopertition Auto");
+            	addSequential(new Auton_Coopertition());
+            	break;
+            	
             case RobotValues.Auton_None:
             	System.out.println("No auton selected");
             	break;
+            	
             default:{
                 System.out.println("Auton selection failed");
                 break;

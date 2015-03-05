@@ -9,6 +9,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
+import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -47,6 +48,8 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
     	SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
     	SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
+    	
+    	new CalibrateElevator().start();
     }
 	
 	public void disabledPeriodic() {
