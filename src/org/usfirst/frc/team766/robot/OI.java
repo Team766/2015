@@ -44,7 +44,7 @@ public class OI {
 					Buttons.AutonDecrement);
 
 	// Auton Stuff
-	public int AutonMode = 1;
+	public int AutonMode = 0;
 	public boolean TankDrive = false;
 	public boolean UseGamepad = false;
 

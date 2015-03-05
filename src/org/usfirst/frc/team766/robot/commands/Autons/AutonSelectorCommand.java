@@ -45,6 +45,11 @@ public class AutonSelectorCommand extends CommandGroup{
             	System.out.println("Push 3 Boxes Auto");
             	addSequential(new Auton_Push3Boxes());
             	break;
+            	
+            case RobotValues.Auton_VisionDrive:
+            	System.out.println("Vision Drive Auto");
+            	addSequential(new OpenCvTest());
+            	break;
         
             case RobotValues.Auton_None:
             	System.out.println("No auton selected");

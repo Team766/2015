@@ -245,7 +245,7 @@ public class OpenCvTest extends CommandBase {
 		} catch (InterruptedException ex) {
 			System.out.println("0 noses.....I 2 tyd to swep");
 		}
-		// change address for your computer
+		// change address for your computers
 		Highgui.imwrite("C://Users/Student/ImagePics/filteredBox_" + picCount + ".jpeg", img);
 		picCount++;
 		

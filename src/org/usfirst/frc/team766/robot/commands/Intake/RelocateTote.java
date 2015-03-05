@@ -8,6 +8,7 @@ import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
  *	Command that gives command groups access to 
  */
 public class RelocateTote extends CommandBase {
+	private static final double tolerance = .01;
 	private final double wantedDistance = .5;
 	private  double
 		wheelR,
@@ -16,6 +17,8 @@ public class RelocateTote extends CommandBase {
 		intakeR,
 		lastDistance;
 	private boolean intaking;
+	private boolean triedRotating = false;
+	
     public RelocateTote() {
     	this(0,0,0,0, false);
     }
@@ -46,6 +49,20 @@ public class RelocateTote extends CommandBase {
     }
 
     protected void execute() {
+    	if(UltrasonicSensor.getInstance().getDistanceDouble() + tolerance > lastDistance && triedRotating)
+    	{
+    		System.out.println("Pushing tote out, tried rotating, falling back to reverse");
+    		Intake.setLeftWheel(-wheelL);
+    		Intake.setRightWheel(-wheelR);
+    	}
+    	else if(UltrasonicSensor.getInstance().getDistanceDouble() + tolerance > lastDistance)
+    	{
+    		System.out.println("Pushing tote out, trying to fix");
+    		Intake.setLeftWheel(-wheelL);
+    		Intake.setRightWheel(wheelR);
+    		triedRotating = true;
+    	}
+    	lastDistance = UltrasonicSensor.getInstance().getDistanceDouble();
     }
 
     protected boolean isFinished() {

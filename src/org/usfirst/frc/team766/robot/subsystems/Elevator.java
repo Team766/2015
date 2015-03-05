@@ -63,8 +63,8 @@ public class Elevator extends Subsystem {
 
 	public void setElevatorSpeed(double speed) {
 		if (((speed > stopTolerance) && (getTopStop()))
-				|| ((speed < stopTolerance) && getBottomStop()))
-			Elevator.set(0);
+				|| ((Math.abs(speed) > stopTolerance) && getBottomStop()))
+			speed = 0;
 
 		if (Math.abs(speed) <= stopTolerance)
 			setBrake(true);

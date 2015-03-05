@@ -21,8 +21,8 @@ public class HotToteAuton extends CommandGroup{
 			addSequential(new DriveTurn(-90));
 		}
 		addSequential(new PullToteIn(), 100);
-		addSequential(new DriveForward(-3));
 		addSequential(new StackAdditionalTote());
+		addSequential(new DriveForward(RobotValues.k_moveBackToAutoZone));
 		
 		//Put totes down
 		addSequential(new DropStack(), 100);

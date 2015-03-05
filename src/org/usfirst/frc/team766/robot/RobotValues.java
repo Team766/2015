@@ -96,7 +96,11 @@ public class RobotValues { //Note: All distances in units of meters
 	//Elevator
 	public static final double SliderChangeTolerance = 0.1;
 	public static int numTotes = 0;
-
+	
+	//Auton Driving
 	public static final double k_moveToNextTote = 33 * INCHES_TO_METERS;
+	public static final double k_moveBackToAutoZone = -3;
+	public static final double turnNextTote = 45;
+	public static final double DistanceToPassTote = 1;
 	
 }
