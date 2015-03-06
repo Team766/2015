@@ -32,7 +32,7 @@ public class Auton_Coopertition extends CommandGroup {
 		addSequential(new DriveForward(-RobotValues.DistanceToStep));
 		addSequential(new DriveUltrasonic(RobotValues.OptimalGripperDistance));
 		
-		// Put totes down
+		// Puts totes down
 		addSequential(new DropStack(), 100);
 	}
 }

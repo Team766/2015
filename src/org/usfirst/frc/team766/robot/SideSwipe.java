@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
@@ -37,19 +38,17 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putNumber("Alpha", 0.5);
     	SmartDashboard.putData(new OpenCvTest());
     	SmartDashboard.putData(new DriveTurn(90));
+    	SmartDashboard.putData(new PrintDiagnostics());
     	dist = new DriveUltrasonic(1);
     	SmartDashboard.putData(dist);
     	SmartDashboard.putData( new TestEncoders());
-    	SmartDashboard.putData("Drive Back"
-    			+ "ward 1.5 Meters: " ,new DriveForward(-1.5));
+    	SmartDashboard.putData("Drive Backward 1.5 Meters: " ,new DriveForward(-1.5));
     	done = false;
     	
     	CommandBase.myLog.print("SideSwipe 2015 Code");
     	SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
     	SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
     	SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
-    	
-    	new CalibrateElevator().start();
     }
 	
 	public void disabledPeriodic() {
