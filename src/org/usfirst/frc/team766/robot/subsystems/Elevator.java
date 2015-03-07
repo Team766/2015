@@ -83,7 +83,7 @@ public class Elevator extends Subsystem {
 				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
 	}
 
-	public void resetEnc() {
+	public void resetEncoders() {
 		liftPos.reset();
 	}
 

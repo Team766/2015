@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class MoveElevatorHeightVelocity extends CommandBase implements
-		MoveElevatorHeightBase {
+		MoveElevatorHeightBase {//Remove superinterface
 
 	// Constants need to be tuned. Units: meters per second
 	private static final double AMAX = .05;
