@@ -29,6 +29,7 @@ public class SideSwipe extends IterativeRobot {
 	
 	private AutonSelectorCommand auton;
 	private DriveUltrasonic dist;
+	private PrintDiagnostics printOut;
 	private boolean AutonCyclePrev;
 	private boolean done;
 	
@@ -44,6 +45,8 @@ public class SideSwipe extends IterativeRobot {
     	SmartDashboard.putData( new TestEncoders());
     	SmartDashboard.putData("Drive Backward 1.5 Meters: " ,new DriveForward(-1.5));
     	done = false;
+    	
+    	printOut = new PrintDiagnostics(true);
     	
     	CommandBase.myLog.print("SideSwipe 2015 Code");
     	SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
@@ -103,6 +106,7 @@ public class SideSwipe extends IterativeRobot {
     	
     	new Slider().start();
     	done = true;
+    	printOut.start();
     }
 
     public void disabledInit(){
@@ -112,9 +116,11 @@ public class SideSwipe extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
 		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle());
+		SmartDashboard.putString("Test Prints", printOut.getOut());
     }
     
     public void testPeriodic() {
         LiveWindow.run();
     }
+    
 }
