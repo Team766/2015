@@ -21,7 +21,6 @@ public class OI {
 			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
 			buttonDriverPickup = new JoystickButton(jRight,
 					Buttons.DriverPickup),
-			buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
 			buttonDriverOverride = new JoystickButton(jRight,
 					Buttons.DriverOverride),
 			buttonDriverDriveSmoothing = new JoystickButton(jRight,
