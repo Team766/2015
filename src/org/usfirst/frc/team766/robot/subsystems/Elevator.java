@@ -97,7 +97,8 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setBrake(boolean stop) {
-		Elevator.set(0);
+		if(stop)
+			Elevator.set(0);
 		brake.set(!stop);
 	}
 

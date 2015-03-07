@@ -19,9 +19,6 @@ public class OI {
 	public Button buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
 			buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
 			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
-			buttonDriverPickup = new JoystickButton(jRight,
-					Buttons.DriverPickup),
-			buttonDriverShoot = new JoystickButton(jRight, Buttons.DriverShoot),
 			buttonDriverOverride = new JoystickButton(jRight,
 					Buttons.DriverOverride),
 			buttonDriverDriveSmoothing = new JoystickButton(jRight,
@@ -145,6 +142,6 @@ public class OI {
 	}
 
 	public double getSlider() {
-		return jBox.getRawAxis(1);
+		return jBox.getY();
 	}
 }
