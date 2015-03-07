@@ -42,7 +42,7 @@ public class Slider extends CommandBase {
 //			Elevator.resetEnc();
 
 		// update Brake
-		Elevator.setBrake(CommandBase.OI.getStop());
+//		Elevator.setBrake(CommandBase.OI.getStop());
 
 		lastSlider = slider;
 	}

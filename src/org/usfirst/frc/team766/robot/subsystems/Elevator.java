@@ -31,7 +31,7 @@ public class Elevator extends Subsystem {
 	private static final int PULSES_PER_ROTATION = 256;
 	private static final double DISTANCE_PER_PULSE = DISTANCE_PER_SPROCKET_ROTATION
 			/ PULSES_PER_ROTATION;
-	private static final boolean DYNAMIC_CALIBRATION = true;
+	private static final boolean DYNAMIC_CALIBRATION = false;
 	private static final double GRAVITY_COUNTERBALANCE = .1;
 	// Needs to be
 	// calculated.
@@ -65,6 +65,7 @@ public class Elevator extends Subsystem {
 		// Emergency stop. If elevator is at top stop, allow elevator to descend
 		// but not rise. If elevator is at bottom stop allow elevator to rise
 		// but not descend.
+		
 		if (((speed > stopTolerance) && (getTopStop()))
 				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
