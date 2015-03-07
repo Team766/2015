@@ -15,6 +15,7 @@ package org.usfirst.frc.team766.lib;
  */
 
 public class PIDController {
+	private static final boolean PRINT = true;
 
 	private double Kp = 0;
 	private double Ki = 0;
@@ -105,12 +106,12 @@ public class PIDController {
 		}
 
 		total_error += cur_error;
-		
+
 		if ((total_error * Ki) > 1) {
-			total_error = 1/Ki;
+			total_error = 1 / Ki;
 		} else {
-			if ((total_error  * Ki) < -1)
-				total_error = -1/Ki;
+			if ((total_error * Ki) < -1)
+				total_error = -1 / Ki;
 		}
 
 		// double out = Kp * cur_error;
@@ -118,12 +119,17 @@ public class PIDController {
 		double out = Kp * cur_error + Ki * total_error + Kd
 				* (cur_error - prev_error);
 		prev_error = cur_error;
+
+		pr("Pre-clip output: " + out);
 		
 		if (!smart) {
 			output_value = clip(out);
-		} else{
+		} else {
 			output_value = out;
 		}
+
+		pr("	Total Eror: " + total_error + "		Current Error: " + cur_error
+				+ "	Output: " + output_value + " 	Setpoint: " + setpoint);
 	}
 
 	public void basicCalculate(double cur_input) {
@@ -175,17 +181,23 @@ public class PIDController {
 	public double getError() {
 		return total_error;
 	}
-	public double getCurrentError()
-	{
+
+	public double getCurrentError() {
 		return cur_error;
 	}
-	public void setMaxoutputHigh(double in)
-	{
+
+	public void setMaxoutputHigh(double in) {
 		maxoutput_high = in;
 	}
-	public void setMaxoutputLow(double in)
-	{
+
+	public void setMaxoutputLow(double in) {
 		maxoutput_low = in;
+	}
+
+	private void pr(Object text) {
+		if (PRINT) {
+			System.out.println("PID: " + text);
+		}
 	}
 
 }

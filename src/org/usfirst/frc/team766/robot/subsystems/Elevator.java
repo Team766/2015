@@ -33,11 +33,8 @@ public class Elevator extends Subsystem {
 			/ PULSES_PER_ROTATION;
 	private static final boolean DYNAMIC_CALIBRATION = false;
 	private static final double GRAVITY_COUNTERBALANCE = .1;
-	// Needs to be
-	// calculated.
-	// Offset of just
-	// weight of mechanism. PID should
-	// compensate for rest
+	// .02 starts going down, .11 starts going up. range can be from .03 to .1
+	// Offset of just weight of mechanism. PID should compensate for rest
 
 	private double gravityOffset = GRAVITY_COUNTERBALANCE;
 	private double stopTolerance = 0.001;
@@ -65,7 +62,7 @@ public class Elevator extends Subsystem {
 		// Emergency stop. If elevator is at top stop, allow elevator to descend
 		// but not rise. If elevator is at bottom stop allow elevator to rise
 		// but not descend.
-		
+
 		if (((speed > stopTolerance) && (getTopStop()))
 				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
@@ -74,6 +71,12 @@ public class Elevator extends Subsystem {
 			setBrake(true);
 		else
 			setBrake(false);
+
+		// Compensating for deadband
+		if (speed < 0)
+			speed -= .06;
+		else if (speed > 0)
+			speed += .06;
 
 		Elevator.set(speed
 				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
@@ -97,22 +100,22 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setBrake(boolean stop) {
-		if(stop)
+		if (stop)
 			Elevator.set(0);
-		brake.set(!stop);
+		brake.set(stop);
 	}
 
-	public boolean getBrake(){
-		return !brake.get();
+	public boolean getBrake() {
+		return brake.get();
 	}
-	
+
 	public boolean getGripper() {
 		return !gripper.get();
 	}
 
 	// grip == true = closed
 	public void setGripper(boolean grip) {
-		gripper.set(!grip);
+		gripper.set(grip);
 		if (DYNAMIC_CALIBRATION) {
 			if (grip) {
 				Timer.delay(.2);
@@ -137,18 +140,19 @@ public class Elevator extends Subsystem {
 					Timer.delay(.05);// Give time to react to change.
 				}
 				gravityOffset = currentPower;
-			}else gravityOffset = GRAVITY_COUNTERBALANCE;
+			} else
+				gravityOffset = GRAVITY_COUNTERBALANCE;
 		}
 	}
 
 	public boolean getTopStop() {
-//		return topStop.get(); 
-		return false;//for testing
+		// return topStop.get();
+		return false;// for testing
 	}
 
 	public boolean getBottomStop() {
-//		return bottomStop.get();
-		return false;//for testing
+		// return bottomStop.get();
+		return false;// for testing
 	}
 
 	public double getElevatorCurrent() {

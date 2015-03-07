@@ -25,8 +25,10 @@ public class Slider extends CommandBase {
 		// else, set both to 1 and -1 respectively
 
 		// Move Elevator to slider
-		slider = CommandBase.OI.getSlider();
-
+//		slider = CommandBase.OI.getSlider();
+		//Note: for testing
+		slider = CommandBase.OI.getLeftSliderThrottle();
+		
 		if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
 			// Convert the slider from -1 - 1 to 0 - TopHeight
 			double goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
@@ -48,19 +50,16 @@ public class Slider extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -71,7 +71,6 @@ public class CalibrateElevator extends CommandBase {
     }
 
     protected void end() {
-    	Elevator.setElevatorSpeed(0);
     }
 
     protected void interrupted() {

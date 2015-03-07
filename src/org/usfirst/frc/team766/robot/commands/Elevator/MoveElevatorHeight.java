@@ -13,10 +13,12 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 // Note: PID Constants need to be tuned
 public class MoveElevatorHeight extends CommandBase {
+	private static final boolean PRINT = true;
+
 	private PIDController positionPID = new PIDController(
-			RobotValues.ElevatorKp, RobotValues.ElevatorKp,
-			RobotValues.ElevatorKd, RobotValues.ElevatorThreshold,
-			RobotValues.ElevatorMaxSpeed, RobotValues.ElevatorMinSpeed);
+			RobotValues.ElevatorKp, RobotValues.ElevatorKi,
+			RobotValues.ElevatorKd, RobotValues.ElevatorMinSpeed,
+			RobotValues.ElevatorMaxSpeed, RobotValues.ElevatorThreshold);
 
 	public MoveElevatorHeight() {
 		requires(Elevator);
@@ -35,8 +37,9 @@ public class MoveElevatorHeight extends CommandBase {
 		positionPID.calculate(Elevator.getEncoders(), false);
 		// Don't want to go too high or too low
 		if ((Elevator.getEncoders() <= RobotValues.ElevatorTopHeight)
-				&& (Elevator.getEncoders() >= 0))
+				&& (Elevator.getEncoders() >= 0)) {
 			Elevator.setElevatorSpeed(positionPID.getOutput());
+		}
 	}
 
 	protected boolean isFinished() {
@@ -55,5 +58,10 @@ public class MoveElevatorHeight extends CommandBase {
 
 	protected void interrupted() {
 		end();
+	}
+
+	private void pr(Object text) {
+		if (PRINT)
+			System.out.println("MoveElevatorHeght: " + text);
 	}
 }

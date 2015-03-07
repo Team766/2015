@@ -11,7 +11,11 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
+import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
+import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
@@ -29,6 +33,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SideSwipe extends IterativeRobot {
 	private static final boolean TESTING = true;
+	private static final boolean PRINT = true;
 
 	private AutonSelectorCommand auton;
 	private DriveUltrasonic dist;
@@ -64,6 +69,15 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new ShowStops());
 			SmartDashboard.putData("Brake Off", new AdjustElevatorBrake(false));
 			SmartDashboard.putData("Brake On", new AdjustElevatorBrake(true));
+			SmartDashboard.putData("MoveElevatorHeight .5",
+					new MoveElevatorHeight(.5));
+			SmartDashboard.putData("MoveElevatorHeightVelocity .5",
+					new MoveElevatorHeightVelocity(.5));
+			SmartDashboard.putData("Close Grippers: ", new AdjustGripper(true));
+			SmartDashboard.putData("Open Grippers: ", new AdjustGripper(false));
+			SmartDashboard.putData("Joystick Control of Elevator",
+					new TankDrive());
+			SmartDashboard.putData(new Slider());
 		}
 
 	}
@@ -107,7 +121,8 @@ public class SideSwipe extends IterativeRobot {
 		if (auton != null)
 			auton.cancel();
 
-		CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
+		// Just for testing
+		// CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
 
 		if (!CommandBase.OI.getTankDrive()) {
 			new CheesyDriveCommand().start();
@@ -115,7 +130,7 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-		// new Slider().start();
+//		new Slider().start();
 		done = true;
 		printOut.start();
 	}
@@ -127,7 +142,7 @@ public class SideSwipe extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		if (TESTING) {
+		if (PRINT) {
 			SmartDashboard.putString("Test Prints", printOut.getOut());
 			System.out.println(printOut.getOut());
 		}

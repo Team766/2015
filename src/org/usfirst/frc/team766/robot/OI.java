@@ -79,6 +79,10 @@ public class OI {
 	public double getSteer() {
 		return jRight.getX();
 	}
+	
+	public double getLeftSliderThrottle(){
+		return jLeft.getThrottle();
+	}
 
 	// tank drive
 	public double getLeft() {

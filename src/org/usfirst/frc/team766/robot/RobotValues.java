@@ -12,7 +12,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double driveDividor = 10;
 
 	// Encoder Height of elevator, needs to be changed
-	public static double ElevatorTopHeight = 1.3;//Actual height 1.6 meters. Subtract a buffer
+	public static double ElevatorTopHeight = 1.5;//Turned down for testing
 
 	// Autonomous
 	// Modes
@@ -84,12 +84,12 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double SmootherRightKi = .2;
 
 	// elevate smoothly
-	public static final double ElevatorKp = .1;
-	public static final double ElevatorKi = .01;
+	public static final double ElevatorKp = 3.2;
+	public static final double ElevatorKi = .005;
 	public static final double ElevatorKd = 0;
-	public static final double ElevatorThreshold = .01;
-	public static final double ElevatorMaxSpeed = 1;
-	public static final double ElevatorMinSpeed = -1;
+	public static final double ElevatorThreshold = 0;
+	public static final double ElevatorMaxSpeed = .5;//Turned down for testing
+	public static final double ElevatorMinSpeed = -.5;
 
 	// Intake PID
 	public static final double IntakeKP = 0.01, IntakeKI = 0.0, IntakeKD = 0.0,
