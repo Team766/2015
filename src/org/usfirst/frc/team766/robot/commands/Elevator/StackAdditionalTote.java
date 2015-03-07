@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
-import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Intake.IntakeTote;
 
@@ -19,6 +18,6 @@ public class StackAdditionalTote extends CommandGroup {
     	addSequential(new MoveElevatorWaypoint(0));
     	addSequential(new AdjustGripper(true));
     	addSequential(new MoveElevatorHeight(curHeight));
-    	RobotValues.numTotes++;
+    	addSequential(new IncrementNumTotes(1));
     }
 }

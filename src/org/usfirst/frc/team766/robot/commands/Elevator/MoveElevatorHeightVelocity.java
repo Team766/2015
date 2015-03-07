@@ -60,7 +60,7 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 
 		velocityPID.setSetpoint(velocityTarget);
 		velocityPID.calculate(curSpeed, false);
-		Elevator.setElevatorSpeedRaw(velocityPID.getOutput());
+		Elevator.setElevatorSpeed(velocityPID.getOutput());
 
 		lastTime = Timer.getFPGATimestamp();
 	}
@@ -72,7 +72,7 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 	}
 
 	protected void end() {
-		Elevator.setElevatorSpeedRaw(0);
+		Elevator.setElevatorSpeed(0);
 	}
 
 	protected void interrupted() {

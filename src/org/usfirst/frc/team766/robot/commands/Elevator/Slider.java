@@ -32,14 +32,14 @@ public class Slider extends CommandBase {
 			// Convert the slider from -1 - 1 to 0 - TopHeight
 			double goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
 			mover.changeGoal(goal);
-			mover.start();
+			mover.start();//Warning: Calls start multiple times?
 		}
 
-		// Reset the elevator
-		if (Elevator.getTopStop())
-			RobotValues.ElevatorTopHeight = Elevator.getEncoders();
-		if (Elevator.getBottomStop())
-			Elevator.resetEnc();
+//		// Reset the elevator. Done in CalibrateElevator();
+//		if (Elevator.getTopStop())
+//			RobotValues.ElevatorTopHeight = Elevator.getEncoders();
+//		if (Elevator.getBottomStop())
+//			Elevator.resetEnc();
 
 		// update Brake
 		Elevator.setBrake(CommandBase.OI.getStop());

@@ -62,8 +62,11 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setElevatorSpeed(double speed) {
+		// Emergency stop. If elevator is at top stop, allow elevator to descend
+		// but not rise. If elevator is at bottom stop allow elevator to rise
+		// but not descend.
 		if (((speed > stopTolerance) && (getTopStop()))
-				|| ((Math.abs(speed) > stopTolerance) && getBottomStop()))
+				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
 
 		if (Math.abs(speed) <= stopTolerance)
@@ -88,7 +91,6 @@ public class Elevator extends Subsystem {
 		return liftPos.getDistance();
 	}
 
-	// Note: Encoders not properly set up for velocity yet. Brett fix!
 	public double getVelocity() {// meters per second
 		return liftPos.getRate();
 	}
@@ -99,36 +101,37 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean getGripper() {
-		return gripper.get();
+		return !gripper.get();
 	}
 
-	public void setGripper(boolean grip) { // true
-											// =
-											// closed
+	// grip == true = closed
+	public void setGripper(boolean grip) {
 		gripper.set(!grip);
-		if (DYNAMIC_CALIBRATION && grip) {
-			Timer.delay(.2);
-			Encoder calibrator = liftPos;
-			calibrator.reset();
-			Elevator.set(.3);
-			double decreases = 0;
-			double lastValue = 0;
-			while (decreases < 3) {
-				double velocity = calibrator.getRate();
+		if (DYNAMIC_CALIBRATION) {
+			if (grip) {
+				Timer.delay(.2);
+				Encoder calibrator = liftPos;
 				calibrator.reset();
-				if (velocity < lastValue)
-					decreases++;
-				lastValue = velocity;
-			}
-			double currentPower = GRAVITY_COUNTERBALANCE;
-			calibrator.reset();
-			while (calibrator.getDistance() < .03) {
-				currentPower += .2;// Increase for less accuracy but faster
-									// calibrating
-				Elevator.set(currentPower);
-				Timer.delay(.05);// Give time to react to change.
-			}
-			gravityOffset = currentPower;
+				Elevator.set(.3);
+				double decreases = 0;
+				double lastValue = 0;
+				while (decreases < 3) {
+					double velocity = calibrator.getRate();
+					calibrator.reset();
+					if (velocity < lastValue)
+						decreases++;
+					lastValue = velocity;
+				}
+				double currentPower = GRAVITY_COUNTERBALANCE;
+				calibrator.reset();
+				while (calibrator.getDistance() < .03) {
+					currentPower += .2;// Increase for less accuracy but faster
+										// calibrating
+					Elevator.set(currentPower);
+					Timer.delay(.05);// Give time to react to change.
+				}
+				gravityOffset = currentPower;
+			}else gravityOffset = GRAVITY_COUNTERBALANCE;
 		}
 	}
 
