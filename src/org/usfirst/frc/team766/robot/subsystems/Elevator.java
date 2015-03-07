@@ -101,6 +101,10 @@ public class Elevator extends Subsystem {
 		brake.set(!stop);
 	}
 
+	public boolean getBrake(){
+		return !brake.get();
+	}
+	
 	public boolean getGripper() {
 		return !gripper.get();
 	}
@@ -137,11 +141,13 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean getTopStop() {
-		return topStop.get();
+//		return topStop.get(); 
+		return false;//for testing
 	}
 
 	public boolean getBottomStop() {
-		return bottomStop.get();
+//		return bottomStop.get();
+		return false;//for testing
 	}
 
 	public double getElevatorCurrent() {

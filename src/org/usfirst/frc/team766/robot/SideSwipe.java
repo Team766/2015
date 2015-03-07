@@ -10,7 +10,8 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
-import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
+import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
@@ -41,12 +42,14 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("Alpha", 0.5);
 		SmartDashboard.putData(new OpenCvTest());
 		SmartDashboard.putData(new DriveTurn(90));
-//		SmartDashboard.putData(new PrintDiagnostics());
+		// SmartDashboard.putData(new PrintDiagnostics());
 		dist = new DriveUltrasonic(1);
 		SmartDashboard.putData(dist);
 		SmartDashboard.putData(new TestEncoders());
 		SmartDashboard.putData("Drive Backward 1.5 Meters: ", new DriveForward(
 				-1.5));
+		SmartDashboard.putData(new CalibrateElevator());
+
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
@@ -59,9 +62,10 @@ public class SideSwipe extends IterativeRobot {
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
 			SmartDashboard.putData(new ShowStops());
+			SmartDashboard.putData("Brake Off", new AdjustElevatorBrake(false));
+			SmartDashboard.putData("Brake On", new AdjustElevatorBrake(true));
 		}
 
-//		new CalibrateElevator().start();
 	}
 
 	public void disabledPeriodic() {
@@ -111,7 +115,7 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-//		new Slider().start();
+		// new Slider().start();
 		done = true;
 		printOut.start();
 	}
@@ -123,8 +127,10 @@ public class SideSwipe extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putString("Test Prints", printOut.getOut());
-		System.out.println(printOut.getOut());
+		if (TESTING) {
+			SmartDashboard.putString("Test Prints", printOut.getOut());
+			System.out.println(printOut.getOut());
+		}
 	}
 
 	public void testPeriodic() {

@@ -12,7 +12,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double driveDividor = 10;
 
 	// Encoder Height of elevator, needs to be changed
-	public static double ElevatorTopHeight = 100;
+	public static double ElevatorTopHeight = 1.3;//Actual height 1.6 meters. Subtract a buffer
 
 	// Autonomous
 	// Modes

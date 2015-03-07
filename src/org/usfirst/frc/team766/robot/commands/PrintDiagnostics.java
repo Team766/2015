@@ -46,12 +46,14 @@ public class PrintDiagnostics extends CommandBase {
 	    	pr("Elevator Bottom Stop: " + Elevator.getBottomStop());
 	    	pr("Elevator Top Stop: " + Elevator.getTopStop());
 	    	pr("Elevator Velocity: " + Elevator.getVelocity());
+	    	pr("Elevator Brake:" + Elevator.getBrake());
 	    	
 	    	pr("\nIntake Statistics:");
 	    	pr("Left Encoder: " + Intake.getEncLeft());
 	    	pr("Right Encoder: " + Intake.getEncRight());
 	    	pr("Left Motor Current" + Intake.getIntakeCurrentLeft());
 	    	pr("Right Motor Current" + Intake.getIntakeCurrentRight());
+	    	
     	}
     }
 
@@ -79,6 +81,7 @@ public class PrintDiagnostics extends CommandBase {
     	"Elevator Bottom Stop: " + CommandBase.Elevator.getBottomStop() + "\n" +
     	"Elevator Top Stop: " + CommandBase.Elevator.getTopStop() + "\n" +
     	"Elevator Velocity: " + CommandBase.Elevator.getVelocity() + "\n" +
+    	"Elevator Brake:" + Elevator.getBrake() + "\n" +
     	
     	"\nIntake Statistics:" + "\n" +
     	"Left Encoder: " + CommandBase.Intake.getEncLeft() + "\n" +
