@@ -41,7 +41,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("Alpha", 0.5);
 		SmartDashboard.putData(new OpenCvTest());
 		SmartDashboard.putData(new DriveTurn(90));
-		SmartDashboard.putData(new PrintDiagnostics());
+//		SmartDashboard.putData(new PrintDiagnostics());
 		dist = new DriveUltrasonic(1);
 		SmartDashboard.putData(dist);
 		SmartDashboard.putData(new TestEncoders());
@@ -61,6 +61,7 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new ShowStops());
 		}
 
+//		new CalibrateElevator().start();
 	}
 
 	public void disabledPeriodic() {
@@ -110,7 +111,7 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-		new Slider().start();
+//		new Slider().start();
 		done = true;
 		printOut.start();
 	}
