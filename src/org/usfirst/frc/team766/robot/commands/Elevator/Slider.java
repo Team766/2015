@@ -18,7 +18,6 @@ public class Slider extends CommandBase {
 	}
 
 	protected void execute() {
-		System.out.println("Elevator Current: " + Elevator.getElevatorCurrent());
 		// If elevator current is big, drop the smoother's max and
 		// enlarge min output
 		// Try and make them be scaled, i,e. the higher the current,

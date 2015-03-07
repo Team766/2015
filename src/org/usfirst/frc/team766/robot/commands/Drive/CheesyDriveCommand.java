@@ -63,7 +63,7 @@ private double oldWheel = 0.0;
 
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;
-
+    
     if (isHighGear) {
       wheelNonLinearity = 0.6;
       // Apply a sin function that's scaled to make it feel better.

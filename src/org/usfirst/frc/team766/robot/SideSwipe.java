@@ -10,7 +10,6 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
-import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
@@ -62,7 +61,6 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new ShowStops());
 		}
 
-		new CalibrateElevator().start();
 	}
 
 	public void disabledPeriodic() {
@@ -124,9 +122,8 @@ public class SideSwipe extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out
-				.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle());
 		SmartDashboard.putString("Test Prints", printOut.getOut());
+		System.out.println(printOut.getOut());
 	}
 
 	public void testPeriodic() {
