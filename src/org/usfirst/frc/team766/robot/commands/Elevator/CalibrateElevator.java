@@ -7,7 +7,8 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *  Goes to bottom stop and reset enc then go to top and set top height. Also has buffer so we aren't so brutal with stops.
  */
 public class CalibrateElevator extends CommandBase {
-	public static final double ENCODER_BUFFER = .3;
+	private static final double ENCODER_BUFFER_BOTTOM = .3;
+	private static final double ENCODER_BUFFER_TOP = .3;
 	
     public CalibrateElevator() {
     }
@@ -26,12 +27,12 @@ public class CalibrateElevator extends CommandBase {
     		encodersSet = true;
     	}
     	
-    	if(encodersSet && Elevator.getEncoders() >= ENCODER_BUFFER){
+    	if(encodersSet && Elevator.getEncoders() >= ENCODER_BUFFER_BOTTOM){
     		Elevator.resetEncoders();
     	}
     	
     	if(Elevator.getTopStop()){
-    		RobotValues.ElevatorTopHeight = Elevator.getEncoders();
+    		RobotValues.ElevatorTopHeight = Elevator.getEncoders() - ENCODER_BUFFER_TOP;
     		isFinished = true;
     	}
     }
