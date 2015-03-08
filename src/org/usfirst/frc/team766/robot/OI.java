@@ -3,6 +3,7 @@ package org.usfirst.frc.team766.robot;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -41,6 +42,7 @@ public class OI {
 					Buttons.AutonDecrement),
 
 			// For testing
+			buttonStackAdditionalTote = new JoystickButton(jTest, Buttons.stackAdditionalTote),
 			buttonBrakeOn = new JoystickButton(jTest, Buttons.BrakeOn),
 			buttonBrakeOff = new JoystickButton(jTest, Buttons.BrakeOff),
 			buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
@@ -65,6 +67,7 @@ public class OI {
 		buttonBrakeOff.whenPressed(new AdjustElevatorBrake(false));
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
+		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
 	}
 
 	public boolean getShifter() {

@@ -26,7 +26,7 @@ public class Buttons {
 	public static final int BrakeOn= 8;
 	public static final int gripperOpen= 11;
 	public static final int gripperClose = 12;
-	
+	public static final int stackAdditionalTote= 9;
 	
     /*
      * Auton:
