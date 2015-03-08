@@ -197,6 +197,14 @@ private double oldWheel = 0.0;
 	  outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
 	  lastLeftOut = outputLeft;
 	  
+	  //Naturally reverses  -EXPERIMENTAL
+	  if(!OI.getQuickTurn())
+	  {		
+		  //If you want to turn, without quick turning
+		  if(Math.abs(OI.getSteer()) > 0.001 && Math.abs(OI.getThrottle()) > 0.001)
+			  outputLeft = -outputLeft;
+	  }
+	  
 	  if(Math.abs(OI.getSteer()) < 0.05)
 		  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  //Accounts for drift in the gyro
@@ -208,6 +216,14 @@ private double oldWheel = 0.0;
   {
 	  outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
 	  lastRightOut = outputRight;
+	  
+	  //Naturally reverses -EXPERIMENTAL
+	  if(!OI.getQuickTurn())
+	  {		
+		  //If you want to turn, without quick turning
+		  if(Math.abs(OI.getSteer()) > 0.001 && Math.abs(OI.getThrottle()) > 0.001)
+			  outputRight = -outputRight;
+	  }
 	  
 	  if(Math.abs(OI.getSteer()) < 0.05)
 		  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
