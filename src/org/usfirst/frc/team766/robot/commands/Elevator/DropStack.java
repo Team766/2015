@@ -12,7 +12,7 @@ public class DropStack extends CommandGroup {
     
     public  DropStack() {
         addSequential(new MoveElevatorWaypoint(0), 100);//Should timeouts be there?
-        addSequential(new AdjustGripper(true), 100);//Should timeouts be there?
+        addSequential(new AdjustGripper(false), 100);//Should timeouts be there?
         addSequential(new SetWheels(-1));
         addSequential(new WaitCommand(10));
         addSequential(new SetWheels(0));

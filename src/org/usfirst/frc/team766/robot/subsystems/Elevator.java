@@ -3,6 +3,7 @@ package org.usfirst.frc.team766.robot.subsystems;
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.Elevator.JoystickControl;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -32,7 +33,7 @@ public class Elevator extends Subsystem {
 	private static final double DISTANCE_PER_PULSE = DISTANCE_PER_SPROCKET_ROTATION
 			/ PULSES_PER_ROTATION;
 	private static final boolean DYNAMIC_CALIBRATION = false;
-	private static final double GRAVITY_COUNTERBALANCE = .1;
+	private static final double GRAVITY_COUNTERBALANCE = .09;
 	// .02 starts going down, .11 starts going up. range can be from .03 to .1
 	// Offset of just weight of mechanism. PID should compensate for rest
 
@@ -56,6 +57,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new JoystickControl());
 	}
 
 	public void setElevatorSpeed(double speed) {
@@ -67,10 +69,11 @@ public class Elevator extends Subsystem {
 				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
 
-		if (Math.abs(speed) <= stopTolerance)
-			setBrake(true);
-		else
-			setBrake(false);
+		//Is this ever useful?
+//		if (Math.abs(speed) <= stopTolerance)
+//			setBrake(true);
+//		else
+//			setBrake(false);
 
 		// Compensating for deadband
 		if (speed < 0)

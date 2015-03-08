@@ -18,19 +18,19 @@ public class TankDrive extends CommandBase {
 
 	protected void execute() {
 		double leftC = OI.getLeft();
-//		double rightC = OI.getRight();
-//		boolean reverseC = OI.getReverse();
-//		if (reverseC) {
-//			double RightSave = rightC;
-//			rightC = leftC;
-//			leftC = RightSave;
-//		}
-//		
-//		
-//		Drive.setLeftPower(leftC);
-//		Drive.setRightPower(rightC);
-//		Drive.setHighGear(OI.getShifter());
-		Elevator.setElevatorSpeedRaw(leftC);
+		double rightC = OI.getRight();
+		boolean reverseC = OI.getReverse();
+		if (reverseC) {
+			double RightSave = rightC;
+			rightC = leftC;
+			leftC = RightSave;
+		}
+		
+		
+		Drive.setLeftPower(leftC);
+		Drive.setRightPower(rightC);
+		Drive.setHighGear(OI.getShifter());
+		
 	}
 
 	protected boolean isFinished() {

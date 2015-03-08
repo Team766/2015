@@ -12,6 +12,9 @@ public class Slider extends CommandBase {
 	
 	MoveElevatorHeight mover = new MoveElevatorHeight();
 
+	public Slider(){
+		requires(Elevator);
+	}
 	@Override
 	protected void initialize() {
 		lastSlider = slider = 0;
@@ -25,9 +28,8 @@ public class Slider extends CommandBase {
 		// else, set both to 1 and -1 respectively
 
 		// Move Elevator to slider
-//		slider = CommandBase.OI.getSlider();
-		//Note: for testing
-		slider = CommandBase.OI.getLeftSliderThrottle();
+		slider = CommandBase.OI.getSlider();
+
 		
 		if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
 			// Convert the slider from -1 - 1 to 0 - TopHeight

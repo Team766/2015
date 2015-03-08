@@ -19,7 +19,13 @@ public class Buttons {
 	public static final int preset4 = 6;
 	public static final int preset5 = 7;
 	public static final int preset6 = 8;
-	public static final int preset7 = 9;
+	public static final int preset7 = 9; 
+	
+	//Test Joystick
+	public static final int BrakeOff= 7;
+	public static final int BrakeOn= 8;
+	public static final int gripperOpen= 11;
+	public static final int gripperClose = 12;
 	
 	
     /*

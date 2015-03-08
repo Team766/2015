@@ -32,6 +32,7 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 	protected void initialize() {
 		velocityPID.reset();
 		lastTime = Timer.getFPGATimestamp();
+		Elevator.setBrake(false);
 	}
 
 	protected void execute() {
@@ -73,6 +74,7 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 
 	protected void end() {
 		Elevator.setElevatorSpeed(0);
+		Elevator.setBrake(true);
 	}
 
 	protected void interrupted() {
