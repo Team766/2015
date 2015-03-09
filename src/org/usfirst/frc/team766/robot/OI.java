@@ -15,15 +15,19 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public Joystick jLeft = new Joystick(0), jRight = new Joystick(1),
 			jBox = new Joystick(2), jTest = new Joystick(3);
-
-	public Button buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
+			
+	public Button 
+			//Driving
+			buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
 			buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
 			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
 			buttonDriverOverride = new JoystickButton(jRight,
 					Buttons.DriverOverride),
 			buttonDriverDriveSmoothing = new JoystickButton(jRight,
 					Buttons.DriverSmoothing),
-
+			buttonDriverSlowMode = new JoystickButton(jLeft, Buttons.DriverSlowMode),
+			
+			//Elevator
 			buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
 			buttonElevatorClamp = new JoystickButton(jBox,
 					Buttons.ElevatorClamp),
@@ -34,7 +38,8 @@ public class OI {
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
 			buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
-
+			
+			//Auton
 			buttonAutonIncrement = new JoystickButton(jBox,
 					Buttons.AutonIncrement),
 			buttonAutonDecrement = new JoystickButton(jBox,
@@ -167,5 +172,10 @@ public class OI {
 
 	public double getSlider() {
 		return jBox.getY();
+	}
+	
+	public boolean getDriverSlowMode()
+	{
+		return buttonDriverSlowMode.get();
 	}
 }

@@ -167,10 +167,21 @@ private double oldWheel = 0.0;
       rightPwm = -1.0;
     }
 
+    if(OI.getDriverSlowMode())
+    {
+    	leftPwm *= RobotValues.SlowModeSLowFactor;
+    	rightPwm *= RobotValues.SlowModeSLowFactor;
+	    Drive.setLeftPower(bearafyLeftPower(leftPwm, RobotValues.SlowAlpha));
+	    Drive.setRightPower(bearafyRightPower(rightPwm, RobotValues.SlowAlpha));
+	    Drive.setHighGear(false);
+    }
+    else
+    {
+    	Drive.setLeftPower(bearafyLeftPower(leftPwm, RobotValues.alpha));
+        Drive.setRightPower(bearafyRightPower(rightPwm, RobotValues.alpha));
+        Drive.setHighGear(isHighGear);
+    }
     //drive.setLeftRightPower(leftPwm, rightPwm);
-    Drive.setLeftPower(bearafyLeftPower(leftPwm));
-    Drive.setRightPower(bearafyRightPower(rightPwm));
-    Drive.setHighGear(isHighGear);
   }
 
   protected boolean isFinished() {
@@ -192,9 +203,9 @@ private double oldWheel = 0.0;
   public static double limit(double v, double limit) {
 	return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
   }
-  public double bearafyLeftPower(double in)
+  public double bearafyLeftPower(double in, double alpha)
   {
-	  outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
+	  outputLeft = alpha * lastLeftOut + (1 - alpha) * in;
 	  lastLeftOut = outputLeft;
 	  
 	  //Naturally reverses  -EXPERIMENTAL
@@ -212,9 +223,9 @@ private double oldWheel = 0.0;
 		  outputLeft = 0;
 	  return outputLeft;
   }
-  public double bearafyRightPower(double in)
+  public double bearafyRightPower(double in, double alpha)
   {
-	  outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
+	  outputRight = alpha * lastRightOut + (1 - alpha) * in;
 	  lastRightOut = outputRight;
 	  
 	  //Naturally reverses -EXPERIMENTAL

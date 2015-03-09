@@ -69,11 +69,6 @@ public class Elevator extends Subsystem {
 				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
 
-		if (Math.abs(speed) <= stopTolerance)
-			setBrake(true);
-		else
-			setBrake(false);
-
 		// Compensating for deadband
 		if (speed < 0)
 			speed -= .06;
