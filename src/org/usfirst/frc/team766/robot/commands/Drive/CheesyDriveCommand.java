@@ -171,17 +171,16 @@ private double oldWheel = 0.0;
     {
     	leftPwm *= RobotValues.SlowModeSLowFactor;
     	rightPwm *= RobotValues.SlowModeSLowFactor;
-	    Drive.setLeftPower(bearafyLeftPower(leftPwm, RobotValues.SlowAlpha));
-	    Drive.setRightPower(bearafyRightPower(rightPwm, RobotValues.SlowAlpha));
+	    Drive.setLeftPower(bearafyLeftPower(leftPwm, true));
+	    Drive.setRightPower(bearafyRightPower(rightPwm, true));
 	    Drive.setHighGear(false);
     }
     else
     {
-    	Drive.setLeftPower(bearafyLeftPower(leftPwm, RobotValues.alpha));
-        Drive.setRightPower(bearafyRightPower(rightPwm, RobotValues.alpha));
+    	Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
+        Drive.setRightPower(bearafyRightPower(rightPwm, false));
         Drive.setHighGear(isHighGear);
     }
-    //drive.setLeftRightPower(leftPwm, rightPwm);
   }
 
   protected boolean isFinished() {
@@ -203,9 +202,12 @@ private double oldWheel = 0.0;
   public static double limit(double v, double limit) {
 	return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
   }
-  public double bearafyLeftPower(double in, double alpha)
+  public double bearafyLeftPower(double in, boolean isSlow)
   {
-	  outputLeft = alpha * lastLeftOut + (1 - alpha) * in;
+  	  if(isSlow)
+	  	outputLeft = RobotValues.SlowAlpha * lastLeftOut + (1 - RobotValues.SlowAlpha) * in;
+	  else
+	  	outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
 	  lastLeftOut = outputLeft;
 	  
 	  //Naturally reverses  -EXPERIMENTAL
@@ -223,9 +225,12 @@ private double oldWheel = 0.0;
 		  outputLeft = 0;
 	  return outputLeft;
   }
-  public double bearafyRightPower(double in, double alpha)
+  public double bearafyRightPower(double in, boolean isSlow)
   {
-	  outputRight = alpha * lastRightOut + (1 - alpha) * in;
+  	  if(isSlow)
+	  	outputRight = RobotValues.SlowAlpha * lastRightOut + (1 - RobotValues.SlowAlpha) * in;
+	  else
+	  	outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
 	  lastRightOut = outputRight;
 	  
 	  //Naturally reverses -EXPERIMENTAL
