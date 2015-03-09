@@ -212,7 +212,7 @@ private double oldWheel = 0.0;
 	  if(!OI.getQuickTurn())
 	  {		
 		  //If you want to turn, without quick turning
-		  if(Math.abs(OI.getSteer()) > 0.001 && Math.abs(OI.getThrottle()) > 0.001)
+		  if(Math.abs(OI.getSteer()) > 0.001 && OI.getThrottle() < -0.001)
 			  outputLeft = -outputLeft;
 	  }
 	  
@@ -232,7 +232,7 @@ private double oldWheel = 0.0;
 	  if(!OI.getQuickTurn())
 	  {		
 		  //If you want to turn, without quick turning
-		  if(Math.abs(OI.getSteer()) > 0.001 && Math.abs(OI.getThrottle()) > 0.001)
+		  if(Math.abs(OI.getSteer()) > 0.001 && OI.getThrottle() < -0.001)
 			  outputRight = -outputRight;
 	  }
 	  
