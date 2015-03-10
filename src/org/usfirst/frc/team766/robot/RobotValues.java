@@ -37,6 +37,8 @@ public class RobotValues { // Note: All distances in units of meters
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.5;
+	public static final double SlowAlpha = 0.7;
+	public static final double SlowModeSLowFactor = 0.4;
 
 	// Elevator presets
 	private static final double ElevatorPresetBase = Box_Height;// All elevator

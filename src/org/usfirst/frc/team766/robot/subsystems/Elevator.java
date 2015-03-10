@@ -69,12 +69,6 @@ public class Elevator extends Subsystem {
 				|| ((speed < -stopTolerance) && getBottomStop()))
 			speed = 0;
 
-		//Is this ever useful?
-//		if (Math.abs(speed) <= stopTolerance)
-//			setBrake(true);
-//		else
-//			setBrake(false);
-
 		// Compensating for deadband
 		if (speed < 0)
 			speed -= .06;
@@ -149,12 +143,20 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean getTopStop() {
-		// return topStop.get();
+		//Add when we get hall effect sensors on the robot
+//		boolean out = topStop.get();
+//		if(out)
+//			RobotValues.ElevatorTopHeight = getEncoders();
+		// return out;
 		return false;// for testing
 	}
 
 	public boolean getBottomStop() {
-		// return bottomStop.get();
+		//Add when we get hall effect sensors on the robot
+//		boolean out = bottomStop.get();
+//		if(out)
+//			resetEncoders();
+//		return out;
 		return false;// for testing
 	}
 
