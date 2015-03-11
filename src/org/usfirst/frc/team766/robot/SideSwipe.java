@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SideSwipe extends IterativeRobot {
 	private static final boolean TESTING = true;
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 
 	private AutonSelectorCommand auton;
 	private DriveUltrasonic dist;
