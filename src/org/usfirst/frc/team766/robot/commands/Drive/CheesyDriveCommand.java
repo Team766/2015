@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
  */
 public class CheesyDriveCommand extends CommandBase {
   private static final double ANGLE_TO_POWER_RATIO = 1;
+  private static final boolean NATUARL_REVERSE = false;  //Experimental
 private double oldWheel = 0.0;
   private double quickStopAccumulator;
   private double throttleDeadband = 0.02;
@@ -177,9 +178,19 @@ private double oldWheel = 0.0;
     }
     else
     {
-    	Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
-        Drive.setRightPower(bearafyRightPower(rightPwm, false));
-        Drive.setHighGear(isHighGear);
+    	if(NATUARL_REVERSE && OI.getThrottle() < 0 && Math.abs(OI.getSteer()) > 0.01)
+    	{
+    		Drive.setLeftPower(bearafyLeftPower(rightPwm, false));
+	        Drive.setRightPower(bearafyRightPower(leftPwm, false));
+	        //If this doesn't work, try this 
+	        //Drive.setRightPower(bearafyLeftPower(leftPwm, false));
+	        //Drive.setLeftPower(bearafyRightPower(rightPwm, false));
+    	}else
+    	{
+	    	Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
+	        Drive.setRightPower(bearafyRightPower(rightPwm, false));
+    	}
+    	Drive.setHighGear(isHighGear);
     }
   }
 
