@@ -15,7 +15,7 @@ package org.usfirst.frc.team766.lib;
  */
 
 public class PIDController {
-	private static final boolean PRINT = true;
+	private boolean print = false;
 
 	private double Kp = 0;
 	private double Ki = 0;
@@ -90,6 +90,16 @@ public class PIDController {
 		Ki = I;
 		Kd = D;
 	}
+	
+	/** Same as calculate() except that it prints debugging information
+	 * 
+	 * @param cur_input
+	 * @param smart
+	 */
+	public void calculateDebug(double cur_input, boolean smart) {
+		print = true;
+		calculate(cur_input, smart);
+	}
 
 	/**
 	 * Calculate PID value. Run only once per loop. Use getOutput to get output.
@@ -101,7 +111,7 @@ public class PIDController {
 		cur_error = (setpoint - cur_input);
 		if (isDone()) {
 			output_value = 0;
-			System.out.println("pid done");
+			pr("pid done");
 			return;
 		}
 
@@ -195,7 +205,7 @@ public class PIDController {
 	}
 
 	private void pr(Object text) {
-		if (PRINT) {
+		if (print) {
 			System.out.println("PID: " + text);
 		}
 	}
