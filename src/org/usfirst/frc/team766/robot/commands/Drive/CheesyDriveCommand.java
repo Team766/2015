@@ -18,8 +18,8 @@ public class CheesyDriveCommand extends CommandBase {
   private static final boolean NATUARL_REVERSE = false;  //Experimental
 private double oldWheel = 0.0;
   private double quickStopAccumulator;
-  private double throttleDeadband = 0.02;
-  private double wheelDeadband = 0.02;
+  private double throttleDeadband = 0.07; //0.02
+  private double wheelDeadband = 0.07; //0.02
   
   //Bearly Driving
   private double lastRightOut;
@@ -58,7 +58,16 @@ private double oldWheel = 0.0;
     boolean isHighGear = OI.getShifter();
 
     double wheelNonLinearity;
-
+    
+    //Natural reversing
+//    double beforeThrottle = OI.getThrottle();
+//    double beforeSteer = OI.getSteer();
+//    if(beforeThrottle < -0.05)
+//    	beforeSteer = -beforeSteer;
+//    	
+//    double wheel = -handleDeadband(beforeSteer, wheelDeadband);
+//    double throttle = handleDeadband(beforeThrottle, throttleDeadband);
+    
     double wheel = -handleDeadband(OI.getSteer(), wheelDeadband);
     double throttle = handleDeadband(OI.getThrottle(), throttleDeadband);
 
@@ -168,7 +177,7 @@ private double oldWheel = 0.0;
       rightPwm = -1.0;
     }
 
-    if(OI.getDriverSlowMode())
+    if(OI.getDriverSlowMode() || ((!Elevator.getGripper() && Math.abs(OI.getSteer()) > 0.05)) || OI.getQuickTurn())
     {
     	leftPwm *= RobotValues.SlowModeSLowFactor;
     	rightPwm *= RobotValues.SlowModeSLowFactor;
@@ -178,18 +187,8 @@ private double oldWheel = 0.0;
     }
     else
     {
-    	if(NATUARL_REVERSE && OI.getThrottle() < 0 && Math.abs(OI.getSteer()) > 0.01)
-    	{
-    		Drive.setLeftPower(bearafyLeftPower(rightPwm, false));
-	        Drive.setRightPower(bearafyRightPower(leftPwm, false));
-	        //If this doesn't work, try this 
-	        //Drive.setRightPower(bearafyLeftPower(leftPwm, false));
-	        //Drive.setLeftPower(bearafyRightPower(rightPwm, false));
-    	}else
-    	{
-	    	Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
-	        Drive.setRightPower(bearafyRightPower(rightPwm, false));
-    	}
+	    Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
+	    Drive.setRightPower(bearafyRightPower(rightPwm, false));
     	Drive.setHighGear(isHighGear);
     }
   }
@@ -216,7 +215,6 @@ private double oldWheel = 0.0;
   }
   public double bearafyLeftPower(double in, boolean isSlow)
   {
-	  outputLeft = in;
   	  if(isSlow)
 	  	outputLeft = RobotValues.SlowAlpha * lastLeftOut + (1 - RobotValues.SlowAlpha) * in;
 	  else
@@ -226,21 +224,22 @@ private double oldWheel = 0.0;
 	  //Naturally reverses  -EXPERIMENTAL
 	  if(!OI.getQuickTurn())
 	  {		
-		  if(Math.abs(OI.getSteer()) <= 0.05)
+		  if(Math.abs(OI.getSteer()) >= 0.05)
 			  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+	  }
+	  
 		  //Accounts for drift in the gyro
-		  if(Math.abs(OI.getThrottle()) <= 0.001)
+		  if(Math.abs(OI.getThrottle()) <= 0.05)
 			  outputLeft = 0;
 		  
 		//If you want to turn, without quick turning
-//		  if(Math.abs(OI.getSteer()) > 0.001 && (OI.getThrottle() < 0))
-//			  outputLeft = -outputLeft;
-	  }
+		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -0.01)))
+			  outputLeft = -outputLeft;
+	  
 	  return outputLeft;
   }
   public double bearafyRightPower(double in, boolean isSlow)
   {
-	  outputRight = in;
   	  if(isSlow)
 	  	outputRight = RobotValues.SlowAlpha * lastRightOut + (1 - RobotValues.SlowAlpha) * in;
 	  else
@@ -251,19 +250,22 @@ private double oldWheel = 0.0;
 	  if(!OI.getQuickTurn())
 	  {		
 	  
-		  if(Math.abs(OI.getSteer()) <= 0.05)
+		  if(Math.abs(OI.getSteer()) >= 0.05)
 			  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 		  else
 			  Drive.resetCheesyGyro();
-		  if(Math.abs(OI.getThrottle()) <= 0.001)
+	  }
+	  else
+		  Drive.resetCheesyGyro();
+		  if(Math.abs(OI.getThrottle()) <= 0.05)
 		  {
 			  outputRight = 0;
 			  Drive.resetCheesyGyro();
 		  }
 		  //If you want to turn, without quick turning
-//		  if(Math.abs(OI.getSteer()) > 0.001 && (OI.getThrottle() < 0))
-//			  outputRight = -outputRight;
-	  }
+		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -.01)))
+			  outputRight = -outputRight;
+	  
 	  return outputRight;
   }
 }

@@ -3,7 +3,9 @@ package org.usfirst.frc.team766.robot;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -47,6 +49,8 @@ public class OI {
 					Buttons.AutonDecrement),
 
 			// For testing
+			buttonStackAdditionalChute = new JoystickButton(jTest, Buttons.stackAdditionalChute),
+			buttonStackAdditional = new JoystickButton(jTest, Buttons.stackAdditionalSmall),
 			buttonStackAdditionalTote = new JoystickButton(jTest, Buttons.stackAdditionalTote),
 			buttonBrakeOn = new JoystickButton(jTest, Buttons.BrakeOn),
 			buttonBrakeOff = new JoystickButton(jTest, Buttons.BrakeOff),
@@ -73,6 +77,8 @@ public class OI {
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
 		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
+		buttonStackAdditional.whenPressed(new StackAdditionalSmall());
+		buttonStackAdditionalChute.whenPressed(new StackAdditionalToteChute());
 	}
 
 	public boolean getShifter() {

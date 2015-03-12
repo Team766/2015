@@ -38,14 +38,14 @@ public class RobotValues { // Note: All distances in units of meters
 	// Decrease for faster reaction times
 	public static final double alpha = 0.5;
 	public static final double SlowAlpha = 0.7;
-	public static final double SlowModeSLowFactor = 0.4;
+	public static final double SlowModeSLowFactor = 0.85;
 
 	// Elevator presets
 	private static final double ElevatorPresetBase = Box_Height;// All elevator
 																// presets based
 																// on this
 																// variable
-	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase,
+	public static final double[] ElevatorPresets = { 0.005, ElevatorPresetBase,
 			ElevatorPresetBase * 2, ElevatorPresetBase * 3,
 			ElevatorPresetBase * 4, ElevatorPresetBase * 5,
 			ElevatorPresetBase * 6 };
@@ -86,7 +86,7 @@ public class RobotValues { // Note: All distances in units of meters
 
 	// elevate smoothly
 	public static final double ElevatorKp = 3.2;
-	public static final double ElevatorKi = .02;//.005
+	public static final double ElevatorKi = .05;//.005
 	public static final double ElevatorKd = 0;
 	public static final double ElevatorThreshold = 0.01;
 	public static final double ElevatorMaxSpeed = .5;//Turned down for testing

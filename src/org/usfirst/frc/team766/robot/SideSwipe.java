@@ -8,6 +8,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
+import org.usfirst.frc.team766.robot.commands.Drive.ResetGyro;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
@@ -18,6 +19,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.JoystickControl;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
@@ -57,7 +59,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData("Drive Backward 1.5 Meters: ", new DriveForward(
 				-1.5));
 		SmartDashboard.putData(new CalibrateElevator());
-
+		SmartDashboard.putData(new ResetGyro());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
@@ -80,6 +82,7 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData("Open Grippers: ", new AdjustGripper(false));
 			new JoystickControl().start();
 			SmartDashboard.putData(new StackAdditionalTote());
+			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
 			SmartDashboard.putData(new Slider());//Don't use for now. Doesn't work correctly
 		}
