@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
+import org.usfirst.frc.team766.robot.commands.DisplayOIButtons;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
@@ -85,6 +86,7 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
 			SmartDashboard.putData(new Slider());//Don't use for now. Doesn't work correctly
+			SmartDashboard.putData(new DisplayOIButtons());
 		}
 		new CalibrateElevator().start();
 	}
