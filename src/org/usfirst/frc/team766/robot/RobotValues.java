@@ -11,8 +11,6 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double safteyDriveDistance = 10;
 	public static final double driveDividor = 10;
 
-	// Encoder Height of elevator, needs to be changed
-	public static double ElevatorTopHeight = 1.5;//Turned down for testing
 
 	// Autonomous
 	// Modes
@@ -39,13 +37,15 @@ public class RobotValues { // Note: All distances in units of meters
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.5;
+	public static final double SlowAlpha = 0.7;
+	public static final double SlowModeSLowFactor = 0.85;
 
 	// Elevator presets
 	private static final double ElevatorPresetBase = Box_Height;// All elevator
 																// presets based
 																// on this
 																// variable
-	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase,
+	public static final double[] ElevatorPresets = { 0.005, ElevatorPresetBase,
 			ElevatorPresetBase * 2, ElevatorPresetBase * 3,
 			ElevatorPresetBase * 4, ElevatorPresetBase * 5,
 			ElevatorPresetBase * 6 };
@@ -72,6 +72,7 @@ public class RobotValues { // Note: All distances in units of meters
 	// gyro turning in drive forward
 	public static final double AngleKp = 0.05;
 	public static final double AngleKi = 0.00;
+	
 	public static final double AngleKd = 0.03;
 	public static final double Angleoutputmax_low = -10;
 	public static final double Angleoutputmax_high = 10;
@@ -85,9 +86,9 @@ public class RobotValues { // Note: All distances in units of meters
 
 	// elevate smoothly
 	public static final double ElevatorKp = 3.2;
-	public static final double ElevatorKi = .005;
+	public static final double ElevatorKi = .05;//.005
 	public static final double ElevatorKd = 0;
-	public static final double ElevatorThreshold = 0;
+	public static final double ElevatorThreshold = 0.01;
 	public static final double ElevatorMaxSpeed = .5;//Turned down for testing
 	public static final double ElevatorMinSpeed = -.5;
 
@@ -98,6 +99,9 @@ public class RobotValues { // Note: All distances in units of meters
 	// Elevator
 	public static final double SliderChangeTolerance = 0.1;
 	public static int numTotes = 0;
+	// Encoder Height of elevator, needs to be changed
+	public static double ElevatorTopHeight = 1.57;//Turned down for testing
+	public static double elevatorSavedHeight = 0;
 	
 	//Auton Driving
 	public static final double k_moveToNextTote = 33 * INCHES_TO_METERS;

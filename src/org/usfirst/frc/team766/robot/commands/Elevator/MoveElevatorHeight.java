@@ -21,20 +21,21 @@ public class MoveElevatorHeight extends CommandBase {
 			RobotValues.ElevatorMaxSpeed, RobotValues.ElevatorThreshold);
 
 	public MoveElevatorHeight() {
-		requires(Elevator);
-		positionPID.setSetpoint(0);
+		this(0);
 	}
 
 	public MoveElevatorHeight(double goal) {
+		requires(Elevator);
 		positionPID.setSetpoint(goal);
 	}
 
 	protected void initialize() {
+		Elevator.setBrake(false);
 		positionPID.reset();
 	}
 
 	protected void execute() {
-		positionPID.calculate(Elevator.getEncoders(), false);
+		positionPID.calculateDebug(Elevator.getEncoders(), false);
 		// Don't want to go too high or too low
 		if ((Elevator.getEncoders() <= RobotValues.ElevatorTopHeight)
 				&& (Elevator.getEncoders() >= 0)) {
@@ -48,12 +49,18 @@ public class MoveElevatorHeight extends CommandBase {
 	}
 
 	protected void end() {
+		Elevator.setBrake(true);
 		Elevator.setElevatorSpeed(0);
 	}
 
 	public void changeGoal(double goal) {
 		positionPID.setSetpoint(goal);
 		initialize();
+	}
+	
+	@Deprecated
+	public void setPIDSetpoint(double goal){//Don't use this, use changeGoal instead.
+		positionPID.setSetpoint(goal);
 	}
 
 	protected void interrupted() {

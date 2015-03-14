@@ -1,8 +1,11 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
-import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -14,16 +17,20 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick jLeft = new Joystick(0), jRight = new Joystick(1),
-			jBox = new Joystick(2);
-
-	public Button buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
+			jBox = new Joystick(2), jTest = new Joystick(3);
+			
+	public Button 
+			//Driving
+			buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
 			buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
 			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
 			buttonDriverOverride = new JoystickButton(jRight,
 					Buttons.DriverOverride),
 			buttonDriverDriveSmoothing = new JoystickButton(jRight,
 					Buttons.DriverSmoothing),
-
+			buttonDriverSlowMode = new JoystickButton(jLeft, Buttons.DriverSlowMode),
+			
+			//Elevator
 			buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
 			buttonElevatorClamp = new JoystickButton(jBox,
 					Buttons.ElevatorClamp),
@@ -34,11 +41,21 @@ public class OI {
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
 			buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
-
+			
+			//Auton
 			buttonAutonIncrement = new JoystickButton(jBox,
 					Buttons.AutonIncrement),
 			buttonAutonDecrement = new JoystickButton(jBox,
-					Buttons.AutonDecrement);
+					Buttons.AutonDecrement),
+
+			// For testing
+			buttonStackAdditionalChute = new JoystickButton(jTest, Buttons.stackAdditionalChute),
+			buttonStackAdditional = new JoystickButton(jTest, Buttons.stackAdditionalSmall),
+			buttonStackAdditionalTote = new JoystickButton(jTest, Buttons.stackAdditionalTote),
+			buttonBrakeOn = new JoystickButton(jTest, Buttons.BrakeOn),
+			buttonBrakeOff = new JoystickButton(jTest, Buttons.BrakeOff),
+			buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
+			buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose);
 
 	// Auton Stuff
 	public int AutonMode = 0;
@@ -54,6 +71,14 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPreset7.whenPressed(new MoveElevatorWaypoint(6));
+		
+		buttonBrakeOn.whenPressed(new AdjustElevatorBrake(true));
+		buttonBrakeOff.whenPressed(new AdjustElevatorBrake(false));
+		buttonGripperOpen.whenPressed(new AdjustGripper(false));
+		buttonGripperClose.whenPressed(new AdjustGripper(true));
+		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
+		buttonStackAdditional.whenPressed(new StackAdditionalSmall());
+		buttonStackAdditionalChute.whenPressed(new StackAdditionalToteChute());
 	}
 
 	public boolean getShifter() {
@@ -79,11 +104,11 @@ public class OI {
 	public double getSteer() {
 		return jRight.getX();
 	}
-	
-	public double getLeftSliderThrottle(){
-		return jLeft.getThrottle();
-	}
 
+	public double getTestY(){
+		return jTest.getY();
+	}
+	
 	// tank drive
 	public double getLeft() {
 		return jLeft.getY();
@@ -112,6 +137,15 @@ public class OI {
 	public boolean getOverride() {
 		return buttonDriverOverride.get();
 	}
+
+	// For testing. Not needed right now.
+	// public boolean getGripperOpen() {
+	// return buttonGrippperOpen.get();
+	// }
+	//
+	// public boolean getGripperClose() {
+	// return buttonGrippperClose.get();
+	// }
 
 	/**
 	 * Adds or subtracts the current auton mode.
@@ -147,5 +181,10 @@ public class OI {
 
 	public double getSlider() {
 		return jBox.getY();
+	}
+	
+	public boolean getDriverSlowMode()
+	{
+		return buttonDriverSlowMode.get();
 	}
 }

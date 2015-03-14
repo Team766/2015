@@ -8,14 +8,19 @@ import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
+import org.usfirst.frc.team766.robot.commands.Drive.ResetGyro;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
+import org.usfirst.frc.team766.robot.commands.Elevator.DropStack;
+import org.usfirst.frc.team766.robot.commands.Elevator.JoystickControl;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
+import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
@@ -33,7 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SideSwipe extends IterativeRobot {
 	private static final boolean TESTING = true;
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 
 	private AutonSelectorCommand auton;
 	private DriveUltrasonic dist;
@@ -54,7 +59,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData("Drive Backward 1.5 Meters: ", new DriveForward(
 				-1.5));
 		SmartDashboard.putData(new CalibrateElevator());
-
+		SmartDashboard.putData(new ResetGyro());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
@@ -63,7 +68,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
 		SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
 		SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
-
+		new CalibrateElevator().start();//Elevator must be at bottom at start.
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
 			SmartDashboard.putData(new ShowStops());
@@ -75,17 +80,19 @@ public class SideSwipe extends IterativeRobot {
 					new MoveElevatorHeightVelocity(.5));
 			SmartDashboard.putData("Close Grippers: ", new AdjustGripper(true));
 			SmartDashboard.putData("Open Grippers: ", new AdjustGripper(false));
-			SmartDashboard.putData("Joystick Control of Elevator",
-					new TankDrive());
-			SmartDashboard.putData(new Slider());
+			new JoystickControl().start();
+			SmartDashboard.putData(new StackAdditionalTote());
+			SmartDashboard.putData(new StackAdditionalSmall());
+			SmartDashboard.putData(new DropStack());
+			SmartDashboard.putData(new Slider());//Don't use for now. Doesn't work correctly
 		}
-
+		new CalibrateElevator().start();
 	}
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 
-		// Auton Cyvler
+		// Auton Cycler
 		if (!AutonCyclePrev && CommandBase.OI.buttonAutonIncrement.get())
 			CommandBase.OI.incrementAutonMode(1);
 		else if (!AutonCyclePrev && CommandBase.OI.buttonAutonDecrement.get())
@@ -131,6 +138,8 @@ public class SideSwipe extends IterativeRobot {
 		}
 
 //		new Slider().start();
+//		new JoystickControl().start();//For testing. Replaces slider
+		
 		done = true;
 		printOut.start();
 	}

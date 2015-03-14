@@ -15,10 +15,11 @@ import edu.wpi.first.wpilibj.DriverStation;
  */
 public class CheesyDriveCommand extends CommandBase {
   private static final double ANGLE_TO_POWER_RATIO = 1;
+  private static final boolean NATUARL_REVERSE = false;  //Experimental
 private double oldWheel = 0.0;
   private double quickStopAccumulator;
-  private double throttleDeadband = 0.02;
-  private double wheelDeadband = 0.02;
+  private double throttleDeadband = 0.07; //0.02
+  private double wheelDeadband = 0.07; //0.02
   
   //Bearly Driving
   private double lastRightOut;
@@ -57,7 +58,16 @@ private double oldWheel = 0.0;
     boolean isHighGear = OI.getShifter();
 
     double wheelNonLinearity;
-
+    
+    //Natural reversing
+//    double beforeThrottle = OI.getThrottle();
+//    double beforeSteer = OI.getSteer();
+//    if(beforeThrottle < -0.05)
+//    	beforeSteer = -beforeSteer;
+//    	
+//    double wheel = -handleDeadband(beforeSteer, wheelDeadband);
+//    double throttle = handleDeadband(beforeThrottle, throttleDeadband);
+    
     double wheel = -handleDeadband(OI.getSteer(), wheelDeadband);
     double throttle = handleDeadband(OI.getThrottle(), throttleDeadband);
 
@@ -167,11 +177,22 @@ private double oldWheel = 0.0;
       rightPwm = -1.0;
     }
 
-    //drive.setLeftRightPower(leftPwm, rightPwm);
-    Drive.setLeftPower(bearafyLeftPower(leftPwm));
-    Drive.setRightPower(bearafyRightPower(rightPwm));
-    Drive.setHighGear(isHighGear);
+    if(OI.getDriverSlowMode() || ((!Elevator.getGripper() && Math.abs(OI.getSteer()) > 0.05)) || OI.getQuickTurn())
+    {
+    	leftPwm *= RobotValues.SlowModeSLowFactor;
+    	rightPwm *= RobotValues.SlowModeSLowFactor;
+	    Drive.setLeftPower(bearafyLeftPower(leftPwm, true));
+	    Drive.setRightPower(bearafyRightPower(rightPwm, true));
+	    Drive.setHighGear(false);
+    }
+    else
+    {
+	    Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
+	    Drive.setRightPower(bearafyRightPower(rightPwm, false));
+    	Drive.setHighGear(isHighGear);
+    }
   }
+
 
   protected boolean isFinished() {
     return false;
@@ -192,32 +213,59 @@ private double oldWheel = 0.0;
   public static double limit(double v, double limit) {
 	return (Math.abs(v) < limit) ? v : limit * (v < 0 ? -1 : 1);
   }
-  public double bearafyLeftPower(double in)
+  public double bearafyLeftPower(double in, boolean isSlow)
   {
-	  outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
+  	  if(isSlow)
+	  	outputLeft = RobotValues.SlowAlpha * lastLeftOut + (1 - RobotValues.SlowAlpha) * in;
+	  else
+	  	outputLeft = RobotValues.alpha * lastLeftOut + (1 - RobotValues.alpha) * in;
 	  lastLeftOut = outputLeft;
 	  
-	  if(Math.abs(OI.getSteer()) < 0.05)
-		  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
-	  //Accounts for drift in the gyro
-	  if(Math.abs(OI.getThrottle()) <= 0.001)
-		  outputLeft = 0;
+	  //Naturally reverses  -EXPERIMENTAL
+	  if(!OI.getQuickTurn())
+	  {		
+		  if(Math.abs(OI.getSteer()) >= 0.05)
+			  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+	  }
+	  
+		  //Accounts for drift in the gyro
+		  if(Math.abs(OI.getThrottle()) <= 0.05)
+			  outputLeft = 0;
+		  
+		//If you want to turn, without quick turning
+		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -0.01)))
+			  outputLeft = -outputLeft;
+	  
 	  return outputLeft;
   }
-  public double bearafyRightPower(double in)
+  public double bearafyRightPower(double in, boolean isSlow)
   {
-	  outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
+  	  if(isSlow)
+	  	outputRight = RobotValues.SlowAlpha * lastRightOut + (1 - RobotValues.SlowAlpha) * in;
+	  else
+	  	outputRight = RobotValues.alpha * lastRightOut + (1 - RobotValues.alpha) * in;
 	  lastRightOut = outputRight;
 	  
-	  if(Math.abs(OI.getSteer()) < 0.05)
-		  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+	  //Naturally reverses -EXPERIMENTAL
+	  if(!OI.getQuickTurn())
+	  {		
+	  
+		  if(Math.abs(OI.getSteer()) >= 0.05)
+			  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+		  else
+			  Drive.resetCheesyGyro();
+	  }
 	  else
 		  Drive.resetCheesyGyro();
-	  if(Math.abs(OI.getThrottle()) <= 0.001)
-	  {
-		  outputRight = 0;
-		  Drive.resetCheesyGyro();
-	  }
+		  if(Math.abs(OI.getThrottle()) <= 0.05)
+		  {
+			  outputRight = 0;
+			  Drive.resetCheesyGyro();
+		  }
+		  //If you want to turn, without quick turning
+		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -.01)))
+			  outputRight = -outputRight;
+	  
 	  return outputRight;
   }
 }
