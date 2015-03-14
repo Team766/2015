@@ -45,7 +45,7 @@ public class RobotValues { // Note: All distances in units of meters
 																// presets based
 																// on this
 																// variable
-	public static final double[] ElevatorPresets = { 0.005, ElevatorPresetBase,
+	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase,
 			ElevatorPresetBase * 2, ElevatorPresetBase * 3,
 			ElevatorPresetBase * 4, ElevatorPresetBase * 5,
 			ElevatorPresetBase * 6 };

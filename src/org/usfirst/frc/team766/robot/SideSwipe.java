@@ -16,7 +16,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.DropStack;
-import org.usfirst.frc.team766.robot.commands.Elevator.JoystickControl;
+import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
@@ -81,7 +81,6 @@ public class SideSwipe extends IterativeRobot {
 					new MoveElevatorHeightVelocity(.5));
 			SmartDashboard.putData("Close Grippers: ", new AdjustGripper(true));
 			SmartDashboard.putData("Open Grippers: ", new AdjustGripper(false));
-			new JoystickControl().start();
 			SmartDashboard.putData(new StackAdditionalTote());
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());

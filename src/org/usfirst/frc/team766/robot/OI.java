@@ -7,6 +7,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
+import org.usfirst.frc.team766.robot.commands.Intake.SetWheels;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,19 +20,20 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public Joystick jLeft = new Joystick(0), jRight = new Joystick(1),
 			jBox = new Joystick(2), jTest = new Joystick(3);
-			
-	public Button 
-			//Driving
-			buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
+
+	public Button
+	// Driving
+	buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
 			buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
 			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
 			buttonDriverOverride = new JoystickButton(jRight,
 					Buttons.DriverOverride),
 			buttonDriverDriveSmoothing = new JoystickButton(jRight,
 					Buttons.DriverSmoothing),
-			buttonDriverSlowMode = new JoystickButton(jLeft, Buttons.DriverSlowMode),
-			
-			//Elevator
+			buttonDriverSlowMode = new JoystickButton(jLeft,
+					Buttons.DriverSlowMode),
+
+			// Elevator
 			buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),
 			buttonElevatorClamp = new JoystickButton(jBox,
 					Buttons.ElevatorClamp),
@@ -42,21 +44,26 @@ public class OI {
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
 			buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
-			
-			//Auton
+
+			// Auton
 			buttonAutonIncrement = new JoystickButton(jBox,
 					Buttons.AutonIncrement),
 			buttonAutonDecrement = new JoystickButton(jBox,
 					Buttons.AutonDecrement),
 
 			// For testing
-			buttonStackAdditionalChute = new JoystickButton(jTest, Buttons.stackAdditionalChute),
-			buttonStackAdditional = new JoystickButton(jTest, Buttons.stackAdditionalSmall),
-			buttonStackAdditionalTote = new JoystickButton(jTest, Buttons.stackAdditionalTote),
+			buttonStackAdditionalChute = new JoystickButton(jTest,
+					Buttons.stackAdditionalChute),
+			buttonStackAdditional = new JoystickButton(jTest,
+					Buttons.stackAdditionalSmall),
+			buttonStackAdditionalTote = new JoystickButton(jTest,
+					Buttons.stackAdditionalTote),
 			buttonBrakeOn = new JoystickButton(jTest, Buttons.BrakeOn),
 			buttonBrakeOff = new JoystickButton(jTest, Buttons.BrakeOff),
 			buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
-			buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose);
+			buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose),
+			buttonIntakeIn = new JoystickButton(jTest, Buttons.intakeIn),
+			buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
 
 	// Auton Stuff
 	public int AutonMode = 3;
@@ -72,7 +79,9 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPreset7.whenPressed(new MoveElevatorWaypoint(6));
-		
+		buttonIntakeIn.whenPressed(new SetWheels(-.3));
+		buttonIntakeOut.whenPressed(new SetWheels(.3));
+
 		buttonBrakeOn.whenPressed(new AdjustElevatorBrake(true));
 		buttonBrakeOff.whenPressed(new AdjustElevatorBrake(false));
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
@@ -107,10 +116,14 @@ public class OI {
 		return jRight.getX();
 	}
 
-	public double getTestY(){
-		return jTest.getY();
+	public double getTestX() {
+		return jTest.getX();
 	}
 	
+	public double getTestY() {
+		return jTest.getY();
+	}
+
 	// tank drive
 	public double getLeft() {
 		return jLeft.getY();
@@ -184,9 +197,8 @@ public class OI {
 	public double getSlider() {
 		return jBox.getY();
 	}
-	
-	public boolean getDriverSlowMode()
-	{
+
+	public boolean getDriverSlowMode() {
 		return buttonDriverSlowMode.get();
 	}
 }

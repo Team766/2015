@@ -8,11 +8,12 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  * 
  * @author Patrick Kao
  */
-public class JoystickControl extends CommandBase {
-	private static final double BOTTOM_TRAVEL = .01;
+public class JoystickElevator extends CommandBase {
+	private static final double BOTTOM_TRAVEL = RobotValues.ElevatorPresets[0];
 	private static final double TOP_TRAVEL = RobotValues.ElevatorTopHeight - .01;
-
-	public JoystickControl() {
+	private static final boolean PRINT = true;
+	
+	public JoystickElevator() {
 		requires(Elevator);
 	}
 
@@ -23,6 +24,7 @@ public class JoystickControl extends CommandBase {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		pr("Current Current: " + Elevator.getElevatorCurrent());
 		double user = OI.getTestY();
 		double curHeight = Elevator.getEncoders();
 		
@@ -47,5 +49,9 @@ public class JoystickControl extends CommandBase {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+	}
+	
+	private void pr(Object text){
+		if(PRINT)System.out.println(text);
 	}
 }

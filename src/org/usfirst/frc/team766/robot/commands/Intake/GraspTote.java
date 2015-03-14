@@ -34,6 +34,8 @@ public class GraspTote extends CommandBase {
     }
 
     protected void initialize() {
+    	pidL.setSetpoint(0);
+    	pidR.setSetpoint(0);
     }
 
     protected void execute() {
@@ -49,15 +51,15 @@ public class GraspTote extends CommandBase {
     	leftPower = pidL.getOutput();
     	rightPower = pidR.getOutput();
     	
-    	if(!(Math.abs(curr_Rrate - pastRateR) <= stopEncDistance))
-    		rightPower = pidR.getOutput();
-    	if(!(Math.abs(curr_Lrate - pastRateL) <= stopEncDistance))
-    		leftPower = pidL.getOutput();
+    	if((Math.abs(curr_Rrate - pastRateR) >= stopEncDistance))
+    		rightPower = 0d;
+    	if((Math.abs(curr_Lrate - pastRateL) >= stopEncDistance))
+    		leftPower = 0d;
     	
     	if(curr_currentLeft > lastLeftCurr)
-    		leftPower = pidL.getOutput();
+    		leftPower = 0;
     	if(curr_currentRight > lastRightCurr)
-    		rightPower = pidR.getOutput();
+    		rightPower = 0;
     	
     	Intake.setLeftIntake(leftPower);
     	Intake.setRightIntake(rightPower);

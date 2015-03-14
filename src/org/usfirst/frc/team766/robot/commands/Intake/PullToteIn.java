@@ -43,10 +43,11 @@ public class PullToteIn extends CommandBase {
 	
 	
 	public PullToteIn() {
-    	stopCurrent = 0;
+    	this(0);
     }
 	
 	public PullToteIn(double stop) {
+		requires(Intake);
     	stopCurrent = stop;
     }
 

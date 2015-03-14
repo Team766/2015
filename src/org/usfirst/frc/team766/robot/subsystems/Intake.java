@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
+import org.usfirst.frc.team766.robot.commands.Intake.JoystickIntake;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -28,6 +29,7 @@ public class Intake extends Subsystem{
 
 	
 	protected void initDefaultCommand() {
+		setDefaultCommand(new JoystickIntake());
 	}
 	
 	public void setLeftIntake(double in)
@@ -46,7 +48,7 @@ public class Intake extends Subsystem{
 	}
 	public void setLeftWheel(double in)
 	{
-		leftWheel.set(in);
+		leftWheel.set(-in);
 	}
 	
 	public void setRightWheel(double in)
