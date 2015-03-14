@@ -32,7 +32,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double DistanceBetweenBoxes = 33; // Distance from box
 															// edge to box edge
 	public static final double Box_Width = 48 * INCHES_TO_METERS;
-	public static final double Box_Height = .32;
+	public static final double Box_Height = .32; //meters
 
 	// Bearly Drive
 	// Decrease for faster reaction times
@@ -50,6 +50,8 @@ public class RobotValues { // Note: All distances in units of meters
 			ElevatorPresetBase * 4, ElevatorPresetBase * 5,
 			ElevatorPresetBase * 6 };
 
+	public static boolean releasedChute = false;
+	
 	// Gyro DriveTurn
 	public static double TurnAngleKp = 0.35;
 	public static double TurnAngleKi = 0.01;

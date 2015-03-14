@@ -12,7 +12,7 @@ public class StackAdditionalToteChute extends CommandGroup {
     	addSequential(new AdjustGripper(true));
     	addSequential(new MoveElevatorWaypoint(3));
     	addSequential(new AdjustGripper(false));
-    	//addSequentail(new WaitForReleassed());
+    	addSequential(new WaitForReleassed());
     	addSequential(new IncrementNumTotes(1));
     }
 }

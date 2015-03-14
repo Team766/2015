@@ -2,6 +2,7 @@ package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
+import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
@@ -78,8 +79,8 @@ public class OI {
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
 		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
 		buttonStackAdditional.whenPressed(new StackAdditionalSmall());
-		buttonStackAdditionalChute.whenPressed(new StackAdditionalToteChute());
-		//buttonStackAdditionalChute.whenReleased(new LowerToteToStack());
+		buttonStackAdditionalChute.whileHeld(new StackAdditionalToteChute());
+		buttonStackAdditionalChute.whenReleased(new LowerToteToStack());
 	}
 
 	public boolean getShifter() {
