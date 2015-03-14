@@ -4,7 +4,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 public class JoystickIntake extends CommandBase {
 	private static final boolean PRINT = true;
-	
+
 	public JoystickIntake() {
 		requires(Intake);
 	}
@@ -17,6 +17,8 @@ public class JoystickIntake extends CommandBase {
 	protected void execute() {
 		double user = OI.getTestX();
 		Intake.setIntake(user);
+		pr("Left Intake" + Intake.getLeftIntake());
+		pr("Right Intake" + Intake.getRightIntake());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -32,8 +34,9 @@ public class JoystickIntake extends CommandBase {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 	}
-	
-	private void pr(Object text){
-		if(PRINT)System.out.println(text);
+
+	private void pr(Object text) {
+		if (PRINT)
+			System.out.println(text);
 	}
 }
