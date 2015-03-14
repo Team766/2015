@@ -18,8 +18,8 @@ public class CheesyDriveCommand extends CommandBase {
   private static final boolean NATUARL_REVERSE = false;  //Experimental
 private double oldWheel = 0.0;
   private double quickStopAccumulator;
-  private double throttleDeadband = 0.07; //0.02
-  private double wheelDeadband = 0.07; //0.02
+  private double throttleDeadband = 0.02; //0.02
+  private double wheelDeadband = 0.02; //0.02
   
   //Bearly Driving
   private double lastRightOut;
@@ -224,18 +224,13 @@ private double oldWheel = 0.0;
 	  //Naturally reverses  -EXPERIMENTAL
 	  if(!OI.getQuickTurn())
 	  {		
-		  if(Math.abs(OI.getSteer()) >= 0.05)
-			  outputLeft = (outputLeft -gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
+		  if(Math.abs(OI.getSteer()) <= 0.05)
+			  outputLeft = (outputLeft - gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  }
 	  
 		  //Accounts for drift in the gyro
-		  if(Math.abs(OI.getThrottle()) <= 0.05)
+		  if(Math.abs(OI.getThrottle()) <= 0.05 && !OI.getQuickTurn())
 			  outputLeft = 0;
-		  
-		//If you want to turn, without quick turning
-		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -0.01)))
-			  outputLeft = -outputLeft;
-	  
 	  return outputLeft;
   }
   public double bearafyRightPower(double in, boolean isSlow)
@@ -250,22 +245,19 @@ private double oldWheel = 0.0;
 	  if(!OI.getQuickTurn())
 	  {		
 	  
-		  if(Math.abs(OI.getSteer()) >= 0.05)
+		  if(Math.abs(OI.getSteer()) <= 0.05)
 			  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 		  else
 			  Drive.resetCheesyGyro();
 	  }
 	  else
 		  Drive.resetCheesyGyro();
-		  if(Math.abs(OI.getThrottle()) <= 0.05)
-		  {
-			  outputRight = 0;
-			  Drive.resetCheesyGyro();
-		  }
-		  //If you want to turn, without quick turning
-		  if(NATUARL_REVERSE && (Math.abs(OI.getSteer()) > 0.05 && (OI.getThrottle() < -.01)))
-			  outputRight = -outputRight;
 	  
+	  if(Math.abs(OI.getThrottle()) <= 0.05 && !OI.getQuickTurn())
+	  {
+		  outputRight = 0;
+		  Drive.resetCheesyGyro();
+	  }	  
 	  return outputRight;
   }
 }

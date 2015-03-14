@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auton_PickOneBox extends CommandGroup {
     
     public  Auton_PickOneBox() {
-    	addSequential(new PullToteIn());
+    	//addSequential(new PullToteIn());
     	addSequential(new AdjustGripper(true));
-    	addParallel(new MoveElevatorWaypoint(3));
+    	addSequential(new MoveElevatorWaypoint(3));
     	addSequential(new DriveForward(RobotValues.DriveForwardDistance));
     	addSequential(new DropStack());
     }

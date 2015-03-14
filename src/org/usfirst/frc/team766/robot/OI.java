@@ -58,7 +58,7 @@ public class OI {
 			buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose);
 
 	// Auton Stuff
-	public int AutonMode = 0;
+	public int AutonMode = 3;
 	public boolean TankDrive = false;
 	public boolean UseGamepad = false;
 
@@ -79,6 +79,7 @@ public class OI {
 		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
 		buttonStackAdditional.whenPressed(new StackAdditionalSmall());
 		buttonStackAdditionalChute.whenPressed(new StackAdditionalToteChute());
+		//buttonStackAdditionalChute.whenReleased(new LowerToteToStack());
 	}
 
 	public boolean getShifter() {

@@ -112,15 +112,17 @@ public class SideSwipe extends IterativeRobot {
 		 */
 		done = true;
 
-		// auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-		// auton.start();
+		 auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+		 auton.start();
 
 	}
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
-		SmartDashboard.putNumber("Graph", dist.graphError);
+//		SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
+//		SmartDashboard.putNumber("Graph", dist.graphError);
+		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle() + "\t Gyro" + CommandBase.Drive.getAngle());
+
 	}
 
 	public void teleopInit() {
