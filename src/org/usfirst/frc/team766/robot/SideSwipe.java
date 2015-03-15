@@ -59,7 +59,6 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData(new TestEncoders());
 		SmartDashboard.putData("Drive Backward 1.5 Meters: ", new DriveForward(
 				-1.5));
-		SmartDashboard.putData(new CalibrateElevator());
 		SmartDashboard.putData(new ResetGyro());
 		done = false;
 
@@ -69,7 +68,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
 		SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
 		SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
-		new CalibrateElevator().start();//Elevator must be at bottom at start.
+		SmartDashboard.putData(new CalibrateElevator());//Elevator must be at bottom at start.
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
 			SmartDashboard.putData(new ShowStops());
@@ -86,7 +85,6 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new DropStack());
 			SmartDashboard.putData(new DisplayOIButtons());
 		}
-		new CalibrateElevator().start();
 	}
 
 	public void disabledPeriodic() {
