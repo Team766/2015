@@ -7,6 +7,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
+import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
 import org.usfirst.frc.team766.robot.commands.Intake.SetWheels;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -53,7 +54,10 @@ public class OI {
 			buttonAutonDecrement = new JoystickButton(jBox,
 					Buttons.AutonDecrement),
 
-					
+			//Intake
+			buttonGraspTote = new JoystickButton(jBox, Buttons.GraspTote),
+			
+			
 			buttonStackAdditionalChute = new JoystickButton(jTest,
 					Buttons.stackAdditionalChute),
 			buttonStackAdditional = new JoystickButton(jTest,
@@ -96,6 +100,8 @@ public class OI {
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
 		
+		//Intake
+		buttonGraspTote.whenPressed(new GraspTote());
 		
 		StackAdditionalTote stackAdd = new StackAdditionalTote();
 		StackAdditionalSmall stackSmall = new StackAdditionalSmall();
