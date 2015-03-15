@@ -38,16 +38,19 @@ public class MoveElevatorHeight extends CommandBase {
 		positionPID.calculateDebug(Elevator.getEncoders(), false);
 		// Don't want to go too high or too low
 		
-		if ((OI.getElevatorCancel()) || (Elevator.getEncoders() <= RobotValues.ElevatorTopHeight)
-				&& (Elevator.getEncoders() >= 0)) {
+		if (isFinished()) {
 			Elevator.setElevatorSpeed(positionPID.getOutput());
-		}
+		}else
+			Elevator.setElevatorSpeed(0d);
 	}
 
 	protected boolean isFinished() {
 		return positionPID.isDone() || Elevator.getBottomStop()
-				|| Elevator.getTopStop() || Elevator.getEncoders() <= RobotValues.ElevatorTopHeight;
+				|| Elevator.getTopStop() || (OI.getElevatorCancel()) || 
+				(Elevator.getEncoders() <= RobotValues.ElevatorTopHeight)
+				&& (Elevator.getEncoders() >= 0);
 	}
+
 
 	protected void end() {
 		Elevator.setBrake(true);

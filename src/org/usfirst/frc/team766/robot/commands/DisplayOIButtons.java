@@ -23,7 +23,6 @@ public class DisplayOIButtons extends CommandBase {
 		pr("Elevator Preset 4: " + OI.buttonElevatorPreset4.get());
 		pr("Elevator Preset 5: " + OI.buttonElevatorPreset5.get());
 		pr("Elevator Preset 6: " + OI.buttonElevatorPreset6.get());
-		pr("Elevator Preset 7: " + OI.buttonElevatorPreset7.get());
 		pr("Button Stop Elevator: " + OI.buttonStopElevator.get());
 		pr("Button Elevator Clamp: " + OI.buttonElevatorClamp.get());
 		pr("buttonAutonIncrement: " + OI.buttonAutonIncrement.get());
@@ -39,7 +38,6 @@ public class DisplayOIButtons extends CommandBase {
 		SmartDashboard.putBoolean("Elevator Preset 4: " , OI.buttonElevatorPreset4.get());
 		SmartDashboard.putBoolean("Elevator Preset 5: " , OI.buttonElevatorPreset5.get());
 		SmartDashboard.putBoolean("Elevator Preset 6: " , OI.buttonElevatorPreset6.get());
-		SmartDashboard.putBoolean("Elevator Preset 7: " , OI.buttonElevatorPreset7.get());
 		SmartDashboard.putBoolean("Button Stop Elevator: " , OI.buttonStopElevator.get());
 		SmartDashboard.putBoolean("Button Elevator Clamp: " , OI.buttonElevatorClamp.get());
 		SmartDashboard.putBoolean("buttonAutonIncrement: " , OI.buttonAutonIncrement.get());

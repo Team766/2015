@@ -43,7 +43,6 @@ public class OI {
 			buttonElevatorPreset4 = new JoystickButton(jBox, Buttons.preset4),
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
-			buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
 			
 			buttonElevatorCancel = new JoystickButton(jBox, Buttons.ElevatorCancel),
 			buttonElevatorCancelAutomation = new JoystickButton(jBox, Buttons.ElevatorCancelAutomation),
@@ -87,7 +86,6 @@ public class OI {
 		buttonElevatorPreset4.whenPressed(new MoveElevatorWaypoint(3));
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
-		buttonElevatorPreset7.whenPressed(new MoveElevatorWaypoint(6));
 		
 		buttonIntakeIn.whileHeld(new SetWheels(-.3));
 		buttonIntakeOut.whileHeld(new SetWheels(.3));

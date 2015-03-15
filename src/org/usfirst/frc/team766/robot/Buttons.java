@@ -22,7 +22,6 @@ public class Buttons {
 	public static final int preset4 = 17;
 	public static final int preset5 = 18;
 	public static final int preset6 = 19;
-	public static final int preset7 = 20;
 	
 	//Test Joystick
 	public static final int BrakeOff= 7;
