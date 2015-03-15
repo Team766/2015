@@ -13,7 +13,6 @@ public class Slider extends CommandBase {
 	MoveElevatorHeight mover = new MoveElevatorHeight();
 
 	public Slider(){
-		requires(Elevator);
 	}
 	@Override
 	protected void initialize() {

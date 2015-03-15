@@ -55,7 +55,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Slider());
+//		setDefaultCommand(new Slider());
 	}
 
 	public void setElevatorSpeed(double speed) {
