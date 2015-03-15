@@ -41,6 +41,15 @@ public class Intake extends Subsystem{
 	{
 		rightIntake.set(in);
 	}
+	
+	public double getLeftIntake()
+	{
+		return leftIntake.get();
+	}
+	
+	public double getRightIntake(){
+		return rightIntake.get();
+	}
 	public void setWheels(double in)
 	{
 		setLeftWheel(in);

@@ -11,7 +11,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class JoystickElevator extends CommandBase {
 	private static final double BOTTOM_TRAVEL = RobotValues.ElevatorPresets[0];
 	private static final double TOP_TRAVEL = RobotValues.ElevatorTopHeight - .01;
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 	
 	public JoystickElevator() {
 		requires(Elevator);

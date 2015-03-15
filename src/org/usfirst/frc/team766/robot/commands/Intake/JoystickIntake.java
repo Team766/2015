@@ -4,7 +4,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 public class JoystickIntake extends CommandBase {
 	private static final boolean PRINT = true;
-	
+
 	public JoystickIntake() {
 		requires(Intake);
 	}
@@ -19,7 +19,7 @@ public class JoystickIntake extends CommandBase {
 			user = 0;
 			
 		Intake.setIntake(user);
-		System.out.println("Intake out: " + user);
+		pr("Left Intake" + Intake.getLeftIntake());
 	}
 
 	protected boolean isFinished() {
@@ -33,8 +33,9 @@ public class JoystickIntake extends CommandBase {
 	protected void interrupted() {
 		end();
 	}
-	
-	private void pr(Object text){
-		if(PRINT)System.out.println(text);
+
+	private void pr(Object text) {
+		if (PRINT)
+			System.out.println(text);
 	}
 }
