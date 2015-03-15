@@ -15,8 +15,8 @@ public class GraspTote extends CommandBase {
 	private PIDController pidR = new PIDController(RobotValues.IntakeKP, 
 			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
 	private final double stopEncDistance = 0.01;
-	private final double tollerance = 10;
-	private final double stopCurrent = 10;
+	private final double tollerance = 0.5;
+	private final double stopCurrent = 3;
 	private double
 		curr_Rrate,
 		curr_Lrate,
@@ -58,7 +58,7 @@ public class GraspTote extends CommandBase {
     	
     	if(curr_currentLeft > lastLeftCurr)
     		leftPower = 0;
-    	if(curr_currentRight > lastRightCurr)
+    	if(curr_currentRight> lastRightCurr)
     		rightPower = 0;
     	
     	Intake.setLeftIntake(leftPower);
@@ -68,11 +68,15 @@ public class GraspTote extends CommandBase {
     	lastRightCurr = curr_currentRight + tollerance;
     	pastRateL = curr_Rrate;
     	pastRateR = curr_Lrate;
+    	
+    	System.out.println("Current Current: " + curr_currentLeft);
+    	System.out.println("Left Encoder: " + curr_Lrate);
+    	System.out.println("Right Encoder: " + curr_Rrate);
     }
 
     protected boolean isFinished() {
-        return ((curr_currentLeft > stopCurrent) && 
-		    	   (curr_currentRight > stopCurrent)) &&
+        return (((curr_currentLeft > stopCurrent) && 
+		    	   (curr_currentRight > stopCurrent))) ||
 		    	   (Math.abs(curr_Rrate - pastRateR) <= stopEncDistance);
     }
 

@@ -118,8 +118,7 @@ public class SideSwipe extends IterativeRobot {
 		Scheduler.getInstance().run();
 //		SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
 //		SmartDashboard.putNumber("Graph", dist.graphError);
-		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle() + "\t Gyro" + CommandBase.Drive.getAngle());
-
+//		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle() + "\t Gyro" + CommandBase.Drive.getAngle());
 	}
 
 	public void teleopInit() {
