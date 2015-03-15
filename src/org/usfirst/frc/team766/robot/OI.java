@@ -1,6 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
-import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
@@ -91,8 +91,8 @@ public class OI {
 		buttonIntakeIn.whileHeld(new SetWheels(-.3));
 		buttonIntakeOut.whileHeld(new SetWheels(.3));
 
-		buttonBrakeOn.whenPressed(new AdjustElevatorBrake(true));
-		buttonBrakeOff.whenPressed(new AdjustElevatorBrake(false));
+		buttonBrakeOn.whenPressed(new AdjustBrake(true));
+		buttonBrakeOff.whenPressed(new AdjustBrake(false));
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
 		

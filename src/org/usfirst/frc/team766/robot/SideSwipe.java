@@ -12,7 +12,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.ResetGyro;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
-import org.usfirst.frc.team766.robot.commands.Elevator.AdjustElevatorBrake;
+import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.DropStack;
@@ -71,8 +71,8 @@ public class SideSwipe extends IterativeRobot {
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
 			SmartDashboard.putData(new ShowStops());
-			SmartDashboard.putData("Brake Off", new AdjustElevatorBrake(false));
-			SmartDashboard.putData("Brake On", new AdjustElevatorBrake(true));
+			SmartDashboard.putData("Brake Off", new AdjustBrake(false));
+			SmartDashboard.putData("Brake On", new AdjustBrake(true));
 			SmartDashboard.putData("MoveElevatorHeight .5",
 					new MoveElevatorHeight(.5));
 			SmartDashboard.putData("MoveElevatorHeightVelocity .5",
