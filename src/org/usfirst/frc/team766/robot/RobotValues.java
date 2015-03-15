@@ -46,7 +46,7 @@ public class RobotValues { // Note: All distances in units of meters
 																// on this
 																// variable
 	public static final double BoxFlange = .04;
-	public static final double[] ElevatorPresets = { -BoxFlange, ElevatorPresetBase - BoxFlange,
+	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase - BoxFlange,
 			ElevatorPresetBase * 2 - BoxFlange, ElevatorPresetBase * 3 - BoxFlange,
 			ElevatorPresetBase * 4 - BoxFlange, ElevatorPresetBase * 5 - BoxFlange};
 

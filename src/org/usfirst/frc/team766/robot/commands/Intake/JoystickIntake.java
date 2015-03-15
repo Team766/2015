@@ -3,7 +3,7 @@ package org.usfirst.frc.team766.robot.commands.Intake;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 public class JoystickIntake extends CommandBase {
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 
 	public JoystickIntake() {
 		requires(Intake);

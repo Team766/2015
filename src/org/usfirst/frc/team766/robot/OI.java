@@ -77,7 +77,8 @@ public class OI {
 
 	public OI() {
 		
-		buttonElevatorClamp.whileHeld(new AdjustGripper(true));
+		buttonElevatorClamp.whenPressed(new AdjustGripper(true));
+		buttonElevatorClamp.whenReleased(new AdjustGripper(false));
 		
 		//Turned of so doesn't interfere with slider.
 		buttonElevatorPreset1.whenPressed(new MoveElevatorWaypoint(0));
@@ -217,7 +218,7 @@ public class OI {
 	}
 
 	public double getSlider() {
-		return jBox.getY();
+		return jBox.getX();
 	}
 
 	public boolean getDriverSlowMode() {
