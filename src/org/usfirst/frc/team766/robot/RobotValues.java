@@ -32,7 +32,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double DistanceBetweenBoxes = 33; // Distance from box
 															// edge to box edge
 	public static final double Box_Width = 48 * INCHES_TO_METERS;
-	public static final double Box_Height = .32; //meters
+	public static final double Box_Height = .305; //meters
 
 	// Bearly Drive
 	// Decrease for faster reaction times
@@ -45,10 +45,11 @@ public class RobotValues { // Note: All distances in units of meters
 																// presets based
 																// on this
 																// variable
-	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase,
-			ElevatorPresetBase * 2, ElevatorPresetBase * 3,
-			ElevatorPresetBase * 4, ElevatorPresetBase * 5,
-			ElevatorPresetBase * 6 };
+	public static final double BoxFlange = .04;
+	public static final double[] ElevatorPresets = { -BoxFlange, ElevatorPresetBase - BoxFlange,
+			ElevatorPresetBase * 2 - BoxFlange, ElevatorPresetBase * 3 - BoxFlange,
+			ElevatorPresetBase * 4 - BoxFlange, ElevatorPresetBase * 5 - BoxFlange,
+			ElevatorPresetBase * 6 - BoxFlange };
 
 	public static boolean releasedChute = false;
 	

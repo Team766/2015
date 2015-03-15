@@ -46,7 +46,7 @@ public class MoveElevatorHeight extends CommandBase {
 
 	protected boolean isFinished() {
 		return positionPID.isDone() || Elevator.getBottomStop()
-				|| Elevator.getTopStop();
+				|| Elevator.getTopStop() || Elevator.getEncoders() <= RobotValues.ElevatorTopHeight;
 	}
 
 	protected void end() {
