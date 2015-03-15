@@ -79,6 +79,8 @@ public class OI {
 	public OI() {
 		
 		buttonElevatorClamp.whileHeld(new AdjustGripper(true));
+		
+		//Turned of so doesn't interfere with slider.
 		buttonElevatorPreset1.whenPressed(new MoveElevatorWaypoint(0));
 		buttonElevatorPreset2.whenPressed(new MoveElevatorWaypoint(1));
 		buttonElevatorPreset3.whenPressed(new MoveElevatorWaypoint(2));
@@ -86,6 +88,7 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPreset7.whenPressed(new MoveElevatorWaypoint(6));
+		
 		buttonIntakeIn.whileHeld(new SetWheels(-.3));
 		buttonIntakeOut.whileHeld(new SetWheels(.3));
 

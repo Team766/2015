@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Intake extends Subsystem{
-
+	private static final double MAX_OUTPUT = .3;
+	private static final double MIN_OUTPUT = -.3;
+	
 	private Victor leftIntake = new Victor(Ports.PWM_IntakeL);
 	private Victor rightIntake = new Victor(Ports.PWM_IntakeR);
 	
@@ -34,11 +36,15 @@ public class Intake extends Subsystem{
 	
 	public void setLeftIntake(double in)
 	{
+		if(in>MAX_OUTPUT) in = MAX_OUTPUT;
+		if(in<MIN_OUTPUT) in = MIN_OUTPUT;
 		leftIntake.set(in);
 	}
 	
 	public void setRightIntake(double in)
 	{
+		if(in>MAX_OUTPUT) in = MAX_OUTPUT;
+		if(in<MIN_OUTPUT) in = MIN_OUTPUT;
 		rightIntake.set(in);
 	}
 	

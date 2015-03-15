@@ -2,9 +2,7 @@ package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
-import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
+import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -57,7 +55,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new JoystickElevator());
+		setDefaultCommand(new Slider());
 	}
 
 	public void setElevatorSpeed(double speed) {
