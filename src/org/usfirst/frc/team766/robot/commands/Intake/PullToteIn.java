@@ -10,6 +10,8 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *  robot.  When run it reads the current and uses that to determine if the motors are
  *  in contact with the tote.
  */
+
+@Deprecated
 public class PullToteIn extends CommandBase {
 
     private double 

@@ -53,7 +53,7 @@ public class Intake extends Subsystem{
 	
 	public void setRightWheel(double in)
 	{
-		rightWheel.set(in);
+		rightWheel.set(-in);
 	}
 	
 	public double getIntakeCurrentRight()
@@ -82,6 +82,10 @@ public class Intake extends Subsystem{
 	{
 		rightEnc.reset();
 		leftEnc.reset();
+	}
+
+	public String getWheelSpeed() {
+		return leftWheel.get() + "\t" + rightWheel.get();
 	}
 	
 }

@@ -18,6 +18,7 @@ public class Slider extends CommandBase {
 	@Override
 	protected void initialize() {
 		lastSlider = slider = 0;
+		mover.start();
 	}
 
 	protected void execute() {
@@ -30,12 +31,14 @@ public class Slider extends CommandBase {
 		// Move Elevator to slider
 		slider = CommandBase.OI.getSlider();
 
-		
+		//If the  slider has moved
 		if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
 			// Convert the slider from -1 - 1 to 0 - TopHeight
-			double goal = (((-RobotValues.ElevatorTopHeight) / (2)) * (slider + 1));
+			double goal = (((RobotValues.ElevatorTopHeight) / 2d) * (slider + 1d));
 			mover.changeGoal(goal);
-			mover.start();//Warning: Calls start multiple times?
+			
+			if(!mover.isRunning())
+				mover.start();
 		}
 
 //		// Reset the elevator. Done in CalibrateElevator();

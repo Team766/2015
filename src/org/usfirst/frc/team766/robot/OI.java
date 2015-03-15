@@ -44,20 +44,26 @@ public class OI {
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
 			buttonElevatorPreset7 = new JoystickButton(jBox, Buttons.preset7),
-
+			
+			buttonElevatorCancel = new JoystickButton(jBox, Buttons.ElevatorCancel),
+			buttonElevatorCancelAutomation = new JoystickButton(jBox, Buttons.ElevatorCancelAutomation),
+			
 			// Auton
 			buttonAutonIncrement = new JoystickButton(jBox,
 					Buttons.AutonIncrement),
 			buttonAutonDecrement = new JoystickButton(jBox,
 					Buttons.AutonDecrement),
 
-			// For testing
+					
 			buttonStackAdditionalChute = new JoystickButton(jTest,
 					Buttons.stackAdditionalChute),
 			buttonStackAdditional = new JoystickButton(jTest,
 					Buttons.stackAdditionalSmall),
 			buttonStackAdditionalTote = new JoystickButton(jTest,
 					Buttons.stackAdditionalTote),
+					
+
+			// For testing
 			buttonBrakeOn = new JoystickButton(jTest, Buttons.BrakeOn),
 			buttonBrakeOff = new JoystickButton(jTest, Buttons.BrakeOff),
 			buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
@@ -71,6 +77,7 @@ public class OI {
 	public boolean UseGamepad = false;
 
 	public OI() {
+		
 		buttonElevatorClamp.whileHeld(new AdjustGripper(true));
 		buttonElevatorPreset1.whenPressed(new MoveElevatorWaypoint(0));
 		buttonElevatorPreset2.whenPressed(new MoveElevatorWaypoint(1));
@@ -79,17 +86,27 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPreset7.whenPressed(new MoveElevatorWaypoint(6));
-		buttonIntakeIn.whenPressed(new SetWheels(-.3));
-		buttonIntakeOut.whenPressed(new SetWheels(.3));
+		buttonIntakeIn.whileHeld(new SetWheels(-.3));
+		buttonIntakeOut.whileHeld(new SetWheels(.3));
 
 		buttonBrakeOn.whenPressed(new AdjustElevatorBrake(true));
 		buttonBrakeOff.whenPressed(new AdjustElevatorBrake(false));
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
-		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
-		buttonStackAdditional.whenPressed(new StackAdditionalSmall());
-		buttonStackAdditionalChute.whileHeld(new StackAdditionalToteChute());
+		
+		
+		StackAdditionalTote stackAdd = new StackAdditionalTote();
+		StackAdditionalSmall stackSmall = new StackAdditionalSmall();
+		StackAdditionalToteChute stackChute = new StackAdditionalToteChute();
+		buttonStackAdditionalTote.whenPressed(stackAdd);
+		buttonStackAdditional.whenPressed(stackSmall);
+		buttonStackAdditionalChute.whileHeld(stackChute);
 		buttonStackAdditionalChute.whenReleased(new LowerToteToStack());
+		
+		//Cancel Automated Commands
+		buttonElevatorCancelAutomation.cancelWhenPressed(stackAdd);
+		buttonElevatorCancelAutomation.cancelWhenPressed(stackSmall);
+		buttonElevatorCancelAutomation.cancelWhenPressed(stackChute);
 	}
 
 	public boolean getShifter() {
@@ -122,6 +139,10 @@ public class OI {
 	
 	public double getTestY() {
 		return jTest.getY();
+	}
+	public double getTest3()
+	{
+		return jTest.getRawAxis(3);
 	}
 
 	// tank drive
@@ -200,5 +221,14 @@ public class OI {
 
 	public boolean getDriverSlowMode() {
 		return buttonDriverSlowMode.get();
+	}
+	
+	public boolean getElevatorCancel()
+	{
+		return buttonElevatorCancel.get();
+	}
+	public boolean getCancelAutomation()
+	{
+		return buttonElevatorCancelAutomation.get();
 	}
 }

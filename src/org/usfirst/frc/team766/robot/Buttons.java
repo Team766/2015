@@ -14,13 +14,15 @@ public class Buttons {
 	public static final int BoxStop = 1;
 	//Elevator
 	public static final int ElevatorClamp = 2;
-	public static final int preset1 = 3;
-	public static final int preset2 = 4;
-	public static final int preset3 = 5;
-	public static final int preset4 = 6;
-	public static final int preset5 = 7;
-	public static final int preset6 = 8;
-	public static final int preset7 = 9; 
+	public static final int ElevatorCancel = 9;
+	public static final int ElevatorCancelAutomation = 21;
+	public static final int preset1 = 14;
+	public static final int preset2 = 15;
+	public static final int preset3 = 16;
+	public static final int preset4 = 17;
+	public static final int preset5 = 18;
+	public static final int preset6 = 19;
+	public static final int preset7 = 20;
 	
 	//Test Joystick
 	public static final int BrakeOff= 7;
