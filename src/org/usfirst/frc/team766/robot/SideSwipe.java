@@ -84,7 +84,6 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new StackAdditionalTote());
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
-			SmartDashboard.putData(new Slider());//Don't use for now. Doesn't work correctly
 			SmartDashboard.putData(new DisplayOIButtons());
 		}
 		new CalibrateElevator().start();
@@ -140,9 +139,6 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-//		new Slider().start();
-//		new JoystickControl().start();//For testing. Replaces slider
-		
 		done = true;
 		printOut.start();
 	}
