@@ -12,6 +12,7 @@ public class Buttons {
     
     //BoxOp
 	public static final int BoxStop = 1;
+	public static final int GraspTote = 12;
 	//Elevator
 	public static final int ElevatorClamp = 2;
 	public static final int ElevatorCancel = 9;
