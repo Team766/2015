@@ -32,7 +32,7 @@ public class Slider extends CommandBase {
 		slider = CommandBase.OI.getSlider();
 
 		//If the  slider has moved
-		if (Math.abs(slider - lastSlider) <= RobotValues.SliderChangeTolerance) {
+		if (Math.abs(slider - lastSlider) >= RobotValues.SliderChangeTolerance) {
 			// Convert the slider from -1 - 1 to 0 - TopHeight
 			double goal = (((RobotValues.ElevatorTopHeight) / 2d) * (slider + 1d));
 			mover.changeGoal(goal);
