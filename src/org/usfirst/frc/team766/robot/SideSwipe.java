@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.DisplayOIButtons;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
@@ -152,6 +153,7 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putString("Test Prints", printOut.getOut());
 			System.out.println(printOut.getOut());
 		}
+		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
 	}
 
 	public void testPeriodic() {

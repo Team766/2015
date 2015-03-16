@@ -72,6 +72,7 @@ public class GraspTote extends CommandBase {
     	System.out.println("Current Current: " + curr_currentLeft);
     	System.out.println("Left Encoder: " + curr_Lrate);
     	System.out.println("Right Encoder: " + curr_Rrate);
+    	System.out.println("Left: " + leftPower + "Right: " + rightPower);
     }
 
     protected boolean isFinished() {
