@@ -34,5 +34,5 @@ public class AdjustBrake extends CommandBase {
     protected void interrupted() {
     }
     
-    private boolean brake;
+    protected boolean brake;
 }

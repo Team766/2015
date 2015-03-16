@@ -2,8 +2,6 @@ package org.usfirst.frc.team766.robot.commands.Elevator;
 
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * Takes whether or not to grip a tote. Pass true into the constructor to close
  * the gripper arm
@@ -11,8 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class AdjustGripper extends CommandBase {
 	public static final double GRIP_TIME = 1;
 	
-	boolean grip, isDone;
-	double startTime;
+	protected boolean grip;
 
 
 	public AdjustGripper(boolean grip) {

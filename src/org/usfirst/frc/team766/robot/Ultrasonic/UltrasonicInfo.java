@@ -44,7 +44,7 @@ public class UltrasonicInfo {
 		return isNew;
 	}
 	
-	private double[] distances;
+	private double[] distances = new double[2];
 	private double angle;
 	boolean isNew;
 }
