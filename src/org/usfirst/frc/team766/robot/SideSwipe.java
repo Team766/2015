@@ -22,6 +22,9 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocit
 import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
+import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
+import org.usfirst.frc.team766.robot.commands.Intake.OpenToteArms;
+import org.usfirst.frc.team766.robot.commands.Intake.ResetIntakeEnc;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
@@ -60,6 +63,9 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData("Drive Backward 1.5 Meters: ", new DriveForward(
 				-1.5));
 		SmartDashboard.putData(new ResetGyro());
+		SmartDashboard.putData(new ResetIntakeEnc());
+		SmartDashboard.putData(new GraspTote());
+		SmartDashboard.putData(new OpenToteArms());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
@@ -100,9 +106,9 @@ public class SideSwipe extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
-		RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
-		RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
+//		RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
+//		RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
+//		RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
 
 		/*
 		 * Run auton command Need to create an auton selector that uses OI and
@@ -123,6 +129,13 @@ public class SideSwipe extends IterativeRobot {
 	}
 
 	public void teleopInit() {
+		
+		RobotValues.IntakeKP = SmartDashboard.getNumber("P");
+		RobotValues.IntakeKI = SmartDashboard.getNumber("I");
+		RobotValues.IntakeKD = SmartDashboard.getNumber("D");
+		
+		
+		
 		// cancel auton
 		if (auton != null)
 			auton.cancel();
@@ -153,7 +166,6 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putString("Test Prints", printOut.getOut());
 			System.out.println(printOut.getOut());
 		}
-		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
 	}
 
 	public void testPeriodic() {

@@ -95,8 +95,10 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double ElevatorMinSpeed = -.5;
 
 	// Intake PID
-	public static final double IntakeKP = 0.01, IntakeKI = 0.0, IntakeKD = 0.0,
-			IntakeThreshold = .01;
+	public static double IntakeKP = 0.04;
+	public static double IntakeKI = 0.0;
+	public static double IntakeKD = 0.0;
+	public static double IntakeThreshold = 2;
 
 	// Elevator
 	public static final double SliderChangeTolerance = 0.1;

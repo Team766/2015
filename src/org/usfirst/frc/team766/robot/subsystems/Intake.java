@@ -82,11 +82,11 @@ public class Intake extends Subsystem{
 	
 	public double getEncLeft()
 	{
-		return leftEnc.getDistance();
+		return leftEnc.get();
 	}
 	public double getEncRight()
 	{
-		return rightEnc.getDistance();
+		return rightEnc.get();
 	}
 	public void setIntake(double in)
 	{
