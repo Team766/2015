@@ -49,7 +49,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase - BoxFlange,
 			ElevatorPresetBase * 2 - BoxFlange, ElevatorPresetBase * 3 - BoxFlange,
 			ElevatorPresetBase * 4 - BoxFlange, ElevatorPresetBase * 5 - BoxFlange};
-
+	public static final double DriveGroundHeight = .02;
 	public static boolean releasedChute = false;
 	
 	// Gyro DriveTurn

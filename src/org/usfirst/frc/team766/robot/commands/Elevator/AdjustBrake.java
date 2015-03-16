@@ -5,9 +5,9 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 /**
  *
  */
-public class AdjustElevatorBrake extends CommandBase {
+public class AdjustBrake extends CommandBase {
 
-    public AdjustElevatorBrake(boolean brake) {
+    public AdjustBrake(boolean brake) {
     	this.brake = brake;
     }
 
@@ -34,5 +34,5 @@ public class AdjustElevatorBrake extends CommandBase {
     protected void interrupted() {
     }
     
-    private boolean brake;
+    protected boolean brake;
 }
