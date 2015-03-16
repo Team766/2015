@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
@@ -8,9 +9,9 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
-import org.usfirst.frc.team766.robot.commands.Intake.IntakeTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.ToggleGripper;
 import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
+import org.usfirst.frc.team766.robot.commands.Intake.IntakeTote;
 import org.usfirst.frc.team766.robot.commands.Intake.SetWheels;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,15 +42,19 @@ public class OI {
 			buttonToggleGripper = new JoystickButton(jBox,
 					Buttons.ToggleGripper),
 			buttonStackAdditionalTote = new JoystickButton(jBox,
-					Buttons.ToggleGripper),
+					Buttons.StackAdditionalToteBoxOp),
 			buttonIntakeFeeder = new JoystickButton(jBox, Buttons.IntakeFeeder),
 			buttonDriveGround = new JoystickButton(jBox, Buttons.DriveGround),
 			buttonBrakeOff = new JoystickButton(jBox, Buttons.BrakeOff),
 			buttonBrakeOn = new JoystickButton(jBox, Buttons.BrakeOn),
-			buttonStopElevator = new JoystickButton(jBox, Buttons.BoxStop),//Need to implement
+			buttonLeftArm = new JoystickButton(jBox, Buttons.LeftArm),
+			buttonRightArm = new JoystickButton(jBox, Buttons.RightArm),
+			// buttonStopElevator = new JoystickButton(jBox,
+			// Buttons.BoxStop),//Need to implement
 			buttonWheelsIn = new JoystickButton(jBox, Buttons.IntakeWheelsIn),
 			buttonWheelsOut = new JoystickButton(jBox, Buttons.IntakeWheelsOut),
-			buttonGraspToteIntake= new JoystickButton(jBox,Buttons.GraspToteIntake),
+			// buttonGraspToteIntake= new
+			// JoystickButton(jBox,Buttons.GraspToteIntake),
 			buttonElevatorCancel = new JoystickButton(jBox,
 					Buttons.ElevatorCancel),// No spare switches/buttons
 			buttonElevatorPreset1 = new JoystickButton(jBox, Buttons.preset1),
@@ -70,7 +75,8 @@ public class OI {
 
 			// For Testing
 			// Intake
-			buttonGraspTote = new JoystickButton(jBox, Buttons.GraspToteIntake),
+			// buttonGraspTote = new JoystickButton(jBox,
+			// Buttons.GraspToteIntake),
 
 			buttonStackAdditionalChute = new JoystickButton(jTest,
 					Buttons.StackAdditionalChute),
@@ -94,12 +100,13 @@ public class OI {
 		buttonToggleGripper.whenPressed(new ToggleGripper());
 		buttonStackAdditionalTote.whenPressed(new StackAdditionalTote());
 		buttonIntakeFeeder.whenPressed(new StackAdditionalToteChute());
-		buttonDriveGround.whenPressed(new MoveElevatorHeight(RobotValues.DriveGroundHeight));
+		buttonDriveGround.whenPressed(new MoveElevatorHeight(
+				RobotValues.DriveGroundHeight));
 		buttonBrakeOff.whenPressed(new AdjustBrake(false));
 		buttonBrakeOn.whenPressed(new AdjustBrake(true));
 		buttonWheelsIn.whenPressed(new SetWheels(-1));
 		buttonWheelsOut.whenPressed(new SetWheels(1));
-		buttonGraspToteIntake.whenPressed(new GraspTote());
+		// buttonGraspToteIntake.whenPressed(new GraspTote());
 		// Turned off so doesn't interfere with slider.
 		buttonElevatorPreset1.whenPressed(new MoveElevatorWaypoint(0));
 		buttonElevatorPreset2.whenPressed(new MoveElevatorWaypoint(1));
@@ -108,20 +115,21 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 
-		buttonIntakeIn.whileHeld(new SetWheels(-.3));
-		buttonIntakeOut.whileHeld(new SetWheels(.3));
+		buttonIntakeIn.whenPressed(new SetWheels(-.3));
+		buttonIntakeOut.whenPressed(new SetWheels(.3));
+		buttonIntakeIn.whenReleased(new SetWheels(0));
+		buttonIntakeOut.whenReleased(new SetWheels(0));
 
 		buttonBrakeOnTest.whenPressed(new AdjustBrake(true));
 		buttonBrakeOffTest.whenPressed(new AdjustBrake(false));
 		buttonGripperOpen.whenPressed(new AdjustGripper(false));
 		buttonGripperClose.whenPressed(new AdjustGripper(true));
-		
-		//Intake
-		buttonGraspTote.whenPressed(new IntakeTote());
-		
 
 		// Intake
-		buttonGraspTote.whenPressed(new GraspTote());
+		// buttonGraspTote.whenPressed(new IntakeTote());
+
+		// Intake
+		// buttonGraspTote.whenPressed(new GraspTote());
 
 		StackAdditionalTote stackAdd = new StackAdditionalTote();
 		StackAdditionalSmall stackSmall = new StackAdditionalSmall();
@@ -240,7 +248,8 @@ public class OI {
 	}
 
 	public boolean getStop() {
-		return buttonStopElevator.get();
+		// return buttonStopElevator.get();
+		return false;
 	}
 
 	public double getSlider() {

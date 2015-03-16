@@ -105,7 +105,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean getGripper() {
-		return !gripper.get();
+		return gripper.get();
 	}
 
 	// grip == true = closed

@@ -45,11 +45,14 @@ public class RobotValues { // Note: All distances in units of meters
 																// presets based
 																// on this
 																// variable
+	// Encoder Height of elevator, needs to be changed
+	public static double ElevatorTopHeight = 1.57;//Turned down for testing
+	public static double elevatorSavedHeight = 0;
 	public static final double BoxFlange = .04;
 	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase - BoxFlange,
 			ElevatorPresetBase * 2 - BoxFlange, ElevatorPresetBase * 3 - BoxFlange,
-			ElevatorPresetBase * 4 - BoxFlange, ElevatorPresetBase * 5 - BoxFlange};
-	public static final double DriveGroundHeight = .02;
+			ElevatorPresetBase * 4 - BoxFlange, ElevatorPresetBase * 5 - BoxFlange, ElevatorTopHeight};
+	public static final double DriveGroundHeight = .06;
 	public static boolean releasedChute = false;
 	
 	// Gyro DriveTurn
@@ -101,9 +104,7 @@ public class RobotValues { // Note: All distances in units of meters
 	// Elevator
 	public static final double SliderChangeTolerance = 0.1;
 	public static int numTotes = 0;
-	// Encoder Height of elevator, needs to be changed
-	public static double ElevatorTopHeight = 1.57;//Turned down for testing
-	public static double elevatorSavedHeight = 0;
+
 	
 	//Auton Driving
 	public static final double k_moveToNextTote = 33 * INCHES_TO_METERS;
