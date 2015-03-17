@@ -17,11 +17,13 @@ public class Buttons {
     public static final int DriveGround= 4;
     public static final int BrakeOff = 7;
     public static final int BrakeOn = 8;
-    public static final int BoxStop = 9;
+    public static final int RightArm = 9;
+//    public static final int BoxStop = 9;
     public static final int ElevatorCancel = 5;//NO SPARE SWITCHES.
     public static final int IntakeWheelsIn= 10;
     public static final int IntakeWheelsOut= 11;
-	public static final int GraspToteIntake = 12;
+    public static final int LeftArm = 12;
+//	public static final int GraspToteIntake = 12;
 	public static final int preset1 = 14;
 	public static final int preset2 = 15;
 	public static final int preset3 = 16;

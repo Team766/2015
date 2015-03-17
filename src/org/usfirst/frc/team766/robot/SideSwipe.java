@@ -2,7 +2,6 @@ package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
-import org.usfirst.frc.team766.robot.commands.DisplayOIButtons;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
@@ -89,7 +88,6 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new StackAdditionalTote());
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
-			SmartDashboard.putData(new DisplayOIButtons());
 		}
 	}
 
@@ -110,6 +108,7 @@ public class SideSwipe extends IterativeRobot {
 //		RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
 //		RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
 
+		CommandBase.Elevator.resetEncoders();
 		/*
 		 * Run auton command Need to create an auton selector that uses OI and
 		 * smartdashboard to allow autons to be selected...Add here
@@ -133,9 +132,7 @@ public class SideSwipe extends IterativeRobot {
 		RobotValues.IntakeKP = SmartDashboard.getNumber("P");
 		RobotValues.IntakeKI = SmartDashboard.getNumber("I");
 		RobotValues.IntakeKD = SmartDashboard.getNumber("D");
-		
-		
-		
+
 		// cancel auton
 		if (auton != null)
 			auton.cancel();
