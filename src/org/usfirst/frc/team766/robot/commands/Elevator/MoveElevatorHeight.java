@@ -13,7 +13,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 // Note: PID Constants need to be tuned
 public class MoveElevatorHeight extends CommandBase {
-	private static final boolean PRINT = true;
+	private static final boolean PRINT = false;
 
 	private PIDController positionPID = new PIDController(
 			RobotValues.ElevatorKp, RobotValues.ElevatorKi,
@@ -36,23 +36,16 @@ public class MoveElevatorHeight extends CommandBase {
 
 	protected void execute() {
 		positionPID.calculateDebug(Elevator.getEncoders(), false);
-		// Don't want to go too high or too low
-		
-		if (!isFinished()) {
-			Elevator.setElevatorSpeed(positionPID.getOutput());
-		}else
-			Elevator.setElevatorSpeed(0d);
+		Elevator.setElevatorSpeed(positionPID.getOutput());
+		pr("Encoder Height: " + Elevator.getEncoders());
 	}
 
 	protected boolean isFinished() {
-		return positionPID.isDone() || Elevator.getBottomStop()
-				|| Elevator.getTopStop() || (OI.getElevatorCancel()) || 
-				(Elevator.getEncoders() >= RobotValues.ElevatorTopHeight)
-				&& (Elevator.getEncoders() <= 0);
+		return positionPID.isDone() || (OI.getElevatorCancel());
 	}
 
-
 	protected void end() {
+		// positionPID.calculateDebug(Elevator.getEncoders(), false);
 		Elevator.setBrake(true);
 		Elevator.setElevatorSpeed(0);
 	}
@@ -61,9 +54,10 @@ public class MoveElevatorHeight extends CommandBase {
 		positionPID.setSetpoint(goal);
 		initialize();
 	}
-	
+
 	@Deprecated
-	public void setPIDSetpoint(double goal){//Don't use this, use changeGoal instead.
+	public void setPIDSetpoint(double goal) {// Don't use this, use changeGoal
+												// instead.
 		positionPID.setSetpoint(goal);
 	}
 

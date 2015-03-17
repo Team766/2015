@@ -11,7 +11,6 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class CalibrateElevator extends CommandBase {
 	private static final boolean PRINT = true;
 	private static final double VELOCITY_THRESHOLD = .03;
-	private static final double CALIBRATE_HEIGHT = .015;// Elevator buffer
 
 	public CalibrateElevator() {
 		requires(Elevator);
@@ -19,32 +18,22 @@ public class CalibrateElevator extends CommandBase {
 
 	protected void initialize() {
 		isFinished = false;
-		encodersSet = false;
 		numNoMoves = 0;
 		Elevator.setBrake(false);
-		Elevator.setElevatorSpeed(-.2);
+		Elevator.setElevatorSpeedRaw(-.25);
 		pr("Calibrate Elevator Start");
 	}
 
 	protected void execute() {
-		double curHeight = Elevator.getEncoders();
-		
-		if (Elevator.getVelocity() < VELOCITY_THRESHOLD) {
+		if (Math.abs(Elevator.getVelocity()) < VELOCITY_THRESHOLD) {
 			numNoMoves++;
 			pr("Calibrate Elevator Encoder Velocity Low");
 		}
 
-		if (numNoMoves > 100 && !encodersSet) {
-			Elevator.resetEncoders();
-			encodersSet = true;
-			Elevator.setElevatorSpeed(.05);
-			pr("Calibrate Elevator: Encoders Reset");
-		}
-
-		if (encodersSet && curHeight > CALIBRATE_HEIGHT) {
+		if (numNoMoves > 12) {
 			Elevator.resetEncoders();
 			isFinished = true;
-			pr("Calibrate Elevator: Encoders Finalized");
+			pr("Calibrate Elevator: Encoders Reset");
 		}
 
 	}
@@ -60,11 +49,12 @@ public class CalibrateElevator extends CommandBase {
 	protected void interrupted() {
 		end();
 	}
-	
-	private void pr(Object text){
-		if(PRINT)System.out.println(text);
+
+	private void pr(Object text) {
+		if (PRINT)
+			System.out.println(text);
 	}
 
 	double numNoMoves;
-	boolean isFinished, encodersSet;
+	boolean isFinished;
 }

@@ -12,5 +12,13 @@ public class MoveElevatorWaypoint extends MoveElevatorHeight {
 	}
     public MoveElevatorWaypoint(int waypoint) {
     	super(RobotValues.ElevatorPresets[waypoint]);
-    }    
+    }
+    
+    protected void initialize(){
+    	super.initialize();
+    }
+    
+    protected void end(){
+    	super.end();
+    }
 }
