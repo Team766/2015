@@ -92,8 +92,8 @@ public class RobotValues { // Note: All distances in units of meters
 	// elevate smoothly
 	public static final double ElevatorKp = 3.2;
 	public static final double ElevatorKi = .05;//.005
-	public static final double ElevatorKd = 0;
-	public static final double ElevatorThreshold = 0.01;
+	public static final double ElevatorKd = 3.2;
+	public static final double ElevatorThreshold = 0.015;
 	public static final double ElevatorMaxSpeed = .5;//Turned down for testing
 	public static final double ElevatorMinSpeed = -.5;
 

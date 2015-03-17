@@ -146,7 +146,7 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-		new Slider().start();
+//		new Slider().start();
 		
 		done = true;
 		printOut.start();
@@ -163,6 +163,8 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putString("Test Prints", printOut.getOut());
 			System.out.println(printOut.getOut());
 		}
+//		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
+		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
 	}
 
 	public void testPeriodic() {

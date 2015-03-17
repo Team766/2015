@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
+	private static final double ELEVATOR_BOTTOM_HEIGHT = .015;
 	private static final int NUM_TEETH_SPROCKET = 24;
 	private static final double CHAIN_PITCH = 3.0 / 8.0 * RobotValues.INCHES_TO_METERS;
 	private static final double DISTANCE_PER_SPROCKET_ROTATION = CHAIN_PITCH
@@ -37,6 +38,7 @@ public class Elevator extends Subsystem {
 
 	private double gravityOffset = GRAVITY_COUNTERBALANCE;
 	private double stopTolerance = 0.001;
+	private boolean emergencyStopped = false;
 
 	private Victor Elevator = new Victor(Ports.PWM_Elevators);
 	private Encoder liftPos = new Encoder(Ports.DIO_ELEVATOR_ENCA,
@@ -55,23 +57,26 @@ public class Elevator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-//		setDefaultCommand(new Slider());
+		// setDefaultCommand(new Slider());
 	}
 
 	public void setElevatorSpeed(double speed) {
-		// Emergency stop. If elevator is at top stop, allow elevator to descend
-		// but not rise. If elevator is at bottom stop allow elevator to rise
-		// but not descend.
 
-		if (((speed > stopTolerance) && (getTopStop()))
-				|| ((speed < -stopTolerance) && getBottomStop()))
-			speed = 0;
 
 		// Compensating for deadband
 		if (speed < 0)
 			speed -= .06;
 		else if (speed > 0)
 			speed += .06;
+
+		// Emergency stop. If elevator is at top stop, allow elevator to descend
+		// but not rise. If elevator is at bottom stop allow elevator to rise
+		// but not descend.
+		emergencyStopped = (tooHigh() && speed > 0) || (tooLow() && speed < 0);
+
+		if (emergencyStopped) {
+			speed = 0;
+		}
 
 		Elevator.set(speed
 				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
@@ -87,7 +92,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public double getEncoders() {
-		return liftPos.getDistance();
+		return liftPos.getDistance()-ELEVATOR_BOTTOM_HEIGHT;
 	}
 
 	public double getVelocity() {// meters per second
@@ -140,21 +145,25 @@ public class Elevator extends Subsystem {
 		}
 	}
 
+	public boolean isEmergencyStopped() {
+		return emergencyStopped;
+	}
+
 	public boolean getTopStop() {
-		//Add when we get hall effect sensors on the robot
-//		boolean out = topStop.get();
-//		if(out)
-//			RobotValues.ElevatorTopHeight = getEncoders();
+		// Add when we get hall effect sensors on the robot
+		// boolean out = topStop.get();
+		// if(out)
+		// RobotValues.ElevatorTopHeight = getEncoders();
 		// return out;
 		return false;// for testing
 	}
 
 	public boolean getBottomStop() {
-		//Add when we get hall effect sensors on the robot
-//		boolean out = bottomStop.get();
-//		if(out)
-//			resetEncoders();
-//		return out;
+		// Add when we get hall effect sensors on the robot
+		// boolean out = bottomStop.get();
+		// if(out)
+		// resetEncoders();
+		// return out;
 		return false;// for testing
 	}
 
@@ -162,4 +171,11 @@ public class Elevator extends Subsystem {
 		return (PDP.getCurrent(0) + PDP.getCurrent(1)) / 2d;
 	}
 
+	private boolean tooHigh() {
+		return getTopStop() || getEncoders() >= RobotValues.ElevatorTopHeight;
+	}
+
+	private boolean tooLow() {
+		return getBottomStop() || getEncoders() <= 0;
+	}
 }
