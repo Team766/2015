@@ -20,6 +20,8 @@ public class Ports {
 	public static final int Sol_Shifter = 0;
 	public static final int Sol_ElevBrake = 1;
 	public static final int Sol_Gripper = 2;
+	public static final int Sol_leftArm = 3;
+	public static final int Sol_rightArm = 4;
 	
 	//Encoders
     public static final int 

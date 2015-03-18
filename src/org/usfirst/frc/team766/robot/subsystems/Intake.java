@@ -5,6 +5,7 @@ import org.usfirst.frc.team766.robot.commands.Intake.JoystickIntake;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,6 +21,8 @@ public class Intake extends Subsystem{
 	
 	private Victor leftIntake = new Victor(Ports.PWM_IntakeL);
 	private Victor rightIntake = new Victor(Ports.PWM_IntakeR);
+	private Solenoid leftArm = new Solenoid(Ports.Sol_leftArm);
+	private Solenoid rightArm = new Solenoid(Ports.Sol_rightArm);
 	
 	private Victor rightWheel = new Victor(Ports.PWM_IntakeWheelR);
 	private Victor leftWheel = new Victor(Ports.PWM_IntakeWheelL);
@@ -48,6 +51,24 @@ public class Intake extends Subsystem{
 		rightIntake.set(in);
 	}
 	
+	public void setLeftArm(boolean open)
+	{
+		leftArm.set(open);
+	}
+	public void setRightArm(boolean open)
+	{
+		rightArm.set(open);
+	}
+	
+	public boolean getLeftArm()
+	{
+		return leftArm.get();
+	}
+	public boolean getRightArm()
+	{
+		return rightArm.get();
+	}
+	
 	public double getLeftIntake()
 	{
 		return leftIntake.get();
@@ -63,7 +84,7 @@ public class Intake extends Subsystem{
 	}
 	public void setLeftWheel(double in)
 	{
-		leftWheel.set(-in);
+		leftWheel.set(in);
 	}
 	
 	public void setRightWheel(double in)

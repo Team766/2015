@@ -12,6 +12,8 @@ import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
 import org.usfirst.frc.team766.robot.commands.Elevator.ToggleGripper;
 import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
 import org.usfirst.frc.team766.robot.commands.Intake.IntakeTote;
+import org.usfirst.frc.team766.robot.commands.Intake.OpenLeftArm;
+import org.usfirst.frc.team766.robot.commands.Intake.OpenRightArm;
 import org.usfirst.frc.team766.robot.commands.Intake.SetWheels;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -104,8 +106,8 @@ public class OI {
 				RobotValues.DriveGroundHeight));
 		buttonBrakeOff.whenPressed(new AdjustBrake(false));
 		buttonBrakeOn.whenPressed(new AdjustBrake(true));
-		buttonWheelsIn.whenPressed(new SetWheels(-1));
-		buttonWheelsOut.whenPressed(new SetWheels(1));
+		buttonWheelsIn.whileHeld(new SetWheels(-1, false));
+		buttonWheelsOut.whileHeld(new SetWheels(1, false));
 		// buttonGraspToteIntake.whenPressed(new GraspTote());
 		// Turned off so doesn't interfere with slider.
 		buttonElevatorPreset1.whenPressed(new MoveElevatorWaypoint(0));
@@ -115,10 +117,8 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 
-		buttonIntakeIn.whenPressed(new SetWheels(-.3));
-		buttonIntakeOut.whenPressed(new SetWheels(.3));
-		buttonIntakeIn.whenReleased(new SetWheels(0));
-		buttonIntakeOut.whenReleased(new SetWheels(0));
+		buttonIntakeIn.whenPressed(new SetWheels(-1, true));
+		buttonIntakeOut.whenPressed(new SetWheels(1, true));
 
 		buttonBrakeOnTest.whenPressed(new AdjustBrake(true));
 		buttonBrakeOffTest.whenPressed(new AdjustBrake(false));
@@ -127,7 +127,8 @@ public class OI {
 
 		// Intake
 		// buttonGraspTote.whenPressed(new IntakeTote());
-
+		buttonLeftArm.whileHeld(new OpenLeftArm());
+		buttonRightArm.whileHeld(new OpenRightArm());
 		// Intake
 		// buttonGraspTote.whenPressed(new GraspTote());
 
