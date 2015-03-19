@@ -3,26 +3,26 @@ package org.usfirst.frc.team766.robot.commands.Intake;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
- *Opens the right intake arm
+ *  Opens the left arm
  */
-public class OpenRightArm extends CommandBase {
+public class CloseLeftArm extends CommandBase {
 
-    public OpenRightArm() {
+    public CloseLeftArm() {
     }
 
     protected void initialize() {
-    	Intake.setRightArm(true);
+    	Intake.setLeftArm(true);
     }
 
     protected void execute() {
+    	
     }
-
     protected boolean isFinished() {
         return false;
     }
 
     protected void end() {
-    	Intake.setRightArm(false);
+    	Intake.setLeftArm(false);
     }
 
     protected void interrupted() {

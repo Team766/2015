@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot;
 
-import org.usfirst.frc.team766.robot.Ultrasonic.UltrasonicSensor;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
@@ -18,12 +17,15 @@ import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.DropStack;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
-import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
+import org.usfirst.frc.team766.robot.commands.Intake.CloseLeftArm;
+import org.usfirst.frc.team766.robot.commands.Intake.CloseRightArm;
 import org.usfirst.frc.team766.robot.commands.Intake.OpenToteArms;
 import org.usfirst.frc.team766.robot.commands.Intake.ResetIntakeEnc;
+import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
+import org.usfirst.frc.team766.robot.commands.Intake.SetRightWheel;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
@@ -88,6 +90,13 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData(new StackAdditionalTote());
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
+			
+			SmartDashboard.putData("left intake wheel in", new SetLeftWheel(-1, false));
+			SmartDashboard.putData("left intake wheel out", new SetLeftWheel(1, false));
+			SmartDashboard.putData("right intake wheel in", new SetRightWheel(-1, false));
+			SmartDashboard.putData("right intake wheel out", new SetRightWheel(1, false));
+			SmartDashboard.putData("close left arm", new CloseLeftArm());
+			SmartDashboard.putData("close right arm", new CloseRightArm());
 		}
 	}
 

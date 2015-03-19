@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class OpenPistonArms extends CommandGroup {
 	
     public OpenPistonArms() {
-    	addParallel(new OpenLeftArm());
-    	addParallel(new OpenRightArm());
+    	addParallel(new CloseLeftArm());
+    	addParallel(new CloseRightArm());
     }
 }

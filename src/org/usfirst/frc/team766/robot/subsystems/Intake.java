@@ -51,13 +51,13 @@ public class Intake extends Subsystem{
 		rightIntake.set(in);
 	}
 	
-	public void setLeftArm(boolean open)
+	public void setLeftArm(boolean close)
 	{
-		leftArm.set(open);
+		leftArm.set(close);
 	}
-	public void setRightArm(boolean open)
+	public void setRightArm(boolean close)
 	{
-		rightArm.set(open);
+		rightArm.set(close);
 	}
 	
 	public boolean getLeftArm()
