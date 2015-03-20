@@ -2,8 +2,8 @@ package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
+import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
-import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
@@ -49,6 +49,7 @@ public class OI {
 					Buttons.StackAdditionalToteBoxOp),
 			buttonIntakeFeeder = new JoystickButton(jBox, Buttons.IntakeFeeder),
 //			buttonDriveGround = new JoystickButton(jBox, Buttons.DriveGround),
+			buttonJoystickElevator = new JoystickButton(jBox, Buttons.JoystickElevator),
 			buttonBrakeOff = new JoystickButton(jBox, Buttons.BrakeOff),
 			buttonBrakeOn = new JoystickButton(jBox, Buttons.BrakeOn),
 			buttonLeftArm = new JoystickButton(jBox, Buttons.LeftArm),
@@ -100,7 +101,7 @@ public class OI {
 			buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
 
 	// Auton Stuff
-	public int AutonMode = 3;
+	public int AutonMode = 1;
 	public boolean TankDrive = false;
 	public boolean UseGamepad = false;
 	
@@ -115,6 +116,7 @@ public class OI {
 		buttonIntakeFeeder.whenPressed(new StackAdditionalToteChute());
 //		buttonDriveGround.whenPressed(new MoveElevatorHeight(
 //				RobotValues.DriveGroundHeight));
+		buttonJoystickElevator.whenPressed(new JoystickElevator());
 		buttonBrakeOff.whenPressed(new AdjustBrake(false));
 		buttonBrakeOn.whenPressed(new AdjustBrake(true));
 		buttonRightIntakeWheelIn.whileHeld(new SetRightWheel(.35, false));

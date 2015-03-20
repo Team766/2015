@@ -174,6 +174,8 @@ public class SideSwipe extends IterativeRobot {
 		}
 //		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
 		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
+		System.out.println("Gyro Position: " +CommandBase.Drive.getAngle());
+		
 	}
 
 	public void testPeriodic() {

@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Elevator extends Subsystem {
-	private static final double ELEVATOR_BOTTOM_HEIGHT = .015;
+	private static final double ELEVATOR_BOTTOM_HEIGHT = 0;
 	private static final int NUM_TEETH_SPROCKET = 24;
 	private static final double CHAIN_PITCH = 3.0 / 8.0 * RobotValues.INCHES_TO_METERS;
 	private static final double DISTANCE_PER_SPROCKET_ROTATION = CHAIN_PITCH
@@ -32,7 +32,7 @@ public class Elevator extends Subsystem {
 	private static final double DISTANCE_PER_PULSE = DISTANCE_PER_SPROCKET_ROTATION
 			/ PULSES_PER_ROTATION;
 	private static final boolean DYNAMIC_CALIBRATION = false;
-	private static final double GRAVITY_COUNTERBALANCE = .09;
+	private static final double GRAVITY_COUNTERBALANCE = .05;
 	// .02 starts going down, .11 starts going up. range can be from .03 to .1
 	// Offset of just weight of mechanism. PID should compensate for rest
 

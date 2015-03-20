@@ -15,6 +15,7 @@ public class Buttons {
     public static final int StackAdditionalToteBoxOp= 2;
     public static final int IntakeFeeder = 3;
 //    public static final int DriveGround= 4;
+    public static final int JoystickElevator = 5;
     public static final int BrakeOff = 8;
     public static final int BrakeOn = 7;
     public static final int RightArm = 12;
@@ -23,10 +24,10 @@ public class Buttons {
 //    public static final int IntakeWheelsIn= 10;
 //    public static final int IntakeWheelsOut= 11;
     public static final int IntakeWheelSpeedBoost = 4;
-    public static final int leftIntakeWheelIn = 22;
-    public static final int LeftIntakeWheelOut = 23;
-    public static final int RightIntakeWheelIn = 10;
-    public static final int RightIntakeWheelOut = 11;
+    public static final int leftIntakeWheelIn = 10;
+    public static final int LeftIntakeWheelOut = 11;
+    public static final int RightIntakeWheelIn = 22;
+    public static final int RightIntakeWheelOut = 23;
     
     public static final int LeftArm = 9;
 //	public static final int GraspToteIntake = 12;
