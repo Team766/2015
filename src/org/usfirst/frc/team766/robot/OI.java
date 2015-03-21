@@ -72,6 +72,7 @@ public class OI {
 			buttonElevatorPreset4 = new JoystickButton(jBox, Buttons.preset4),
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
+			buttonElevatorPresetTop = new JoystickButton(jBox, Buttons.presetTop),
 
 			buttonElevatorCancelAutomation = new JoystickButton(jBox,
 					Buttons.ElevatorCancelAutomation),
@@ -106,7 +107,7 @@ public class OI {
 	public boolean UseGamepad = false;
 	
 	public static double getIntakeWheelSpeedMult() {
-		return buttonIntakeWheelSpeedBoost.get() ? 2 : 1;
+		return buttonIntakeWheelSpeedBoost.get() ? 3 : 1;
 	}
 
 	public OI() {
@@ -131,6 +132,7 @@ public class OI {
 		buttonElevatorPreset4.whenPressed(new MoveElevatorWaypoint(3));
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
+		buttonElevatorPresetTop.whenPressed(new MoveElevatorWaypoint(6));
 
 		buttonIntakeIn.whenPressed(new SetWheels(-1, true));
 		buttonIntakeOut.whenPressed(new SetWheels(1, true));
@@ -282,5 +284,13 @@ public class OI {
 
 	public boolean getCancelAutomation() {
 		return buttonElevatorCancelAutomation.get();
+	}
+	public boolean getAutonIncrement()
+	{
+		return buttonAutonIncrement.get();
+	}
+	public boolean getAutonDecrement()
+	{
+		return buttonAutonDecrement.get();
 	}
 }

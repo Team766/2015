@@ -37,6 +37,7 @@ public class Buttons {
 	public static final int preset4 = 17;
 	public static final int preset5 = 18;
 	public static final int preset6 = 19;
+	public static final int presetTop = 20;
 	public static final int ElevatorCancelAutomation = 21;
 	
 	//Test Joystick
@@ -57,8 +58,8 @@ public class Buttons {
      * for one job.  Since the auton cycle occurs during disabled, we can 
      * have buttons with multiple purposes.
      */
-	public static final int AutonIncrement = 1;
-	public static final int AutonDecrement = 2;
+	public static final int AutonIncrement = 4;
+	public static final int AutonDecrement = 3;
 	
 
 }

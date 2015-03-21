@@ -36,7 +36,7 @@ public class Ports {
 		DIO_RIntakeEncA = 6,
 		DIO_RIntakeEncB = 7;
 	
-	public static final int GYRO = 1;
+	public static final int GYRO = 0;
 	
 	//Hall Effect Sensor
 	public static final int DIO_HallEffectSensorBottom = 10;

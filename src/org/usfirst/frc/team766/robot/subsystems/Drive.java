@@ -106,8 +106,8 @@ public class Drive extends Subsystem {
 			leftTarget = -power;
 			rightTarget = power;
 		} else {
-			leftDrive.set(-power);
-			rightDrive.set(power);
+			leftDrive.set(power);
+			rightDrive.set(-power);
 		}
 	}
 

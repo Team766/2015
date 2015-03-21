@@ -17,8 +17,10 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final int Auton_VisionDrive = 0, Auton_Move = 1,
 			Auton_PickOneBox = 2, Auton_Rotate = 3, Auton_MoveToLandfill = 4,
 			Auton_None = 5, Auton_Push3Boxes = 6, Auton_Coopertition = 7;
-
-	public static final int Auton_Max = 6;
+	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
+		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition"};
+	
+	public static final int Auton_Max = 7;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
@@ -36,9 +38,11 @@ public class RobotValues { // Note: All distances in units of meters
 
 	// Bearly Drive
 	// Decrease for faster reaction times
-	public static final double alpha = 0.5;
+	public static final double alpha = 0.4;
 	public static final double SlowAlpha = 0.7;
 	public static final double SlowModeSLowFactor = 0.85;
+	public static final double leftSlowFactor = 0.7;
+	public static final double rightSlowFactor = 0.7;
 
 	// Elevator presets
 	private static final double ElevatorPresetBase = Box_Height;// All elevator

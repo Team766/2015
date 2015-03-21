@@ -231,7 +231,7 @@ private double oldWheel = 0.0;
 		  //Accounts for drift in the gyro
 		  if(Math.abs(OI.getThrottle()) <= 0.05 && !OI.getQuickTurn())
 			  outputLeft = 0;
-	  return outputLeft;
+	  return outputLeft * RobotValues.leftSlowFactor;
   }
   public double bearafyRightPower(double in, boolean isSlow)
   {
@@ -258,6 +258,6 @@ private double oldWheel = 0.0;
 		  outputRight = 0;
 		  Drive.resetCheesyGyro();
 	  }	  
-	  return outputRight;
+	  return outputRight * RobotValues.rightSlowFactor;
   }
 }

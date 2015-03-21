@@ -102,14 +102,14 @@ public class SideSwipe extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-
+		
+		SmartDashboard.putString("Autonomous Mode: ", RobotValues.Autons[CommandBase.OI.AutonMode]);
 		// Auton Cycler
-		if (!AutonCyclePrev && CommandBase.OI.buttonAutonIncrement.get())
+		if (!AutonCyclePrev && CommandBase.OI.getAutonIncrement())
 			CommandBase.OI.incrementAutonMode(1);
-		else if (!AutonCyclePrev && CommandBase.OI.buttonAutonDecrement.get())
+		else if (!AutonCyclePrev && CommandBase.OI.getAutonDecrement())
 			CommandBase.OI.incrementAutonMode(-1);
-		AutonCyclePrev = (CommandBase.OI.buttonAutonIncrement.get() || CommandBase.OI.buttonAutonDecrement
-				.get());
+		AutonCyclePrev = (CommandBase.OI.getAutonIncrement() || CommandBase.OI.getAutonDecrement());
 	}
 
 	public void autonomousInit() {
@@ -173,8 +173,9 @@ public class SideSwipe extends IterativeRobot {
 			System.out.println(printOut.getOut());
 		}
 //		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
-		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
-		System.out.println("Gyro Position: " +CommandBase.Drive.getAngle());
+//		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
+		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
+		System.out.println("Encoders L, R: " + CommandBase.Drive.getLeftEncoderDistance() + " \t\t" + CommandBase.Drive.getRightEncoderDistance());
 		
 	}
 
