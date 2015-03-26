@@ -1,29 +1,32 @@
 package org.usfirst.frc.team766.robot.commands.Intake;
 
-import org.usfirst.frc.team766.robot.commands.CommandBase;
+import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  *	
  */
-public class SetRightWheel extends CommandBase {
+public class SetRightWheel extends SetWheelBase {
 	private double inSpeed;
 	private boolean temp;
 	
-	public SetRightWheel()
-	{
-		this(0,false);
+	public SetRightWheel() 	{
+		this(0,false, null);
 	}
-    public SetRightWheel(double inSpeed, boolean temp) {
+	public SetRightWheel(double inSpeed, boolean temp) {
+		this(inSpeed, temp, null);
+	}
+    public SetRightWheel(double inSpeed, boolean temp, Button boost) {
+    	super(boost);
         this.inSpeed = inSpeed;
         this.temp = temp;
     }
 
     protected void initialize() {
-    	Intake.setRightWheel(inSpeed*OI.getIntakeWheelSpeedMult());
+    	Intake.setRightWheel(inSpeed*getIntakeWheelSpeedMult());
     }
 
     protected void execute() {
-    	Intake.setRightWheel(inSpeed*OI.getIntakeWheelSpeedMult());
+    	Intake.setRightWheel(inSpeed*getIntakeWheelSpeedMult());
     }
 
     protected boolean isFinished() {

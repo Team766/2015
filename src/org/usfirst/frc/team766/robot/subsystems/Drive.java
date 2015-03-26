@@ -19,15 +19,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Drive extends Subsystem {
-	private static final double DISTANCE_PER_PULSE = (Math.PI * .09958) / 256; // PI
-																				// *
-																				// Wheel
-																				// Diameter
-																				// /
-																				// 256
-																				// *
-																				// Encoder
-																				// type
+	private static final double WHEEL_DIAMETER = .09958, // meters
+								PULSES_PER_ROTATION = 256,
+								DISTANCE_PER_PULSE = (Math.PI * WHEEL_DIAMETER) / PULSES_PER_ROTATION; 
+								
 	private static final double ACCELEROMETER_STOP_THRESHOLD = .1;
 
 	private double outputRight;
@@ -106,8 +101,8 @@ public class Drive extends Subsystem {
 			leftTarget = -power;
 			rightTarget = power;
 		} else {
-			leftDrive.set(power);
-			rightDrive.set(-power);
+			leftDrive.set(-power);
+			rightDrive.set(power);
 		}
 	}
 
@@ -124,7 +119,7 @@ public class Drive extends Subsystem {
 			leftDrive.set(-power);
 	}
 
-	public synchronized void setRightPower(double power) {
+	public void setRightPower(double power) {
 		// Compensating for deadband
 		// if(power < 0)
 		// power -= .08;
@@ -137,13 +132,13 @@ public class Drive extends Subsystem {
 			rightDrive.set(power);
 	}
 
-	private synchronized double getRightTarget() { // Should I have these return
+	private double getRightTarget() { // Should I have these return
 													// Double.NaN if you aren't
 													// in smoothing mode?
 		return rightTarget;
 	}
 
-	private synchronized double getLeftTarget() { // Should I have these return
+	private double getLeftTarget() { // Should I have these return
 													// Double.NaN if you aren't
 													// in smoothing mode?
 		return leftTarget;

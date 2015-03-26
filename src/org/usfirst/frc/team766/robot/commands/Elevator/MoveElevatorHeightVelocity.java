@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class MoveElevatorHeightVelocity extends CommandBase implements
-		MoveElevatorHeightBase {//Remove superinterface
+public class MoveElevatorHeightVelocity extends CommandBase  {
 
 	// Constants need to be tuned. Units: meters per second
 	private static final double AMAX = .05;
@@ -81,7 +80,6 @@ public class MoveElevatorHeightVelocity extends CommandBase implements
 		end();
 	}
 
-	@Override
 	public void changeGoal(double goal) {
 		targetPosition = goal;
 		direction = goal / Math.abs(goal);
