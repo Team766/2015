@@ -53,11 +53,8 @@ public class Drive extends Subsystem {
 
 		cheesyGyro = gyro;
 		Periodic smoother = new Periodic() {
-			private double lastRightOut, lastLeftOut; // Do not use variable
-														// directly. Use getters
-														// and setters to avoid
-														// conflict.
-
+			private double lastRightOut, lastLeftOut; 
+			
 			protected void execute() {
 				outputLeft = rateOfChange * lastLeftOut + (1 - rateOfChange)
 						* getLeftTarget();

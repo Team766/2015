@@ -35,7 +35,7 @@ public class MoveElevatorHeight extends CommandBase {
 	}
 
 	protected void execute() {
-		positionPID.calculateDebug(Elevator.getEncoders(), false);
+		positionPID.calculate(Elevator.getEncoders(), false);
 		Elevator.setElevatorSpeed(positionPID.getOutput());
 		pr("Encoder Height: " + Elevator.getEncoders());
 	}
