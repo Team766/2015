@@ -47,7 +47,7 @@ public class OI {
 					Buttons.StackAdditionalToteBoxOp),
 			buttonIntakeFeeder = new JoystickButton(jBox, Buttons.IntakeFeeder),
 //			buttonDriveGround = new JoystickButton(jBox, Buttons.DriveGround),
-			buttonJoystickElevator = new JoystickButton(jBox, Buttons.JoystickElevator),
+			//buttonJoystickElevator = new JoystickButton(jBox, Buttons.JoystickElevator),
 			buttonBrakeOff = new JoystickButton(jBox, Buttons.BrakeOff),
 			buttonBrakeOn = new JoystickButton(jBox, Buttons.BrakeOn),
 			buttonLeftArm = new JoystickButton(jBox, Buttons.LeftArm),
@@ -114,7 +114,7 @@ public class OI {
 		buttonIntakeFeeder.whenPressed(new StackAdditionalToteChute());
 //		buttonDriveGround.whenPressed(new MoveElevatorHeight(
 //				RobotValues.DriveGroundHeight));
-		buttonJoystickElevator.whenPressed(new JoystickElevator());
+//		buttonJoystickElevator.whenPressed(new JoystickElevator());
 		buttonBrakeOff.whenPressed(new AdjustBrake(false));
 		buttonBrakeOn.whenPressed(new AdjustBrake(true));
 		buttonRightIntakeWheelIn.whileHeld(new SetRightWheel(.35, false, buttonIntakeWheelSpeedBoost));

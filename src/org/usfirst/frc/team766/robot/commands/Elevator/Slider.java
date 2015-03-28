@@ -43,7 +43,7 @@ public class Slider extends CommandBase {
 			double goal = (((RobotValues.ElevatorTopHeight) / 2d) * (slider + 1d));
 			mover.changeGoal(goal);
 			
-			if (!mover.isRunning())
+			if (!mover.isRunning() || mover.isFinished())
 				mover.start();
 
 		}
