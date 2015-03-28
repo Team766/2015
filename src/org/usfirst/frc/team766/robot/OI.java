@@ -5,6 +5,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
+import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
@@ -72,7 +73,9 @@ public class OI {
 			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
 			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
 			buttonElevatorPresetTop = new JoystickButton(jBox, Buttons.presetTop),
-
+			
+			buttonSliderDone = new JoystickButton(jBox, Buttons.SliderDone),
+			
 			buttonElevatorCancelAutomation = new JoystickButton(jBox,
 					Buttons.ElevatorCancelAutomation),
 
@@ -128,6 +131,8 @@ public class OI {
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPresetTop.whenPressed(new MoveElevatorWaypoint(6));
 
+		buttonSliderDone.whileHeld(new Slider());
+		
 		buttonIntakeIn.whenPressed(new SetWheels(-1, true));
 		buttonIntakeOut.whenPressed(new SetWheels(1, true));
 

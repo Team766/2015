@@ -219,5 +219,13 @@ public class Drive extends Subsystem {
 	public void setSmoothing(boolean setSmooth) {
 		smoothing = setSmooth;
 	}
+	public void cheesyGyroInit()
+	{
+		cheesyGyro.initGyro();
+	}
+	public void gyroInit()
+	{
+		gyro.initGyro();
+	}
 
 }

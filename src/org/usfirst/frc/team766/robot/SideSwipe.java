@@ -155,8 +155,6 @@ public class SideSwipe extends IterativeRobot {
 			new TankDrive().start();
 		}
 
-//		new Slider().start();
-		
 		done = true;
 		printOut.start();
 	}

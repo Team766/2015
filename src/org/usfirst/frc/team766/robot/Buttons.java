@@ -28,6 +28,7 @@ public class Buttons {
     public static final int LeftIntakeWheelOut = 11;
     public static final int RightIntakeWheelIn = 22;
     public static final int RightIntakeWheelOut = 23;
+    public static final int SliderDone = 24;
     
     public static final int LeftArm = 9;
 //	public static final int GraspToteIntake = 12;
