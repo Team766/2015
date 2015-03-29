@@ -14,9 +14,7 @@ public class ResetGyro extends CommandBase {
     	Drive.setPower(0);
     	Elevator.setElevatorSpeed(0);
     	
-    	Drive.cheesyGyroInit();
     	Drive.gyroInit();
-    	Drive.resetCheesyGyro();
     	Drive.resetGyro();
     }
 

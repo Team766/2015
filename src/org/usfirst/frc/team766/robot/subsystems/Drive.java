@@ -39,7 +39,6 @@ public class Drive extends Subsystem {
 	private Solenoid Shifter = new Solenoid(Ports.Sol_Shifter);
 
 	private Gyro gyro = new Gyro(Ports.GYRO);
-	private Gyro cheesyGyro;
 
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
@@ -51,7 +50,6 @@ public class Drive extends Subsystem {
 
 	public Drive() {
 
-		cheesyGyro = gyro;
 		Periodic smoother = new Periodic() {
 			private double lastRightOut, lastLeftOut; 
 			
@@ -202,15 +200,14 @@ public class Drive extends Subsystem {
 	public double getAngle() {
 		return gyro.getAngle();
 	}
+	
 
-	// Cheesy Gyro
-	public void resetCheesyGyro() {
-		cheesyGyro.reset();
+	public void gyroInit()
+	{
+		gyro.initGyro();
 	}
-
-	public double getCheesyAngle() {
-		return cheesyGyro.getAngle();
-	}
+	
+	//Smoothing
 
 	public boolean getSmoothing() {
 		return smoothing;
@@ -218,14 +215,6 @@ public class Drive extends Subsystem {
 
 	public void setSmoothing(boolean setSmooth) {
 		smoothing = setSmooth;
-	}
-	public void cheesyGyroInit()
-	{
-		cheesyGyro.initGyro();
-	}
-	public void gyroInit()
-	{
-		gyro.initGyro();
 	}
 
 }

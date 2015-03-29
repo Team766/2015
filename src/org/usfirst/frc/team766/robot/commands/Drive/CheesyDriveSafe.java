@@ -37,7 +37,7 @@ private double oldWheel = 0.0;
 
   protected void initialize() {
     //drive.disableControllers() ;
-	  Drive.resetCheesyGyro();
+	  Drive.resetGyro();
 	  Drive.setSmoothing(false);
 	  gyroPID.reset();
 	  lastRightOut = 0;
@@ -47,7 +47,7 @@ private double oldWheel = 0.0;
   }
 
   protected void execute() {
-	  gyroPID.calculate(Drive.getCheesyAngle(), false); 
+	  gyroPID.calculate(Drive.getAngle(), false); 
 	  
 	  
     if (DriverStation.getInstance().isAutonomous()) {
@@ -212,11 +212,11 @@ private double oldWheel = 0.0;
 	  if(Math.abs(OI.getSteer()) < 0.001)
 		  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  else
-		  Drive.resetCheesyGyro();
+		  Drive.resetGyro();
 	  if(Math.abs(OI.getThrottle()) <= 0.001)
 	  {
 		  outputRight = 0;
-		  Drive.resetCheesyGyro();
+		  Drive.resetGyro();
 	  }
 	  return outputRight;
   }

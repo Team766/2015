@@ -25,7 +25,6 @@ public class PrintDiagnostics extends CommandBase {
     	{
 	    	pr("Drive Statistics:");
 	    	pr("Drive Angle: " + Drive.getAngle());
-	    	pr("Drive Cheesy Angle: " + Drive.getCheesyAngle());
 	    	pr("Drive Left Encoder: " +Drive.getLeftEncoderDistance());
 	    	pr("Drive Right Encoder: " +Drive.getRightEncoderDistance());
 	    	pr("Drive Average Encoder: " +Drive.getAverageEncoderDistance());
@@ -60,7 +59,6 @@ public class PrintDiagnostics extends CommandBase {
     protected void execute() {
     	out = "Drive Statistics:" + "\n" +
     	"Drive Angle: " + CommandBase.Drive.getAngle() + "\n" +
-    	"Drive Cheesy Angle: " + CommandBase.Drive.getCheesyAngle() + "\n" +
     	"Drive Left Encoder: " + CommandBase.Drive.getLeftEncoderDistance() + "\n" +
     	"Drive Right Encoder: " + CommandBase.Drive.getRightEncoderDistance() + "\n" +
     	"Drive Average Encoder: " + CommandBase.Drive.getAverageEncoderDistance() + "\n" +

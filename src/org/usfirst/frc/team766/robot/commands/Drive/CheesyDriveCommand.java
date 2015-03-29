@@ -38,7 +38,7 @@ private double oldWheel = 0.0;
 
   protected void initialize() {
     //drive.disableControllers() ;
-	  Drive.resetCheesyGyro();
+	  Drive.resetGyro();
 	  Drive.setSmoothing(false);
 	  gyroPID.reset();
 	  lastRightOut = 0;
@@ -48,7 +48,7 @@ private double oldWheel = 0.0;
   }
 
   protected void execute() {
-	  gyroPID.calculate(Drive.getCheesyAngle(), false); 
+	  gyroPID.calculate(Drive.getAngle(), false); 
 	  
 	  
     if (DriverStation.getInstance().isAutonomous()) {
@@ -224,12 +224,12 @@ private double oldWheel = 0.0;
 	  //Naturally reverses  -EXPERIMENTAL
 	  if(!OI.getQuickTurn())
 	  {		
-		  if(Math.abs(OI.getSteer()) <= 0.05)
+		  if(Math.abs(OI.getSteer()) <= 0.01)
 			  outputLeft = (outputLeft - gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 	  }
 	  
 		  //Accounts for drift in the gyro
-		  if(Math.abs(OI.getThrottle()) <= 0.05 && !OI.getQuickTurn())
+		  if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
 			  outputLeft = 0;
 	  return outputLeft * RobotValues.leftSlowFactor;
   }
@@ -244,19 +244,20 @@ private double oldWheel = 0.0;
 	  //Naturally reverses -EXPERIMENTAL
 	  if(!OI.getQuickTurn())
 	  {		
-	  
-		  if(Math.abs(OI.getSteer()) <= 0.05)
+		  //Driving straight
+		  if(Math.abs(OI.getSteer()) <= 0.01)
 			  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
-		  else
-			  Drive.resetCheesyGyro();
+		  //If they are not moving, don't reset
+		  else if(Math.abs(OI.getThrottle()) <= 0.01)
+			  Drive.resetGyro();
 	  }
 	  else
-		  Drive.resetCheesyGyro();
+		  Drive.resetGyro();
 	  
-	  if(Math.abs(OI.getThrottle()) <= 0.05 && !OI.getQuickTurn())
+	  if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
 	  {
 		  outputRight = 0;
-		  Drive.resetCheesyGyro();
+		  Drive.resetGyro();
 	  }	  
 	  return outputRight * RobotValues.rightSlowFactor;
   }
