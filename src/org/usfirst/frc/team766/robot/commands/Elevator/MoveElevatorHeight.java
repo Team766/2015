@@ -62,7 +62,7 @@ public class MoveElevatorHeight extends CommandBase {
 	}
 
 	protected void interrupted() {
-		end();
+		//Don't call the end() method.  Gave us nasty bugs
 	}
 
 	private void pr(Object text) {

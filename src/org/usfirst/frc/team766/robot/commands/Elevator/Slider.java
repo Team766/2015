@@ -7,15 +7,16 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  * Moves elevator based on slider (joystick) input. Should this be a singleton?
  */
 public class Slider extends CommandBase {
-	private static final boolean PRINTSLIDER = true;
+	private static final boolean PRINTSLIDER = false;
 
 	private boolean enabled;
 	private double lastSlider;
 	private double slider;
 
-	MoveElevatorHeight mover = new MoveElevatorHeight();
+	MoveElevatorHeight mover;
 
 	public Slider() {
+		mover = new MoveElevatorHeight();
 		enabled = true;
 	}
 
@@ -58,8 +59,6 @@ public class Slider extends CommandBase {
 
 	@Override
 	protected void end() {
-		Elevator.setBrake(true);
-		Elevator.setElevatorSpeed(0);
 	}
 
 	@Override

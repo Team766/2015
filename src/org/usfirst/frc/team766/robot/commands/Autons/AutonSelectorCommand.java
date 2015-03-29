@@ -24,8 +24,8 @@ public class AutonSelectorCommand extends CommandGroup{
             //runs the Move Command
             case RobotValues.Auton_Move:
                 System.out.println("Drive Forward to Landmark Auton");
-                //addSequential(new DriveForward(RobotValues.DriveForwardDistance));
-                addSequential(new TimedDrive(2.25));
+                addSequential(new DriveForward(RobotValues.DriveForwardDistance));
+                //addSequential(new TimedDrive(2.25));
                 break;
             case RobotValues.Auton_PickOneBox:
             	System.out.println("Pick One Box Auton");

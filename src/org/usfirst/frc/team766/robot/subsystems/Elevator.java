@@ -40,16 +40,19 @@ public class Elevator extends Subsystem {
 	private double stopTolerance = 0.001;
 	private boolean emergencyStopped = false;
 
-	private Victor Elevator = new Victor(Ports.PWM_Elevators);
+	private Victor ElevatorA = new Victor(Ports.PWM_ElevatorA);
+	private Victor ElevatorB = new Victor(Ports.PWM_ElevatorB);
+	private Victor ElevatorC = new Victor(Ports.PWM_ElevatorC);
+	
 	private Encoder liftPos = new Encoder(Ports.DIO_ELEVATOR_ENCA,
 			Ports.DIO_ELEVATOR_ENCB);
 	private Solenoid brake = new Solenoid(Ports.Sol_ElevBrake);
 
 	private Solenoid gripper = new Solenoid(Ports.Sol_Gripper);
-	private DigitalInput topStop = new DigitalInput(
-			Ports.DIO_HallEffectSensorTop);
-	private DigitalInput bottomStop = new DigitalInput(
-			Ports.DIO_HallEffectSensorBottom);
+//	private DigitalInput topStop = new DigitalInput(
+//			Ports.DIO_HallEffectSensorTop);
+//	private DigitalInput bottomStop = new DigitalInput(
+//			Ports.DIO_HallEffectSensorBottom);
 	private PowerDistributionPanel PDP = new PowerDistributionPanel();
 
 	public Elevator() {
@@ -78,12 +81,12 @@ public class Elevator extends Subsystem {
 			speed = 0;
 		}
 
-		Elevator.set(speed
+		setElevatorMotors(speed
 				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
 	}
 
 	public void setElevatorSpeedRaw(double in) {
-		Elevator.set(in
+		setElevatorMotors(in
 				+ (DYNAMIC_CALIBRATION ? gravityOffset : GRAVITY_COUNTERBALANCE));
 	}
 
@@ -101,7 +104,7 @@ public class Elevator extends Subsystem {
 
 	public void setBrake(boolean stop) {
 		if (stop)
-			Elevator.set(0);
+			setElevatorMotors(0);
 		brake.set(stop);
 	}
 
@@ -121,7 +124,7 @@ public class Elevator extends Subsystem {
 				Timer.delay(.2);
 				Encoder calibrator = liftPos;
 				calibrator.reset();
-				Elevator.set(.3);
+				setElevatorMotors(.3);
 				double decreases = 0;
 				double lastValue = 0;
 				while (decreases < 3) {
@@ -136,7 +139,7 @@ public class Elevator extends Subsystem {
 				while (calibrator.getDistance() < .03) {
 					currentPower += .2;// Increase for less accuracy but faster
 										// calibrating
-					Elevator.set(currentPower);
+					setElevatorMotors(currentPower);
 					Timer.delay(.05);// Give time to react to change.
 				}
 				gravityOffset = currentPower;
@@ -177,5 +180,11 @@ public class Elevator extends Subsystem {
 
 	private boolean tooLow() {
 		return getBottomStop() || getEncoders() <= 0;
+	}
+	private void setElevatorMotors(double s)
+	{
+		ElevatorA.set(s);
+		ElevatorB.set(s);
+		ElevatorC.set(s);
 	}
 }

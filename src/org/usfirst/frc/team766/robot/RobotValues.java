@@ -108,7 +108,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static double IntakeThreshold = 2;
 
 	// Elevator
-	public static final double SliderChangeTolerance = 0.1;
+	public static final double SliderChangeTolerance = 0.01;
 	public static int numTotes = 0;
 
 	

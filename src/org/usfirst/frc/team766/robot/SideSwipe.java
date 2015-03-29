@@ -131,6 +131,7 @@ public class SideSwipe extends IterativeRobot {
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
 //		SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
 //		SmartDashboard.putNumber("Graph", dist.graphError);
 //		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle() + "\t Gyro" + CommandBase.Drive.getAngle());
@@ -172,8 +173,8 @@ public class SideSwipe extends IterativeRobot {
 		}
 //		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
 //		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
-		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
-		System.out.println("Drive Encoders L, R:  " + CommandBase.Drive.getLeftEncoderDistance() + ", " + CommandBase.Drive.getRightEncoderDistance());
+//		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
+//		System.out.println("Drive Encoders L, R:  " + CommandBase.Drive.getLeftEncoderDistance() + ", " + CommandBase.Drive.getRightEncoderDistance());
 		
 	}
 

@@ -19,8 +19,8 @@ public class Intake extends Subsystem{
 	private static final double MAX_OUTPUT = .3;
 	private static final double MIN_OUTPUT = -.3;
 	
-	private Victor leftIntake = new Victor(Ports.PWM_IntakeL);
-	private Victor rightIntake = new Victor(Ports.PWM_IntakeR);
+//	private Victor leftIntake = new Victor(Ports.PWM_IntakeL);
+//	private Victor rightIntake = new Victor(Ports.PWM_IntakeR);
 	private Solenoid leftArm = new Solenoid(Ports.Sol_leftArm);
 	private Solenoid rightArm = new Solenoid(Ports.Sol_rightArm);
 	
@@ -37,18 +37,19 @@ public class Intake extends Subsystem{
 		setDefaultCommand(new JoystickIntake());
 	}
 	
+	@Deprecated
 	public void setLeftIntake(double in)
 	{
 		if(in>MAX_OUTPUT) in = MAX_OUTPUT;
 		if(in<MIN_OUTPUT) in = MIN_OUTPUT;
-		leftIntake.set(in);
+//		leftIntake.set(in);
 	}
-	
+	@Deprecated
 	public void setRightIntake(double in)
 	{
 		if(in>MAX_OUTPUT) in = MAX_OUTPUT;
 		if(in<MIN_OUTPUT) in = MIN_OUTPUT;
-		rightIntake.set(in);
+//		rightIntake.set(in);
 	}
 	
 	public void setLeftArm(boolean close)
@@ -69,13 +70,16 @@ public class Intake extends Subsystem{
 		return rightArm.get();
 	}
 	
+	@Deprecated
 	public double getLeftIntake()
 	{
-		return leftIntake.get();
+		return 0;
+//		return leftIntake.get();
 	}
-	
+	@Deprecated
 	public double getRightIntake(){
-		return rightIntake.get();
+		return 0;
+//		return rightIntake.get();
 	}
 	public void setWheels(double in)
 	{
@@ -109,6 +113,7 @@ public class Intake extends Subsystem{
 	{
 		return rightEnc.get();
 	}
+	@Deprecated
 	public void setIntake(double in)
 	{
 		setLeftIntake(in);
