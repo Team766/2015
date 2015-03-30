@@ -44,6 +44,16 @@ public class logData {
 		}
 	}
 	
+	public void printRaw(String in)
+	{
+		try{
+			pw.println(in);
+		}catch(NullPointerException e)
+		{
+			System.out.println("Can't print raw value: " + in);
+		}
+	}
+	
 	public void print(String message, int value)
 	{
 		try{

@@ -27,6 +27,7 @@ import org.usfirst.frc.team766.robot.commands.Intake.ResetIntakeEnc;
 import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
 import org.usfirst.frc.team766.robot.commands.Intake.SetRightWheel;
 import org.usfirst.frc.team766.robot.testing.DispEncoders;
+import org.usfirst.frc.team766.robot.testing.LogGyroAngle;
 import org.usfirst.frc.team766.robot.testing.ShowStops;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -67,6 +68,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData(new ResetIntakeEnc());
 		SmartDashboard.putData(new GraspTote());
 		SmartDashboard.putData(new OpenToteArms());
+		SmartDashboard.putData(new LogGyroAngle());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
