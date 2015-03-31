@@ -35,7 +35,12 @@ public class RobotValues { // Note: All distances in units of meters
 															// edge to box edge
 	public static final double Box_Width = 48 * INCHES_TO_METERS;
 	public static final double Box_Height = .305; //meters
-
+	//Three Tote Auton
+	public static final double ThreeToteAutonDrivePastToteDistance = .5;
+	public static final double ThreeToteAutonDistanceToNextTote = .4;
+	public static final double ThreeToteAutonDistanceToAutoZone = 2;
+	
+	
 	// Bearly Drive
 	// Decrease for faster reaction times
 	public static final double alpha = 0.4;

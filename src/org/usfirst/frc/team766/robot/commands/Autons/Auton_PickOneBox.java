@@ -18,7 +18,7 @@ public class Auton_PickOneBox extends CommandGroup {
     public  Auton_PickOneBox() {
     	//addSequential(new PullToteIn());
     	addSequential(new AdjustGripper(true));
-    	addSequential(new MoveElevatorWaypoint(3));
+    	addSequential(new MoveElevatorWaypoint(1));
     	addSequential(new DriveTurn(90));
     	addSequential(new DriveForward(RobotValues.DriveForwardDistance));
     	addSequential(new DropStack());

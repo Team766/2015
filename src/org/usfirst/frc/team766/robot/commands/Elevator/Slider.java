@@ -22,8 +22,7 @@ public class Slider extends CommandBase {
 
 	@Override
 	protected void initialize() {
-		lastSlider = slider = 0;
-		mover.start();
+		lastSlider = slider = OI.getSlider();
 	}
 
 	protected void execute() {

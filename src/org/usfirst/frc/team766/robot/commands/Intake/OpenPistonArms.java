@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class OpenPistonArms extends CommandGroup {
 	
-    public OpenPistonArms() {
-    	addParallel(new CloseLeftArm());
-    	addParallel(new CloseRightArm());
+    public OpenPistonArms(boolean open) {
+    	addParallel(new CloseLeftArm(open));
+    	addParallel(new CloseRightArm(open));
     }
 }

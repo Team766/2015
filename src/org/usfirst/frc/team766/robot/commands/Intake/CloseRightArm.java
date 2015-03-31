@@ -6,12 +6,14 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *Opens the right intake arm
  */
 public class CloseRightArm extends CommandBase {
-
-    public CloseRightArm() {
+	boolean state;
+	
+    public CloseRightArm(boolean in) {
+    	state = in;
     }
 
     protected void initialize() {
-    	Intake.setRightArm(true);
+    	Intake.setRightArm(state);
     }
 
     protected void execute() {
@@ -22,7 +24,7 @@ public class CloseRightArm extends CommandBase {
     }
 
     protected void end() {
-    	Intake.setRightArm(false);
+    	Intake.setRightArm(!state);
     }
 
     protected void interrupted() {

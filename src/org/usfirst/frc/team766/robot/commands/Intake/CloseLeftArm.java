@@ -6,12 +6,13 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *  Opens the left arm
  */
 public class CloseLeftArm extends CommandBase {
-
-    public CloseLeftArm() {
+	boolean state;
+    public CloseLeftArm(boolean open) {
+    	state = open;
     }
 
     protected void initialize() {
-    	Intake.setLeftArm(true);
+    	Intake.setLeftArm(state);
     }
 
     protected void execute() {
@@ -22,7 +23,7 @@ public class CloseLeftArm extends CommandBase {
     }
 
     protected void end() {
-    	Intake.setLeftArm(false);
+    	Intake.setLeftArm(!state);
     }
 
     protected void interrupted() {

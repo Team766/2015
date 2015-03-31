@@ -29,79 +29,73 @@ public class OI {
 			jBox = new Joystick(2), jTest = new Joystick(3);
 	
 	public Button
-	// Driving
-			buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
-			buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
-			buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
-			buttonDriverOverride = new JoystickButton(jRight,
-					Buttons.DriverOverride),
-			buttonDriverDriveSmoothing = new JoystickButton(jRight,
-					Buttons.DriverSmoothing),
-			buttonDriverSlowMode = new JoystickButton(jLeft,
-					Buttons.DriverSlowMode),
+		// Driving
+		buttonShifter = new JoystickButton(jLeft, Buttons.Shifter),
+		buttonQuickTurn = new JoystickButton(jRight, Buttons.QuickTurn),
+		buttonReverse = new JoystickButton(jRight, Buttons.Reverse),
+		buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
+		buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
+		buttonDriverSlowMode = new JoystickButton(jLeft, Buttons.DriverSlowMode),
+		
+		//Driver Intake
+		buttonDriverLeftArm = new JoystickButton(jLeft, Buttons.LeftIntakeArm),
+		buttonDriverRightArm = new JoystickButton(jRight, Buttons.RightIntakeArm),
+		buttonDriverLeftWheel = new JoystickButton(jLeft, Buttons.LeftIntakeWheel),
+		buttonDriverRightWheel = new JoystickButton(jRight, Buttons.RightIntakeWheel),
+		
+		// Elevator
+		buttonToggleGripper = new JoystickButton(jBox, Buttons.ToggleGripper),
+		buttonStackAdditionalTote = new JoystickButton(jBox, Buttons.StackAdditionalToteBoxOp),
+		buttonIntakeFeeder = new JoystickButton(jBox, Buttons.IntakeFeeder),
+//		buttonDriveGround = new JoystickButton(jBox, Buttons.DriveGround),
+		//buttonJoystickElevator = new JoystickButton(jBox, Buttons.JoystickElevator),
+		buttonBrakeOff = new JoystickButton(jBox, Buttons.BrakeOff),
+		buttonBrakeOn = new JoystickButton(jBox, Buttons.BrakeOn),
+		buttonLeftArm = new JoystickButton(jBox, Buttons.LeftArm),
+		buttonRightArm = new JoystickButton(jBox, Buttons.RightArm),
+		// buttonStopElevator = new JoystickButton(jBox,
+		// Buttons.BoxStop),//Need to implement
+//		buttonWheelsIn = new JoystickButton(jBox, Buttons.IntakeWheelsIn),
+//		buttonWheelsOut = new JoystickButton(jBox, Buttons.IntakeWheelsOut),
+		buttonIntakeWheelSpeedBoost = new JoystickButton(jBox, Buttons.IntakeWheelSpeedBoost),
 
-			// Elevator
-			buttonToggleGripper = new JoystickButton(jBox,
-					Buttons.ToggleGripper),
-			buttonStackAdditionalTote = new JoystickButton(jBox,
-					Buttons.StackAdditionalToteBoxOp),
-			buttonIntakeFeeder = new JoystickButton(jBox, Buttons.IntakeFeeder),
-//			buttonDriveGround = new JoystickButton(jBox, Buttons.DriveGround),
-			//buttonJoystickElevator = new JoystickButton(jBox, Buttons.JoystickElevator),
-			buttonBrakeOff = new JoystickButton(jBox, Buttons.BrakeOff),
-			buttonBrakeOn = new JoystickButton(jBox, Buttons.BrakeOn),
-			buttonLeftArm = new JoystickButton(jBox, Buttons.LeftArm),
-			buttonRightArm = new JoystickButton(jBox, Buttons.RightArm),
-			// buttonStopElevator = new JoystickButton(jBox,
-			// Buttons.BoxStop),//Need to implement
-//			buttonWheelsIn = new JoystickButton(jBox, Buttons.IntakeWheelsIn),
-//			buttonWheelsOut = new JoystickButton(jBox, Buttons.IntakeWheelsOut),
-			buttonIntakeWheelSpeedBoost = new JoystickButton(jBox, Buttons.IntakeWheelSpeedBoost),
+		buttonLeftIntakeWheelIn = new JoystickButton(jBox, Buttons.leftIntakeWheelIn),
+		buttonLeftIntakeWheelOut = new JoystickButton(jBox, Buttons.LeftIntakeWheelOut),
+		buttonRightIntakeWheelIn = new JoystickButton(jBox, Buttons.RightIntakeWheelIn),
+		buttonRightIntakeWheelOut = new JoystickButton(jBox, Buttons.RightIntakeWheelOut),
+		// buttonGraspToteIntake= new
+		// JoystickButton(jBox,Buttons.GraspToteIntake),
+		buttonElevatorCancel = new JoystickButton(jBox, Buttons.ElevatorCancel),
+		buttonElevatorPreset1 = new JoystickButton(jBox, Buttons.preset1),
+		buttonElevatorPreset2 = new JoystickButton(jBox, Buttons.preset2),
+		buttonElevatorPreset3 = new JoystickButton(jBox, Buttons.preset3),
+		buttonElevatorPreset4 = new JoystickButton(jBox, Buttons.preset4),
+		buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
+		buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
+		buttonElevatorPresetTop = new JoystickButton(jBox, Buttons.presetTop),
+		
+		buttonSliderDone = new JoystickButton(jBox, Buttons.SliderDone),
+		
+		buttonElevatorCancelAutomation = new JoystickButton(jBox, Buttons.ElevatorCancelAutomation),
 
-			buttonLeftIntakeWheelIn = new JoystickButton(jBox, Buttons.leftIntakeWheelIn),
-			buttonLeftIntakeWheelOut = new JoystickButton(jBox, Buttons.LeftIntakeWheelOut),
-			buttonRightIntakeWheelIn = new JoystickButton(jBox, Buttons.RightIntakeWheelIn),
-			buttonRightIntakeWheelOut = new JoystickButton(jBox, Buttons.RightIntakeWheelOut),
-			// buttonGraspToteIntake= new
-			// JoystickButton(jBox,Buttons.GraspToteIntake),
-			buttonElevatorCancel = new JoystickButton(jBox,
-					Buttons.ElevatorCancel),// No spare switches/buttons
-			buttonElevatorPreset1 = new JoystickButton(jBox, Buttons.preset1),
-			buttonElevatorPreset2 = new JoystickButton(jBox, Buttons.preset2),
-			buttonElevatorPreset3 = new JoystickButton(jBox, Buttons.preset3),
-			buttonElevatorPreset4 = new JoystickButton(jBox, Buttons.preset4),
-			buttonElevatorPreset5 = new JoystickButton(jBox, Buttons.preset5),
-			buttonElevatorPreset6 = new JoystickButton(jBox, Buttons.preset6),
-			buttonElevatorPresetTop = new JoystickButton(jBox, Buttons.presetTop),
-			
-			buttonSliderDone = new JoystickButton(jBox, Buttons.SliderDone),
-			
-			buttonElevatorCancelAutomation = new JoystickButton(jBox,
-					Buttons.ElevatorCancelAutomation),
+		// Auton
+		buttonAutonIncrement = new JoystickButton(jBox, Buttons.AutonIncrement),
+		buttonAutonDecrement = new JoystickButton(jBox, Buttons.AutonDecrement),
 
-			// Auton
-			buttonAutonIncrement = new JoystickButton(jBox,
-					Buttons.AutonIncrement),
-			buttonAutonDecrement = new JoystickButton(jBox,
-					Buttons.AutonDecrement),
+		// For Testing
+		// Intake
+		// buttonGraspTote = new JoystickButton(jBox,
+		// Buttons.GraspToteIntake),
 
-			// For Testing
-			// Intake
-			// buttonGraspTote = new JoystickButton(jBox,
-			// Buttons.GraspToteIntake),
-
-			buttonStackAdditionalChute = new JoystickButton(jTest,
-					Buttons.StackAdditionalChute),
-			buttonStackAdditional = new JoystickButton(jTest,
-					Buttons.StackAdditionalSmall),
-			buttonStackAdditionalToteTest = new JoystickButton(jTest,
-					Buttons.StackAdditionalToteTest),
-			buttonBrakeOnTest = new JoystickButton(jTest, Buttons.BrakeOnTest),
-			buttonBrakeOffTest = new JoystickButton(jTest, Buttons.BrakeOffTest),
-			buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
-			buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose),
-			buttonIntakeIn = new JoystickButton(jTest, Buttons.intakeIn),
-			buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
+		buttonStackAdditionalChute = new JoystickButton(jTest, Buttons.StackAdditionalChute),
+		buttonStackAdditional = new JoystickButton(jTest, Buttons.StackAdditionalSmall),
+		buttonStackAdditionalToteTest = new JoystickButton(jTest, Buttons.StackAdditionalToteTest),
+		buttonBrakeOnTest = new JoystickButton(jTest, Buttons.BrakeOnTest),
+		buttonBrakeOffTest = new JoystickButton(jTest, Buttons.BrakeOffTest),
+		buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
+		buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose),
+		buttonIntakeIn = new JoystickButton(jTest, Buttons.intakeIn),
+		buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
 
 	// Auton Stuff
 	public int AutonMode = 1;
@@ -143,8 +137,15 @@ public class OI {
 
 		// Intake
 		// buttonGraspTote.whenPressed(new IntakeTote());
-		buttonLeftArm.whileHeld(new CloseLeftArm());
-		buttonRightArm.whileHeld(new CloseRightArm());
+		buttonLeftArm.whileHeld(new CloseLeftArm(true));
+		buttonRightArm.whileHeld(new CloseRightArm(true));
+		
+		//Driver Intake
+		buttonDriverLeftArm.whileHeld(new CloseLeftArm(true));
+		buttonDriverRightArm.whileHeld(new CloseRightArm(true));
+		buttonDriverLeftWheel.whileHeld(new SetLeftWheel(-1, true));
+		buttonDriverRightWheel.whileHeld(new SetRightWheel(-1, true));
+		
 		// Intake
 		// buttonGraspTote.whenPressed(new GraspTote());
 
@@ -179,11 +180,13 @@ public class OI {
 	}
 
 	public double getThrottle() {
-		return jLeft.getY();
+		return Math.pow(jLeft.getY(), 3);
+		//return jLeft.getY();;
 	}
 
 	public double getSteer() {
-		return jRight.getX();
+		return Math.pow(jRight.getX(), 3);
+		//return jRight.getX();
 	}
 
 	public double getTestX() {

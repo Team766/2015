@@ -229,7 +229,8 @@ private double oldWheel = 0.0;
 	  }
 	  
 		  //Accounts for drift in the gyro
-		  if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
+//		  if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
+	  if(Math.abs(OI.getThrottle()) <= 0.01 && Math.abs(OI.getSteer()) <= 0.01)
 			  outputLeft = 0;
 	  return outputLeft * RobotValues.leftSlowFactor;
   }
@@ -248,13 +249,15 @@ private double oldWheel = 0.0;
 		  if(Math.abs(OI.getSteer()) <= 0.01)
 			  outputRight = (outputRight + gyroPID.getOutput() * ANGLE_TO_POWER_RATIO);
 		  //If they are not moving, don't reset
-		  else if(Math.abs(OI.getThrottle()) <= 0.01)
+		  //else if(Math.abs(OI.getThrottle()) <= 0.01)
+		  else
 			  Drive.resetGyro();
 	  }
 	  else
 		  Drive.resetGyro();
 	  
-	  if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
+	  //if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
+	  if(Math.abs(OI.getThrottle()) <= 0.01 && Math.abs(OI.getSteer()) <= 0.01)
 	  {
 		  outputRight = 0;
 		  Drive.resetGyro();

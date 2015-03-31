@@ -97,8 +97,8 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData("left intake wheel out", new SetLeftWheel(1, false));
 			SmartDashboard.putData("right intake wheel in", new SetRightWheel(-1, false));
 			SmartDashboard.putData("right intake wheel out", new SetRightWheel(1, false));
-			SmartDashboard.putData("close left arm", new CloseLeftArm());
-			SmartDashboard.putData("close right arm", new CloseRightArm());
+			SmartDashboard.putData("close left arm", new CloseLeftArm(true));
+			SmartDashboard.putData("close right arm", new CloseRightArm(true));
 		}
 	}
 

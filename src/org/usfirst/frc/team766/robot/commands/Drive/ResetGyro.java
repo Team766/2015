@@ -6,7 +6,17 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  *	Resets the Gyro after stopping everything
  */
 public class ResetGyro extends CommandBase {
-    public ResetGyro() {
+	
+	private boolean fast;
+	
+	public ResetGyro() {
+		//Default to slow(More thorough method)
+		this(false);
+    }
+	
+    public ResetGyro(boolean quick) {
+    	fast = quick;
+  
     }
 
     protected void initialize() {
@@ -14,7 +24,8 @@ public class ResetGyro extends CommandBase {
     	Drive.setPower(0);
     	Elevator.setElevatorSpeed(0);
     	
-    	Drive.gyroInit();
+    	if(!fast)
+    		Drive.gyroInit();
     	Drive.resetGyro();
     }
 
