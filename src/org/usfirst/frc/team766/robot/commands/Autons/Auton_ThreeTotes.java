@@ -13,6 +13,7 @@ import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
 import org.usfirst.frc.team766.robot.commands.Intake.SetRightWheel;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *	Three tote auton
@@ -37,52 +38,66 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auton_ThreeTotes extends CommandGroup {
     
     public  Auton_ThreeTotes() {
-    	for(int i = 0; i < 2; i++)
-    	{
+//    	for(int i = 0; i < 2; i++)
+//    	{
     		//Pick up the tote
     		addSequential(new MoveElevatorWaypoint(0));
 			addSequential(new AdjustGripper(true));
-			addSequential(new MoveElevatorWaypoint(1));
+			addSequential(new MoveElevatorWaypoint(2));
 			
-			//Go around the container
-			addSequential(new DriveTurn(-45));
-			addSequential(new ResetGyro(true));
-			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance));
-			addSequential(new DriveTurn(90));
-			addSequential(new ResetGyro(true));
-			
-			//Intake the arms while you approach the next tote
-			addParallel(new OpenPistonArms(true));
+			addParallel(new OpenPistonArms(false));
 			addParallel(new SetLeftWheel(-1,true));
 			addParallel(new SetRightWheel(-1,true));
 			
-			//Drive into the next tote and straighten out
-			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance));
-			addSequential(new DriveTurn(-45));
+			addSequential(new DriveTurn(30));
 			addSequential(new ResetGyro(true));
+			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance1));
+			addSequential(new DriveTurn(-60));
+			addSequential(new ResetGyro(true));
+			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance2));
 			
-			//Close the intake systems
-			addParallel(new OpenPistonArms(false));
+//			//Go around the container
+//			addSequential(new DriveTurn(45));
+//			addSequential(new WaitCommand(0.25));
+//			addSequential(new ResetGyro(true));
+//			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance1));
+//			addSequential(new DriveTurn(-90));
+//			addSequential(new WaitCommand(0.25));
+//			addSequential(new ResetGyro(true));
+//			
+//			//Intake the arms while you approach the next tote
+//			addParallel(new OpenPistonArms(false));
+//			addParallel(new SetLeftWheel(-1,true));
+//			addParallel(new SetRightWheel(-1,true));
+//			
+//			//Drive into the next tote and straighten out
+//			addSequential(new DriveForward(RobotValues.ThreeToteAutonDrivePastToteDistance2));
+//			addSequential(new DriveTurn(45));
+//			addSequential(new WaitCommand(0.25));
+//			addSequential(new ResetGyro(true));
+//			
+//			//Pick up the next tote
+			addSequential(new DriveForward(RobotValues.ThreeToteAutonDistanceToNextTote));
+//			
+//			//Close the intake systems
+			addParallel(new OpenPistonArms(true));
 			addParallel(new SetLeftWheel(0,true));
 			addParallel(new SetRightWheel(0,true));
 			
-			//Pick up the next tote
-			addSequential(new DriveForward(RobotValues.ThreeToteAutonDistanceToNextTote));
-			
-    	}
-
-    	//After picking up the first two totes, set up for the next one
-    	
-    	//Pick up the third tote
-		addSequential(new StackAdditionalTote());
-		
-		//Rotate to face the Auto Zone with the totes, and drive into the auto zone
-		addSequential(new DriveTurn(90));
-		addSequential(new ResetGyro(true));
-		addSequential(new DriveForward(RobotValues.ThreeToteAutonDistanceToAutoZone));
-		
-		//Once in the auto zone, put the stack down for the points
-		addSequential(new DropStack());
+//    	}
+//
+//    	//After picking up the first two totes, set up for the next one
+//    	
+//    	//Pick up the third tote
+//		addSequential(new StackAdditionalTote());
+//		
+//		//Rotate to face the Auto Zone with the totes, and drive into the auto zone
+//		addSequential(new DriveTurn(90));
+//		addSequential(new ResetGyro(true));
+//		addSequential(new DriveForward(RobotValues.ThreeToteAutonDistanceToAutoZone));
+//		
+//		//Once in the auto zone, put the stack down for the points
+//		addSequential(new DropStack());
 			
     	
     }

@@ -14,13 +14,23 @@ public class RobotValues { // Note: All distances in units of meters
 
 	// Autonomous
 	// Modes
-	public static final int Auton_VisionDrive = 0, Auton_Move = 1,
-			Auton_PickOneBox = 2, Auton_Rotate = 3, Auton_MoveToLandfill = 4,
-			Auton_None = 5, Auton_Push3Boxes = 6, Auton_Coopertition = 7;
-	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
-		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition"};
+	public static final int 
+		Auton_VisionDrive = 0, 
+		Auton_Move = 1,
+		Auton_PickOneBox = 2, 
+		Auton_Rotate = 3, 
+		Auton_MoveToLandfill = 4,
+		Auton_None = 5,
+		Auton_Push3Boxes = 6,
+		Auton_Coopertition = 7,
+		Auton_Container = 8,
+		Auton_3Tote = 9;
 	
-	public static final int Auton_Max = 7;
+	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
+		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition", "One Container"
+		, "Three Tote"};
+	
+	public static final int Auton_Max = 9;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
@@ -36,9 +46,10 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double Box_Width = 48 * INCHES_TO_METERS;
 	public static final double Box_Height = .305; //meters
 	//Three Tote Auton
-	public static final double ThreeToteAutonDrivePastToteDistance = .5;
-	public static final double ThreeToteAutonDistanceToNextTote = .4;
-	public static final double ThreeToteAutonDistanceToAutoZone = 2;
+	public static double ThreeToteAutonDrivePastToteDistance1 = 1.25;
+	public static double ThreeToteAutonDrivePastToteDistance2 = 1.25;
+	public static double ThreeToteAutonDistanceToNextTote = .4;
+	public static double ThreeToteAutonDistanceToAutoZone = 2;
 	
 	
 	// Bearly Drive
@@ -70,8 +81,8 @@ public class RobotValues { // Note: All distances in units of meters
 	public static double TurnAngleKd = 0.15;
 
 	// drive straight
-
-	public static final double DriveKp = 0.2;// Decrease to decrease robot speed
+								//.2
+	public static final double DriveKp = 0.1;// Decrease to decrease robot speed
 	public static final double DriveKi = 0.01;
 	public static final double DriveKd = 0.1;
 	public static final double Driveoutputmax_low = -10;
@@ -84,7 +95,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double UltrasonicDriveKd = 0.0;
 
 	// gyro turning in drive forward
-	public static final double AngleKp = 0.05;
+	public static final double AngleKp = 0.01;//.05
 	public static final double AngleKi = 0.00;
 	
 	public static final double AngleKd = 0.03;

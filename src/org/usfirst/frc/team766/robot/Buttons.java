@@ -4,7 +4,6 @@ public class Buttons {
 	public static final int Shifter = 2;
     public static final int Reverse = 2;
     public static final int QuickTurn = 2;
-    public static final int DriverPickup = 7;
     public static final int DriverSlowMode = 3; //Pick a better number
     public static final int DriverOverride = 3;
     public static final int DriverSmoothing = 4; //Feel free to change if not practical or wan to use button 4 for something else
@@ -35,6 +34,8 @@ public class Buttons {
     public static final int RightIntakeWheelIn = 22;
     public static final int RightIntakeWheelOut = 23;
     public static final int SliderDone = 24;
+    
+    public static final int CalibrateElevator = 5;
     
     public static final int LeftArm = 9;
 //	public static final int GraspToteIntake = 12;

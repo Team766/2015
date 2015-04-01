@@ -2,6 +2,7 @@ package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
+import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.LowerToteToStack;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorWaypoint;
@@ -40,8 +41,8 @@ public class OI {
 		//Driver Intake
 		buttonDriverLeftArm = new JoystickButton(jLeft, Buttons.LeftIntakeArm),
 		buttonDriverRightArm = new JoystickButton(jRight, Buttons.RightIntakeArm),
-		buttonDriverLeftWheel = new JoystickButton(jLeft, Buttons.LeftIntakeWheel),
-		buttonDriverRightWheel = new JoystickButton(jRight, Buttons.RightIntakeWheel),
+		buttonDriverLeftWheel = new JoystickButton(jRight, Buttons.LeftIntakeWheel),
+		buttonDriverRightWheel = new JoystickButton(jLeft, Buttons.RightIntakeWheel),
 		
 		// Elevator
 		buttonToggleGripper = new JoystickButton(jBox, Buttons.ToggleGripper),
@@ -58,7 +59,8 @@ public class OI {
 //		buttonWheelsIn = new JoystickButton(jBox, Buttons.IntakeWheelsIn),
 //		buttonWheelsOut = new JoystickButton(jBox, Buttons.IntakeWheelsOut),
 		buttonIntakeWheelSpeedBoost = new JoystickButton(jBox, Buttons.IntakeWheelSpeedBoost),
-
+		buttonCalibrateElevator = new JoystickButton(jBox, Buttons.CalibrateElevator),
+		
 		buttonLeftIntakeWheelIn = new JoystickButton(jBox, Buttons.leftIntakeWheelIn),
 		buttonLeftIntakeWheelOut = new JoystickButton(jBox, Buttons.LeftIntakeWheelOut),
 		buttonRightIntakeWheelIn = new JoystickButton(jBox, Buttons.RightIntakeWheelIn),
@@ -126,7 +128,7 @@ public class OI {
 		buttonElevatorPresetTop.whenPressed(new MoveElevatorWaypoint(6));
 
 		buttonSliderDone.whileHeld(new Slider());
-		
+		buttonCalibrateElevator.whenPressed(new CalibrateElevator());
 		buttonIntakeIn.whenPressed(new SetWheels(-1, true));
 		buttonIntakeOut.whenPressed(new SetWheels(1, true));
 
@@ -143,8 +145,8 @@ public class OI {
 		//Driver Intake
 		buttonDriverLeftArm.whileHeld(new CloseLeftArm(true));
 		buttonDriverRightArm.whileHeld(new CloseRightArm(true));
-		buttonDriverLeftWheel.whileHeld(new SetLeftWheel(-1, true));
-		buttonDriverRightWheel.whileHeld(new SetRightWheel(-1, true));
+		buttonDriverLeftWheel.whileHeld(new SetLeftWheel(1, false, buttonIntakeWheelSpeedBoost));
+		buttonDriverRightWheel.whileHeld(new SetRightWheel(1, false, buttonIntakeWheelSpeedBoost));
 		
 		// Intake
 		// buttonGraspTote.whenPressed(new GraspTote());

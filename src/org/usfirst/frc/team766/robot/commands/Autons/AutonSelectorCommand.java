@@ -60,6 +60,16 @@ public class AutonSelectorCommand extends CommandGroup{
             case RobotValues.Auton_None:
             	System.out.println("No auton selected");
             	break;
+            
+            case RobotValues.Auton_Container:
+            	System.out.println("One Container Auton");
+            	addSequential(new Auton_OneContainer());
+            	break;
+            	
+            case RobotValues.Auton_3Tote:
+            	System.out.println("Three Tote Auton");
+            	addSequential(new Auton_ThreeTotes());
+            	break;
             	
             default:{
                 System.out.println("Auton selection failed");

@@ -34,7 +34,6 @@ public class Intake extends Subsystem{
 
 	
 	protected void initDefaultCommand() {
-		setDefaultCommand(new JoystickIntake());
 	}
 	
 	@Deprecated

@@ -77,6 +77,12 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
 		SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
 		SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
+		
+		SmartDashboard.putNumber("Drive Past Tote 1", RobotValues.ThreeToteAutonDrivePastToteDistance1);
+		SmartDashboard.putNumber("Drive Past Tote 2", RobotValues.ThreeToteAutonDrivePastToteDistance2);
+		SmartDashboard.putNumber("Distance to Auto Zone", RobotValues.ThreeToteAutonDistanceToAutoZone);
+		SmartDashboard.putNumber("Drive To Next Tote", RobotValues.ThreeToteAutonDistanceToNextTote);
+		
 		SmartDashboard.putData(new CalibrateElevator());//Elevator must be at bottom at start.
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
@@ -119,6 +125,10 @@ public class SideSwipe extends IterativeRobot {
 //		RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
 //		RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
 
+		RobotValues.ThreeToteAutonDrivePastToteDistance1 = SmartDashboard.getNumber("Drive Past Tote 1");
+		RobotValues.ThreeToteAutonDrivePastToteDistance2 = SmartDashboard.getNumber("Drive Past Tote 2");
+		RobotValues.ThreeToteAutonDistanceToAutoZone = SmartDashboard.getNumber("Distance to Auto Zone");
+		RobotValues.ThreeToteAutonDistanceToNextTote = SmartDashboard.getNumber("Drive To Next Tote");
 		CommandBase.Elevator.resetEncoders();
 		/*
 		 * Run auton command Need to create an auton selector that uses OI and
