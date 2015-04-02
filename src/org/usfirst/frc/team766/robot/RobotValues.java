@@ -66,7 +66,7 @@ public class RobotValues { // Note: All distances in units of meters
 																// on this
 																// variable
 	// Encoder Height of elevator, needs to be changed
-	public static double ElevatorTopHeight = 1.57;//Turned down for testing
+	public static double ElevatorTopHeight = 1.59;//1.57
 	public static double elevatorSavedHeight = 0;
 	public static final double BoxFlange = .04;
 	public static final double[] ElevatorPresets = { 0, ElevatorPresetBase - BoxFlange,

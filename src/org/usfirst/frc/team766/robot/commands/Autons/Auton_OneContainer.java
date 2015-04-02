@@ -17,8 +17,10 @@ public class Auton_OneContainer extends CommandGroup {
     public  Auton_OneContainer() {
     	addSequential(new AdjustGripper(false));
     	addSequential(new MoveElevatorWaypoint(2));
+    	addSequential(new AdjustGripper(true));
     	addSequential(new DriveTurn(-90));
     	addSequential(new DriveForward(RobotValues.DriveForwardDistance));
+    	addSequential(new AdjustGripper(false));
     	addSequential(new MoveElevatorWaypoint(0));
     }
 }
