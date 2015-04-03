@@ -145,8 +145,8 @@ public class OI {
 		//Driver Intake
 		buttonDriverLeftArm.whileHeld(new CloseLeftArm(true));
 		buttonDriverRightArm.whileHeld(new CloseRightArm(true));
-		buttonDriverLeftWheel.whileHeld(new SetLeftWheel(1, false, buttonIntakeWheelSpeedBoost));
-		buttonDriverRightWheel.whileHeld(new SetRightWheel(1, false, buttonIntakeWheelSpeedBoost));
+		buttonDriverLeftWheel.whileHeld(new SetLeftWheel(.4, false, buttonIntakeWheelSpeedBoost));
+		buttonDriverRightWheel.whileHeld(new SetRightWheel(.4, false, buttonIntakeWheelSpeedBoost));
 		
 		// Intake
 		// buttonGraspTote.whenPressed(new GraspTote());
