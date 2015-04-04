@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot.commands;
 
 import org.usfirst.frc.team766.lib.logData;
+import org.usfirst.frc.team766.robot.subsystems.ContainerGrabber;
 import org.usfirst.frc.team766.robot.subsystems.Drive;
 import org.usfirst.frc.team766.robot.OI;
 import org.usfirst.frc.team766.robot.subsystems.Intake;
@@ -25,6 +26,7 @@ public abstract class CommandBase extends Command{
 	public static OI OI;
 	public static NetworkTable table;
 	public static logData myLog;
+	public static ContainerGrabber grabber;
 	
 	public static void init(){
 		Drive = new Drive();
@@ -33,6 +35,7 @@ public abstract class CommandBase extends Command{
 		OI = new OI();
 		table = NetworkTable.getTable("dataTable");
 		myLog = new logData();
+		grabber = new ContainerGrabber();
 	}
 
 }

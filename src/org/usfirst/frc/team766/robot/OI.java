@@ -11,6 +11,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
 import org.usfirst.frc.team766.robot.commands.Elevator.ToggleGripper;
+import org.usfirst.frc.team766.robot.commands.Grabber.GrabberController;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseLeftArm;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseRightArm;
 import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
@@ -88,6 +89,11 @@ public class OI {
 		// Intake
 		// buttonGraspTote = new JoystickButton(jBox,
 		// Buttons.GraspToteIntake),
+		
+		//Grabber Stuff
+		buttonLowerGrabber = new JoystickButton(jBox, Buttons.LowerGrabber),
+		buttonRaiseGrabber = new JoystickButton(jBox, Buttons.RaiseGrabber),
+		buttonGrabberBooster = new JoystickButton(jBox, Buttons.GrabberBooster),
 
 		buttonStackAdditionalChute = new JoystickButton(jTest, Buttons.StackAdditionalChute),
 		buttonStackAdditional = new JoystickButton(jTest, Buttons.StackAdditionalSmall),
@@ -98,6 +104,7 @@ public class OI {
 		buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose),
 		buttonIntakeIn = new JoystickButton(jTest, Buttons.intakeIn),
 		buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
+	
 
 	// Auton Stuff
 	public int AutonMode = 1;
@@ -126,7 +133,13 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPresetTop.whenPressed(new MoveElevatorWaypoint(6));
-
+		
+		//Grabber
+		buttonLowerGrabber.whileHeld(new GrabberController(-RobotValues.DefaultGrabberSpeed, buttonGrabberBooster));
+		buttonRaiseGrabber.whileHeld(new GrabberController(RobotValues.DefaultGrabberSpeed, buttonGrabberBooster));
+		buttonLowerGrabber.whenReleased(new GrabberController(0));
+		buttonRaiseGrabber.whenPressed(new GrabberController(0));
+		
 		buttonSliderDone.whileHeld(new Slider());
 		buttonCalibrateElevator.whenPressed(new CalibrateElevator());
 		buttonIntakeIn.whenPressed(new SetWheels(-1, true));

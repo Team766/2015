@@ -74,6 +74,11 @@ public class AutonSelectorCommand extends CommandGroup{
             	System.out.println("Three Tote Auton");
             	addSequential(new Auton_ThreeTotes());
             	break;
+            
+            case RobotValues.Auton_CalibrateElevator:
+            	System.out.println("Calibrate Elevator Auton");
+            	addSequential(new CalibrateElevator());
+            	break;
             	
             default:{
                 System.out.println("Auton selection failed");

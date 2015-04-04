@@ -24,13 +24,14 @@ public class RobotValues { // Note: All distances in units of meters
 		Auton_Push3Boxes = 6,
 		Auton_Coopertition = 7,
 		Auton_Container = 8,
-		Auton_3Tote = 9;
+		Auton_3Tote = 9,
+		Auton_CalibrateElevator= 10;
 	
 	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
 		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition", "One Container"
-		, "Three Tote"};
+		, "Three Tote", "Calibrate Elevator"};
 	
-	public static final int Auton_Max = 9;
+	public static final int Auton_Max = 10;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
@@ -51,6 +52,9 @@ public class RobotValues { // Note: All distances in units of meters
 	public static double ThreeToteAutonDistanceToNextTote = .4;
 	public static double ThreeToteAutonDistanceToAutoZone = 2;
 	
+	//Grabber
+	public static double GrabberSpeedMax = 1;
+	public static double DefaultGrabberSpeed = 0.3;
 	
 	// Bearly Drive
 	// Decrease for faster reaction times

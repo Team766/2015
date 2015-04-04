@@ -27,6 +27,10 @@ public class Ports {
 	public static final int Sol_leftArm = 3;
 	public static final int Sol_rightArm = 4;
 	
+	//Grabber
+	public static final int PWM_GrabberL = 3;
+	public static final int PWM_GrabberR = 4;
+	
 	//Encoders
     public static final int 
 		DIO_LDriveEncA = 0,

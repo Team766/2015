@@ -14,6 +14,10 @@ public class Buttons {
     public static final int LeftIntakeWheel = 7;
     public static final int RightIntakeWheel = 7;
     
+    //BoxOp Grabber
+    public static final int LowerGrabber = 100;
+    public static final int RaiseGrabber = 100;
+    public static final int GrabberBooster = 100;
     
     //BoxOp (Elevator)
     public static final int ToggleGripper = 1;
