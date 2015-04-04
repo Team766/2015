@@ -34,7 +34,7 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
-	public static final double DriveForwardDistance = 107 * INCHES_TO_METERS;// Distance
+	public static final double DriveForwardDistance = 80 * INCHES_TO_METERS;// Distance //107
 																				// to
 																				// landmark
 	public static final double DistanceToLandfill = (646.88 / 2 - 102.81)

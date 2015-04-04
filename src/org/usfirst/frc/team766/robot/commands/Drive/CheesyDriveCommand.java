@@ -5,6 +5,7 @@ import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Controls the robot drive train using the standard Team 254 scheme.
@@ -20,6 +21,7 @@ private double oldWheel = 0.0;
   private double quickStopAccumulator;
   private double throttleDeadband = 0.02; //0.02
   private double wheelDeadband = 0.02; //0.02
+  private Timer timer;
   
   //Bearly Driving
   private double lastRightOut;
@@ -33,6 +35,7 @@ private double oldWheel = 0.0;
 
   public CheesyDriveCommand() {
 	  requires(Drive);
+	  timer = new Timer();
 	  gyroPID.setSetpoint(0);
   }
 
@@ -45,6 +48,7 @@ private double oldWheel = 0.0;
 	  lastLeftOut = 0;
 	  outputLeft = 0;
 	  outputRight = 0;
+	  timer.reset();
   }
 
   protected void execute() {
@@ -102,7 +106,7 @@ private double oldWheel = 0.0;
     double negInertiaAccumulator = 0.0;
     double negInertiaScalar;
     if (isHighGear) {
-      negInertiaScalar = 5.0;
+      negInertiaScalar = 2.5;//5.0
       sensitivity = RobotValues.sensitivityHigh;
     } else {
       if (wheel * negInertia > 0) {
@@ -199,6 +203,7 @@ private double oldWheel = 0.0;
   }
 
   protected void end() {
+	  timer.stop();
 	  Drive.setPower(0);
 	  Drive.setSmoothing(true);
   }
@@ -255,6 +260,12 @@ private double oldWheel = 0.0;
 	  }
 	  else
 		  Drive.resetGyro();
+	  
+	  if((gyroPID.getError() / timer.get()) > 45)
+	  {
+		  Drive.resetGyro();
+		  timer.reset();
+	  }
 	  
 	  //if(Math.abs(OI.getThrottle()) <= 0.01 && !OI.getQuickTurn())
 	  if(Math.abs(OI.getThrottle()) <= 0.01 && Math.abs(OI.getSteer()) <= 0.01)
