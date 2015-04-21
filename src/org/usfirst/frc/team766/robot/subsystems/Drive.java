@@ -27,7 +27,7 @@ public class Drive extends Subsystem {
 
 	private double outputRight;
 	private double outputLeft;
-
+	
 	private Victor leftDrive = new Victor(Ports.PWM_Left_Drive);
 	private Victor rightDrive = new Victor(Ports.PWM_Right_Drive);
 
@@ -49,7 +49,6 @@ public class Drive extends Subsystem {
 	private boolean smoothing = false;
 
 	public Drive() {
-
 		Periodic smoother = new Periodic() {
 			private double lastRightOut, lastLeftOut; 
 			

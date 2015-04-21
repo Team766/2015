@@ -195,13 +195,13 @@ public class OI {
 	}
 
 	public double getThrottle() {
-		return Math.pow(jLeft.getY(), 3);
-		//return jLeft.getY();;
+		//return Math.pow(jLeft.getY(), 3);
+		return jLeft.getY();
 	}
 
 	public double getSteer() {
-		return Math.pow(jRight.getX(), 3);
-		//return jRight.getX();
+		//return Math.pow(jRight.getX(), 3);
+		return (getThrottle() < 0)? -jRight.getX() : jRight.getX();
 	}
 
 	public double getTestX() {
