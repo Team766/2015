@@ -11,7 +11,6 @@ import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalToteChute;
 import org.usfirst.frc.team766.robot.commands.Elevator.ToggleGripper;
-import org.usfirst.frc.team766.robot.commands.Grabber.GrabberController;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseLeftArm;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseRightArm;
 import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
@@ -78,7 +77,7 @@ public class OI {
 		buttonElevatorPresetTop = new JoystickButton(jBox, Buttons.presetTop),
 		
 		buttonSliderDone = new JoystickButton(jBox, Buttons.SliderDone),
-		
+
 		buttonElevatorCancelAutomation = new JoystickButton(jBox, Buttons.ElevatorCancelAutomation),
 
 		// Auton
@@ -133,12 +132,6 @@ public class OI {
 		buttonElevatorPreset5.whenPressed(new MoveElevatorWaypoint(4));
 		buttonElevatorPreset6.whenPressed(new MoveElevatorWaypoint(5));
 		buttonElevatorPresetTop.whenPressed(new MoveElevatorWaypoint(6));
-		
-		//Grabber
-		buttonLowerGrabber.whileHeld(new GrabberController(-RobotValues.DefaultGrabberSpeed, buttonGrabberBooster));
-		buttonRaiseGrabber.whileHeld(new GrabberController(RobotValues.DefaultGrabberSpeed, buttonGrabberBooster));
-		buttonLowerGrabber.whenReleased(new GrabberController(0));
-		buttonRaiseGrabber.whenPressed(new GrabberController(0));
 		
 		buttonSliderDone.whileHeld(new Slider());
 		buttonCalibrateElevator.whenPressed(new CalibrateElevator());
@@ -201,7 +194,7 @@ public class OI {
 
 	public double getSteer() {
 		//return Math.pow(jRight.getX(), 3);
-		return (getThrottle() < 0)? -jRight.getX() : jRight.getX();
+		return (getThrottle() < 0)? (-jRight.getX()) : (jRight.getX());
 	}
 
 	public double getTestX() {
