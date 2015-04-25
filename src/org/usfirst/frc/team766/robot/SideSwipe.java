@@ -77,13 +77,18 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
 		SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
 		SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
-		
-		SmartDashboard.putNumber("Drive Past Tote 1", RobotValues.ThreeToteAutonDrivePastToteDistance1);
-		SmartDashboard.putNumber("Drive Past Tote 2", RobotValues.ThreeToteAutonDrivePastToteDistance2);
-		SmartDashboard.putNumber("Distance to Auto Zone", RobotValues.ThreeToteAutonDistanceToAutoZone);
-		SmartDashboard.putNumber("Drive To Next Tote", RobotValues.ThreeToteAutonDistanceToNextTote);
-		
-		SmartDashboard.putData(new CalibrateElevator());//Elevator must be at bottom at start.
+
+		SmartDashboard.putNumber("Drive Past Tote 1",
+				RobotValues.ThreeToteAutonDrivePastToteDistance1);
+		SmartDashboard.putNumber("Drive Past Tote 2",
+				RobotValues.ThreeToteAutonDrivePastToteDistance2);
+		SmartDashboard.putNumber("Distance to Auto Zone",
+				RobotValues.ThreeToteAutonDistanceToAutoZone);
+		SmartDashboard.putNumber("Drive To Next Tote",
+				RobotValues.ThreeToteAutonDistanceToNextTote);
+
+		SmartDashboard.putData(new CalibrateElevator());// Elevator must be at
+														// bottom at start.
 		if (TESTING) {
 			SmartDashboard.putData(new DispEncoders());
 			SmartDashboard.putData(new ShowStops());
@@ -91,18 +96,26 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putData("Brake On", new AdjustBrake(true));
 			SmartDashboard.putData("MoveElevatorHeight .5",
 					new MoveElevatorHeight(.5));
+			SmartDashboard.putData("MoveElevatorHeight 1",
+					new MoveElevatorHeight(1));
 			SmartDashboard.putData("MoveElevatorHeightVelocity .5",
 					new MoveElevatorHeightVelocity(.5));
+			SmartDashboard.putData("MoveElevatorHeightVelocity 1",
+					new MoveElevatorHeightVelocity(1));
 			SmartDashboard.putData("Close Grippers: ", new AdjustGripper(true));
 			SmartDashboard.putData("Open Grippers: ", new AdjustGripper(false));
 			SmartDashboard.putData(new StackAdditionalTote());
 			SmartDashboard.putData(new StackAdditionalSmall());
 			SmartDashboard.putData(new DropStack());
-			
-			SmartDashboard.putData("left intake wheel in", new SetLeftWheel(-1, false));
-			SmartDashboard.putData("left intake wheel out", new SetLeftWheel(1, false));
-			SmartDashboard.putData("right intake wheel in", new SetRightWheel(-1, false));
-			SmartDashboard.putData("right intake wheel out", new SetRightWheel(1, false));
+
+			SmartDashboard.putData("left intake wheel in", new SetLeftWheel(-1,
+					false));
+			SmartDashboard.putData("left intake wheel out", new SetLeftWheel(1,
+					false));
+			SmartDashboard.putData("right intake wheel in", new SetRightWheel(
+					-1, false));
+			SmartDashboard.putData("right intake wheel out", new SetRightWheel(
+					1, false));
 			SmartDashboard.putData("close left arm", new CloseLeftArm(true));
 			SmartDashboard.putData("close right arm", new CloseRightArm(true));
 		}
@@ -110,25 +123,31 @@ public class SideSwipe extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		
-		SmartDashboard.putString("Autonomous Mode: ", RobotValues.Autons[CommandBase.OI.AutonMode]);
+
+		SmartDashboard.putString("Autonomous Mode: ",
+				RobotValues.Autons[CommandBase.OI.AutonMode]);
 		// Auton Cycler
 		if (!AutonCyclePrev && CommandBase.OI.getAutonIncrement())
 			CommandBase.OI.incrementAutonMode(1);
 		else if (!AutonCyclePrev && CommandBase.OI.getAutonDecrement())
 			CommandBase.OI.incrementAutonMode(-1);
-		AutonCyclePrev = (CommandBase.OI.getAutonIncrement() || CommandBase.OI.getAutonDecrement());
+		AutonCyclePrev = (CommandBase.OI.getAutonIncrement() || CommandBase.OI
+				.getAutonDecrement());
 	}
 
 	public void autonomousInit() {
-//		RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
-//		RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
-//		RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
+		// RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
+		// RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
+		// RobotValues.TurnAngleKd = SmartDashboard.getNumber("D");
 
-		RobotValues.ThreeToteAutonDrivePastToteDistance1 = SmartDashboard.getNumber("Drive Past Tote 1");
-		RobotValues.ThreeToteAutonDrivePastToteDistance2 = SmartDashboard.getNumber("Drive Past Tote 2");
-		RobotValues.ThreeToteAutonDistanceToAutoZone = SmartDashboard.getNumber("Distance to Auto Zone");
-		RobotValues.ThreeToteAutonDistanceToNextTote = SmartDashboard.getNumber("Drive To Next Tote");
+		RobotValues.ThreeToteAutonDrivePastToteDistance1 = SmartDashboard
+				.getNumber("Drive Past Tote 1");
+		RobotValues.ThreeToteAutonDrivePastToteDistance2 = SmartDashboard
+				.getNumber("Drive Past Tote 2");
+		RobotValues.ThreeToteAutonDistanceToAutoZone = SmartDashboard
+				.getNumber("Distance to Auto Zone");
+		RobotValues.ThreeToteAutonDistanceToNextTote = SmartDashboard
+				.getNumber("Drive To Next Tote");
 		CommandBase.Elevator.resetEncoders();
 		/*
 		 * Run auton command Need to create an auton selector that uses OI and
@@ -136,21 +155,23 @@ public class SideSwipe extends IterativeRobot {
 		 */
 		done = true;
 
-		 auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-		 auton.start();
+		auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
+		auton.start();
 
 	}
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
-//		SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
-//		SmartDashboard.putNumber("Graph", dist.graphError);
-//		System.out.println("Cheesy Gyro: " + CommandBase.Drive.getCheesyAngle() + "\t Gyro" + CommandBase.Drive.getAngle());
+		// SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
+		// SmartDashboard.putNumber("Graph", dist.graphError);
+		// System.out.println("Cheesy Gyro: " +
+		// CommandBase.Drive.getCheesyAngle() + "\t Gyro" +
+		// CommandBase.Drive.getAngle());
 	}
 
 	public void teleopInit() {
-		
+
 		RobotValues.IntakeKP = SmartDashboard.getNumber("P");
 		RobotValues.IntakeKI = SmartDashboard.getNumber("I");
 		RobotValues.IntakeKD = SmartDashboard.getNumber("D");
@@ -183,11 +204,15 @@ public class SideSwipe extends IterativeRobot {
 			SmartDashboard.putString("Test Prints", printOut.getOut());
 			System.out.println(printOut.getOut());
 		}
-//		System.out.println("Ultrasonic Sensor: " + UltrasonicSensor.getInstance().getDistanceDouble());
-//		System.out.println("Encoder Height: " + CommandBase.Elevator.getEncoders());
-//		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
-//		System.out.println("Drive Encoders L, R:  " + CommandBase.Drive.getLeftEncoderDistance() + ", " + CommandBase.Drive.getRightEncoderDistance());
-		
+		// System.out.println("Ultrasonic Sensor: " +
+		// UltrasonicSensor.getInstance().getDistanceDouble());
+		// System.out.println("Encoder Height: " +
+		// CommandBase.Elevator.getEncoders());
+		// System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
+		// System.out.println("Drive Encoders L, R:  " +
+		// CommandBase.Drive.getLeftEncoderDistance() + ", " +
+		// CommandBase.Drive.getRightEncoderDistance());
+
 	}
 
 	public void testPeriodic() {

@@ -194,7 +194,9 @@ public class OI {
 
 	public double getSteer() {
 		//return Math.pow(jRight.getX(), 3);
-		return (getThrottle() < 0)? (-jRight.getX()) : (jRight.getX());
+		if(!getQuickTurn())
+			return (getThrottle() > 0)? (-jRight.getX()) : (jRight.getX());
+		return jRight.getX();
 	}
 
 	public double getTestX() {

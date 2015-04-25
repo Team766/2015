@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class MoveElevatorHeightVelocity extends CommandBase  {
+public class MoveElevatorHeightVelocity extends CommandBase {
 
+	private static final boolean PRINT = true;
 	// Constants need to be tuned. Units: meters per second
 	private static final double AMAX = .05;
 	private static final double VMAX = .3;
@@ -39,7 +40,13 @@ public class MoveElevatorHeightVelocity extends CommandBase  {
 		double curPosition = Elevator.getEncoders();
 		double timeElapsed = Timer.getFPGATimestamp() - lastTime;
 
+		pr("\nMoveElevatorHeightVelocity:\nDistanceInRamp: "
+				+ distanceInRamp(curSpeed) + "\nCurrent Speed: " + curSpeed
+				+ "\nCurrent Position: " + curPosition + "\nElapsed Time: "
+				+ timeElapsed + "\nVelocity Target: " + velocityTarget);
+
 		if (Math.abs(targetPosition - curPosition) <= distanceInRamp(curSpeed)) {
+			pr("Phase type set to ramp down");
 			phase = phaseType.RAMP_DOWN;
 		}
 
@@ -66,9 +73,8 @@ public class MoveElevatorHeightVelocity extends CommandBase  {
 	}
 
 	protected boolean isFinished() {
-		return Elevator.getVelocity() <= STOP_THRESHOLD
-				&& phase == phaseType.RAMP_DOWN || Elevator.getBottomStop()
-				|| Elevator.getTopStop();
+		return (Elevator.getVelocity() <= STOP_THRESHOLD && phase == phaseType.RAMP_DOWN)
+				|| Elevator.getBottomStop() || Elevator.getTopStop();
 	}
 
 	protected void end() {
@@ -87,7 +93,12 @@ public class MoveElevatorHeightVelocity extends CommandBase  {
 	}
 
 	private static double distanceInRamp(double velocity) {
-		return Math.pow(AMAX, 2) / (2 * Math.abs(velocity));
+		return Math.pow(velocity, 2) / (2 * AMAX);
+	}
+
+	private static void pr(Object text) {
+		if (PRINT)
+			System.out.println(text);
 	}
 
 	private PIDController velocityPID = new PIDController(
