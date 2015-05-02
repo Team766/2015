@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.lib.BearlyDriveServer;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
@@ -19,9 +20,9 @@ import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalTote;
-import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseLeftArm;
 import org.usfirst.frc.team766.robot.commands.Intake.CloseRightArm;
+import org.usfirst.frc.team766.robot.commands.Intake.GraspTote;
 import org.usfirst.frc.team766.robot.commands.Intake.OpenToteArms;
 import org.usfirst.frc.team766.robot.commands.Intake.ResetIntakeEnc;
 import org.usfirst.frc.team766.robot.commands.Intake.SetLeftWheel;
@@ -161,13 +162,14 @@ public class SideSwipe extends IterativeRobot {
 	}
 
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
 		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("Graph", dist.graphError);
 		// System.out.println("Cheesy Gyro: " +
 		// CommandBase.Drive.getCheesyAngle() + "\t Gyro" +
 		// CommandBase.Drive.getAngle());
+		BearlyDriveServer.getInstance().run();
 	}
 
 	public void teleopInit() {
