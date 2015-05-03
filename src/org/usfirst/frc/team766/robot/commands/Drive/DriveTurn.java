@@ -65,4 +65,9 @@ public class DriveTurn extends CommandBase {
 	}
 
 	double counter = 0;
+
+	public void changeGoal(int degrees) {
+		pid.setSetpoint(degrees);
+		initialize();
+	}
 }

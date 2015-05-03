@@ -80,6 +80,11 @@ public class AutonSelectorCommand extends CommandGroup{
             	addSequential(new CalibrateElevator());
             	break;
             	
+            case RobotValues.Auton_TextControlled:
+            	System.out.println("Control the robot with text");
+            	addSequential(new TextToControls());
+            	break;
+            	
             default:{
                 System.out.println("Auton selection failed");
                 break;

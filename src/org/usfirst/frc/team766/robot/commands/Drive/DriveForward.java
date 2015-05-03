@@ -61,7 +61,7 @@ public class DriveForward extends CommandBase {
 				* ANGLE_TO_POWER_RATIO);
 	}
 
-	protected boolean isFinished() {
+	public boolean isFinished() {
 		return DistancePID.isDone();
 	}
 
@@ -78,6 +78,11 @@ public class DriveForward extends CommandBase {
 	private void pr(Object text) {
 		if (PRINT)
 			System.out.println("Drive Forward: " + text);
+	}
+	
+	public void changeGoal(double goal) {
+		DistancePID.setSetpoint(goal);
+		initialize();
 	}
 
 }

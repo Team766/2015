@@ -119,6 +119,9 @@ public class SideSwipe extends IterativeRobot {
 					1, false));
 			SmartDashboard.putData("close left arm", new CloseLeftArm(true));
 			SmartDashboard.putData("close right arm", new CloseRightArm(true));
+			
+			//Text controller
+			CommandBase.OI.server.start();
 		}
 	}
 
@@ -162,14 +165,13 @@ public class SideSwipe extends IterativeRobot {
 	}
 
 	public void autonomousPeriodic() {
-		//Scheduler.getInstance().run();
+		Scheduler.getInstance().run();
 		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("Graph", dist.graphError);
 		// System.out.println("Cheesy Gyro: " +
 		// CommandBase.Drive.getCheesyAngle() + "\t Gyro" +
 		// CommandBase.Drive.getAngle());
-		BearlyDriveServer.getInstance().run();
 	}
 
 	public void teleopInit() {

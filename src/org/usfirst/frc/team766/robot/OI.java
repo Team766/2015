@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.lib.BearlyDriveServer;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
@@ -109,6 +110,9 @@ public class OI {
 	public int AutonMode = 1;
 	public boolean TankDrive = false;
 	public boolean UseGamepad = false;
+	
+	//Bearly Drive Text Controller
+	public BearlyDriveServer server = BearlyDriveServer.getInstance();
 	
 	public OI() {
 		buttonToggleGripper.whenPressed(new ToggleGripper());
