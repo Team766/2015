@@ -47,7 +47,7 @@ public class DriveTurn extends CommandBase {
 		}
 	}
 
-	protected boolean isFinished() {
+	public boolean isFinished() {
 		return pid.isDone();
 	}
 

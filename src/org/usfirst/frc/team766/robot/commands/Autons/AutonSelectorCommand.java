@@ -1,9 +1,8 @@
 package org.usfirst.frc.team766.robot.commands.Autons;
 
+import org.usfirst.frc.team766.lib.TextCompiler;
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
-import org.usfirst.frc.team766.robot.commands.Drive.TimedDrive;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -83,6 +82,11 @@ public class AutonSelectorCommand extends CommandGroup{
             case RobotValues.Auton_TextControlled:
             	System.out.println("Control the robot with text");
             	addSequential(new TextToControls());
+            	break;
+            	
+            case RobotValues.Auton_TextCompiler:
+            	System.out.println("Run commands in file");
+            	addSequential(new TextCompiler());
             	break;
             	
             default:{

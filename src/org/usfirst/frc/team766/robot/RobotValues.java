@@ -26,13 +26,14 @@ public class RobotValues { // Note: All distances in units of meters
 		Auton_Container = 8,
 		Auton_3Tote = 9,
 		Auton_CalibrateElevator= 10,
-		Auton_TextControlled = 11;
+		Auton_TextControlled = 11,
+		Auton_TextCompiler = 12;
 	
 	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
 		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition", "One Container"
-		, "Three Tote", "Calibrate Elevator", "Text Controlled"};
+		, "Three Tote", "Calibrate Elevator", "Text Controlled", "File Compiler"};
 	
-	public static final int Auton_Max = 11;
+	public static final int Auton_Max = 12;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
