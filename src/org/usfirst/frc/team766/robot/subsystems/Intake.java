@@ -87,12 +87,12 @@ public class Intake extends Subsystem{
 	}
 	public void setLeftWheel(double in)
 	{
-		leftWheel.set(in);
+		leftWheel.set(-in);
 	}
 	
 	public void setRightWheel(double in)
 	{
-		rightWheel.set(-in);
+		rightWheel.set(in);
 	}
 	
 	public double getIntakeCurrentRight()

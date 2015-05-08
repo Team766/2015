@@ -42,8 +42,8 @@ public class OI {
 		//Driver Intake
 		buttonDriverLeftArm = new JoystickButton(jLeft, Buttons.LeftIntakeArm),
 		buttonDriverRightArm = new JoystickButton(jRight, Buttons.RightIntakeArm),
-		buttonDriverLeftWheel = new JoystickButton(jRight, Buttons.LeftIntakeWheel),
-		buttonDriverRightWheel = new JoystickButton(jLeft, Buttons.RightIntakeWheel),
+		buttonDriverLeftWheel = new JoystickButton(jLeft, Buttons.LeftIntakeWheel),
+		buttonDriverRightWheel = new JoystickButton(jRight, Buttons.RightIntakeWheel),
 		
 		// Elevator
 		buttonToggleGripper = new JoystickButton(jBox, Buttons.ToggleGripper),

@@ -33,10 +33,10 @@ public class Buttons {
 //    public static final int IntakeWheelsIn= 10;
 //    public static final int IntakeWheelsOut= 11;
     public static final int IntakeWheelSpeedBoost = 4;
-    public static final int leftIntakeWheelIn = 10;
-    public static final int LeftIntakeWheelOut = 11;
-    public static final int RightIntakeWheelIn = 22;
-    public static final int RightIntakeWheelOut = 23;
+    public static final int leftIntakeWheelIn = 22;
+    public static final int LeftIntakeWheelOut = 23;
+    public static final int RightIntakeWheelIn = 10;
+    public static final int RightIntakeWheelOut = 11;
     public static final int SliderDone = 24;
     
     public static final int CalibrateElevator = 5;
