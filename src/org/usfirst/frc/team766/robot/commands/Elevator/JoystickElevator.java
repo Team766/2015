@@ -1,6 +1,6 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
-import org.usfirst.frc.team766.robot.RobotValues;
+//import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /**
@@ -11,8 +11,8 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 public class JoystickElevator extends CommandBase {
 	private static final double DEADZONE = .3;// For joystick
 
-	private static final double BOTTOM_TRAVEL = 0;
-	private static final double TOP_TRAVEL = RobotValues.ElevatorTopHeight;
+//	private static final double BOTTOM_TRAVEL = 0;
+//	private static final double TOP_TRAVEL = RobotValues.ElevatorTopHeight;
 	private static final boolean PRINT = false;
 
 	public JoystickElevator() {
@@ -32,7 +32,7 @@ public class JoystickElevator extends CommandBase {
 		if (Math.abs(user) < DEADZONE)
 			user = 0;
 
-		double curHeight = Elevator.getEncoders();
+//		double curHeight = Elevator.getEncoders();
 
 		if (Elevator.getElevatorCurrent() > 10) {
 			Elevator.setElevatorSpeedRaw(0);

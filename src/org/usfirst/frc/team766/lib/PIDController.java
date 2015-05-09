@@ -149,9 +149,9 @@ public class PIDController {
 		prev_error = cur_error;
 	}
 
-	private double smartClamp(double out) {
-		return (((2d / -1860d) * (out)) - 1);
-	}
+//	private double smartClamp(double out) {
+//		return (((2d / -1860d) * (out)) - 1);
+//	}
 
 	public double getOutput() {
 		return output_value;

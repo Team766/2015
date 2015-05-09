@@ -60,7 +60,7 @@ public class AutonSelectorCommand extends CommandGroup{
             	break;
             	
             case RobotValues.Auton_None:
-            	System.out.println("No auton selected");
+            	System.out.println("No Auton Selected");
             	break;
             
             case RobotValues.Auton_Container:
@@ -86,7 +86,7 @@ public class AutonSelectorCommand extends CommandGroup{
             	
             case RobotValues.Auton_TextCompiler:
             	System.out.println("Run commands in file");
-            	addSequential(new TextCompiler());
+            	addSequential(new TextCompiler("/tmp/Commands.txt"));
             	break;
             	
             default:{

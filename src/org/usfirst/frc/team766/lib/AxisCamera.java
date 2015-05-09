@@ -23,7 +23,9 @@ import org.opencv.highgui.Highgui;
 import static edu.wpi.first.wpilibj.Timer.delay;
 
 /**
- * Axis M1011 network camera
+ * Axis M1011 network camera.  Reads the values from the network camera into a matrix
+ * that can be used by openCV libraries to analyze the footage
+ * @author Brett Levenson
  */
 public class AxisCamera {
     public enum WhiteBalance {

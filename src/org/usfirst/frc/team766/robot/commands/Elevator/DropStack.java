@@ -1,9 +1,6 @@
 package org.usfirst.frc.team766.robot.commands.Elevator;
 
-import org.usfirst.frc.team766.robot.commands.Intake.SetWheels;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *  Removes stacked totes from the robot

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot;
 
-import org.usfirst.frc.team766.lib.BearlyDriveServer;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
