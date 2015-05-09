@@ -27,21 +27,23 @@ public class JoystickElevator extends CommandBase {
 
 	// Called repeatedly whsen this Command is scheduled to run
 	protected void execute() {
-		pr("Current Current: " + Elevator.getElevatorCurrent());
-		double user = OI.getSlider();
-		if (Math.abs(user) < DEADZONE)
-			user = 0;
-
-//		double curHeight = Elevator.getEncoders();
-
-		if (Elevator.getElevatorCurrent() > 10) {
-			Elevator.setElevatorSpeedRaw(0);
-			emergencyStop = true;
-			System.out
-					.println("Joystick Control: Elevator Current Spiked. Elevator Stopped.");
-		} else {
-			Elevator.setElevatorSpeedRaw(user);
-		}
+		Elevator.setElevatorSpeed(OI.getTestY());
+//		pr("Current Current: " + Elevator.getElevatorCurrent());
+//		//double user = OI.getSlider();
+//		double user = OI.getTestY();
+//		if (Math.abs(user) < DEADZONE)
+//			user = 0;
+//
+////		double curHeight = Elevator.getEncoders();
+//
+//		if (Elevator.getElevatorCurrent() > 10) {
+//			Elevator.setElevatorSpeedRaw(0);
+//			emergencyStop = true;
+//			System.out
+//					.println("Joystick Control: Elevator Current Spiked. Elevator Stopped.");
+//		} else {
+//			Elevator.setElevatorSpeed(user);
+//		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

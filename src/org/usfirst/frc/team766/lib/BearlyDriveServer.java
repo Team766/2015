@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class BearlyDriveServer implements Runnable {
 	private static BearlyDriveServer instance_;
 
-	private static final int PORT = 9004;
+	private static final int PORT = 9009;
 
 	private Thread serverThread = new Thread(this);
 
@@ -58,7 +58,11 @@ public class BearlyDriveServer implements Runnable {
 	}
 	
 	public void start() {
-		serverThread.start();
+		try{
+			serverThread.start();
+		}catch(Exception e){
+			System.out.println("Failed to connect thread");
+		}
 	}
 
 	public void run() {
@@ -140,11 +144,11 @@ public class BearlyDriveServer implements Runnable {
 					//open or close
 					if(input.contains("open")){
 						System.out.println("Opening the claw");
-						claw = true;
+						claw = false;
 					}
 					else if(input.contains("close")){
 						System.out.println("Closing the claw");
-						claw = false;
+						claw = true;
 					}
 					else if(input.contains("toggle")){
 						System.out.println("Toggling the state of the claw");

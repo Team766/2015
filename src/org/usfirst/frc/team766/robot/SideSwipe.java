@@ -15,6 +15,7 @@ import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.DropStack;
+import org.usfirst.frc.team766.robot.commands.Elevator.JoystickElevator;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeight;
 import org.usfirst.frc.team766.robot.commands.Elevator.MoveElevatorHeightVelocity;
 import org.usfirst.frc.team766.robot.commands.Elevator.StackAdditionalSmall;
@@ -118,10 +119,12 @@ public class SideSwipe extends IterativeRobot {
 					1, false));
 			SmartDashboard.putData("close left arm", new CloseLeftArm(true));
 			SmartDashboard.putData("close right arm", new CloseRightArm(true));
-			
-			//Text controller
-			CommandBase.OI.server.start();
 		}
+		
+		//Text controller
+		System.out.println("Before Server starting");
+		CommandBase.OI.server.start();
+		System.out.println("After Server starting");
 	}
 
 	public void disabledPeriodic() {
@@ -185,7 +188,9 @@ public class SideSwipe extends IterativeRobot {
 
 		// Just for testing
 		// CommandBase.OI.setTankDrive(SmartDashboard.getBoolean("Tank Drive"));
-
+		
+		new JoystickElevator().start();
+		
 		if (!CommandBase.OI.getTankDrive()) {
 			new CheesyDriveCommand().start();
 		} else {

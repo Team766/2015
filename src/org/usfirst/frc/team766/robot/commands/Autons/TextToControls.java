@@ -25,14 +25,22 @@ public class TextToControls extends CommandBase {
 
     protected void execute() {
     	
-    	if (!driver.isRunning() || driver.isFinished())
-			driver.start();
+//    	if (!driver.isRunning())
+//			driver.start();
+//    	if (!turner.isRunning())
+//			turner.start();
     	
     	
-    	if(Math.abs(OI.server.getDriveDistance() - lastDistance) > .2)
+    	if(Math.abs(OI.server.getDriveDistance() - lastDistance) > .2){
     		driver.changeGoal(OI.server.getDriveDistance());
-    	if(Math.abs(OI.server.getDegrees() - lastDegree) > 5)
-    		turner.changeGoal(OI.server.getDegrees());
+    		turner.cancel();
+    		driver.start();
+    	}
+    	if(Math.abs(OI.server.getDegrees() - lastDegree) > 5){
+    		turner.changeGoal(OI.server.getDegrees());	
+    		driver.cancel();
+    		turner.start();
+    	}
     	Elevator.setGripper(OI.server.getClawState());
     	
     	lastDistance = OI.server.getDriveDistance();
