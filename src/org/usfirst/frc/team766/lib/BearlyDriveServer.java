@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class BearlyDriveServer implements Runnable {
 	private static BearlyDriveServer instance_;
 
-	private static final int PORT = 9009;
+	private static final int PORT = 5801;
 
 	private Thread serverThread = new Thread(this);
 
@@ -24,6 +24,7 @@ public class BearlyDriveServer implements Runnable {
 	//Sendable values
 	private double distance = 0;
 	private int degrees = 0;
+	private int waypoint = 0;
 	private boolean claw = false;
 
 	private String commands = "Drive Forward [distance] ##"
@@ -34,7 +35,8 @@ public class BearlyDriveServer implements Runnable {
 			+ "\tRotates the robot left x degrees around its center ##" + "Turn Right [degrees] ##"
 			+ "\tRotates the robot right x degrees around its center ##" + "Open/Close/Toggle Claw ##"
 			+ "\tOpens, closses, or toggles the state of the elevator's arm ##" + "help ##"
-			+ "\tList all the commands and what they do";
+			+ "\tList all the commands and what they do" + "Waypoint [position between 0 - 6] ##"
+			+ "\tRaises or lowers the elevator to the desired height ##";
 
 	private String name;
 	private Socket socket;
@@ -100,7 +102,7 @@ public class BearlyDriveServer implements Runnable {
 				
 				try{
 					
-				input = input.toLowerCase();
+				input = input.toLowerCase().trim();
 				//Drive Forward [degrees]
 				if(input.contains("drive forward")){
 					System.out.print("Driving Forward ");
@@ -158,7 +160,15 @@ public class BearlyDriveServer implements Runnable {
 						//Prints invalid input
 						throw new Exception();
 					}
-					
+				
+				//Elevator presets	
+				}else if(input.contains("waypoint")){
+					int value = Integer.parseInt(input.substring(9));
+					if(value < 0 || value > 6)throw new Exception();
+					else
+						waypoint = value;
+					System.out.println("Moving elevator to waypoint " + value);
+		
 				//Help	
 				}else if(input.equals("help")){
 					for (PrintWriter writer : writers) {
@@ -197,6 +207,13 @@ public class BearlyDriveServer implements Runnable {
 	
 	public int getDegrees(){
 		return degrees;
+	}
+	
+	public int getWaypoint(){
+		//Safety
+		waypoint = waypoint < 0 ? 0 : waypoint;
+		waypoint = waypoint > 6 ? 6 : waypoint;
+		return waypoint;
 	}
 	
 	public boolean getClawState(){
