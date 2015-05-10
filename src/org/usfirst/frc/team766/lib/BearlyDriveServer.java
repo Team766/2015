@@ -56,7 +56,6 @@ public class BearlyDriveServer implements Runnable {
 
 	private BearlyDriveServer(Socket socket) {
 		this.socket = socket;
-		serverThread.start();
 	}
 	
 	public void start() {
