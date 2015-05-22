@@ -206,6 +206,10 @@ public class Drive extends Subsystem {
 		gyro.initGyro();
 	}
 	
+	public double getGyroAngleInRadians() {
+	    return (getAngle() * Math.PI) / 180.0;
+	 }
+	
 	//Smoothing
 
 	public boolean getSmoothing() {
