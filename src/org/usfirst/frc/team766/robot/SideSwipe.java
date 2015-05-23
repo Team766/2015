@@ -6,6 +6,7 @@ import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
+import org.usfirst.frc.team766.robot.commands.Drive.DrivePath;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
 import org.usfirst.frc.team766.robot.commands.Drive.ResetGyro;
@@ -70,6 +71,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData(new GraspTote());
 		SmartDashboard.putData(new OpenToteArms());
 		SmartDashboard.putData(new LogGyroAngle());
+		SmartDashboard.putData(new DrivePath());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
