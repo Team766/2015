@@ -114,9 +114,8 @@ public class AxisCamera {
     }
 
     /**
-     * Get an image from the camera and store it in the provided image.
+     * Grabs an image from the axis IP camera and returns it as a Mat object that can be easily used with openCV.
      *
-     * @param image The imaq image to store the result in. This must be an HSL or RGB image.
      * @return <code>true</code> upon success, <code>false</code> on a failure
      */
     public Mat getImage() {

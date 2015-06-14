@@ -1,6 +1,11 @@
 package org.usfirst.frc.team766.lib;
 
 /**
+ * When attempting to move something with a control loop, a PID controller can 
+ * smoothly decrease the error.  This class is used for the elevator, driving during
+ * autonmous, and angle correction with the gyro during the tele-operated period of the
+ * match.
+ * 
  * Because FRC's PID only supports a narrow range of things - you have to send
  * the output directly to speed controller, etc.
  * 
@@ -57,6 +62,15 @@ public class PIDController {
 		endthreshold = threshold;
 	}
 
+	/**
+	 * Constructs a PID controller, with the specified P,I,D values, along with the end threshold.
+	 * 
+	 * @param P Proportional value used in the PID controller
+	 * @param I	Integral value used in the PID controller
+	 * @param D Derivative value used in the PID controller
+	 * 
+	 * @param threshold the end threshold for declaring the PID 'done'
+	 */
 	public PIDController(double P, double I, double D, double threshold) {
 		Kp = P;
 		Ki = I;
@@ -81,9 +95,9 @@ public class PIDController {
 	/**
 	 * If we want to set values, such as with SmartDash
 	 * 
-	 * @param P
-	 * @param I
-	 * @param D
+	 * @param P Proportional value used in the PID controller
+	 * @param I	Integral value used in the PID controller
+	 * @param D Derivative value used in the PID controller
 	 */
 	public void setConstants(double P, double I, double D) {
 		Kp = P;
@@ -93,8 +107,8 @@ public class PIDController {
 	
 	/** Same as calculate() except that it prints debugging information
 	 * 
-	 * @param cur_input
-	 * @param smart
+	 * @param cur_input The current input to be plugged into the PID controller
+	 * @param smart True if you want the output to be dynamically adjusted to the speed controller
 	 */
 	public void calculateDebug(double cur_input, boolean smart) {
 		print = true;
@@ -104,8 +118,8 @@ public class PIDController {
 	/**
 	 * Calculate PID value. Run only once per loop. Use getOutput to get output.
 	 * 
-	 * @param cur_input
-	 *            Input from sensor
+	 * @param cur_input Input value from sensor
+	 * @param smart True if you want the output to be dynamically adjusted to the speed controller
 	 */
 	public void calculate(double cur_input, boolean smart) {
 		cur_error = (setpoint - cur_input);

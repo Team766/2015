@@ -42,6 +42,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 
  * @author Brett Levenson
  * @author Patrick Kao
+ * 
+ * @version 2.0
  */
 
 public class SideSwipe extends IterativeRobot {
@@ -54,6 +56,11 @@ public class SideSwipe extends IterativeRobot {
 	private boolean AutonCyclePrev;
 	private boolean done;
 
+	/**
+	 * First method called when the robot first turns on.  Initializes the robot to its
+	 * beginning state.  This includes all of the constants and commands that are put onto
+	 * smartdashboard.
+	 */
 	public void robotInit() {
 		CommandBase.init();
 		SmartDashboard.putBoolean("Tank Drive", false);
@@ -128,7 +135,11 @@ public class SideSwipe extends IterativeRobot {
 		CommandBase.OI.server.start();
 		System.out.println("After Server starting");
 	}
-
+	
+	/**
+	 * Method called repeatedly while the robot is in the disabled state.
+	 * Updates the commands that display and select the different autonomous modes.
+	 */
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 
@@ -143,6 +154,12 @@ public class SideSwipe extends IterativeRobot {
 				.getAutonDecrement());
 	}
 
+	/**
+	 * This method is run once at the start of the autonomous period.
+	 * Queues the autonomous command up that was selected during disabled periodic method.
+	 * This is also the location where the constants used during the autonomous commands are updated
+	 * to allow for easier testing.  Values that don't change are set in the robotInit function.
+	 */
 	public void autonomousInit() {
 		// RobotValues.TurnAngleKp = SmartDashboard.getNumber("P");
 		// RobotValues.TurnAngleKi = SmartDashboard.getNumber("I");
@@ -167,7 +184,13 @@ public class SideSwipe extends IterativeRobot {
 		auton.start();
 
 	}
-
+	
+	/**
+	 * This function is run repeatedly during the autonomous period of the match.
+	 * This updates the commands that control the state of the robot during autonomous.
+	 * When debugging, this method is helpful because it can display the live values of 
+	 * the robot to the console to see what is wrong. 
+	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
@@ -177,7 +200,11 @@ public class SideSwipe extends IterativeRobot {
 		// CommandBase.Drive.getCheesyAngle() + "\t Gyro" +
 		// CommandBase.Drive.getAngle());
 	}
-
+	
+	/**
+	 * The first function called at the start of the tele-operated period of the match.
+	 * This is where the commands that control the elevator and drive base are initiated.
+	 */
 	public void teleopInit() {
 
 		RobotValues.IntakeKP = SmartDashboard.getNumber("P");
@@ -203,11 +230,20 @@ public class SideSwipe extends IterativeRobot {
 		printOut.start();
 	}
 
+	/**
+	 * The method called at the start of the disabled period.  This method is mainly used to close
+	 * files and different features after the robot has completed during the autonomous and teleop periods.
+	 */
 	public void disabledInit() {
 		if (done)
 			CommandBase.myLog.closeFile();
 	}
 
+	/**
+	 * This method is called repeatedly during the driver controlled section of the match, or during the
+	 * test period.  This updates the different subsystem commands that actuate the robot.  This also displays
+	 * useful information in the console while the robot is running.
+	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		if (PRINT) {
@@ -224,7 +260,12 @@ public class SideSwipe extends IterativeRobot {
 		// CommandBase.Drive.getRightEncoderDistance());
 
 	}
-
+	
+	/**
+	 * This method is called repeatedly during the practice period.  This simply updates the live window features
+	 * so that smartdashboard can display the current state of the robot.  This method is not currently in use because
+	 * it is unnecessary and repetitive.
+	 */
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
