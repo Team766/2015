@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.lib.trajectory.AutoPaths;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
@@ -181,7 +182,7 @@ public class SideSwipe extends IterativeRobot {
 		done = true;
 
 		auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-		auton.start();
+		//auton.start();
 
 	}
 	
@@ -235,6 +236,9 @@ public class SideSwipe extends IterativeRobot {
 	 * files and different features after the robot has completed during the autonomous and teleop periods.
 	 */
 	public void disabledInit() {
+		//Loads trajectory paths from files
+		AutoPaths.loadPaths();
+		
 		if (done)
 			CommandBase.myLog.closeFile();
 	}

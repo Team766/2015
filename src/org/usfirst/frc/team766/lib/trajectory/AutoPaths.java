@@ -19,7 +19,7 @@ public class AutoPaths {
 	                                                     "Inside, Close",
 	                                                     "Straight ahead",
 	                                                     };
-	  static Hashtable paths_ = new Hashtable();
+	  static Hashtable<String, Path> paths_ = new Hashtable<String,Path>();
 	  
 	  public static void loadPaths() {
 	    Timer t = new Timer();
@@ -27,17 +27,17 @@ public class AutoPaths {
 	    ReadPath pathReader = new ReadPath();
 	    for (int i = 0; i < kPathNames.length; ++i) {
 
-	      Path path = pathReader.getPath("/tmp/" + kPathNames[i] + ".txt");
+	      Path path = pathReader.getPath("/var/local/paths/" + kPathNames[i] + ".txt");
 	      paths_.put(kPathNames[i], path);
 	    }
 	    System.out.println("Parsing paths took: " + t.get());
 	  }
 	  
 	  public static Path get(String name) {
-	    return (Path)paths_.get(name);
+	    return paths_.get(name);
 	  }
 	  
 	  public static Path getByIndex(int index) {
-	    return (Path)paths_.get(kPathNames[index]);
+	    return paths_.get(kPathNames[index]);
 	  }
 	}

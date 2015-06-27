@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot.commands.Drive;
 
+import org.usfirst.frc.team766.lib.trajectory.AutoPaths;
 import org.usfirst.frc.team766.lib.trajectory.Path;
 import org.usfirst.frc.team766.lib.trajectory.Trajectory;
 import org.usfirst.frc.team766.lib.trajectory.TrajectoryFollower;
@@ -66,8 +67,9 @@ public class PathDrive extends CommandBase {
 
 		System.out.println("Init Drive " + Timer.getFPGATimestamp());
 		Drive.resetEncoders();
+		
 		loadProfile(path.getLeftWheelTrajectory(),
-				path.getRightWheelTrajectory(), 1.0, heading);
+					path.getRightWheelTrajectory(), 1.0, 0.0);
 
 	}
 
