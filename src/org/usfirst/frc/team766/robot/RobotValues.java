@@ -1,5 +1,7 @@
 package org.usfirst.frc.team766.robot;
 
+import java.util.HashMap;
+
 public class RobotValues { // Note: All distances in units of meters
 	// Conversion constants
 	public static final double INCHES_TO_METERS = 0.0254;
@@ -11,29 +13,21 @@ public class RobotValues { // Note: All distances in units of meters
 	public static final double safteyDriveDistance = 10;
 	public static final double driveDividor = 10;
 
-
+	//Map that stores the values for the HTTP server
+	public static HashMap<String, Number> httpValues = new HashMap<String, Number>(){
+		private static final long serialVersionUID = 1L;
+		{
+			put("Auton Mode", 1);
+		}
+	};
+	
 	// Autonomous
 	// Modes
-	public static final int 
-		Auton_VisionDrive = 0, 
-		Auton_Move = 1,
-		Auton_PickOneBox = 2, 
-		Auton_Rotate = 3, 
-		Auton_MoveToLandfill = 4,
-		Auton_None = 5,
-		Auton_Push3Boxes = 6,
-		Auton_Coopertition = 7,
-		Auton_Container = 8,
-		Auton_3Tote = 9,
-		Auton_CalibrateElevator= 10,
-		Auton_TextControlled = 11,
-		Auton_TextCompiler = 12;
-	
 	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
 		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition", "One Container"
 		, "Three Tote", "Calibrate Elevator", "Text Controlled", "File Compiler"};
 	
-	public static final int Auton_Max = 12;
+	public static final int Auton_Max = Autons.length-1;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons

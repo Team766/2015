@@ -20,71 +20,71 @@ public class AutonSelectorCommand extends CommandGroup{
     public AutonSelectorCommand(int mode){
     	//pass in the auton mode
 
-        switch(mode){
+        switch(RobotValues.Autons[mode]){
             //runs the Move Command
-            case RobotValues.Auton_Move:
+            case "Move Forward":
                 System.out.println("Drive Forward to Landmark Auton");
                 addSequential(new Auton_DriveForward());
                 //addSequential(new DriveForward(RobotValues.DriveForwardDistance));
                 //addSequential(new TimedDrive(2.25));
                 break;
-            case RobotValues.Auton_PickOneBox:
+            case "Pickup One Tote":
             	System.out.println("Pick One Box Auton");
             	addSequential(new Auton_PickOneBox());
             	addSequential(new CalibrateElevator());
             	break;
             	
-            case RobotValues.Auton_Rotate:
+            case "Rotate 90 degrees":
                 System.out.println("Rotate Auton");
                 addSequential(new DriveTurn(90));
                 break;
             
-            case RobotValues.Auton_MoveToLandfill://Align robot with box
+            case "Move to landfill"://Align robot with box
             	System.out.println("Move to Landfill Auton");
             	addSequential(new Auton_MoveToLandfill());
             	break;
             
-            case RobotValues.Auton_Push3Boxes:
+            case "3 Tote Hot":
             	System.out.println("Push 3 Boxes Auto");
             	addSequential(new Auton_Push3Boxes());
             	break;
             	
-            case RobotValues.Auton_VisionDrive:
+            case "Vision Drive":
             	System.out.println("Vision Drive Auto");
             	addSequential(new OpenCvTest());
             	break;
         
-            case RobotValues.Auton_Coopertition:
+            case "Coopertition":
             	System.out.println("Coopertition Auto");
             	addSequential(new Auton_Coopertition());
             	break;
             	
-            case RobotValues.Auton_None:
+            case "No Auton Selected":
             	System.out.println("No Auton Selected");
             	break;
             
-            case RobotValues.Auton_Container:
+            case "One Container":
             	System.out.println("One Container Auton");
             	addSequential(new Auton_OneContainer());
             	addSequential(new CalibrateElevator());
             	break;
             	
-            case RobotValues.Auton_3Tote:
+            case "Three Tote":
             	System.out.println("Three Tote Auton");
             	addSequential(new Auton_ThreeTotes());
             	break;
             
-            case RobotValues.Auton_CalibrateElevator:
+            case "Calibrate Elevator":
             	System.out.println("Calibrate Elevator Auton");
             	addSequential(new CalibrateElevator());
             	break;
             	
-            case RobotValues.Auton_TextControlled:
+            case "Text Controlled":
             	System.out.println("Control the robot with text");
             	addSequential(new TextToControls());
             	break;
             	
-            case RobotValues.Auton_TextCompiler:
+            case "File Compiler":
             	System.out.println("Run commands in file");
             	addSequential(new TextCompiler("/tmp/Commands.txt"));
             	break;
