@@ -52,7 +52,6 @@ public class PathDrive extends CommandBase {
 			Drive.setLeftPower(speedLeft + turn);
 			Drive.setRightPower(speedRight - turn);
 		}
-
 	}
 
 	protected void end() {
@@ -62,6 +61,8 @@ public class PathDrive extends CommandBase {
 
 	@Override
 	protected void initialize() {
+		path = OI.path;
+		
 		followerLeft.configure(1.5, 0, 0, 1.0 / 15.0, 1.0 / 34.0);
 		followerRight.configure(1.5, 0, 0, 1.0 / 15.0, 1.0 / 34.0);
 
@@ -121,5 +122,4 @@ public class PathDrive extends CommandBase {
 		}
 		return angle;
 	}
-
 }

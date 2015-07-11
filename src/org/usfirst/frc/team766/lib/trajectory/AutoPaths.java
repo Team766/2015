@@ -29,6 +29,7 @@ public class AutoPaths {
 
 	      Path path = pathReader.getPath("/var/local/paths/" + kPathNames[i] + ".txt");
 	      paths_.put(kPathNames[i], path);
+	      
 	    }
 	    System.out.println("Parsing paths took: " + t.get());
 	  }

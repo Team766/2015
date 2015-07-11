@@ -1,6 +1,8 @@
 package org.usfirst.frc.team766.robot;
 
 import org.usfirst.frc.team766.lib.BearlyDriveServer;
+import org.usfirst.frc.team766.lib.HTTPServer;
+import org.usfirst.frc.team766.lib.trajectory.Path;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustBrake;
 import org.usfirst.frc.team766.robot.commands.Elevator.AdjustGripper;
 import org.usfirst.frc.team766.robot.commands.Elevator.CalibrateElevator;
@@ -112,6 +114,13 @@ public class OI {
 	
 	//Bearly Drive Text Controller
 	public BearlyDriveServer server = BearlyDriveServer.getInstance();
+	
+	//Trajectory
+	public Path path = null;
+	
+	
+	//HTTP server
+	public HTTPServer HttpServer = new HTTPServer();
 	
 	public OI() {
 		buttonToggleGripper.whenPressed(new ToggleGripper());

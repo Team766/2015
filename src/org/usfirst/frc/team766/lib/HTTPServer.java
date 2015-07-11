@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.usfirst.frc.team766.robot.RobotValues;
+import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 import com.sun.net.httpserver.Filter;
 import com.sun.net.httpserver.HttpContext;
@@ -35,14 +36,17 @@ import com.sun.net.httpserver.HttpServer;
 
 //TODO Look at robotValues arrays dirrectly
 
-public class HTTPServer extends Filter {
+public class HTTPServer extends Filter implements Runnable{
 
 	private static String code = "";
 
 	private static HashMap<String, String> values = new HashMap<String, String>();
 	
-	public static void main(String[] args) throws IOException{
-		HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+	public void run(){
+		HttpServer server;
+		try {
+			server = HttpServer.create(new InetSocketAddress(8000), 0);
+		
 		
 		HttpContext context2 = server.createContext("/display", new HttpHandler(){
 			public void handle(HttpExchange exchange) throws IOException {
@@ -82,7 +86,14 @@ public class HTTPServer extends Filter {
 			    	while (it.hasNext()) {
 			    		Map.Entry pair = (Map.Entry)it.next();
 		        		code += "<p><strong>Key:</strong> " + pair.getKey() + " <strong>Value: </strong>" + pair.getValue() + "</p>";
-		        	
+		        		
+		        		if(pair.getKey().equals("AutoMode")){
+		        			for(int i = 0; i < RobotValues.Autons.length; i++){
+		        				if(RobotValues.Autons[i].equals(pair.getValue()))
+		        					CommandBase.OI.AutonMode = i;
+		        			}
+		        		}
+		        			
 		        		values.put((String)pair.getKey(), (String)pair.getValue());
 		        		 it.remove(); // avoids a ConcurrentModificationException
 	        		}
@@ -96,6 +107,9 @@ public class HTTPServer extends Filter {
 		valueSite.getFilters().add(new HTTPServer());
 
 		server.start();
+		} catch (IOException e) {
+			System.out.println("HTTP Server failed to open");
+		}
 	}
 	
 	private static String getHTML(){

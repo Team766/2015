@@ -135,6 +135,12 @@ public class SideSwipe extends IterativeRobot {
 		System.out.println("Before Server starting");
 		CommandBase.OI.server.start();
 		System.out.println("After Server starting");
+		
+		//HTTP Server
+		new Thread(CommandBase.OI.HttpServer).start();
+		
+		//Load Paths
+		AutoPaths.loadPaths();
 	}
 	
 	/**
@@ -194,7 +200,8 @@ public class SideSwipe extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
+		//System.out.println(CommandBase.Drive.getAverageEncoderDistance());
+		//System.out.println("Gyro Position: " + CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("gyro", CommandBase.Drive.getAngle());
 		// SmartDashboard.putNumber("Graph", dist.graphError);
 		// System.out.println("Cheesy Gyro: " +
