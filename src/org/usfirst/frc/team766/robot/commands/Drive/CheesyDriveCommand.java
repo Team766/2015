@@ -72,7 +72,7 @@ private double oldWheel = 0.0;
 //    double wheel = -handleDeadband(beforeSteer, wheelDeadband);
 //    double throttle = handleDeadband(beforeThrottle, throttleDeadband);
     
-    double wheel = -handleDeadband(OI.getSteer(), wheelDeadband);
+    double wheel = -handleDeadband((Math.pow(OI.getSteer(), 3)), wheelDeadband);
     double throttle = handleDeadband(OI.getThrottle(), throttleDeadband);
 
     double negInertia = wheel - oldWheel;

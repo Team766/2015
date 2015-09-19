@@ -25,13 +25,13 @@ public class RobotValues { // Note: All distances in units of meters
 	// Modes
 	public static final String[] Autons = {"Vision Drive", "Move Forward", "Pickup One Tote", "Rotate 90 degrees",
 		"Move to landfill", "No Auton Selected", "3 Tote Hot", "Coopertition", "One Container"
-		, "Three Tote", "Calibrate Elevator", "Text Controlled", "File Compiler"};
+		, "Three Tote", "Calibrate Elevator", "Text Controlled", "File Compiler", "Container & Tote"};
 	
 	public static final int Auton_Max = Autons.length-1;
 	public static final int Auton_Min = 0;
 
 	// Values for Autons
-	public static final double DriveForwardDistance = 80 * INCHES_TO_METERS;// Distance //107
+	public static final double DriveForwardDistance = 38 * INCHES_TO_METERS;// Distance //107
 																				// to
 																				// landmark
 	public static final double DistanceToLandfill = (646.88 / 2 - 102.81)

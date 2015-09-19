@@ -88,6 +88,10 @@ public class AutonSelectorCommand extends CommandGroup{
             	System.out.println("Run commands in file");
             	addSequential(new TextCompiler("/tmp/Commands.txt"));
             	break;
+            case "Container & Tote":
+            	System.out.println("Contianer then Tote");
+            	addSequential(new Auton_CanAndTote());
+            	break;
             	
             default:{
                 System.out.println("Auton selection failed");
