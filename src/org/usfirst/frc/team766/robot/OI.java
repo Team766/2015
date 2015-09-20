@@ -39,6 +39,7 @@ public class OI {
 		buttonDriverOverride = new JoystickButton(jRight, Buttons.DriverOverride),
 		buttonDriverDriveSmoothing = new JoystickButton(jRight, Buttons.DriverSmoothing),
 		buttonDriverSlowMode = new JoystickButton(jLeft, Buttons.DriverSlowMode),
+		buttonSlowTurn = new JoystickButton(jLeft, Buttons.SlowTurn),
 		
 		//Driver Intake
 		buttonDriverLeftArm = new JoystickButton(jLeft, Buttons.LeftIntakeArm),
@@ -189,6 +190,10 @@ public class OI {
 
 	public boolean getQuickTurn() {
 		return buttonQuickTurn.get();
+	}
+	
+	public boolean getSlowTurn(){
+		return buttonSlowTurn.get();
 	}
 
 	public boolean getReverse() {

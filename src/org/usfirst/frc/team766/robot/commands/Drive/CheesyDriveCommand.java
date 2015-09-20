@@ -59,6 +59,7 @@ private double oldWheel = 0.0;
       return;
     }
     boolean isQuickTurn = OI.getQuickTurn();
+    boolean isSlowTurn = OI.getSlowTurn();
     boolean isHighGear = OI.getShifter();
 
     double wheelNonLinearity;
@@ -136,7 +137,7 @@ private double oldWheel = 0.0;
       negInertiaAccumulator = 0;
     }
     linearPower = throttle;
-
+   
     // Quickturn!
     if (isQuickTurn) {
       if (Math.abs(linearPower) < 0.2) {
@@ -181,19 +182,27 @@ private double oldWheel = 0.0;
       rightPwm = -1.0;
     }
 
-    if(OI.getDriverSlowMode() || ((!Elevator.getGripper() && Math.abs(OI.getSteer()) > 0.05)) || OI.getQuickTurn())
-    {
-    	leftPwm *= RobotValues.SlowModeSLowFactor;
-    	rightPwm *= RobotValues.SlowModeSLowFactor;
-	    Drive.setLeftPower(bearafyLeftPower(leftPwm, true));
-	    Drive.setRightPower(bearafyRightPower(rightPwm, true));
-	    Drive.setHighGear(false);
-    }
-    else
-    {
-	    Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
-	    Drive.setRightPower(bearafyRightPower(rightPwm, false));
-    	Drive.setHighGear(isHighGear);
+    
+    if(isSlowTurn){
+    	double pow = OI.getSteer() * 0.5;
+    	Drive.setLeftPower(-pow);
+    	Drive.setRightPower(pow);
+    }    
+    else{
+	    if(OI.getDriverSlowMode() || ((!Elevator.getGripper() && Math.abs(OI.getSteer()) > 0.05)) || OI.getQuickTurn())
+	    {
+	    	leftPwm *= RobotValues.SlowModeSLowFactor;
+	    	rightPwm *= RobotValues.SlowModeSLowFactor;
+		    Drive.setLeftPower(bearafyLeftPower(leftPwm, true));
+		    Drive.setRightPower(bearafyRightPower(rightPwm, true));
+		    Drive.setHighGear(false);
+	    }
+	    else
+	    {
+		    Drive.setLeftPower(bearafyLeftPower(leftPwm, false));
+		    Drive.setRightPower(bearafyRightPower(rightPwm, false));
+	    	Drive.setHighGear(isHighGear);
+	    }
     }
   }
 
