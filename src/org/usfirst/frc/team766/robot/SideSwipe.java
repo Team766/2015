@@ -5,6 +5,7 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
 import org.usfirst.frc.team766.robot.commands.Autons.AutonSelectorCommand;
 import org.usfirst.frc.team766.robot.commands.Autons.OpenCvTest;
+import org.usfirst.frc.team766.robot.commands.Drive.ArcadeDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.CheesyDriveCommand;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DrivePath;
@@ -65,6 +66,7 @@ public class SideSwipe extends IterativeRobot {
 	public void robotInit() {
 		CommandBase.init();
 		SmartDashboard.putBoolean("Tank Drive", false);
+		SmartDashboard.putBoolean("GamePad", false);
 		SmartDashboard.putNumber("Alpha", 0.5);
 		SmartDashboard.putData(new OpenCvTest());
 		SmartDashboard.putData(new DriveTurn(90));
@@ -230,7 +232,9 @@ public class SideSwipe extends IterativeRobot {
 		
 		if (!CommandBase.OI.getTankDrive()) {
 			new CheesyDriveCommand().start();
-		} else {
+		} else if(SmartDashboard.getBoolean("GamePad")) 
+			new ArcadeDrive().start();
+		else {
 			new TankDrive().start();
 		}
 

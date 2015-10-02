@@ -27,7 +27,15 @@ public class JoystickElevator extends CommandBase {
 
 	// Called repeatedly whsen this Command is scheduled to run
 	protected void execute() {
-		Elevator.setElevatorSpeed(OI.getTestY());
+		//Elevator.setElevatorSpeed(OI.getTestY());
+		double speed = OI.getElevatorY();
+		
+		if(Math.abs(speed) <= 0.2){
+			speed = 0d;
+			Elevator.setBrake(true);
+		}
+		Elevator.setElevatorSpeed(speed);
+		
 //		pr("Current Current: " + Elevator.getElevatorCurrent());
 //		//double user = OI.getSlider();
 //		double user = OI.getTestY();

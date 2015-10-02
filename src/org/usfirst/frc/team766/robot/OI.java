@@ -26,10 +26,16 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
+ * 
+ * Gampad button map provided by:
+ * 	http://team358.org/files/programming/ControlSystem2009-/XBoxControlMapping.jpg
  */
 public class OI {
-	public Joystick jLeft = new Joystick(0), jRight = new Joystick(1),
-			jBox = new Joystick(2), jTest = new Joystick(3);
+	public Joystick jLeft = new Joystick(0), 
+			jRight = new Joystick(1),
+			jBox = new Joystick(2), 
+			jTest = new Joystick(3),
+			jGpad = new Joystick(4);
 	
 	public Button
 		// Driving
@@ -104,7 +110,13 @@ public class OI {
 		buttonGripperOpen = new JoystickButton(jTest, Buttons.gripperOpen),
 		buttonGripperClose = new JoystickButton(jTest, Buttons.gripperClose),
 		buttonIntakeIn = new JoystickButton(jTest, Buttons.intakeIn),
-		buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut);
+		buttonIntakeOut = new JoystickButton(jTest, Buttons.intakeOut),
+	
+		//Gamepad
+		buttonGamepadToggleGripper = new JoystickButton(jGpad, Buttons.GamePadGripper),
+		buttonGamepadCalElev = new JoystickButton(jGpad, Buttons.GamePadCalivrateElevator),
+		buttonGamepadBrakeOn = new JoystickButton(jGpad, Buttons.GamePadBrakeOn),
+		buttonGamepadBrakeOff = new JoystickButton(jGpad, Buttons.GamePadBrakeOff);
 	
 
 	// Auton Stuff
@@ -181,6 +193,12 @@ public class OI {
 		buttonElevatorCancelAutomation.cancelWhenPressed(stackAdd);
 		buttonElevatorCancelAutomation.cancelWhenPressed(stackSmall);
 		buttonElevatorCancelAutomation.cancelWhenPressed(stackChute);
+		
+		//Gamepad
+		buttonGamepadToggleGripper.whenPressed(new ToggleGripper());
+		buttonGamepadBrakeOn.whenPressed(new AdjustBrake(true));
+		buttonGamepadBrakeOff.whenPressed(new AdjustBrake(false));
+		buttonGamepadCalElev.whenPressed(new CalibrateElevator());
 	}
 
 	public boolean getShifter() {
@@ -316,5 +334,16 @@ public class OI {
 	public boolean getAutonDecrement()
 	{
 		return buttonAutonDecrement.get();
+	}
+	
+	//Gampad
+	public double getArcadeX(){
+		return jGpad.getRawAxis(1);
+	}
+	public double getArcadeY(){
+		return jGpad.getRawAxis(2);
+	}
+	public double getElevatorY(){
+		return jGpad.getRawAxis(5);
 	}
 }

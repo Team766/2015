@@ -63,6 +63,13 @@ public class Buttons {
 	public static final int StackAdditionalSmall = 10;
 	public static final int StackAdditionalChute = 2;
 	
+	//Gamepad
+	public static final int
+		GamePadGripper = 1,
+		GamePadCalivrateElevator = 4,
+		GamePadBrakeOn = 5,
+		GamePadBrakeOff = 6;
+	
     /*
      * Auton:
      * AutonIncrement and AutonDecrement will be removed and other
