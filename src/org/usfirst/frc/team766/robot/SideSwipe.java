@@ -190,7 +190,7 @@ public class SideSwipe extends IterativeRobot {
 		done = true;
 
 		auton = new AutonSelectorCommand(CommandBase.OI.AutonMode);
-		//auton.start();
+		auton.start();
 
 	}
 	

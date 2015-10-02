@@ -1,11 +1,12 @@
 package org.usfirst.frc.team766.robot;
 
 public class Buttons {
-	public static final int Shifter = 2;
+	public static final int Shifter = 3;
     public static final int Reverse = 2;
     public static final int QuickTurn = 2;
+    public static final int SlowTurn = 2;
     public static final int DriverSlowMode = 3; //Pick a better number
-    public static final int DriverOverride = 3;
+    public static final int DriverOverride = 5;
     public static final int DriverSmoothing = 4; //Feel free to change if not practical or wan to use button 4 for something else
     
     //Driver Intake
