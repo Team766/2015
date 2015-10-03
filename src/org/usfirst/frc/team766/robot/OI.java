@@ -343,12 +343,12 @@ public class OI {
 	
 	//Gampad
 	public double getArcadeX(){
-		return jGpad.getRawAxis(1);
+		return -jGpad.getRawAxis(0);
 	}
 	public double getArcadeY(){
-		return jGpad.getRawAxis(2);
+		return jGpad.getRawAxis(1);
 	}
 	public double getElevatorY(){
-		return jGpad.getRawAxis(5);
+		return -jGpad.getRawAxis(3);
 	}
 }

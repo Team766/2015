@@ -230,12 +230,15 @@ public class SideSwipe extends IterativeRobot {
 		
 		new JoystickElevator().start();
 		
-		if (!CommandBase.OI.getTankDrive()) {
-			new CheesyDriveCommand().start();
-		} else if(SmartDashboard.getBoolean("GamePad")) 
+		if(!SmartDashboard.getBoolean("GamePad")){
+			if (!CommandBase.OI.getTankDrive()) {
+				new CheesyDriveCommand().start();
+			}
+			else {
+				new TankDrive().start();
+			}
+		}else{
 			new ArcadeDrive().start();
-		else {
-			new TankDrive().start();
 		}
 
 		done = true;
