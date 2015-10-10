@@ -7,6 +7,7 @@ import org.usfirst.frc.team766.lib.trajectory.TrajectoryFollower;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * DrivePathAction causes the robot to drive along a Path
@@ -49,8 +50,8 @@ public class PathDrive extends CommandBase {
 			double angleDiff = Math.toDegrees(angleDiffRads);
 
 			double turn = kTurn * angleDiff;
-			Drive.setLeftPower(speedLeft + turn);
-			Drive.setRightPower(speedRight - turn);
+			Drive.setLeftPower(speedLeft - turn);
+			Drive.setRightPower(speedRight + turn);
 		}
 	}
 
@@ -98,7 +99,7 @@ public class PathDrive extends CommandBase {
 		reset();
 		followerLeft.setTrajectory(leftProfile);
 		followerRight.setTrajectory(rightProfile);
-		this.direction = direction;
+		this.direction = -direction;
 		this.heading = heading;
 	}
 

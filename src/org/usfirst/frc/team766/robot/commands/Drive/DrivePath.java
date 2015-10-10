@@ -18,8 +18,11 @@ public class DrivePath extends CommandGroup {
 
 	public DrivePath() {
 		//addSequential(new PathDrive(AutoPaths.get("InsideLanePathFar"), 10000));
-		addSequential(new SetTrajectoryPath("StraightAheadPath"));
-		addSequential(new PathDrive(AutoPaths.get("StraightAheadPath"), 10000));
+//		addSequential(new SetTrajectoryPath("StraightAheadPath"));
+//		addSequential(new PathDrive(AutoPaths.get("StraightAheadPath"), 10000));
+		
+		addSequential(new SetTrajectoryPath("InsideLanePathClose"));
+		addSequential(new PathDrive(AutoPaths.get("InsideLanePathClose"), 10000));
 	}
 
 }
