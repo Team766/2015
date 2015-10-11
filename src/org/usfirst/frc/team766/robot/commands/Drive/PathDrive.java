@@ -50,8 +50,8 @@ public class PathDrive extends CommandBase {
 			double angleDiff = Math.toDegrees(angleDiffRads);
 
 			double turn = kTurn * angleDiff;
-			Drive.setLeftPower(speedLeft - turn);
-			Drive.setRightPower(speedRight + turn);
+			Drive.setLeftPower(speedLeft + turn);
+			Drive.setRightPower(speedRight - turn);
 		}
 	}
 
