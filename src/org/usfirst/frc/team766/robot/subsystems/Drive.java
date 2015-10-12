@@ -177,6 +177,10 @@ public class Drive extends Subsystem {
 	public double getAverageVelocity() {
 		return (getLeftVelocity() + getRightVelocity()) / 2;
 	}
+	
+	public double getAcceleration() {
+		return accel.getY();
+	}
 
 	public void resetEncoders() {
 		rightEncoder.reset();

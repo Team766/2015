@@ -11,6 +11,7 @@ import org.usfirst.frc.team766.robot.commands.Drive.DriveForward;
 import org.usfirst.frc.team766.robot.commands.Drive.DrivePath;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveTurn;
 import org.usfirst.frc.team766.robot.commands.Drive.DriveUltrasonic;
+import org.usfirst.frc.team766.robot.commands.Drive.RecordPath;
 import org.usfirst.frc.team766.robot.commands.Drive.ResetGyro;
 import org.usfirst.frc.team766.robot.commands.Drive.TankDrive;
 import org.usfirst.frc.team766.robot.commands.Drive.TestEncoders;
@@ -82,6 +83,7 @@ public class SideSwipe extends IterativeRobot {
 		SmartDashboard.putData(new OpenToteArms());
 		SmartDashboard.putData(new LogGyroAngle());
 		SmartDashboard.putData(new DrivePath());
+		SmartDashboard.putData(new RecordPath());
 		done = false;
 
 		printOut = new PrintDiagnostics(true);
