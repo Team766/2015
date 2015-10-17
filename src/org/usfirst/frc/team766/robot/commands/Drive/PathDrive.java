@@ -39,10 +39,14 @@ public class PathDrive extends CommandBase {
 		} else {
 			double distanceL = direction * Drive.getLeftEncoderDistance();
 			double distanceR = direction * Drive.getRightEncoderDistance();
-
+			System.out.println("DistanceL:" + distanceL);
+			System.out.println("DistanceR:" + distanceR + "\n");
+			
 			double speedLeft = direction * followerLeft.calculate(distanceL);
 			double speedRight = direction * followerRight.calculate(distanceR);
-
+//			System.out.println("SpeedLeft:" + speedLeft);
+//			System.out.println("SpeedRight:" + speedRight + "\n");
+			
 			double goalHeading = followerLeft.getHeading();
 			double observedHeading = Drive.getGyroAngleInRadians();
 
@@ -50,8 +54,10 @@ public class PathDrive extends CommandBase {
 			double angleDiff = Math.toDegrees(angleDiffRads);
 
 			double turn = kTurn * angleDiff;
-			Drive.setLeftPower(speedLeft + turn);
-			Drive.setRightPower(speedRight - turn);
+			//Drive.setLeftPower(speedLeft + turn);
+			//Drive.setRightPower(speedRight - turn);
+			Drive.setLeftPower(speedLeft);
+			Drive.setRightPower(speedRight);
 		}
 	}
 
