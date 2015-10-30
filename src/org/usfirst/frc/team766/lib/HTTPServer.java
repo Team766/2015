@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.usfirst.frc.team766.robot.OI;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
@@ -66,7 +67,7 @@ public class HTTPServer extends Filter implements Runnable{
 						//Loop through the hashMap to display values
 						r +=  "<p>" + buildForm("Time of Match", 12) + "</p>"
 						+ "<p>" + buildForm("Auton") + "</p>"
-						+ "<p>" + buildDropDown("AutoMode", RobotValues.Autons) + "</p>";
+						+ "<p>" + buildDropDown("AutoMode", RobotValues.Autons[CommandBase.OI.AutonMode], RobotValues.Autons) + "</p>";
 				
 						r += "<input type=\"submit\" value=\"Submit\"></form>"
 						+ "<input type=\"submit\" value=\"Go to /display\" "
@@ -119,12 +120,16 @@ public class HTTPServer extends Filter implements Runnable{
 		return out;
 	}
 	
-	private static String buildDropDown(String valueName, String... options){
+	private static String buildDropDown(String valueName, String current, String... options){
 		String id = valueName.replace(' ', '_');
 		String out = "<select name=\"" + id + "\">";
 		
-		for(String s : options)
-			out += "<option value=\"" + s + "\">" + s + "</option>";
+		for(String s : options){
+			if(s.equals(current))
+				out += "<option value=\"" + s + "\" selected >" + s + "</option>";
+			else
+				out += "<option value=\"" + s + "\">" + s + "</option>";
+		}
 				
 		return out + "</select>";
 	}
