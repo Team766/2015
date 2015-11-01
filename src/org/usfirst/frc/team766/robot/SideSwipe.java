@@ -279,11 +279,6 @@ public class SideSwipe extends IterativeRobot {
 		// System.out.println("Drive Encoders L, R:  " +
 		// CommandBase.Drive.getLeftEncoderDistance() + ", " +
 		// CommandBase.Drive.getRightEncoderDistance());
-		
-		System.out.println("RightEncoderRate: " + CommandBase.Drive.getRawRightEncoder());
-		System.out.println("LeftEncoderRate: " + CommandBase.Drive.getRawLeftEncoder() + "\n");
-		System.out.println("RightEncoder: " + CommandBase.Drive.getRightEncoderDistance());
-		System.out.println("LeftEncoder: " + CommandBase.Drive.getLeftEncoderDistance() + "\n");
 	}
 	
 	/**

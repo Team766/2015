@@ -12,11 +12,11 @@ public class Ports {
 	public static final int PWM_Right_Drive = 0;
 //	public static final int PWM_IntakeR = 3;
 //	public static final int PWM_IntakeL = 4;
-	public static final int PWM_IntakeWheelR = 5;
+	public static final int PWM_IntakeWheelR = 4;
 	public static final int PWM_IntakeWheelL = 6;
 	
 	//Elevator
-	public static final int PWM_ElevatorA = 4;
+	public static final int PWM_ElevatorA = 5;
 	public static final int PWM_ElevatorB = 7;
 	public static final int PWM_ElevatorC = 8;
 	

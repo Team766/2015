@@ -37,7 +37,8 @@ public class PathDrive extends CommandBase {
 		if (onTarget()) {
 			Drive.setPower(0.0);
 		} else {
-			double distanceL = direction * Drive.getLeftEncoderDistance();
+			//double distanceL = direction * Drive.getLeftEncoderDistance();
+			double distanceL = direction * Drive.getRightEncoderDistance();
 			double distanceR = direction * Drive.getRightEncoderDistance();
 			System.out.println("DistanceL:" + distanceL);
 			System.out.println("DistanceR:" + distanceR + "\n");

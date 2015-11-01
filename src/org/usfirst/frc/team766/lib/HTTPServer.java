@@ -69,9 +69,10 @@ public class HTTPServer extends Filter implements Runnable{
 						+ "<p>" + buildForm("Auton") + "</p>"
 						+ "<p>" + buildDropDown("AutoMode", RobotValues.Autons[CommandBase.OI.AutonMode], RobotValues.Autons) + "</p>";
 				
-						r += "<input type=\"submit\" value=\"Submit\"></form>"
+						r += "<input type=\"submit\" value=\"Submit\" onclick \"myFunction()\"></form>"
 						+ "<input type=\"submit\" value=\"Go to /display\" "
-						+ "onclick=\"window.location='/display';\" /></html>";
+						+ "onclick=\"window.location='/display';\" />"
+						+ "<script>function myFunction() {location.reload();}</script></html>";
 				
 				exchange.sendResponseHeaders(200, r.getBytes().length);
 				OutputStream os = exchange.getResponseBody();
