@@ -1,6 +1,7 @@
 package org.usfirst.frc.team766.robot.commands;
 
 import org.usfirst.frc.team766.lib.logData;
+import org.usfirst.frc.team766.lib.logFactory;
 import org.usfirst.frc.team766.robot.subsystems.Drive;
 import org.usfirst.frc.team766.robot.OI;
 import org.usfirst.frc.team766.robot.subsystems.Intake;
@@ -32,7 +33,9 @@ public abstract class CommandBase extends Command{
 		Intake = new Intake();
 		OI = new OI();
 		table = NetworkTable.getTable("dataTable");
-		myLog = new logData();
+		myLog = new logData("basicLog");
+		
+		logFactory.createInstance("factoryTester");
 	}
 
 }

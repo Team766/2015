@@ -19,25 +19,34 @@ public class logData {
 	private PrintWriter pw;
 	private Timer timer = new Timer();
 	private boolean INDENT = false;
+	private String name;
+	
+	private String html = "<body style=\"background-color:rgba(180, 28, 28, 0.8)\">";
 			
-	public logData(){
+	public logData(String name){
+		this.name = name;
 		try {
-			pw = new PrintWriter(new FileWriter("/tmp/log.txt"));
+			pw = new PrintWriter(new FileWriter("/tmp/logs/" + name + ".txt"));
 			timer.start();
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the log's constructor");
 			timer.stop();
 			e.printStackTrace();
 		}
+		html += "<h2 style = \"color: white\">" + name + "</h2> + <p style = \"color: #fc4\">";
 	}
 	
 	public void print(String message)
 	{
 		try{
-			if(INDENT)
+			if(INDENT){
 				pw.println(getTime() + "\t\t" + message);
-			else
+				html += getTime() + "\t\t" + message + "<br>";
+			}
+			else{
 				pw.println(getTime() + "\t" + message);
+				html += getTime() + "\t\t" + message + "<br>";
+			}
 		}catch(NullPointerException e)
 		{
 			System.out.println("Null Pointer alert!");
@@ -48,6 +57,7 @@ public class logData {
 	{
 		try{
 			pw.println(in);
+			html += in + "<br>";
 		}catch(NullPointerException e)
 		{
 			System.out.println("Can't print raw value: " + in);
@@ -57,11 +67,15 @@ public class logData {
 	public void print(String message, int value)
 	{
 		try{
-			if(INDENT)
+			if(INDENT){
 				pw.println(getTime() + "\t\t" + message + value);
+				html += getTime() + "\t\t" + message + value + "<br>";
+			}
 			
-			else
+			else{
 				pw.println(getTime() + "\t" + message + value);
+				html += getTime() + "\t" + message + value + "<br>";
+			}
 		}catch(NullPointerException e)
 		{
 			System.out.println("Can't save log!");
@@ -95,6 +109,14 @@ public class logData {
 
 	public void setIndent(boolean iNDENT) {
 		INDENT = iNDENT;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public String getHTML(){
+		return html;
 	}
 }
 

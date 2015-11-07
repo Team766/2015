@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot.testing;
 
+import org.usfirst.frc.team766.lib.logFactory;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
 /*
@@ -21,11 +22,12 @@ public class LogGyroAngle extends CommandBase{
 	}
 
 	protected void initialize() {
-		myLog.print("\n\n\n\nStarting Gyro Values: \n");
+		logFactory.createInstance("Gyro");
+		logFactory.getInstance("Gyro").print("\n\n\n\nStarting Gyro Values: \n");
 	}
 
 	protected void execute() {
-		myLog.printRaw(time + " " + Drive.getAngle());
+		logFactory.getInstance("Gyro").printRaw(time + " " + Drive.getAngle());
 		
 		count++;
 		time += 10;
@@ -42,7 +44,7 @@ public class LogGyroAngle extends CommandBase{
     }
 
     protected void end() {
-    	myLog.closeFile();
+    	logFactory.closeFile("Gyro");
     }
 
     protected void interrupted() {

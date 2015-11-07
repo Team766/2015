@@ -60,6 +60,18 @@ public class HTTPServer extends Filter implements Runnable{
     	    }
 		});
 		
+		for(logData log : logFactory.getLogs().values()){
+			server.createContext("/logs/" + log.getName(), new HttpHandler(){
+				public void handle(HttpExchange exchange) throws IOException {
+					exchange.sendResponseHeaders(200, log.getHTML().getBytes().length);
+					OutputStream os = exchange.getResponseBody();
+					os.write(log.getHTML().getBytes());
+					os.close();
+				}
+			});
+			System.out.println("Posting log: " + log.getName());
+		}
+		
 		HttpContext valueSite = server.createContext("/values", new HttpHandler(){
 			public void handle(HttpExchange exchange) throws IOException {
 				String r = "<html><form action=\"values\">";

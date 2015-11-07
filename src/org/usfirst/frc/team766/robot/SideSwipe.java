@@ -1,5 +1,6 @@
 package org.usfirst.frc.team766.robot;
 
+import org.usfirst.frc.team766.lib.logFactory;
 import org.usfirst.frc.team766.lib.trajectory.AutoPaths;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 import org.usfirst.frc.team766.robot.commands.PrintDiagnostics;
@@ -89,6 +90,7 @@ public class SideSwipe extends IterativeRobot {
 		printOut = new PrintDiagnostics(true);
 
 		CommandBase.myLog.print("SideSwipe 2015 Code");
+		logFactory.getInstance("factoryTester").print("SideSwipe Lauching");
 		SmartDashboard.putNumber("P", RobotValues.UltrasonicDriveKp);
 		SmartDashboard.putNumber("I", RobotValues.UltrasonicDriveKi);
 		SmartDashboard.putNumber("D", RobotValues.UltrasonicDriveKd);
@@ -256,8 +258,10 @@ public class SideSwipe extends IterativeRobot {
 		//Loads trajectory paths from files
 		AutoPaths.loadPaths();
 		
-		if (done)
+		if (done){
 			CommandBase.myLog.closeFile();
+			logFactory.closeFiles();
+		}
 	}
 
 	/**
