@@ -1,6 +1,5 @@
 package org.usfirst.frc.team766.robot.commands.Intake;
 
-import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.Elevator.IncrementNumTotes;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

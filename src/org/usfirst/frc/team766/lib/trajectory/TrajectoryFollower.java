@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TrajectoryFollower {
 
 	private double kp_;
-	private double ki_; // Not currently used, but might be in the future.
 	private double kd_;
 	private double kv_;
 	private double ka_;
@@ -24,7 +23,6 @@ public class TrajectoryFollower {
 
 	public void configure(double kp, double ki, double kd, double kv, double ka) {
 		kp_ = kp;
-		ki_ = ki;
 		kd_ = kd;
 		kv_ = kv;
 		ka_ = ka;

@@ -2,9 +2,7 @@ package org.usfirst.frc.team766.robot.subsystems;
 
 import org.usfirst.frc.team766.robot.Ports;
 import org.usfirst.frc.team766.robot.RobotValues;
-import org.usfirst.frc.team766.robot.commands.Elevator.Slider;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -37,7 +35,6 @@ public class Elevator extends Subsystem {
 	// Offset of just weight of mechanism. PID should compensate for rest
 
 	private double gravityOffset = GRAVITY_COUNTERBALANCE;
-	private double stopTolerance = 0.001;
 	private boolean emergencyStopped = false;
 
 	private Victor ElevatorA = new Victor(Ports.PWM_ElevatorA);

@@ -14,16 +14,11 @@ public class GraspTote extends CommandBase {
 			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
 	private PIDController pidR = new PIDController(RobotValues.IntakeKP, 
 			RobotValues.IntakeKI, RobotValues.IntakeKD, RobotValues.IntakeThreshold);
-	private final double stopEncDistance = 0.01;
 	private final double DegreesToPulsesConstant = 0.76705;
 	
 	private double
-		curr_Rrate,
-		curr_Lrate,
 		leftPower,
-		rightPower,
-		pastRateR,
-		pastRateL;
+		rightPower;
 	
     public GraspTote() {
         requires(Intake);
@@ -34,7 +29,8 @@ public class GraspTote extends CommandBase {
     	pidR.setSetpoint(45);
     }
 
-    protected void execute() {
+    @SuppressWarnings("deprecation")
+	protected void execute() {
 //    	curr_Rrate = Intake.getEncRight();
 //    	curr_Lrate = Intake.getEncLeft();
     	
@@ -64,7 +60,8 @@ public class GraspTote extends CommandBase {
 //    	return leftPower <= 0 && rightPower <= 0;
     }
 
-    protected void end() {
+    @SuppressWarnings("deprecation")
+	protected void end() {
     	Intake.setWheels(0);
     	Intake.setIntake(0);
     }

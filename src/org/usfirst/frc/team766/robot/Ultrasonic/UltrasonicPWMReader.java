@@ -26,10 +26,6 @@ public class UltrasonicPWMReader implements Runnable {
 		dataCollector.start();
 	}
 
-	private void pr(String line) {
-		System.out.println("UltrasonicPWMReader: " + line);
-	}
-
 	public synchronized double[] getDistanceDouble() {
 		return sensorValues;
 	}

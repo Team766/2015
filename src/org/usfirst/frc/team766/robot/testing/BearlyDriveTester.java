@@ -196,6 +196,7 @@ private double oldWheel = 0.0;
     	System.out.println("Normal Mode Right: " + bearafyRightPower(rightPwm, RobotValues.alpha));
     	System.out.println("Normal Mode Shifter: " + isHighGear);
     }
+    scan.close();
   }
 
   protected boolean isFinished() {

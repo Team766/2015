@@ -119,9 +119,9 @@ public class PIDController {
 	 * Calculate PID value. Run only once per loop. Use getOutput to get output.
 	 * 
 	 * @param cur_input Input value from sensor
-	 * @param smart True if you want the output to be dynamically adjusted to the speed controller
+	 * @param clamp True if you want the output to be clamped
 	 */
-	public void calculate(double cur_input, boolean smart) {
+	public void calculate(double cur_input, boolean clamp) {
 		cur_error = (setpoint - cur_input);
 		if (isDone()) {
 			output_value = 0;
@@ -146,11 +146,10 @@ public class PIDController {
 
 		pr("Pre-clip output: " + out);
 		
-		if (!smart) {
+		if (clamp)
 			output_value = clip(out);
-		} else {
+		else
 			output_value = out;
-		}
 
 		pr("	Total Eror: " + total_error + "		Current Error: " + cur_error
 				+ "	Output: " + output_value + " 	Setpoint: " + setpoint);
@@ -163,18 +162,12 @@ public class PIDController {
 		prev_error = cur_error;
 	}
 
-//	private double smartClamp(double out) {
-//		return (((2d / -1860d) * (out)) - 1);
-//	}
-
 	public double getOutput() {
 		return output_value;
 	}
 
 	public boolean isDone() {
-		if (Math.abs(cur_error) < endthreshold)
-			return true;
-		return false;
+		return Math.abs(cur_error) < endthreshold;
 	}
 
 	/**
@@ -219,9 +212,8 @@ public class PIDController {
 	}
 
 	private void pr(Object text) {
-		if (print) {
+		if (print)
 			System.out.println("PID: " + text);
-		}
 	}
 
 }

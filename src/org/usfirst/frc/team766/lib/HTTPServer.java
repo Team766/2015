@@ -9,13 +9,11 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.usfirst.frc.team766.robot.OI;
 import org.usfirst.frc.team766.robot.RobotValues;
 import org.usfirst.frc.team766.robot.commands.CommandBase;
 
@@ -49,6 +47,7 @@ public class HTTPServer extends Filter implements Runnable{
 			server = HttpServer.create(new InetSocketAddress(8000), 0);
 		
 		
+		@SuppressWarnings("unused")
 		HttpContext context2 = server.createContext("/display", new HttpHandler(){
 			public void handle(HttpExchange exchange) throws IOException {
 				String response = getHTML();
@@ -73,6 +72,7 @@ public class HTTPServer extends Filter implements Runnable{
 		}
 		
 		HttpContext valueSite = server.createContext("/values", new HttpHandler(){
+			@SuppressWarnings("rawtypes")
 			public void handle(HttpExchange exchange) throws IOException {
 				String r = "<html><form action=\"values\">";
 						
@@ -91,6 +91,7 @@ public class HTTPServer extends Filter implements Runnable{
 				os.write(r.getBytes());
 				os.close();
 				
+				@SuppressWarnings("unchecked")
 				Map<String, Object> params =
 		    	           (Map<String, Object>)exchange.getAttribute("parameters");
 				System.out.println(params.values());

@@ -299,12 +299,12 @@ public class OI {
 			AutonMode--;
 		else
 			System.out.println("incrementAutonMode can't take parm 0!");
-
+		
 		// Reset the auton cycle
-		if (AutonMode > RobotValues.Auton_Max) {
-			AutonMode = RobotValues.Auton_Min;
-		} else if (AutonMode < RobotValues.Auton_Min) {
-			AutonMode = RobotValues.Auton_Max;
+		if (AutonMode > RobotValues.Autons.length-1) {
+			AutonMode = 0;
+		} else if (AutonMode < 0) {
+			AutonMode = RobotValues.Autons.length-1;
 		}
 	}
 

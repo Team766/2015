@@ -10,13 +10,11 @@ import org.usfirst.frc.team766.robot.commands.CommandBase;
  * Displays the drift of the angle over time
  */
 public class LogGyroAngle extends CommandBase{
-	private boolean done;
 	private int count;
 	private int time;
 	private int SAMPLESIZE = 100;
 	
 	public LogGyroAngle() {
-		done = false;
 		count = 0;
 		time = 0;
 	}
