@@ -1,9 +1,5 @@
 package org.usfirst.frc.team766.lib;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import edu.wpi.first.wpilibj.Timer;
 
 /*
@@ -16,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
  
 public class logData {
 	
-	private PrintWriter pw;
+	//private PrintWriter pw;
 	private Timer timer = new Timer();
 	private boolean INDENT = false;
 	private String name;
@@ -25,26 +21,25 @@ public class logData {
 			
 	public logData(String name){
 		this.name = name;
-		try {
-			pw = new PrintWriter(new FileWriter("/tmp/logs/" + name + ".txt"));
+//		try {
+			//pw = new PrintWriter(new FileWriter("/tmp/logs/" + name + ".txt"));
 			timer.start();
-		} catch (IOException e) {
+//		} catch (IOException e) {
 			System.out.println("Something went wrong in the log's constructor");
 			timer.stop();
-			e.printStackTrace();
-		}
-		html += "<h2 style = \"color: white\">" + name + "</h2> + <p style = \"color: #fc4\">";
+//		}
+		html += "<h2 style = \"color: white\">" + name + "</h2>  <p style = \"color: #fc4\">";
 	}
 	
 	public void print(String message)
 	{
 		try{
 			if(INDENT){
-				pw.println(getTime() + "\t\t" + message);
+				//pw.println(getTime() + "\t\t" + message);
 				html += getTime() + "\t\t" + message + "<br>";
 			}
 			else{
-				pw.println(getTime() + "\t" + message);
+				//pw.println(getTime() + "\t" + message);
 				html += getTime() + "\t\t" + message + "<br>";
 			}
 		}catch(NullPointerException e)
@@ -56,7 +51,7 @@ public class logData {
 	public void printRaw(String in)
 	{
 		try{
-			pw.println(in);
+			//pw.println(in);
 			html += in + "<br>";
 		}catch(NullPointerException e)
 		{
@@ -68,12 +63,12 @@ public class logData {
 	{
 		try{
 			if(INDENT){
-				pw.println(getTime() + "\t\t" + message + value);
+				//pw.println(getTime() + "\t\t" + message + value);
 				html += getTime() + "\t\t" + message + value + "<br>";
 			}
 			
 			else{
-				pw.println(getTime() + "\t" + message + value);
+				//pw.println(getTime() + "\t" + message + value);
 				html += getTime() + "\t" + message + value + "<br>";
 			}
 		}catch(NullPointerException e)
@@ -87,7 +82,7 @@ public class logData {
 		timer.stop();
 		
 		try{
-			pw.close();
+			//pw.close();
 		}catch(NullPointerException e)
 		{
 			System.out.println("Can't save log!");
@@ -100,7 +95,7 @@ public class logData {
         int seconds = totalSeconds % 60; 
         int minutes = (totalSeconds / 60) % 60; 
         int hours = totalSeconds / 3600; 
-        return hours + ":" + minutes + ":" + seconds;
+        return "<p1 style = \"color: white\">" + hours + ":" + minutes + ":" + seconds + "</p1>";
     }
 
 	public boolean isIndent() {

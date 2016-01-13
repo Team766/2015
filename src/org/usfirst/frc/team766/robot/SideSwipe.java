@@ -220,7 +220,8 @@ public class SideSwipe extends IterativeRobot {
 	 * This is where the commands that control the elevator and drive base are initiated.
 	 */
 	public void teleopInit() {
-
+		logFactory.getInstance("factoryTester").print("Teleop Init");
+		
 		RobotValues.IntakeKP = SmartDashboard.getNumber("P");
 		RobotValues.IntakeKI = SmartDashboard.getNumber("I");
 		RobotValues.IntakeKD = SmartDashboard.getNumber("D");
